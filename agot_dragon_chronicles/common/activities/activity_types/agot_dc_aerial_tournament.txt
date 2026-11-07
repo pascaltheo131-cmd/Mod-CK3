@@ -1,0 +1,354 @@
+﻿###############################################################################
+# AGOT - Dragon Chronicles : le Tournoi aérien
+# Activité organisable depuis le menu des activités (groupe « grand »,
+# comme le Grand tournoi). Course et joutes de dragons.
+# Hôte : seigneur adulte, landed, cavalier d'un dragon vivant.
+###############################################################################
+
+agot_dc_aerial_tournament = {
+	is_shown = {
+		is_landed = yes
+		is_adult = yes
+		agot_dc_rider_with_dragon_trigger = yes
+		NOT = { government_has_flag = government_is_nw }
+	}
+
+	can_start_showing_failures_only = {
+		is_available_healthy_adult = yes
+		is_at_war = no
+		NOT = { is_activity_type_on_cooldown = agot_dc_aerial_tournament }
+	}
+
+	is_valid = {
+		scope:host = {
+			is_alive = yes
+			is_imprisoned = no
+			NOT = { is_incapable = yes }
+		}
+	}
+
+	on_invalidated = {
+	}
+
+	activity_group_type = grand
+	is_single_location = yes
+	planner_type = province
+
+	province_filter = domain
+	ai_province_filter = capital
+	max_province_icons = 5
+
+	province_score = {
+		value = 10
+		if = {
+			limit = { this = scope:host.capital_province }
+			add = 20
+		}
+	}
+
+	ai_will_select_province = {
+		value = 10
+		if = {
+			limit = { this = scope:host.capital_province }
+			add = 50
+		}
+	}
+
+	cooldown = { years = 5 }
+
+	wait_time_before_start = { days = 7 }
+	max_guest_arrival_delay_time = { months = 2 }
+
+	###################
+	# COÛTS
+	###################
+
+	cost = {
+		gold = {
+			add = {
+				value = 75
+				desc = agot_dc_aerial_tournament_base_cost
+			}
+		}
+		prestige = {
+			add = {
+				value = 50
+				desc = agot_dc_aerial_tournament_base_cost
+			}
+		}
+	}
+
+	ui_predicted_cost = {
+		gold = { value = 75 }
+		prestige = { value = 50 }
+	}
+
+	###################
+	# OPTIONS
+	###################
+
+	options = {
+		# Ampleur du tournoi
+		agot_dc_aerial_scale = {
+			agot_dc_aerial_scale_modest = {
+				default = yes
+				ai_will_do = {
+					value = 60
+					if = {
+						limit = { has_trait = greedy }
+						add = 30
+					}
+				}
+			}
+			agot_dc_aerial_scale_grand = {
+				cost = {
+					gold = { value = 150 }
+					prestige = { value = 100 }
+				}
+				ai_will_do = {
+					value = 30
+					if = {
+						limit = { has_trait = arrogant }
+						add = 30
+					}
+					if = {
+						limit = { gold < 400 }
+						add = -30
+					}
+				}
+			}
+		}
+
+		# Nature de l'épreuve
+		agot_dc_aerial_trial = {
+			agot_dc_aerial_trial_race = {
+				default = yes
+				ai_will_do = { value = 50 }
+			}
+			agot_dc_aerial_trial_targets = {
+				cost = {
+					gold = { value = 25 }
+				}
+				ai_will_do = {
+					value = 30
+					if = {
+						limit = { has_trait = calm }
+						add = 20
+					}
+				}
+			}
+			agot_dc_aerial_trial_joust = {
+				ai_will_do = {
+					value = 20
+					if = {
+						limit = { has_trait = wrathful }
+						add = 30
+					}
+					if = {
+						limit = { has_trait = brave }
+						add = 20
+					}
+					if = {
+						limit = { has_trait = craven }
+						add = -20
+					}
+				}
+			}
+		}
+	}
+
+	###################
+	# PHASES
+	###################
+
+	phases = {
+		agot_dc_aerial_parade = {
+			is_predefined = yes
+			order = 1
+
+			on_phase_active = {
+				if = {
+					limit = { this = scope:host }
+					scope:activity = {
+						add_activity_log_entry = {
+							key = agot_dc_aerial_parade_log
+							tags = { contest }
+							score = 20
+							character = scope:host
+						}
+						progress_activity_phase_after = { days = 3 }
+					}
+					trigger_event = agot_dc_tourney.0001
+				}
+			}
+		}
+
+		agot_dc_aerial_contest = {
+			is_predefined = yes
+			order = 2
+
+			on_phase_active = {
+				if = {
+					limit = { this = scope:host }
+					trigger_event = { id = agot_dc_tourney.0010 days = 1 }
+					trigger_event = { id = agot_dc_tourney.0010 days = 4 }
+					trigger_event = { id = agot_dc_tourney.0020 days = 7 }
+					scope:activity = {
+						progress_activity_phase_after = { days = 9 }
+					}
+				}
+			}
+		}
+	}
+
+	###################
+	# IA
+	###################
+
+	ai_will_do = {
+		value = 10
+		if = {
+			limit = { has_trait = gregarious }
+			add = 10
+		}
+		if = {
+			limit = { has_trait = arrogant }
+			add = 10
+		}
+		if = {
+			limit = { has_trait = shy }
+			add = -10
+		}
+		if = {
+			limit = { gold < 150 }
+			add = -50
+		}
+	}
+
+	ai_check_interval = 60
+
+	###################
+	# INVITÉS
+	###################
+
+	max_guests = 30
+	allow_zero_guest_invites = yes
+	open_invite = no
+
+	guest_invite_rules = {
+		rules = {
+			2 = activity_invite_rule_friends
+			3 = activity_invite_rule_lovers
+			4 = activity_invite_rule_courtiers
+			4 = activity_invite_rule_guests
+		}
+		defaults = {
+			1 = agot_dc_invite_rule_dragonriders
+			2 = activity_invite_rule_close_family
+			3 = activity_invite_rule_vassals
+		}
+	}
+
+	can_be_activity_guest = {
+		agot_can_be_activity_guest = yes
+	}
+
+	host_intents = {
+		intents = { reduce_stress_intent befriend_attendee_intent }
+		default = reduce_stress_intent
+	}
+
+	guest_intents = {
+		intents = { reduce_stress_intent befriend_attendee_intent }
+		default = reduce_stress_intent
+	}
+
+	guest_join_chance = {
+		base = 25
+		base_activity_modifier = yes
+		activity_guest_shared_ai_accept_modifier = yes
+		modifier = {
+			agot_dc_rider_with_dragon_trigger = yes
+			add = 40
+			desc = agot_dc_aerial_tournament_rider_join_reason
+		}
+	}
+
+	###################
+	# DÉBUT / FIN
+	###################
+
+	on_start = {
+		scope:host = {
+			add_character_flag = {
+				flag = agot_dc_hosting_aerial_tournament
+				months = 6
+			}
+		}
+	}
+
+	on_complete = {
+		if = {
+			limit = { this = scope:host }
+			remove_character_flag = agot_dc_hosting_aerial_tournament
+		}
+		remove_character_flag = agot_dc_tourney_hampered
+	}
+
+	###################
+	# GRAPHISMES (ressources existantes du Grand tournoi)
+	###################
+
+	map_entity = "building_western_tournament_01_entity"
+
+	background = {
+		texture = "gfx/interface/illustrations/activity_header_backgrounds/activity_tournament.dds"
+		environment = "environment_jerusalem"
+		ambience = "event:/DLC/EP2/SFX/Ambience/2D/ep2_amb_2d_tournament_locale"
+	}
+
+	window_characters = {
+		host = {
+			camera = camera_event_center
+			effect = {
+				scope:host = { add_to_list = characters }
+			}
+			scripted_animation = {
+				animation = personality_bold
+			}
+		}
+		guest = {
+			camera = camera_body
+			effect = {
+				every_attending_character = {
+					limit = {
+						this != scope:host
+						agot_dc_rider_with_dragon_trigger = yes
+					}
+					add_to_list = characters
+				}
+			}
+			scripted_animation = {
+				animation = personality_bold
+			}
+		}
+	}
+
+	host_description = {
+		first_valid = {
+			desc = agot_dc_aerial_tournament_host_desc
+		}
+	}
+
+	conclusion_description = {
+		first_valid = {
+			triggered_desc = {
+				trigger = {
+					scope:activity = { has_variable = agot_dc_tourney_bloodshed }
+				}
+				desc = agot_dc_aerial_tournament_conclusion_bloody
+			}
+			desc = agot_dc_aerial_tournament_conclusion_desc
+		}
+	}
+}

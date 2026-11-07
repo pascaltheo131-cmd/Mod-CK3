@@ -1,0 +1,93 @@
+﻿# AGOT - Dragon Chronicles : score d'un concurrent du Tournoi aérien
+# root = le cavalier (doit avoir var:current_dragon)
+# scope:activity = le tournoi
+agot_dc_aerial_racer_score = {
+	value = prowess
+	# Expérience de dragonnier (piste dragon_training du trait dragonrider)
+	if = {
+		limit = {
+			has_trait_xp = {
+				trait = dragonrider
+				track = dragon_training
+				value > 30
+			}
+		}
+		add = 5
+	}
+	if = {
+		limit = {
+			has_trait_xp = {
+				trait = dragonrider
+				track = dragon_training
+				value > 65
+			}
+		}
+		add = 5
+	}
+	if = {
+		limit = {
+			has_trait_xp = {
+				trait = dragonrider
+				track = dragon_training
+				value = 100
+			}
+		}
+		add = 5
+	}
+	# Traits du dragon
+	if = {
+		limit = { var:current_dragon = { has_trait = dragon_swift } }
+		add = 8
+	}
+	if = {
+		limit = { var:current_dragon = { has_trait = dragon_slow } }
+		add = -8
+	}
+	if = {
+		limit = { var:current_dragon = { has_trait = dragon_skittish } }
+		add = -4
+	}
+	if = {
+		limit = { var:current_dragon = { has_trait = dragon_cooperative } }
+		add = 3
+	}
+	if = {
+		limit = { var:current_dragon = { has_trait = dragon_defiant } }
+		add = -3
+	}
+	# Joute : la prouesse compte davantage
+	if = {
+		limit = {
+			scope:activity ?= {
+				has_activity_option = {
+					category = agot_dc_aerial_trial
+					option = agot_dc_aerial_trial_joust
+				}
+			}
+		}
+		add = {
+			value = prowess
+			multiply = 0.5
+		}
+	}
+	# Course : la vitesse du dragon compte davantage
+	if = {
+		limit = {
+			scope:activity ?= {
+				has_activity_option = {
+					category = agot_dc_aerial_trial
+					option = agot_dc_aerial_trial_race
+				}
+			}
+			var:current_dragon = { has_trait = dragon_swift }
+		}
+		add = 4
+	}
+	# Handicap subi pendant un incident
+	if = {
+		limit = { has_character_flag = agot_dc_tourney_hampered }
+		add = -10
+	}
+	# Part de hasard
+	add = { 0 15 }
+}

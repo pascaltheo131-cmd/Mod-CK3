@@ -1,0 +1,634 @@
+﻿namespace = agot_dc_tourney
+
+###############################################################################
+# AGOT - Dragon Chronicles : évènements de l'activité « Tournoi aérien »
+# (agot_dc_aerial_tournament). Tous envoyés à l'hôte (root), sauf 0021.
+#  0001        : ouverture / parade
+#  0010        : répartiteur caché des incidents
+#  0011 - 0016 : incidents
+#  0020        : finale et remise du prix
+#  0021        : notification au vainqueur (s'il n'est pas l'hôte)
+###############################################################################
+
+scripted_trigger agot_dc_tourney_has_two_racers_trigger = {
+	involved_activity ?= {
+		any_attending_character = {
+			count >= 2
+			agot_dc_rider_with_dragon_trigger = yes
+		}
+	}
+}
+
+scripted_effect agot_dc_tourney_pick_racer_effect = {
+	save_scope_as = host
+	involved_activity = {
+		save_scope_as = activity
+		random_attending_character = {
+			limit = { agot_dc_rider_with_dragon_trigger = yes }
+			save_scope_as = dc_racer
+		}
+	}
+	scope:dc_racer.var:current_dragon = { save_scope_as = dc_racer_dragon }
+}
+
+scripted_effect agot_dc_tourney_pick_second_racer_effect = {
+	scope:activity = {
+		random_attending_character = {
+			limit = {
+				agot_dc_rider_with_dragon_trigger = yes
+				NOT = { this = scope:dc_racer }
+			}
+			save_scope_as = dc_rival
+		}
+	}
+	scope:dc_rival.var:current_dragon = { save_scope_as = dc_rival_dragon }
+}
+
+#########################################
+# 0001 - La parade des dragons
+#########################################
+agot_dc_tourney.0001 = {
+	type = activity_event
+	title = agot_dc_tourney.0001.t
+	desc = agot_dc_tourney.0001.desc
+	theme = dragon
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { exists = involved_activity }
+	immediate = {
+		involved_activity = { save_scope_as = activity }
+		var:current_dragon ?= { save_scope_as = dc_dragon }
+	}
+
+	option = { # Ouvrir la parade en personne
+		name = agot_dc_tourney.0001.a
+		trigger = { agot_dc_rider_with_dragon_trigger = yes }
+		random_list = {
+			75 = {
+				desc = agot_dc_tourney.0001.a.success
+				modifier = {
+					add = 15
+					has_trait_xp = {
+						trait = dragonrider
+						track = dragon_training
+						value > 65
+					}
+				}
+				add_prestige = minor_prestige_gain
+				agot_add_dragon_training_xp = { VALUE = 5 }
+			}
+			25 = {
+				desc = agot_dc_tourney.0001.a.fail
+				add_stress = minor_stress_gain
+			}
+		}
+		ai_chance = {
+			base = 70
+			modifier = { add = 20 has_trait = arrogant }
+		}
+	}
+	option = { # Laisser défiler les concurrents
+		name = agot_dc_tourney.0001.b
+		add_stress = minor_stress_loss
+		ai_chance = { base = 30 }
+	}
+}
+
+#########################################
+# 0010 - Répartiteur caché des incidents
+#########################################
+agot_dc_tourney.0010 = {
+	type = character_event
+	hidden = yes
+	trigger = { exists = involved_activity }
+	immediate = {
+		random_list = {
+			20 = { trigger_event = agot_dc_tourney.0011 } # Dragon qui refuse de voler
+			15 = {
+				trigger = { agot_dc_tourney_has_two_racers_trigger = yes }
+				trigger_event = agot_dc_tourney.0012 # Collision en vol
+			}
+			15 = {
+				trigger = { agot_dc_tourney_has_two_racers_trigger = yes }
+				trigger_event = agot_dc_tourney.0013 # Un dragon attaque un rival
+			}
+			20 = { trigger_event = agot_dc_tourney.0014 } # Foule terrifiée
+			15 = { trigger_event = agot_dc_tourney.0015 } # Chute d'un cavalier
+			15 = { trigger_event = agot_dc_tourney.0016 } # Vent violent
+		}
+	}
+}
+
+#########################################
+# 0011 - Le dragon refuse de voler
+#########################################
+agot_dc_tourney.0011 = {
+	type = activity_event
+	title = agot_dc_tourney.0011.t
+	desc = agot_dc_tourney.0011.desc
+	theme = dragon
+	left_portrait = {
+		character = scope:dc_racer
+		animation = worry
+	}
+	right_portrait = {
+		character = scope:dc_racer_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { exists = involved_activity }
+	immediate = { agot_dc_tourney_pick_racer_effect = yes }
+
+	option = { # Laisser le cavalier l'apaiser
+		name = agot_dc_tourney.0011.a
+		scope:dc_racer = {
+			add_character_flag = { flag = agot_dc_tourney_hampered months = 3 }
+			agot_add_dragon_training_xp = { VALUE = 5 }
+		}
+		scope:dc_racer_dragon = { change_temperament = { VALUE = -3 } }
+		ai_chance = { base = 60 }
+	}
+	option = { # Qu'on le force à s'envoler !
+		name = agot_dc_tourney.0011.b
+		random_list = {
+			60 = {
+				desc = agot_dc_tourney.0011.b.flies
+				modifier = {
+					add = 20
+					scope:dc_racer = {
+						has_trait_xp = {
+							trait = dragonrider
+							track = dragon_training
+							value > 65
+						}
+					}
+				}
+				scope:dc_racer = { add_prestige = minor_prestige_gain }
+				scope:dc_racer_dragon = { change_temperament = { VALUE = 5 } }
+			}
+			40 = {
+				desc = agot_dc_tourney.0011.b.lashes
+				scope:dc_racer = {
+					increase_wounds_effect = { REASON = dragon }
+					add_character_flag = { flag = agot_dc_tourney_hampered months = 3 }
+					agot_dc_tourney_casualty_effect = yes
+				}
+			}
+		}
+		ai_chance = {
+			base = 40
+			modifier = { add = 30 has_trait = impatient }
+		}
+	}
+}
+
+#########################################
+# 0012 - Collision en plein vol
+#########################################
+agot_dc_tourney.0012 = {
+	type = activity_event
+	title = agot_dc_tourney.0012.t
+	desc = agot_dc_tourney.0012.desc
+	theme = dragon
+	left_portrait = {
+		character = scope:dc_racer
+		animation = pain
+	}
+	right_portrait = {
+		character = scope:dc_rival
+		animation = pain
+	}
+	trigger = { agot_dc_tourney_has_two_racers_trigger = yes }
+	immediate = {
+		agot_dc_tourney_pick_racer_effect = yes
+		agot_dc_tourney_pick_second_racer_effect = yes
+	}
+
+	option = { # Que les mestres s'en occupent
+		name = agot_dc_tourney.0012.a
+		random_list = {
+			50 = {
+				desc = agot_dc_tourney.0012.a.dragons
+				scope:dc_racer_dragon = { wound_dragon = yes }
+				scope:dc_rival_dragon = { wound_dragon = yes }
+				scope:dc_racer = { add_character_flag = { flag = agot_dc_tourney_hampered months = 3 } }
+				scope:dc_rival = { add_character_flag = { flag = agot_dc_tourney_hampered months = 3 } }
+			}
+			40 = {
+				desc = agot_dc_tourney.0012.a.riders
+				scope:dc_racer = {
+					increase_wounds_effect = { REASON = dragon }
+					agot_dc_tourney_casualty_effect = yes
+				}
+				scope:dc_rival = {
+					increase_wounds_effect = { REASON = dragon }
+					agot_dc_tourney_casualty_effect = yes
+				}
+			}
+			10 = {
+				desc = agot_dc_tourney.0012.a.death
+				modifier = {
+					add = 10
+					involved_activity ?= {
+						has_activity_option = {
+							category = agot_dc_aerial_trial
+							option = agot_dc_aerial_trial_joust
+						}
+					}
+				}
+				scope:dc_racer_dragon = { wound_dragon = yes }
+				scope:dc_rival = {
+					if = {
+						limit = { NOT = { this = scope:host } }
+						agot_dc_tourney_casualty_effect = yes
+						death = { death_reason = death_dragon }
+					}
+					else = {
+						increase_wounds_effect = { REASON = dragon }
+						agot_dc_tourney_casualty_effect = yes
+					}
+				}
+			}
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+#########################################
+# 0013 - Un dragon attaque un rival
+#########################################
+agot_dc_tourney.0013 = {
+	type = activity_event
+	title = agot_dc_tourney.0013.t
+	desc = agot_dc_tourney.0013.desc
+	theme = dragon
+	left_portrait = {
+		character = scope:dc_racer_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	right_portrait = {
+		character = scope:dc_rival
+		animation = fear
+	}
+	trigger = { agot_dc_tourney_has_two_racers_trigger = yes }
+	immediate = {
+		agot_dc_tourney_pick_racer_effect = yes
+		agot_dc_tourney_pick_second_racer_effect = yes
+	}
+
+	option = { # Disqualifier l'agresseur
+		name = agot_dc_tourney.0013.a
+		scope:dc_rival_dragon = { wound_dragon = yes }
+		scope:dc_racer = {
+			add_character_flag = { flag = agot_dc_tourney_hampered months = 3 }
+			add_prestige = minor_prestige_loss
+			if = {
+				limit = { NOT = { this = root } }
+				add_opinion = {
+					target = root
+					modifier = angry_opinion
+					opinion = -15
+				}
+			}
+		}
+		scope:dc_rival = {
+			if = {
+				limit = { NOT = { this = root } }
+				add_opinion = {
+					target = root
+					modifier = grateful_opinion
+					opinion = 15
+				}
+			}
+		}
+		ai_chance = {
+			base = 60
+			modifier = { add = 20 has_trait = just }
+		}
+	}
+	option = { # « C'est le sang du dragon. » Laisser faire.
+		name = agot_dc_tourney.0013.b
+		scope:dc_rival_dragon = { wound_dragon = yes }
+		scope:dc_racer_dragon = { change_temperament = { VALUE = 5 } }
+		scope:dc_rival = {
+			add_character_flag = { flag = agot_dc_tourney_hampered months = 3 }
+			if = {
+				limit = { NOT = { this = root } }
+				add_opinion = {
+					target = root
+					modifier = angry_opinion
+					opinion = -20
+				}
+			}
+		}
+		add_dread = minor_dread_gain
+		ai_chance = {
+			base = 40
+			modifier = { add = 30 has_trait = callous }
+		}
+	}
+}
+
+#########################################
+# 0014 - La foule terrifiée
+#########################################
+agot_dc_tourney.0014 = {
+	type = activity_event
+	title = agot_dc_tourney.0014.t
+	desc = agot_dc_tourney.0014.desc
+	theme = dragon
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	right_portrait = {
+		character = scope:dc_racer_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { exists = involved_activity }
+	immediate = { agot_dc_tourney_pick_racer_effect = yes }
+
+	option = { # Dédommager les familles du peuple
+		name = agot_dc_tourney.0014.a
+		remove_short_term_gold = minor_gold_value
+		add_prestige = minor_prestige_gain
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 has_trait = compassionate }
+		}
+	}
+	option = { # Le peuple doit apprendre à craindre les dragons
+		name = agot_dc_tourney.0014.b
+		add_dread = minor_dread_gain
+		add_prestige = minor_prestige_loss
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 has_trait = callous }
+		}
+	}
+}
+
+#########################################
+# 0015 - La chute d'un cavalier
+#########################################
+agot_dc_tourney.0015 = {
+	type = activity_event
+	title = agot_dc_tourney.0015.t
+	desc = agot_dc_tourney.0015.desc
+	theme = dragon
+	left_portrait = {
+		character = scope:dc_racer
+		animation = fear
+	}
+	right_portrait = {
+		character = scope:dc_racer_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { exists = involved_activity }
+	immediate = { agot_dc_tourney_pick_racer_effect = yes }
+
+	option = { # Prier les Sept (ou les dieux) pour lui
+		name = agot_dc_tourney.0015.a
+		random_list = {
+			45 = {
+				desc = agot_dc_tourney.0015.a.caught
+				modifier = {
+					add = 20
+					scope:dc_racer = {
+						has_trait_xp = {
+							trait = dragonrider
+							track = dragon_training
+							value > 65
+						}
+					}
+				}
+				modifier = {
+					add = 10
+					scope:dc_racer_dragon = { has_trait = dragon_swift }
+				}
+				scope:dc_racer = {
+					add_prestige = minor_prestige_gain
+					agot_add_dragon_training_xp = { VALUE = 10 }
+				}
+			}
+			45 = {
+				desc = agot_dc_tourney.0015.a.wounded
+				scope:dc_racer = {
+					increase_wounds_effect = { REASON = dragon }
+					add_character_flag = { flag = agot_dc_tourney_hampered months = 3 }
+					agot_dc_tourney_casualty_effect = yes
+				}
+			}
+			10 = {
+				desc = agot_dc_tourney.0015.a.death
+				modifier = {
+					add = 10
+					involved_activity ?= {
+						has_activity_option = {
+							category = agot_dc_aerial_trial
+							option = agot_dc_aerial_trial_joust
+						}
+					}
+				}
+				scope:dc_racer = {
+					if = {
+						limit = { NOT = { this = scope:host } }
+						agot_dc_tourney_casualty_effect = yes
+						death = { death_reason = death_dragon }
+					}
+					else = {
+						increase_wounds_effect = { REASON = dragon }
+						agot_dc_tourney_casualty_effect = yes
+					}
+				}
+			}
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+#########################################
+# 0016 - Le vent violent
+#########################################
+agot_dc_tourney.0016 = {
+	type = activity_event
+	title = agot_dc_tourney.0016.t
+	desc = agot_dc_tourney.0016.desc
+	theme = dragon
+	left_portrait = {
+		character = root
+		animation = worry
+	}
+	right_portrait = {
+		character = scope:dc_racer
+		animation = personality_bold
+	}
+	trigger = { exists = involved_activity }
+	immediate = { agot_dc_tourney_pick_racer_effect = yes }
+
+	option = { # Retarder l'épreuve d'un jour
+		name = agot_dc_tourney.0016.a
+		remove_short_term_gold = minor_gold_value
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 has_trait = patient }
+		}
+	}
+	option = { # Les vrais dragonniers volent par tous les temps !
+		name = agot_dc_tourney.0016.b
+		scope:activity = {
+			every_attending_character = {
+				limit = {
+					agot_dc_rider_with_dragon_trigger = yes
+					NOT = {
+						has_trait_xp = {
+							trait = dragonrider
+							track = dragon_training
+							value > 30
+						}
+					}
+				}
+				add_character_flag = { flag = agot_dc_tourney_hampered months = 3 }
+			}
+		}
+		random_list = {
+			80 = { desc = agot_dc_tourney.0016.b.ok }
+			20 = {
+				desc = agot_dc_tourney.0016.b.hurt
+				scope:dc_racer = {
+					increase_wounds_effect = { REASON = dragon }
+					agot_dc_tourney_casualty_effect = yes
+				}
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 has_trait = brave }
+		}
+	}
+}
+
+#########################################
+# 0020 - Finale et remise du prix
+#########################################
+agot_dc_tourney.0020 = {
+	type = activity_event
+	title = agot_dc_tourney.0020.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { NOT = { exists = scope:agot_dc_winner } }
+				desc = agot_dc_tourney.0020.desc_none
+			}
+			triggered_desc = {
+				trigger = { scope:agot_dc_winner = root }
+				desc = agot_dc_tourney.0020.desc_host
+			}
+			desc = agot_dc_tourney.0020.desc
+		}
+	}
+	theme = dragon
+	left_portrait = {
+		character = scope:agot_dc_winner
+		animation = personality_bold
+	}
+	right_portrait = {
+		character = scope:agot_dc_winner_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { exists = involved_activity }
+	immediate = {
+		save_scope_as = host
+		involved_activity = {
+			save_scope_as = activity
+			set_variable = { name = agot_dc_best_score value = -1000 }
+			every_attending_character = {
+				limit = { agot_dc_rider_with_dragon_trigger = yes }
+				set_variable = { name = agot_dc_race_score value = agot_dc_aerial_racer_score }
+				if = {
+					limit = { var:agot_dc_race_score > scope:activity.var:agot_dc_best_score }
+					scope:activity = {
+						set_variable = { name = agot_dc_best_score value = prev.var:agot_dc_race_score }
+						set_variable = { name = agot_dc_winner value = prev }
+					}
+				}
+			}
+			if = {
+				limit = { exists = var:agot_dc_winner }
+				var:agot_dc_winner = {
+					save_scope_as = agot_dc_winner
+					var:current_dragon ?= { save_scope_as = agot_dc_winner_dragon }
+				}
+			}
+		}
+	}
+
+	option = { # Couronner le champion des cieux
+		name = agot_dc_tourney.0020.a
+		trigger = { exists = scope:agot_dc_winner }
+		agot_dc_aerial_tournament_rewards_effect = yes
+		if = {
+			limit = { NOT = { scope:agot_dc_winner = root } }
+			scope:agot_dc_winner = { trigger_event = agot_dc_tourney.0021 }
+		}
+		ai_chance = { base = 100 }
+	}
+	option = { # Aucun vainqueur : clore le tournoi
+		name = agot_dc_tourney.0020.b
+		trigger = { NOT = { exists = scope:agot_dc_winner } }
+		add_prestige = minor_prestige_loss
+		ai_chance = { base = 100 }
+	}
+	after = {
+		involved_activity ?= {
+			every_attending_character = {
+				remove_variable = agot_dc_race_score
+			}
+		}
+	}
+}
+
+#########################################
+# 0021 - Notification au vainqueur
+#########################################
+agot_dc_tourney.0021 = {
+	type = activity_event
+	title = agot_dc_tourney.0021.t
+	desc = agot_dc_tourney.0021.desc
+	theme = dragon
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	right_portrait = {
+		character = scope:agot_dc_winner_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	immediate = {
+		var:current_dragon ?= { save_scope_as = agot_dc_winner_dragon }
+	}
+
+	option = {
+		name = agot_dc_tourney.0021.a
+		add_stress = minor_stress_loss
+	}
+}

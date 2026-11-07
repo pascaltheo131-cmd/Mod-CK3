@@ -1,0 +1,6 @@
+﻿# Trophée du Tournoi aérien : icône propre au mod, figurine de dragon en bronze d AGOT en 3D
+agot_dc_aerial_trophy = {
+	icon = "agot_dc_aerial_trophy.dds"
+	pedestal = "tall_pillow"
+	asset = dragon_doll_04_entity
+}

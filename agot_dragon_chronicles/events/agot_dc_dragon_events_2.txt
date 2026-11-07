@@ -491,33 +491,16 @@ agot_dc.0231 = {
 	trigger = {
 		agot_dc_rider_with_dragon_trigger = yes
 		is_landed = yes
+		is_ai = no
+		NOT = { exists = involved_activity }
+		NOT = { is_activity_type_on_cooldown = agot_dc_aerial_tournament }
 	}
 	immediate = { var:current_dragon = { save_scope_as = dc_dragon } }
 
-	option = { # Organiser une course et y participer
+	# Simple annonce : le Tournoi aérien s'organise depuis le menu des activités
+	# (activité agot_dc_aerial_tournament). Aucun effet de jeu.
+	option = {
 		name = agot_dc.0231.a
-		remove_short_term_gold = medium_gold_value
-		duel = {
-			skill = prowess
-			value = 12
-			50 = {
-				desc = agot_dc.0231.a.win
-				compare_modifier = { value = scope:duel_value multiplier = 3.5 }
-				add_prestige = major_prestige_gain
-				add_character_modifier = { modifier = agot_dc_aerial_champion_modifier years = 5 }
-			}
-			50 = {
-				desc = agot_dc.0231.a.lose
-				compare_modifier = { value = scope:duel_value multiplier = -3.5 }
-				add_prestige = minor_prestige_gain
-				agot_add_dragon_training_xp = { VALUE = 15 }
-			}
-		}
-		ai_chance = { base = 60 }
-	}
-	option = { # Pas de jeux avec un dragon
-		name = agot_dc.0231.b
-		ai_chance = { base = 40 }
 	}
 }
 

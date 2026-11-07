@@ -1,0 +1,115 @@
+﻿l_english:
+ # --- Activité ---
+ agot_dc_aerial_tournament: "Tournoi aérien"
+ agot_dc_aerial_tournament_host_an_a: "$host_activity_a$"
+ agot_dc_aerial_tournament_desc: "Convoquez les cavaliers de dragon du royaume pour une course et des joutes dans le ciel, comme au temps de la Danse et des grands tournois de Port-Réal. Les nobles du royaume viendront contempler le spectacle... si leurs nerfs le permettent."
+ agot_dc_aerial_tournament_selection_tooltip: "Organisez un [GetActivityType('agot_dc_aerial_tournament').GetName] où s'affronteront les cavaliers de dragon.\n\nRécompenses attendues :\n$agot_dc_aerial_tournament_host_desc$"
+ agot_dc_aerial_tournament_host_desc: "$BULLET_WITH_TAB$Gain de [prestige|E] pour l'hôte\n$BULLET_WITH_TAB$Le vainqueur reçoit un trophée unique et le titre de Champion des Cieux\n$BULLET_WITH_TAB$Expérience de dragonnier pour les concurrents\n$BULLET_WITH_TAB$#N Risque de blessures, voire de morts#!"
+ agot_dc_aerial_tournament_predicted_cost: "Le coût exact dépend de l'ampleur et de l'épreuve choisies."
+ agot_dc_aerial_tournament_destination_selection: "Un #V Tournoi aérien#! peut se tenir dans n'importe quelle province de votre domaine."
+ agot_dc_aerial_tournament_province_desc: "Choisissez le lieu du tournoi"
+ agot_dc_aerial_tournament_conclusion_desc: "Le [GetActivityType('agot_dc_aerial_tournament').GetName] est terminé. Les dragons ont regagné leurs antres, et l'on chantera longtemps le nom du Champion des Cieux."
+ agot_dc_aerial_tournament_conclusion_bloody: "Le [GetActivityType('agot_dc_aerial_tournament').GetName] est terminé, mais le sable de la lice a bu du sang. On se souviendra de ce jour autant pour ses morts et ses blessés que pour son champion."
+ agot_dc_aerial_tournament_guest_desc: "Cavaliers et spectateurs"
+ agot_dc_aerial_tournament_guest_help_text: "Invitez les cavaliers de dragon qui concourront, ainsi que les nobles qui assisteront au spectacle. Seuls les invités chevauchant un dragon vivant prendront part aux épreuves."
+ agot_dc_aerial_tournament_cooldown: "Vous devez attendre au moins 5 ans avant d'organiser un autre Tournoi aérien !"
+ TRAVEL_NAME_FOR_agot_dc_aerial_tournament: "$TRAVEL_NAME_FOR_activity_tournament$"
+ agot_dc_aerial_tournament_base_cost: "Préparatifs du tournoi"
+ agot_dc_aerial_tournament_rider_join_reason: "Cavalier de dragon, désireux de prouver sa valeur"
+
+ # --- Règle d'invitation ---
+ agot_dc_invite_rule_dragonriders: "Cavaliers de dragon"
+ agot_dc_invite_rule_dragonriders_desc: "Les cavaliers d'un dragon vivant parmi vos vassaux, votre cour, votre famille proche et votre suzerain."
+
+ # --- Phases ---
+ agot_dc_aerial_parade: "Parade des dragons"
+ agot_dc_aerial_parade_desc: "Les dragons défilent au-dessus de la foule, écailles étincelantes, pendant que les hérauts proclament le nom de chaque cavalier."
+ agot_dc_aerial_contest: "Épreuves aériennes"
+ agot_dc_aerial_contest_desc: "Les cavaliers s'affrontent dans le ciel. Le vent, les flammes et l'humeur des dragons décideront autant que l'adresse."
+
+ # --- Options : ampleur ---
+ agot_dc_aerial_scale: "Ampleur"
+ agot_dc_aerial_scale_modest: "Modeste"
+ agot_dc_aerial_scale_modest_desc: "$EFFECT_LIST_BULLET$ Gains de [prestige|E] normaux\n$EFFECT_LIST_BULLET$ Trophée de maître pour le vainqueur\n\n#weak Quelques bannières, une tribune de bois et des dragons : que faut-il de plus ?#!"
+ agot_dc_aerial_scale_grand: "Grandiose"
+ agot_dc_aerial_scale_grand_desc: "$EFFECT_LIST_BULLET$ Gains de [prestige|E] accrus pour l'hôte et le vainqueur\n$EFFECT_LIST_BULLET$ Trophée prestigieux pour le vainqueur\n\n#weak Pavillons de soie, ménestrels, vin de La Treille : un spectacle digne de l'Ancienne Valyria.#!"
+
+ # --- Options : épreuve ---
+ agot_dc_aerial_trial: "Épreuve"
+ agot_dc_aerial_trial_race: "Course autour des tours"
+ agot_dc_aerial_trial_race_desc: "$EFFECT_LIST_BULLET$ La vitesse des dragons compte davantage\n\n#weak Trois tours des remparts, et le premier à toucher la plus haute flèche l'emporte.#!"
+ agot_dc_aerial_trial_targets: "Cibles enflammées"
+ agot_dc_aerial_trial_targets_desc: "$EFFECT_LIST_BULLET$ Coût supplémentaire en [gold|E]\n\n#weak Des mannequins de paille et de poix sur des radeaux : au cavalier de commander « Dracarys » au bon moment.#!"
+ agot_dc_aerial_trial_joust: "Joute aérienne au premier sang"
+ agot_dc_aerial_trial_joust_desc: "$EFFECT_LIST_BULLET$ La [prowess|E] compte davantage\n$EFFECT_LIST_BULLET$ #N Risque de mort accru#!\n\n#weak Lance émoussée contre lance émoussée, à cent pieds du sol. Que pourrait-il mal se passer ?#!"
+
+ # --- Journal ---
+ agot_dc_aerial_parade_log_title: "La parade commence"
+ agot_dc_aerial_parade_log: "[CHARACTER.GetTitledFirstName] ouvre le tournoi : les dragons défilent au-dessus de la foule."
+ agot_dc_aerial_winner_log_title: "Le Champion des Cieux"
+ agot_dc_aerial_winner_log: "[CHARACTER.GetTitledFirstName] remporte le Tournoi aérien et reçoit le trophée du champion."
+ agot_dc_aerial_losers_log_title: "Les autres concurrents"
+ agot_dc_aerial_losers_log: "Les cavaliers vaincus repartent avec un peu de gloire et beaucoup d'expérience."
+ agot_dc_aerial_host_log_title: "Le tournoi s'achève"
+ agot_dc_aerial_host_log: "[CHARACTER.GetTitledFirstName] reçoit les éloges de ses invités pour ce tournoi."
+
+ # --- Trophée ---
+ agot_dc_aerial_trophy_name: "Dragon d'or des Cieux"
+ agot_dc_aerial_trophy_desc: "Une statuette de bronze doré : un dragon aux ailes déployées s'élançant d'un socle orné d'un rubis. Remise à [agot_dc_trophy_winner.GetTitledFirstNameNoTooltip] pour sa victoire au Tournoi aérien, chevauchant [agot_dc_trophy_dragon.GetFirstNameNoTooltip]."
+
+ # --- Évènements ---
+ agot_dc_tourney.0001.t: "La parade des dragons"
+ agot_dc_tourney.0001.desc: "Les tribunes sont pleines à craquer. Seigneurs, dames et petites gens lèvent les yeux vers le ciel où tournoient les dragons, tandis que les hérauts proclament le nom de chaque cavalier. [dc_dragon.GetName] attend votre signal, les naseaux fumants."
+ agot_dc_tourney.0001.a: "J'ouvrirai moi-même la parade !"
+ agot_dc_tourney.0001.a.success: "Votre passage en rase-mottes au-dessus des tribunes déclenche un tonnerre d'acclamations."
+ agot_dc_tourney.0001.a.fail: "[dc_dragon.GetName] boude la foule et se pose bien trop tôt. Quelques rires étouffés s'élèvent."
+ agot_dc_tourney.0001.b: "Laissons les concurrents défiler."
+
+ agot_dc_tourney.0011.t: "Un dragon rétif"
+ agot_dc_tourney.0011.desc: "Au moment du départ, [dc_racer_dragon.GetName] refuse obstinément de quitter le sol. [dc_racer.GetTitledFirstName] a beau crier « Sōvegon ! », la bête se contente de gronder en fouettant la lice de sa queue."
+ agot_dc_tourney.0011.a: "Qu'on lui laisse le temps de l'apaiser."
+ agot_dc_tourney.0011.b: "Qu'on le force à s'envoler !"
+ agot_dc_tourney.0011.b.flies: "Le dragon s'arrache enfin au sol dans un rugissement furieux."
+ agot_dc_tourney.0011.b.lashes: "Le dragon se retourne contre son propre cavalier !"
+
+ agot_dc_tourney.0012.t: "Collision en plein vol"
+ agot_dc_tourney.0012.desc: "Dans le dernier virage autour de la grande tour, [dc_racer_dragon.GetName] et [dc_rival_dragon.GetName] se percutent dans un fracas d'écailles et d'ailes. La foule hurle tandis que les deux bêtes tombent en vrille."
+ agot_dc_tourney.0012.a: "Que les mestres se tiennent prêts !"
+ agot_dc_tourney.0012.a.dragons: "Les dragons se dégagent, blessés, mais les cavaliers sont saufs."
+ agot_dc_tourney.0012.a.riders: "Les deux cavaliers sont désarçonnés et gravement blessés."
+ agot_dc_tourney.0012.a.death: "Un cavalier ne se relève pas."
+
+ agot_dc_tourney.0013.t: "Sang de dragon"
+ agot_dc_tourney.0013.desc: "Sans prévenir, [dc_racer_dragon.GetName] fond sur [dc_rival_dragon.GetName], toutes griffes dehors. Comme Vhagar et Arrax au-dessus de la baie des Naufrageurs, les deux dragons s'empoignent en plein ciel sous les yeux de [dc_rival.GetTitledFirstName], terrifié."
+ agot_dc_tourney.0013.a: "Disqualifiez l'agresseur !"
+ agot_dc_tourney.0013.b: "C'est le sang du dragon. Laissez faire."
+
+ agot_dc_tourney.0014.t: "La foule terrifiée"
+ agot_dc_tourney.0014.desc: "Une gerbe de flammes de [dc_racer_dragon.GetName] frôle les tribunes populaires. La panique se répand : on se piétine, on fuit, des enfants pleurent. Le silence revenu, tous les regards se tournent vers vous."
+ agot_dc_tourney.0014.a: "Dédommagez les familles."
+ agot_dc_tourney.0014.b: "Le peuple doit apprendre à craindre les dragons."
+
+ agot_dc_tourney.0015.t: "La chute"
+ agot_dc_tourney.0015.desc: "Une rafale, une sangle qui cède, et [dc_racer.GetTitledFirstName] glisse de sa selle. Le cavalier tombe comme une pierre tandis que [dc_racer_dragon.GetName] plonge à sa suite."
+ agot_dc_tourney.0015.a: "Que les dieux le gardent !"
+ agot_dc_tourney.0015.a.caught: "Le dragon rattrape son cavalier à quelques pieds du sol. La foule exulte !"
+ agot_dc_tourney.0015.a.wounded: "Le cavalier s'écrase dans la lice, brisé mais vivant."
+ agot_dc_tourney.0015.a.death: "Le dragon arrive trop tard."
+
+ agot_dc_tourney.0016.t: "Le vent se lève"
+ agot_dc_tourney.0016.desc: "Un vent violent venu de la mer secoue les bannières et fait tanguer les dragons. [dc_racer.GetTitledFirstName] vous fait signe : faut-il poursuivre les épreuves ?"
+ agot_dc_tourney.0016.a: "Retardons l'épreuve d'un jour."
+ agot_dc_tourney.0016.b: "Les vrais dragonniers volent par tous les temps !"
+ agot_dc_tourney.0016.b.ok: "Les cavaliers aguerris domptent la tempête ; les novices peinent."
+ agot_dc_tourney.0016.b.hurt: "Une bourrasque projette un cavalier contre les remparts."
+
+ agot_dc_tourney.0020.t: "Le Champion des Cieux"
+ agot_dc_tourney.0020.desc: "Les épreuves sont terminées. Sous les vivats, [agot_dc_winner.GetTitledFirstName] pose [agot_dc_winner_dragon.GetName] au centre de la lice et met genou à terre devant vous pour recevoir le prix du champion."
+ agot_dc_tourney.0020.desc_host: "Les épreuves sont terminées et c'est vous, sur [agot_dc_winner_dragon.GetName], qui avez surpassé tous vos rivaux ! Les tribunes scandent votre nom, et votre propre héraut vous remet le prix du champion."
+ agot_dc_tourney.0020.desc_none: "Les épreuves sont terminées, mais plus aucun cavalier n'est en état de concourir. Le tournoi s'achève sans vainqueur, dans un silence gêné."
+ agot_dc_tourney.0020.a: "Gloire au Champion des Cieux !"
+ agot_dc_tourney.0020.b: "Le tournoi est clos."
+
+ agot_dc_tourney.0021.t: "Champion des Cieux"
+ agot_dc_tourney.0021.desc: "Vous avez remporté le tournoi aérien de [host.GetTitledFirstName] ! Monté sur [agot_dc_winner_dragon.GetName], vous avez surpassé tous les autres cavaliers, et l'on vous remet le Dragon d'or des Cieux."
+ agot_dc_tourney.0021.a: "Que les bardes chantent mon nom !"

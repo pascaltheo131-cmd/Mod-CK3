@@ -1,0 +1,180 @@
+﻿# AGOT - Dragon Chronicles : effets du Tournoi aérien
+
+# Crée le trophée du vainqueur.
+# root = le vainqueur (cavalier) ; scope:activity = le tournoi
+agot_dc_create_aerial_trophy_effect = {
+	save_scope_as = agot_dc_trophy_winner
+	var:current_dragon ?= { save_scope_as = agot_dc_trophy_dragon }
+	# Rareté selon l'ampleur : prestigieuse (70) ou de maître (30), cf. set_artifact_rarity_*
+	if = {
+		limit = {
+			scope:activity ?= {
+				has_activity_option = {
+					category = agot_dc_aerial_scale
+					option = agot_dc_aerial_scale_grand
+				}
+			}
+		}
+		set_artifact_rarity_famed = yes
+	}
+	else = {
+		set_artifact_rarity_masterwork = yes
+	}
+	create_artifact = {
+		name = agot_dc_aerial_trophy_name
+		description = agot_dc_aerial_trophy_desc
+		type = pedestal
+		visuals = agot_dc_aerial_trophy
+		wealth = scope:wealth
+		quality = scope:quality
+		modifier = artifact_monthly_prestige_2_modifier
+		history = {
+			type = prize_created
+			recipient = scope:agot_dc_trophy_winner
+		}
+		save_scope_as = agot_dc_new_trophy
+	}
+	scope:agot_dc_new_trophy ?= {
+		add_artifact_modifier = artifact_prowess_2_modifier
+		if = {
+			limit = {
+				scope:activity ?= {
+					has_activity_option = {
+						category = agot_dc_aerial_scale
+						option = agot_dc_aerial_scale_grand
+					}
+				}
+			}
+			add_artifact_modifier = artifact_monthly_prestige_2_modifier
+		}
+	}
+}
+
+# Conséquences politiques quand un concurrent est tué ou grièvement blessé.
+# root = la victime ; scope:host = l'hôte ; scope:activity = le tournoi
+# À appeler AVANT un éventuel effet death.
+agot_dc_tourney_casualty_effect = {
+	scope:activity ?= {
+		set_variable = agot_dc_tourney_bloodshed
+	}
+	if = {
+		limit = { NOT = { this = scope:host } }
+		every_close_family_member = {
+			limit = { NOT = { this = scope:host } }
+			add_opinion = {
+				target = scope:host
+				modifier = angry_opinion
+				opinion = -30
+			}
+		}
+		add_opinion = {
+			target = scope:host
+			modifier = angry_opinion
+			opinion = -20
+		}
+	}
+	scope:host = {
+		add_prestige = minor_prestige_loss
+	}
+}
+
+# Récompenses finales, appliquées par l'évènement de remise du prix.
+# root = l'hôte ; scope:activity ; scope:agot_dc_winner
+agot_dc_aerial_tournament_rewards_effect = {
+	scope:activity = {
+		add_activity_log_entry = {
+			key = agot_dc_aerial_winner_log
+			tags = { winner contest }
+			score = 100
+			show_in_conclusion = yes
+			character = scope:agot_dc_winner
+			scope:agot_dc_winner = {
+				if = {
+					limit = {
+						scope:activity = {
+							has_activity_option = {
+								category = agot_dc_aerial_scale
+								option = agot_dc_aerial_scale_grand
+							}
+						}
+					}
+					add_prestige = massive_prestige_gain
+				}
+				else = {
+					add_prestige = major_prestige_gain
+				}
+				add_character_modifier = {
+					modifier = agot_dc_aerial_champion_modifier
+					years = 5
+				}
+				agot_add_dragon_training_xp = { VALUE = 25 }
+				agot_dc_create_aerial_trophy_effect = yes
+			}
+		}
+		every_attending_character = {
+			limit = {
+				NOT = { this = scope:agot_dc_winner }
+			}
+			add_opinion = {
+				target = scope:agot_dc_winner
+				modifier = respect_opinion
+				opinion = 15
+			}
+		}
+		add_activity_log_entry = {
+			key = agot_dc_aerial_losers_log
+			tags = { contest }
+			score = 50
+			show_in_conclusion = yes
+			character = scope:host
+			every_attending_character = {
+				limit = {
+					agot_dc_rider_with_dragon_trigger = yes
+					NOT = { this = scope:agot_dc_winner }
+				}
+				add_prestige = minor_prestige_gain
+				agot_add_dragon_training_xp = { VALUE = 10 }
+			}
+		}
+		add_activity_log_entry = {
+			key = agot_dc_aerial_host_log
+			tags = { completed }
+			score = 60
+			show_in_conclusion = yes
+			character = scope:host
+			scope:host = {
+				if = {
+					limit = { scope:activity = { has_variable = agot_dc_tourney_bloodshed } }
+					add_prestige = minor_prestige_gain
+				}
+				else_if = {
+					limit = {
+						scope:activity = {
+							has_activity_option = {
+								category = agot_dc_aerial_scale
+								option = agot_dc_aerial_scale_grand
+							}
+						}
+					}
+					add_prestige = major_prestige_gain
+					add_dynasty_prestige = minor_dynasty_prestige_gain
+				}
+				else = {
+					add_prestige = medium_prestige_gain
+				}
+				add_stress = minor_stress_loss
+			}
+			every_attending_character = {
+				limit = {
+					NOT = { this = scope:host }
+					NOT = { scope:activity = { has_variable = agot_dc_tourney_bloodshed } }
+				}
+				add_opinion = {
+					target = scope:host
+					modifier = impressed_opinion
+					opinion = 15
+				}
+			}
+		}
+	}
+}

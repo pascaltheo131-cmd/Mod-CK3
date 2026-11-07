@@ -1,0 +1,12 @@
+﻿# Le personnage chevauche un dragon vivant et utilisable
+agot_dc_rider_with_dragon_trigger = {
+	is_current_dragonrider = yes
+	exists = var:current_dragon
+	var:current_dragon = { is_alive = yes }
+}
+
+# Idem, mais sur le champ de bataille (respecte le choix de ne pas utiliser son dragon)
+agot_dc_battle_rider_trigger = {
+	agot_dc_rider_with_dragon_trigger = yes
+	is_current_dragonrider_warfare = yes
+}

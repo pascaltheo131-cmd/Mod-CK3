@@ -1,0 +1,26 @@
+﻿agot_dc_dragon_terror_modifier = {
+	dread_baseline_add = 10
+	monthly_prestige = 0.5
+}
+
+agot_dc_dragon_blessed_modifier = {
+	monthly_piety = 0.5
+	stress_loss_mult = 0.1
+}
+
+agot_dc_dragon_scholar_modifier = {
+	learning = 1
+}
+
+agot_dc_dragon_merciful_modifier = {
+	general_opinion = 5
+}
+
+agot_dc_dragon_festival_modifier = {
+	county_opinion_add = 10
+}
+
+agot_dc_dragon_feared_county_modifier = {
+	county_opinion_add = -10
+	levy_size = 0.1
+}

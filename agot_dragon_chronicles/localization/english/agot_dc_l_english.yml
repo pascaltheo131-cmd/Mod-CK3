@@ -1,0 +1,125 @@
+﻿l_english:
+ # Modificateurs
+ agot_dc_dragon_terror_modifier: "Terreur ailée"
+ agot_dc_dragon_terror_modifier_desc: "Les survivants racontent partout comment ce personnage a brûlé des armées en fuite."
+ agot_dc_dragon_blessed_modifier: "Dragon béni"
+ agot_dc_dragon_blessed_modifier_desc: "Le dragon de ce personnage a reçu la bénédiction des dieux."
+ agot_dc_dragon_scholar_modifier: "Étude draconique"
+ agot_dc_dragon_scholar_modifier_desc: "Ce personnage finance l'étude savante de son dragon."
+ agot_dc_dragon_merciful_modifier: "Cavalier clément"
+ agot_dc_dragon_merciful_modifier_desc: "On loue ce cavalier de dragon pour sa retenue."
+ agot_dc_dragon_festival_modifier: "Fête du Dragon"
+ agot_dc_dragon_festival_modifier_desc: "Le peuple célèbre le dragon de son seigneur."
+ agot_dc_dragon_feared_county_modifier: "Ombre du Dragon"
+ agot_dc_dragon_feared_county_modifier_desc: "Le peuple tremble, mais les hommes s'enrôlent par peur."
+
+ # 0001
+ agot_dc.0001.t: "Une faim perdue"
+ agot_dc.0001.desc: "Depuis trois jours, [dc_dragon.GetFirstName] repousse les carcasses que lui apportent ses gardiens. Il reste roulé en boule, les yeux mi-clos, et sa fumée est grise et maigre."
+ agot_dc.0001.a: "Qu'on fasse venir un mestre."
+ agot_dc.0001.a.picky: "Le mestre conclut à un simple caprice : le dragon voulait du mouton, pas du bœuf."
+ agot_dc.0001.a.sick_early: "Le mestre décèle une fièvre naissante et la soigne à temps."
+ agot_dc.0001.b: "Je vais le nourrir de mes propres mains."
+ agot_dc.0001.b.success: "Le dragon mange enfin, dans votre main."
+ agot_dc.0001.b.burned: "Un claquement de mâchoires, un souffle de feu… vous êtes brûlé."
+ agot_dc.0001.c: "Il mangera quand il aura faim."
+ agot_dc.0001.c.fine: "Le lendemain, il dévore deux bœufs entiers."
+ agot_dc.0001.c.ill: "Son état empire : le dragon est malade."
+
+ # 0011
+ agot_dc.0011.t: "Une ombre près du dragon"
+ agot_dc.0011.desc: "Un gardien rapporte qu'un inconnu rôde la nuit autour de l'antre de [dc_dragon.GetFirstName], posant trop de questions sur ses repas et ses chaînes."
+ agot_dc.0011.a: "Doublez la garde."
+ agot_dc.0011.b: "Tendons-lui un piège."
+ agot_dc.0011.b.success: "L'espion est pris, et il parle."
+ agot_dc.0011.b.failure: "L'espion s'échappe, et le dragon devient nerveux."
+ agot_dc.0011.c: "Laissez la porte ouverte. Mon dragon s'en chargera."
+
+ # 0021
+ agot_dc.0021.t: "Les dieux et le dragon"
+ agot_dc.0021.desc: "Un prêtre de votre foi demande à bénir [dc_dragon.GetFirstName] devant la foule, pour montrer que le feu du dragon sert la volonté divine."
+ agot_dc.0021.a: "Qu'il le bénisse."
+ agot_dc.0021.b: "Mon dragon n'a besoin d'aucun dieu."
+ agot_dc.0021.c: "Laissez-le donc offrir sa colombe… au dragon."
+
+ # 0031
+ agot_dc.0031.t: "Le savant et la bête"
+ agot_dc.0031.desc: "Un érudit venu de la Citadelle supplie qu'on le laisse étudier [dc_dragon.GetFirstName] : ses écailles, son feu, son sommeil. Il prétend retrouver des savoirs perdus de Valyria."
+ agot_dc.0031.a: "Je financerai ses recherches."
+ agot_dc.0031.b: "Qu'il regarde, de loin."
+ agot_dc.0031.b.fine: "Il remplit des carnets entiers, ravi."
+ agot_dc.0031.b.eaten: "Il s'approche un peu trop. On ne retrouve que ses carnets."
+ agot_dc.0031.c: "Dehors, charlatan."
+
+ # 0041
+ agot_dc.0041.t: "Un festin chez le voisin"
+ agot_dc.0041.desc: "[dc_dragon.GetFirstName] est revenu repu, l'haleine pleine de laine brûlée. Un messager de [dc_neighbor.GetTitledFirstName] réclame réparation : tout un troupeau a disparu dans les flammes."
+ agot_dc.0041.a: "Payez-lui ses moutons."
+ agot_dc.0041.b: "Les dragons mangent ce qu'ils veulent."
+
+ # 0051
+ agot_dc.0051.t: "Une forêt de brigands"
+ agot_dc.0051.desc: "[dc_vassal.GetTitledFirstName] se plaint de brigands cachés dans une forêt de ses terres et offre une bourse généreuse si [dc_dragon.GetFirstName] réduit les bois en cendres."
+ agot_dc.0051.a: "Le feu purifiera tout."
+ agot_dc.0051.a.wildfire: "L'incendie a gagné des villages voisins…"
+ agot_dc.0051.b: "Mon dragon n'est pas un garde-chasse."
+
+ # 0061
+ agot_dc.0061.t: "Dans l'œil de la tempête"
+ agot_dc.0061.desc: "Au retour d'un long vol, une tempête monstrueuse vous barre la route. Les éclairs zèbrent le ciel autour de [dc_dragon.GetFirstName]."
+ agot_dc.0061.a: "Plus haut ! À travers les nuages !"
+ agot_dc.0061.a.success: "Vous jaillissez au-dessus des nuages, sous un ciel d'étoiles."
+ agot_dc.0061.a.struck: "La foudre vous frappe tous les deux."
+ agot_dc.0061.b: "Posons-nous et attendons."
+
+ # 0071
+ agot_dc.0071.t: "Feu sur les flots"
+ agot_dc.0071.desc: "En survolant la côte, vous repérez un navire pirate qui pille un village de pêcheurs. [dc_dragon.GetFirstName] n'attend pas votre ordre : le navire n'est bientôt plus qu'une torche dérivante."
+ agot_dc.0071.a: "Récupérez le butin de l'épave."
+ agot_dc.0071.b: "Libérez les captifs enchaînés dans la cale."
+
+ # 0081
+ agot_dc.0081.t: "La Fête du Dragon"
+ agot_dc.0081.desc: "Le peuple de votre capitale a fabriqué une immense effigie de [dc_dragon.GetFirstName] en toile et en bois, et danse dans les rues en son honneur."
+ agot_dc.0081.a: "Survolons la fête !"
+ agot_dc.0081.b: "Un dragon n'est pas un jouet de foire."
+
+ # Batailles
+ agot_dc_battle.1001.t: "Les fuyards"
+ agot_dc_battle.1001.desc: "La bataille est gagnée. Sous vous, l'ennemi brisé fuit en désordre à travers les champs. [dc_dragon.GetFirstName] gronde, impatient."
+ agot_dc_battle.1001.a: "Dracarys. Qu'aucun ne rentre chez lui."
+ agot_dc_battle.1001.b: "Assez. Laissez-les raconter ce qu'ils ont vu."
+
+ agot_dc_battle.1011.t: "Le carreau de scorpion"
+ agot_dc_battle.1011.desc: "Un sifflement, puis un cri : un carreau de scorpion s'est fiché dans le flanc de [dc_dragon.GetFirstName]. La machine ennemie se recharge déjà."
+ agot_dc_battle.1011.a: "Réduisez cette machine en cendres !"
+ agot_dc_battle.1011.a.hit: "Un second carreau vous frôle et vous blesse."
+ agot_dc_battle.1011.b: "On se replie, mon dragon d'abord."
+
+ agot_dc_battle.1021.t: "Entre les crocs"
+ agot_dc_battle.1021.desc: "[dc_enemy_commander.GetTitledFirstName] est à terre, désarmé, et [dc_dragon.GetFirstName] le tient sous sa griffe. Il n'attend qu'un mot de vous."
+ agot_dc_battle.1021.a: "Dracarys."
+ agot_dc_battle.1021.b: "Laissez-le fuir. Qu'il tremble le reste de sa vie."
+ agot_dc_battle.1021.c: "Relevez-vous, ser. Vous vous êtes bien battu."
+
+ agot_dc_battle.1031.t: "Le rugissement de la victoire"
+ agot_dc_battle.1031.desc: "Alors que l'ennemi se disperse, [dc_dragon.GetFirstName] s'élève au-dessus du champ de bataille et pousse un rugissement qui fait trembler les deux armées."
+ agot_dc_battle.1031.a: "Le ciel nous appartient !"
+
+ agot_dc_battle.2001.t: "La fureur du dragon"
+ agot_dc_battle.2001.desc: "Rendu fou par le fracas et l'odeur du sang, [dc_dragon.GetFirstName] ne répond plus à vos ordres et crache son feu au hasard, y compris sur vos propres hommes."
+ agot_dc_battle.2001.a: "Reprendre le contrôle, quoi qu'il en coûte."
+ agot_dc_battle.2001.a.success: "Vous le domptez à nouveau, devant tous."
+ agot_dc_battle.2001.a.failure: "Il vous échappe et brûle vos propres rangs."
+ agot_dc_battle.2001.b: "Laisser le dragon fuir le champ de bataille."
+
+ agot_dc_battle.2011.t: "Désarçonné"
+ agot_dc_battle.2011.desc: "Une volée de flèches déchire vos sangles. [dc_dragon.GetFirstName] fait une embardée et vous êtes projeté dans le vide…"
+ agot_dc_battle.2011.a: "Je m'accrocherai jusqu'au bout."
+ agot_dc_battle.2011.b: "Je remonterai en selle dès que possible."
+
+ agot_dc_battle.2021.t: "Couvrir la retraite"
+ agot_dc_battle.2021.desc: "La bataille est perdue. Vos hommes fuient, talonnés par la cavalerie ennemie. Du haut de [dc_dragon.GetFirstName], vous pourriez leur sauver la vie."
+ agot_dc_battle.2021.a: "Plongeons sur leurs poursuivants !"
+ agot_dc_battle.2021.a.wounded: "Votre dragon a été blessé en couvrant la retraite."
+ agot_dc_battle.2021.b: "Chacun pour soi."

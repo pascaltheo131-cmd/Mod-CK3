@@ -1,0 +1,465 @@
+﻿namespace = agot_dc
+
+###############################################################################
+# AGOT - Dragon Chronicles : évènements aléatoires de temps de paix
+# Envoyés depuis agot_dc_yearly_dragon_pulse au cavalier (root).
+# scope:dc_dragon = le dragon du cavalier
+###############################################################################
+
+scripted_effect agot_dc_save_dragon_effect = {
+	var:current_dragon = { save_scope_as = dc_dragon }
+}
+
+#########################################
+# 0001 - Le dragon refuse de manger
+#########################################
+agot_dc.0001 = {
+	type = character_event
+	title = agot_dc.0001.t
+	desc = agot_dc.0001.desc
+	theme = dragon
+	cooldown = { years = 10 }
+	left_portrait = { character = root animation = worry }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = {
+		agot_dc_rider_with_dragon_trigger = yes
+		var:current_dragon = { NOT = { has_trait = dragon_ill } }
+	}
+	immediate = { agot_dc_save_dragon_effect = yes }
+
+	option = { # Faire venir un mestre
+		name = agot_dc.0001.a
+		remove_short_term_gold = minor_gold_value
+		random_list = {
+			60 = {
+				desc = agot_dc.0001.a.picky
+				add_stress = minor_stress_loss
+			}
+			40 = {
+				desc = agot_dc.0001.a.sick_early
+				add_learning_lifestyle_xp = minor_lifestyle_xp
+				scope:dc_dragon = { change_temperament = { VALUE = -5 } }
+			}
+		}
+		ai_chance = { base = 50 }
+	}
+	option = { # Le nourrir soi-même
+		name = agot_dc.0001.b
+		agot_add_dragon_training_xp = { VALUE = 10 }
+		random_list = {
+			80 = {
+				desc = agot_dc.0001.b.success
+				add_stress = medium_stress_loss
+			}
+			20 = {
+				desc = agot_dc.0001.b.burned
+				modifier = { add = -10 has_trait = brave }
+				increase_wounds_effect = { REASON = dragon }
+			}
+		}
+		ai_chance = {
+			base = 30
+			modifier = { add = 30 has_trait = brave }
+		}
+	}
+	option = { # Ignorer
+		name = agot_dc.0001.c
+		random_list = {
+			50 = { desc = agot_dc.0001.c.fine }
+			50 = {
+				desc = agot_dc.0001.c.ill
+				scope:dc_dragon = { add_trait = dragon_ill }
+			}
+		}
+		ai_chance = { base = 20 }
+	}
+}
+
+#########################################
+# 0011 - Un espion rôde autour du dragon
+#########################################
+agot_dc.0011 = {
+	type = character_event
+	title = agot_dc.0011.t
+	desc = agot_dc.0011.desc
+	theme = intrigue
+	cooldown = { years = 15 }
+	left_portrait = { character = root animation = scheme }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = {
+		agot_dc_rider_with_dragon_trigger = yes
+		is_landed = yes
+	}
+	immediate = { agot_dc_save_dragon_effect = yes }
+
+	option = { # Doubler la garde
+		name = agot_dc.0011.a
+		remove_short_term_gold = medium_gold_value
+		add_stress = minor_stress_loss
+		ai_chance = { base = 50 }
+	}
+	option = { # Tendre un piège
+		name = agot_dc.0011.b
+		duel = {
+			skill = intrigue
+			value = 12
+			50 = {
+				desc = agot_dc.0011.b.success
+				compare_modifier = { value = scope:duel_value multiplier = 3.5 }
+				add_prestige = medium_prestige_gain
+				add_intrigue_lifestyle_xp = medium_lifestyle_xp
+				add_dread = 10
+			}
+			50 = {
+				desc = agot_dc.0011.b.failure
+				compare_modifier = { value = scope:duel_value multiplier = -3.5 }
+				add_stress = medium_stress_gain
+				scope:dc_dragon = { change_temperament = { VALUE = 5 } }
+			}
+		}
+		ai_chance = {
+			base = 30
+			modifier = { add = 30 intrigue >= 12 }
+		}
+	}
+	option = { # Laisser le dragon s'en charger
+		name = agot_dc.0011.c
+		add_dread = 15
+		scope:dc_dragon = { change_temperament = { VALUE = 10 } }
+		stress_impact = { compassionate = medium_stress_impact_gain }
+		ai_chance = {
+			base = 20
+			modifier = { add = 30 has_trait = sadistic }
+		}
+	}
+}
+
+#########################################
+# 0021 - Un prêtre veut bénir le dragon
+#########################################
+agot_dc.0021 = {
+	type = character_event
+	title = agot_dc.0021.t
+	desc = agot_dc.0021.desc
+	theme = faith
+	cooldown = { years = 20 }
+	left_portrait = { character = root animation = personality_rational }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { agot_dc_rider_with_dragon_trigger = yes }
+	immediate = { agot_dc_save_dragon_effect = yes }
+
+	option = { # Accepter la bénédiction
+		name = agot_dc.0021.a
+		add_piety = medium_piety_gain
+		add_character_modifier = { modifier = agot_dc_dragon_blessed_modifier years = 5 }
+		stress_impact = { cynical = minor_stress_impact_gain }
+		ai_chance = {
+			base = 60
+			modifier = { add = 30 has_trait = zealous }
+		}
+	}
+	option = { # Mon dragon n'a besoin d'aucun dieu
+		name = agot_dc.0021.b
+		add_prestige = medium_prestige_gain
+		add_piety = medium_piety_loss
+		stress_impact = { zealous = medium_stress_impact_gain }
+		ai_chance = {
+			base = 30
+			modifier = { add = 40 has_trait = cynical }
+		}
+	}
+	option = { # Le dragon dévore la colombe sacrificielle
+		name = agot_dc.0021.c
+		trigger = { has_trait = arrogant }
+		add_dread = 10
+		add_piety = minor_piety_loss
+		scope:dc_dragon = { change_temperament = { VALUE = 5 } }
+		ai_chance = { base = 10 }
+	}
+}
+
+#########################################
+# 0031 - Un érudit veut étudier le dragon
+#########################################
+agot_dc.0031 = {
+	type = character_event
+	title = agot_dc.0031.t
+	desc = agot_dc.0031.desc
+	theme = learning
+	cooldown = { years = 15 }
+	left_portrait = { character = root animation = personality_rational }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { agot_dc_rider_with_dragon_trigger = yes }
+	immediate = { agot_dc_save_dragon_effect = yes }
+
+	option = { # Financer ses recherches
+		name = agot_dc.0031.a
+		remove_short_term_gold = medium_gold_value
+		add_character_modifier = { modifier = agot_dc_dragon_scholar_modifier years = 10 }
+		add_learning_lifestyle_xp = major_lifestyle_xp
+		ai_chance = {
+			base = 40
+			modifier = { add = 40 has_trait = scholar }
+		}
+	}
+	option = { # Le laisser observer, sans plus
+		name = agot_dc.0031.b
+		add_learning_lifestyle_xp = minor_lifestyle_xp
+		random_list = {
+			80 = { desc = agot_dc.0031.b.fine }
+			20 = {
+				desc = agot_dc.0031.b.eaten
+				add_dread = 5
+				add_stress = minor_stress_gain
+			}
+		}
+		ai_chance = { base = 40 }
+	}
+	option = { # Le chasser
+		name = agot_dc.0031.c
+		add_prestige = minor_prestige_gain
+		ai_chance = { base = 20 }
+	}
+}
+
+#########################################
+# 0041 - Le dragon dévore le troupeau d'un voisin
+#########################################
+agot_dc.0041 = {
+	type = character_event
+	title = agot_dc.0041.t
+	desc = agot_dc.0041.desc
+	theme = dragon
+	cooldown = { years = 10 }
+	left_portrait = { character = root animation = worry }
+	right_portrait = { character = scope:dc_neighbor animation = anger }
+	lower_right_portrait = scope:dc_dragon
+	trigger = {
+		agot_dc_rider_with_dragon_trigger = yes
+		is_landed = yes
+		any_neighboring_and_across_water_top_liege_realm_owner = { is_alive = yes }
+	}
+	immediate = {
+		agot_dc_save_dragon_effect = yes
+		random_neighboring_and_across_water_top_liege_realm_owner = { save_scope_as = dc_neighbor }
+	}
+
+	option = { # Payer une compensation
+		name = agot_dc.0041.a
+		pay_short_term_gold = { target = scope:dc_neighbor gold = minor_gold_value }
+		scope:dc_neighbor = { add_opinion = { target = root modifier = grateful_opinion opinion = 20 } }
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 has_trait = just }
+		}
+	}
+	option = { # Les dragons mangent ce qu'ils veulent
+		name = agot_dc.0041.b
+		add_dread = 10
+		add_prestige = minor_prestige_gain
+		scope:dc_neighbor = { add_opinion = { target = root modifier = angry_opinion opinion = -25 } }
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 has_trait = arrogant }
+		}
+	}
+}
+
+#########################################
+# 0051 - Un vassal paie pour brûler une forêt de brigands
+#########################################
+agot_dc.0051 = {
+	type = character_event
+	title = agot_dc.0051.t
+	desc = agot_dc.0051.desc
+	theme = dragon
+	cooldown = { years = 10 }
+	left_portrait = { character = root animation = personality_bold }
+	right_portrait = { character = scope:dc_vassal animation = beg }
+	lower_right_portrait = scope:dc_dragon
+	trigger = {
+		agot_dc_rider_with_dragon_trigger = yes
+		any_vassal = { is_ai = yes }
+	}
+	immediate = {
+		agot_dc_save_dragon_effect = yes
+		random_vassal = {
+			limit = { is_ai = yes }
+			save_scope_as = dc_vassal
+		}
+	}
+
+	option = { # Brûler la forêt
+		name = agot_dc.0051.a
+		add_gold = medium_gold_value
+		agot_add_dragon_training_xp = { VALUE = 15 }
+		add_martial_lifestyle_xp = medium_lifestyle_xp
+		scope:dc_vassal = { add_opinion = { target = root modifier = grateful_opinion opinion = 30 } }
+		random = {
+			chance = 15
+			send_interface_toast = {
+				title = agot_dc.0051.a.wildfire
+				left_icon = root
+				add_stress = minor_stress_gain
+				add_prestige = minor_prestige_loss
+			}
+		}
+		ai_chance = { base = 70 }
+	}
+	option = { # Refuser
+		name = agot_dc.0051.b
+		scope:dc_vassal = { add_opinion = { target = root modifier = disappointed_opinion opinion = -15 } }
+		ai_chance = { base = 30 }
+	}
+}
+
+#########################################
+# 0061 - Vol dans la tempête
+#########################################
+agot_dc.0061 = {
+	type = character_event
+	title = agot_dc.0061.t
+	desc = agot_dc.0061.desc
+	theme = dragon
+	cooldown = { years = 8 }
+	left_portrait = {
+		character = root
+		animation = jockey_gallop
+		camera = camera_dragonrider_flying_event_front
+	}
+	trigger = { agot_dc_rider_with_dragon_trigger = yes }
+	immediate = { agot_dc_save_dragon_effect = yes }
+
+	option = { # Traverser la tempête
+		name = agot_dc.0061.a
+		random_list = {
+			70 = {
+				desc = agot_dc.0061.a.success
+				modifier = { add = 20 has_trait = brave }
+				agot_add_dragon_training_xp = { VALUE = 25 }
+				add_prestige = medium_prestige_gain
+				add_stress = major_stress_loss
+			}
+			30 = {
+				desc = agot_dc.0061.a.struck
+				modifier = { add = 20 has_trait = craven }
+				increase_wounds_effect = { REASON = dragon }
+				scope:dc_dragon = { wound_dragon = yes }
+			}
+		}
+		ai_chance = {
+			base = 40
+			modifier = { add = 40 has_trait = brave }
+		}
+	}
+	option = { # Se poser et attendre
+		name = agot_dc.0061.b
+		add_stress = minor_stress_gain
+		stress_impact = { brave = minor_stress_impact_gain }
+		ai_chance = { base = 60 }
+	}
+}
+
+#########################################
+# 0071 - Le dragon incendie un navire pirate
+#########################################
+agot_dc.0071 = {
+	type = character_event
+	title = agot_dc.0071.t
+	desc = agot_dc.0071.desc
+	theme = dragon
+	cooldown = { years = 15 }
+	left_portrait = {
+		character = root
+		animation = jockey_gallop
+		camera = camera_dragonrider_over_battlefield
+	}
+	trigger = {
+		agot_dc_rider_with_dragon_trigger = yes
+		is_landed = yes
+		capital_province ?= { is_coastal = yes }
+	}
+	immediate = { agot_dc_save_dragon_effect = yes }
+
+	option = { # Piller l'épave
+		name = agot_dc.0071.a
+		add_gold = major_gold_value
+		add_prestige = minor_prestige_gain
+		stress_impact = { greedy = medium_stress_impact_loss }
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 has_trait = greedy }
+		}
+	}
+	option = { # Libérer les captifs à bord
+		name = agot_dc.0071.b
+		add_prestige = medium_prestige_gain
+		add_character_modifier = { modifier = agot_dc_dragon_merciful_modifier years = 5 }
+		stress_impact = { compassionate = medium_stress_impact_loss }
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 has_trait = compassionate }
+		}
+	}
+}
+
+#########################################
+# 0081 - Fête populaire en l'honneur du dragon
+#########################################
+agot_dc.0081 = {
+	type = character_event
+	title = agot_dc.0081.t
+	desc = agot_dc.0081.desc
+	theme = dragon
+	cooldown = { years = 20 }
+	left_portrait = { character = root animation = happiness }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = {
+		agot_dc_rider_with_dragon_trigger = yes
+		is_landed = yes
+		exists = capital_county
+	}
+	immediate = { agot_dc_save_dragon_effect = yes }
+
+	option = { # Survoler la fête
+		name = agot_dc.0081.a
+		remove_short_term_gold = minor_gold_value
+		capital_county = { add_county_modifier = { modifier = agot_dc_dragon_festival_modifier years = 10 } }
+		add_prestige = minor_prestige_gain
+		ai_chance = { base = 60 }
+	}
+	option = { # Rappeler au peuple qui est le maître
+		name = agot_dc.0081.b
+		add_dread = 10
+		capital_county = { add_county_modifier = { modifier = agot_dc_dragon_feared_county_modifier years = 10 } }
+		ai_chance = {
+			base = 40
+			modifier = { add = 30 has_trait = callous }
+		}
+	}
+}

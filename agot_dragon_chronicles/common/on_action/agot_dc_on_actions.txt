@@ -1,0 +1,43 @@
+﻿# Les on_actions vanilla sont fusionnés : on ajoute seulement nos propres sous-actions.
+
+yearly_playable_pulse = {
+	on_actions = { agot_dc_yearly_dragon_pulse }
+}
+
+agot_dc_yearly_dragon_pulse = {
+	trigger = { agot_dc_rider_with_dragon_trigger = yes }
+	random_events = {
+		200 = 0
+		10 = agot_dc.0001 # Le dragon refuse de manger
+		10 = agot_dc.0011 # Un espion rôde autour du dragon
+		10 = agot_dc.0021 # Un septon veut bénir (ou maudire) le dragon
+		10 = agot_dc.0031 # Un érudit veut étudier le dragon
+		10 = agot_dc.0041 # Le dragon dévore le troupeau d'un voisin
+		10 = agot_dc.0051 # Un seigneur paie pour brûler une forêt de brigands
+		10 = agot_dc.0061 # Vol dans la tempête
+		10 = agot_dc.0071 # Le dragon incendie un navire pirate
+		10 = agot_dc.0081 # Fête populaire en l'honneur du dragon
+	}
+}
+
+on_combat_end_winner = {
+	on_actions = { agot_dc_combat_winner }
+}
+
+agot_dc_combat_winner = {
+	random_events = {
+		65 = 0
+		35 = agot_dc_battle.0100
+	}
+}
+
+on_combat_end_loser = {
+	on_actions = { agot_dc_combat_loser }
+}
+
+agot_dc_combat_loser = {
+	random_events = {
+		65 = 0
+		35 = agot_dc_battle.0200
+	}
+}

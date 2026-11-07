@@ -1,0 +1,357 @@
+﻿namespace = agot_dc_battle
+
+###############################################################################
+# AGOT - Dragon Chronicles : évènements aléatoires de bataille
+# 0100 / 0200 sont des gestionnaires cachés (scope = combat_side) appelés depuis
+# agot_dc_combat_winner / agot_dc_combat_loser. Ils cherchent un cavalier de dragon
+# dans le camp et lui envoient l'évènement visible.
+#
+# scope:dc_rider           = le cavalier
+# scope:dc_dragon          = son dragon
+# scope:dc_enemy_commander = le commandant adverse (peut ne pas exister)
+###############################################################################
+
+scripted_trigger agot_dc_side_has_rider_trigger = {
+	OR = {
+		side_commander ?= { agot_dc_battle_rider_trigger = yes }
+		any_side_knight = { agot_dc_battle_rider_trigger = yes }
+	}
+}
+
+scripted_effect agot_dc_save_battle_scopes_effect = {
+	if = {
+		limit = { side_commander ?= { agot_dc_battle_rider_trigger = yes } }
+		side_commander = { save_scope_as = dc_rider }
+	}
+	else = {
+		random_side_knight = {
+			limit = { agot_dc_battle_rider_trigger = yes }
+			save_scope_as = dc_rider
+		}
+	}
+	scope:dc_rider.var:current_dragon = { save_scope_as = dc_dragon }
+	enemy_side.side_commander ?= {
+		if = {
+			limit = { is_alive = yes }
+			save_scope_as = dc_enemy_commander
+		}
+	}
+}
+
+#########################################
+# 0100 - Gestionnaire : victoire
+#########################################
+agot_dc_battle.0100 = {
+	hidden = yes
+	scope = combat_side
+	trigger = { agot_dc_side_has_rider_trigger = yes }
+	immediate = {
+		agot_dc_save_battle_scopes_effect = yes
+		scope:dc_rider = {
+			random_list = {
+				10 = { trigger_event = agot_dc_battle.1001 } # Massacre des fuyards
+				10 = { trigger_event = agot_dc_battle.1011 } # Carreau de scorpion
+				10 = { # Le commandant ennemi entre les crocs
+					trigger = {
+						exists = scope:dc_enemy_commander
+						scope:dc_enemy_commander = {
+							NOT = { has_trait = dragonrider }
+							NOT = { has_trait = dragon }
+						}
+					}
+					trigger_event = agot_dc_battle.1021
+				}
+				8 = { trigger_event = agot_dc_battle.1031 } # Le rugissement de la victoire
+			}
+		}
+	}
+}
+
+#########################################
+# 0200 - Gestionnaire : défaite
+#########################################
+agot_dc_battle.0200 = {
+	hidden = yes
+	scope = combat_side
+	trigger = { agot_dc_side_has_rider_trigger = yes }
+	immediate = {
+		agot_dc_save_battle_scopes_effect = yes
+		scope:dc_rider = {
+			random_list = {
+				10 = { trigger_event = agot_dc_battle.2001 } # Le dragon devient incontrôlable
+				10 = { trigger_event = agot_dc_battle.2011 } # Désarçonné
+				10 = { trigger_event = agot_dc_battle.2021 } # Couvrir la retraite
+			}
+		}
+	}
+}
+
+#########################################
+# 1001 - Massacre des fuyards
+#########################################
+agot_dc_battle.1001 = {
+	type = character_event
+	title = agot_dc_battle.1001.t
+	desc = agot_dc_battle.1001.desc
+	theme = battle
+	left_portrait = {
+		character = root
+		animation = jockey_gallop
+		camera = camera_dragonrider_over_battlefield
+	}
+
+	option = { # Brûler les fuyards
+		name = agot_dc_battle.1001.a
+		add_dread = 15
+		add_prestige = medium_prestige_gain
+		add_character_modifier = { modifier = agot_dc_dragon_terror_modifier years = 3 }
+		scope:dc_dragon = { change_temperament = { VALUE = 5 } }
+		stress_impact = {
+			compassionate = major_stress_impact_gain
+			forgiving = medium_stress_impact_gain
+		}
+		ai_chance = {
+			base = 50
+			modifier = { add = 40 has_trait = wrathful }
+		}
+	}
+	option = { # Les épargner
+		name = agot_dc_battle.1001.b
+		add_prestige = minor_prestige_gain
+		add_character_modifier = { modifier = agot_dc_dragon_merciful_modifier years = 5 }
+		stress_impact = {
+			sadistic = medium_stress_impact_gain
+			wrathful = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 50
+			modifier = { add = 40 has_trait = compassionate }
+		}
+	}
+}
+
+#########################################
+# 1011 - Carreau de scorpion
+#########################################
+agot_dc_battle.1011 = {
+	type = character_event
+	title = agot_dc_battle.1011.t
+	desc = agot_dc_battle.1011.desc
+	theme = battle
+	left_portrait = { character = root animation = pain }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	immediate = {
+		scope:dc_dragon = { wound_dragon = yes }
+	}
+
+	option = { # Réduire la machine en cendres
+		name = agot_dc_battle.1011.a
+		add_dread = 10
+		agot_add_dragon_training_xp = { VALUE = 20 }
+		random = {
+			chance = 25
+			send_interface_toast = {
+				title = agot_dc_battle.1011.a.hit
+				left_icon = root
+				increase_wounds_effect = { REASON = battle }
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 has_trait = brave }
+		}
+	}
+	option = { # Mettre le dragon à l'abri
+		name = agot_dc_battle.1011.b
+		add_prestige = minor_prestige_loss
+		stress_impact = { brave = minor_stress_impact_gain }
+		ai_chance = { base = 50 }
+	}
+}
+
+#########################################
+# 1021 - Le commandant ennemi entre les crocs
+#########################################
+agot_dc_battle.1021 = {
+	type = character_event
+	title = agot_dc_battle.1021.t
+	desc = agot_dc_battle.1021.desc
+	theme = battle
+	left_portrait = { character = root animation = personality_bold }
+	right_portrait = { character = scope:dc_enemy_commander animation = fear }
+	lower_right_portrait = scope:dc_dragon
+	trigger = { scope:dc_enemy_commander ?= { is_alive = yes } }
+
+	option = { # Dracarys
+		name = agot_dc_battle.1021.a
+		add_dread = 25
+		add_prestige = major_prestige_gain
+		scope:dc_enemy_commander = {
+			death = {
+				death_reason = death_dragon
+				killer = root
+			}
+		}
+		stress_impact = {
+			compassionate = major_stress_impact_gain
+			honest = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 40
+			modifier = { add = 40 has_trait = sadistic }
+		}
+	}
+	option = { # Le laisser fuir, terrifié
+		name = agot_dc_battle.1021.b
+		add_prestige = medium_prestige_gain
+		scope:dc_enemy_commander = {
+			add_trait = craven
+			add_opinion = { target = root modifier = scared_opinion opinion = -30 }
+		}
+		ai_chance = { base = 30 }
+	}
+	option = { # Faire preuve de chevalerie
+		name = agot_dc_battle.1021.c
+		add_prestige = minor_prestige_gain
+		scope:dc_enemy_commander = { add_opinion = { target = root modifier = respect_opinion opinion = 30 } }
+		stress_impact = { sadistic = medium_stress_impact_gain }
+		ai_chance = {
+			base = 30
+			modifier = { add = 40 has_trait = honest }
+		}
+	}
+}
+
+#########################################
+# 1031 - Le rugissement de la victoire
+#########################################
+agot_dc_battle.1031 = {
+	type = character_event
+	title = agot_dc_battle.1031.t
+	desc = agot_dc_battle.1031.desc
+	theme = battle
+	left_portrait = {
+		character = root
+		animation = jockey_gallop
+		camera = camera_dragonrider_flying_event_front
+	}
+
+	option = {
+		name = agot_dc_battle.1031.a
+		add_prestige = medium_prestige_gain
+		agot_add_dragon_training_xp = { VALUE = 15 }
+		add_stress = medium_stress_loss
+	}
+}
+
+#########################################
+# 2001 - Le dragon devient incontrôlable
+#########################################
+agot_dc_battle.2001 = {
+	type = character_event
+	title = agot_dc_battle.2001.t
+	desc = agot_dc_battle.2001.desc
+	theme = battle
+	left_portrait = { character = root animation = fear }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+
+	option = { # Reprendre le contrôle
+		name = agot_dc_battle.2001.a
+		duel = {
+			skill = prowess
+			value = 12
+			50 = {
+				desc = agot_dc_battle.2001.a.success
+				compare_modifier = { value = scope:duel_value multiplier = 3.5 }
+				agot_add_dragon_training_xp = { VALUE = 30 }
+				add_prestige = minor_prestige_gain
+			}
+			50 = {
+				desc = agot_dc_battle.2001.a.failure
+				compare_modifier = { value = scope:duel_value multiplier = -3.5 }
+				add_prestige = medium_prestige_loss
+				add_stress = medium_stress_gain
+				scope:dc_dragon = { change_temperament = { VALUE = 10 } }
+			}
+		}
+		ai_chance = { base = 70 }
+	}
+	option = { # Laisser le dragon fuir
+		name = agot_dc_battle.2001.b
+		add_prestige = medium_prestige_loss
+		add_stress = minor_stress_gain
+		ai_chance = { base = 30 }
+	}
+}
+
+#########################################
+# 2011 - Désarçonné
+#########################################
+agot_dc_battle.2011 = {
+	type = character_event
+	title = agot_dc_battle.2011.t
+	desc = agot_dc_battle.2011.desc
+	theme = battle
+	left_portrait = { character = root animation = pain }
+	immediate = {
+		increase_wounds_effect = { REASON = battle }
+	}
+
+	option = { # S'accrocher, coûte que coûte
+		name = agot_dc_battle.2011.a
+		add_prestige = minor_prestige_gain
+		stress_impact = { craven = medium_stress_impact_gain }
+	}
+	option = { # Remonter en selle dès que possible
+		name = agot_dc_battle.2011.b
+		agot_add_dragon_training_xp = { VALUE = 10 }
+		add_stress = minor_stress_gain
+	}
+}
+
+#########################################
+# 2021 - Couvrir la retraite
+#########################################
+agot_dc_battle.2021 = {
+	type = character_event
+	title = agot_dc_battle.2021.t
+	desc = agot_dc_battle.2021.desc
+	theme = battle
+	left_portrait = {
+		character = root
+		animation = jockey_gallop
+		camera = camera_dragonrider_over_battlefield
+	}
+
+	option = { # Plonger sur les poursuivants
+		name = agot_dc_battle.2021.a
+		add_prestige = medium_prestige_gain
+		add_dread = 5
+		random = {
+			chance = 35
+			send_interface_toast = {
+				title = agot_dc_battle.2021.a.wounded
+				left_icon = scope:dc_dragon
+				scope:dc_dragon = { wound_dragon = yes }
+			}
+		}
+		stress_impact = { craven = medium_stress_impact_gain }
+		ai_chance = { base = 60 }
+	}
+	option = { # Sauver d'abord sa propre peau
+		name = agot_dc_battle.2021.b
+		add_prestige = medium_prestige_loss
+		stress_impact = { brave = medium_stress_impact_gain }
+		ai_chance = { base = 40 }
+	}
+}

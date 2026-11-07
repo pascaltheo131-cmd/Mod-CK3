@@ -6,7 +6,8 @@
 ###############################################################################
 
 #########################################
-# 1041 - Terreur des cieux (victoire)
+# 1041 - La bannière arrachée (victoire)
+# Le dragon arrache l'étendard ennemi en plein vol
 #########################################
 agot_dc_battle.1041 = {
 	type = character_event
@@ -21,11 +22,22 @@ agot_dc_battle.1041 = {
 		outfit_tags = { linear_camera_zoom }
 	}
 
-	option = {
+	option = { # La suspendre dans ma grande salle
 		name = agot_dc_battle.1041.a
 		add_prestige = medium_prestige_gain
 		add_martial_lifestyle_xp = medium_lifestyle_xp
 		add_character_modifier = { modifier = agot_dc_dragon_fury_modifier years = 2 }
+	}
+	option = { # La rendre à son seigneur, par courtoisie
+		name = agot_dc_battle.1041.b
+		trigger = { exists = scope:dc_enemy_commander }
+		add_prestige = minor_prestige_gain
+		scope:dc_enemy_commander = { add_opinion = { target = root modifier = respect_opinion opinion = 25 } }
+	}
+	option = { # La faire brûler devant ses soldats
+		name = agot_dc_battle.1041.c
+		add_dread = 15
+		scope:dc_enemy_commander ?= { add_opinion = { target = root modifier = insult_opinion opinion = -30 } }
 	}
 }
 

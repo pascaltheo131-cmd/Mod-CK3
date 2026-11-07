@@ -50,7 +50,7 @@ agot_dc_battle.0100 = {
 		scope:dc_rider = {
 			random_list = {
 				10 = { trigger_event = agot_dc_battle.1001 } # Massacre des fuyards
-				10 = { trigger_event = agot_dc_battle.1011 } # Carreau de scorpion
+				10 = { trigger_event = agot_dc_battle.1011 } # Le convoi de bagages
 				10 = { # Le commandant ennemi entre les crocs
 					trigger = {
 						exists = scope:dc_enemy_commander
@@ -61,8 +61,8 @@ agot_dc_battle.0100 = {
 					}
 					trigger_event = agot_dc_battle.1021
 				}
-				8 = { trigger_event = agot_dc_battle.1031 } # Le rugissement de la victoire
-				8 = { trigger_event = agot_dc_battle.1041 } # Terreur des cieux
+				8 = { trigger_event = agot_dc_battle.1031 } # Le festin du champ de bataille
+				8 = { trigger_event = agot_dc_battle.1041 } # La bannière arrachée
 			}
 		}
 	}
@@ -133,46 +133,44 @@ agot_dc_battle.1001 = {
 }
 
 #########################################
-# 1011 - Carreau de scorpion
+# 1011 - Le convoi de bagages
+# Le dragon fond sur le train de ravitaillement ennemi en fuite
 #########################################
 agot_dc_battle.1011 = {
 	type = character_event
 	title = agot_dc_battle.1011.t
 	desc = agot_dc_battle.1011.desc
 	theme = battle
-	left_portrait = { character = root animation = pain }
-	right_portrait = {
-		character = scope:dc_dragon
-		animation = dragon_main
-		camera = camera_dragon_event_standing
-		outfit_tags = { linear_camera_zoom }
-	}
-	immediate = {
-		scope:dc_dragon = { wound_dragon = yes }
+	left_portrait = {
+		character = root
+		animation = jockey_gallop
+		camera = camera_dragonrider_over_battlefield
 	}
 
-	option = { # Réduire la machine en cendres
+	option = { # Saisir le trésor de guerre
 		name = agot_dc_battle.1011.a
-		add_dread = 10
-		agot_add_dragon_training_xp = { VALUE = 20 }
-		random = {
-			chance = 25
-			send_interface_toast = {
-				title = agot_dc_battle.1011.a.hit
-				left_icon = root
-				increase_wounds_effect = { REASON = battle }
-			}
-		}
+		add_gold = medium_gold_value
+		stress_impact = { generous = minor_stress_impact_gain }
 		ai_chance = {
 			base = 50
-			modifier = { add = 30 has_trait = brave }
+			modifier = { add = 30 has_trait = greedy }
 		}
 	}
-	option = { # Mettre le dragon à l'abri
+	option = { # Partager le butin avec mes soldats
 		name = agot_dc_battle.1011.b
-		add_prestige = minor_prestige_loss
-		stress_impact = { brave = minor_stress_impact_gain }
-		ai_chance = { base = 50 }
+		add_gold = minor_gold_value
+		add_prestige = medium_prestige_gain
+		add_martial_lifestyle_xp = minor_lifestyle_xp
+		ai_chance = {
+			base = 40
+			modifier = { add = 30 has_trait = generous }
+		}
+	}
+	option = { # Tout brûler pour affamer l'ennemi
+		name = agot_dc_battle.1011.c
+		add_dread = 10
+		agot_add_dragon_training_xp = { VALUE = 15 }
+		ai_chance = { base = 20 }
 	}
 }
 
@@ -230,24 +228,46 @@ agot_dc_battle.1021 = {
 }
 
 #########################################
-# 1031 - Le rugissement de la victoire
+# 1031 - Le festin du champ de bataille
+# Le dragon se gave des chevaux morts et refuse de voler
 #########################################
 agot_dc_battle.1031 = {
 	type = character_event
 	title = agot_dc_battle.1031.t
 	desc = agot_dc_battle.1031.desc
 	theme = battle
-	left_portrait = {
-		character = root
-		animation = jockey_gallop
-		camera = camera_dragonrider_flying_event_front
+	left_portrait = { character = root animation = disgust }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
 	}
 
-	option = {
+	option = { # Le laisser digérer
 		name = agot_dc_battle.1031.a
-		add_prestige = medium_prestige_gain
+		add_stress = minor_stress_gain
+		scope:dc_dragon = { change_temperament = { VALUE = -5 } }
+		ai_chance = { base = 50 }
+	}
+	option = { # Le forcer à repartir
+		name = agot_dc_battle.1031.b
 		agot_add_dragon_training_xp = { VALUE = 15 }
-		add_stress = medium_stress_loss
+		scope:dc_dragon = { change_temperament = { VALUE = 10 } }
+		ai_chance = { base = 30 }
+	}
+	option = { # Lui offrir les morts ennemis : que tous le voient
+		name = agot_dc_battle.1031.c
+		add_dread = 20
+		add_piety = medium_piety_loss
+		stress_impact = {
+			compassionate = medium_stress_impact_gain
+			zealous = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 20
+			modifier = { add = 30 has_trait = sadistic }
+		}
 	}
 }
 

@@ -8,8 +8,8 @@ agot_dc_yearly_dragon_pulse = {
 	trigger = { agot_dc_rider_with_dragon_trigger = yes }
 	random_events = {
 		200 = 0
-		10 = agot_dc.0001 # Le dragon refuse de manger
-		10 = agot_dc.0011 # Un espion rôde autour du dragon
+		10 = agot_dc.0001 # La viande empoisonnée
+		10 = agot_dc.0011 # Le marché des écailles
 		10 = agot_dc.0021 # Un septon veut bénir (ou maudire) le dragon
 		10 = agot_dc.0031 # Un érudit veut étudier le dragon
 		10 = agot_dc.0041 # Le dragon dévore le troupeau d'un voisin
@@ -19,7 +19,7 @@ agot_dc_yearly_dragon_pulse = {
 		10 = agot_dc.0081 # Fête populaire en l'honneur du dragon
 		10 = agot_dc.0091 # Un dragon rétif
 		5 = agot_dc.0101 # Le dragon grandit
-		10 = agot_dc.0111 # Rêves de feu
+		10 = agot_dc.0111 # La langue des dragons
 		6 = agot_dc.0121 # Le dragon s'en prend à un courtisan
 	}
 }

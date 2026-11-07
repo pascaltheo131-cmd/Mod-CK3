@@ -86,14 +86,15 @@ agot_dc.0101 = {
 }
 
 #########################################
-# 0111 - Rêves de feu
+# 0111 - Les ordres en haut valyrien
+# Le dragon n'obéit vraiment qu'aux mots de l'ancienne langue
 #########################################
 agot_dc.0111 = {
 	type = character_event
 	title = agot_dc.0111.t
 	desc = agot_dc.0111.desc
-	theme = dragon
-	cooldown = { years = 10 }
+	theme = learning
+	cooldown = { years = 15 }
 	left_portrait = { character = root animation = personality_rational }
 	right_portrait = {
 		character = scope:dc_dragon
@@ -104,14 +105,17 @@ agot_dc.0111 = {
 	trigger = { agot_dc_rider_with_dragon_trigger = yes }
 	immediate = { var:current_dragon = { save_scope_as = dc_dragon } }
 
-	option = { # Méditer sur le lien
+	option = { # Apprendre l'ancienne langue avec un mestre
 		name = agot_dc.0111.a
-		add_character_modifier = { modifier = agot_dc_dragon_bond_modifier years = 3 }
-		agot_add_dragon_training_xp = { VALUE = 10 }
-	}
-	option = { # Interroger les mestres
-		name = agot_dc.0111.b
+		remove_short_term_gold = minor_gold_value
 		add_learning_lifestyle_xp = medium_lifestyle_xp
+		agot_add_dragon_training_xp = { VALUE = 20 }
+		add_character_modifier = { modifier = agot_dc_dragon_bond_modifier years = 5 }
+	}
+	option = { # Il apprendra la langue commune
+		name = agot_dc.0111.b
+		add_prestige = minor_prestige_gain
+		scope:dc_dragon = { change_temperament = { VALUE = 5 } }
 	}
 }
 

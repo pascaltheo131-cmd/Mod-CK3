@@ -11,85 +11,16 @@ scripted_effect agot_dc_save_dragon_effect = {
 }
 
 #########################################
-# 0001 - Le dragon refuse de manger
+# 0001 - La viande empoisonnée
+# Quelqu'un a tenté d'empoisonner le dragon
 #########################################
 agot_dc.0001 = {
 	type = character_event
 	title = agot_dc.0001.t
 	desc = agot_dc.0001.desc
-	theme = dragon
-	cooldown = { years = 10 }
-	left_portrait = { character = root animation = worry }
-	right_portrait = {
-		character = scope:dc_dragon
-		animation = dragon_main
-		camera = camera_dragon_event_standing
-		outfit_tags = { linear_camera_zoom }
-	}
-	trigger = {
-		agot_dc_rider_with_dragon_trigger = yes
-		var:current_dragon = { NOT = { has_trait = dragon_ill } }
-	}
-	immediate = { agot_dc_save_dragon_effect = yes }
-
-	option = { # Faire venir un mestre
-		name = agot_dc.0001.a
-		remove_short_term_gold = minor_gold_value
-		random_list = {
-			60 = {
-				desc = agot_dc.0001.a.picky
-				add_stress = minor_stress_loss
-			}
-			40 = {
-				desc = agot_dc.0001.a.sick_early
-				add_learning_lifestyle_xp = minor_lifestyle_xp
-				scope:dc_dragon = { change_temperament = { VALUE = -5 } }
-			}
-		}
-		ai_chance = { base = 50 }
-	}
-	option = { # Le nourrir soi-même
-		name = agot_dc.0001.b
-		agot_add_dragon_training_xp = { VALUE = 10 }
-		random_list = {
-			80 = {
-				desc = agot_dc.0001.b.success
-				add_stress = medium_stress_loss
-			}
-			20 = {
-				desc = agot_dc.0001.b.burned
-				modifier = { add = -10 has_trait = brave }
-				increase_wounds_effect = { REASON = dragon }
-			}
-		}
-		ai_chance = {
-			base = 30
-			modifier = { add = 30 has_trait = brave }
-		}
-	}
-	option = { # Ignorer
-		name = agot_dc.0001.c
-		random_list = {
-			50 = { desc = agot_dc.0001.c.fine }
-			50 = {
-				desc = agot_dc.0001.c.ill
-				scope:dc_dragon = { add_trait = dragon_ill }
-			}
-		}
-		ai_chance = { base = 20 }
-	}
-}
-
-#########################################
-# 0011 - Un espion rôde autour du dragon
-#########################################
-agot_dc.0011 = {
-	type = character_event
-	title = agot_dc.0011.t
-	desc = agot_dc.0011.desc
 	theme = intrigue
 	cooldown = { years = 15 }
-	left_portrait = { character = root animation = scheme }
+	left_portrait = { character = root animation = anger }
 	right_portrait = {
 		character = scope:dc_dragon
 		animation = dragon_main
@@ -99,48 +30,102 @@ agot_dc.0011 = {
 	trigger = {
 		agot_dc_rider_with_dragon_trigger = yes
 		is_landed = yes
+		var:current_dragon = { NOT = { has_trait = dragon_ill } }
 	}
 	immediate = { agot_dc_save_dragon_effect = yes }
 
-	option = { # Doubler la garde
-		name = agot_dc.0011.a
-		remove_short_term_gold = medium_gold_value
-		add_stress = minor_stress_loss
-		ai_chance = { base = 50 }
-	}
-	option = { # Tendre un piège
-		name = agot_dc.0011.b
+	option = { # Mener l'enquête
+		name = agot_dc.0001.a
 		duel = {
 			skill = intrigue
 			value = 12
 			50 = {
-				desc = agot_dc.0011.b.success
+				desc = agot_dc.0001.a.found
 				compare_modifier = { value = scope:duel_value multiplier = 3.5 }
+				add_dread = 15
 				add_prestige = medium_prestige_gain
 				add_intrigue_lifestyle_xp = medium_lifestyle_xp
-				add_dread = 10
 			}
 			50 = {
-				desc = agot_dc.0011.b.failure
+				desc = agot_dc.0001.a.lost
 				compare_modifier = { value = scope:duel_value multiplier = -3.5 }
 				add_stress = medium_stress_gain
-				scope:dc_dragon = { change_temperament = { VALUE = 5 } }
 			}
 		}
 		ai_chance = {
-			base = 30
+			base = 50
 			modifier = { add = 30 intrigue >= 12 }
 		}
 	}
-	option = { # Laisser le dragon s'en charger
-		name = agot_dc.0011.c
-		add_dread = 15
-		scope:dc_dragon = { change_temperament = { VALUE = 10 } }
+	option = { # Faire goûter chaque repas par un prisonnier
+		name = agot_dc.0001.b
+		remove_short_term_gold = minor_gold_value
+		add_dread = 10
 		stress_impact = { compassionate = medium_stress_impact_gain }
 		ai_chance = {
-			base = 20
-			modifier = { add = 30 has_trait = sadistic }
+			base = 30
+			modifier = { add = 30 has_trait = paranoid }
 		}
+	}
+	option = { # Le dragon a mangé une partie de la viande
+		name = agot_dc.0001.c
+		random_list = {
+			60 = { desc = agot_dc.0001.c.fine }
+			40 = {
+				desc = agot_dc.0001.c.ill
+				scope:dc_dragon = { add_trait = dragon_ill }
+			}
+		}
+		ai_chance = { base = 20 }
+	}
+}
+
+#########################################
+# 0011 - Le marché des écailles
+# Les gardiens vendent en secret écailles et dents tombées
+#########################################
+agot_dc.0011 = {
+	type = character_event
+	title = agot_dc.0011.t
+	desc = agot_dc.0011.desc
+	theme = stewardship
+	cooldown = { years = 15 }
+	left_portrait = { character = root animation = personality_rational }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { agot_dc_rider_with_dragon_trigger = yes }
+	immediate = { agot_dc_save_dragon_effect = yes }
+
+	option = { # Faire cesser ce trafic
+		name = agot_dc.0011.a
+		add_prestige = minor_prestige_gain
+		add_dread = 5
+		stress_impact = { greedy = minor_stress_impact_gain }
+		ai_chance = {
+			base = 40
+			modifier = { add = 30 has_trait = just }
+		}
+	}
+	option = { # Prendre sa part
+		name = agot_dc.0011.b
+		add_gold = medium_gold_value
+		add_stewardship_lifestyle_xp = minor_lifestyle_xp
+		stress_impact = { honest = medium_stress_impact_gain }
+		ai_chance = {
+			base = 40
+			modifier = { add = 40 has_trait = greedy }
+		}
+	}
+	option = { # En faire un commerce officiel avec Essos
+		name = agot_dc.0011.c
+		add_gold = major_gold_value
+		add_prestige = medium_prestige_loss
+		stress_impact = { arrogant = medium_stress_impact_gain }
+		ai_chance = { base = 20 }
 	}
 }
 

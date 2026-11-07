@@ -1,0 +1,4 @@
+# Sauvegarde le dragon du cavalier dans scope:dragon
+dre_save_dragon = {
+	var:current_dragon = { save_scope_as = dragon }
+}

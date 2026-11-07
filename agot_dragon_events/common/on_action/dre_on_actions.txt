@@ -1,0 +1,48 @@
+# Événements aléatoires annuels (s'ajoutent à la liste existante)
+on_yearly_playable = {
+	random_events = {
+		chance_of_no_event = { value = 70 }
+		100 = dragon_ev.0001
+		100 = dragon_ev.0002
+		100 = dragon_ev.0003
+		100 = dragon_ev.0004
+		60  = dragon_ev.0005
+	}
+}
+
+# Fin de bataille : root = le camp du combat
+on_combat_end_winner = {
+	on_actions = { dre_on_combat_win }
+}
+on_combat_end_loser = {
+	on_actions = { dre_on_combat_loss }
+}
+
+dre_on_combat_win = {
+	effect = {
+		side_commander = {
+			if = {
+				limit = { dre_has_dragon = yes }
+				random_list = {
+					40 = { trigger_event = dragon_ev.0101 }
+					30 = { trigger_event = dragon_ev.0102 }
+					30 = { }
+				}
+			}
+		}
+	}
+}
+
+dre_on_combat_loss = {
+	effect = {
+		side_commander = {
+			if = {
+				limit = { dre_has_dragon = yes }
+				random_list = {
+					50 = { trigger_event = dragon_ev.0103 }
+					50 = { }
+				}
+			}
+		}
+	}
+}

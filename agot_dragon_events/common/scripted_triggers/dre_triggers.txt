@@ -1,0 +1,16 @@
+# ============================================================
+# COUCHE DE COMPATIBILITÉ AGOT
+# Si AGOT renomme ses traits/variables, ne modifiez QUE ce fichier.
+# Vérifiez dans le dossier du mod AGOT : grep -r "current_dragon" common/
+# ============================================================
+
+# Le personnage est-il un dragon ?
+dre_is_dragon = {
+	has_trait = dragon
+}
+
+# Le personnage chevauche-t-il un dragon vivant ?
+dre_has_dragon = {
+	exists = var:current_dragon
+	var:current_dragon = { is_alive = yes }
+}

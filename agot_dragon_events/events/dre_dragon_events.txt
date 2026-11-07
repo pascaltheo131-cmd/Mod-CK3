@@ -1,0 +1,196 @@
+namespace = dragon_ev
+
+# 0001 - Le dragon refuse d'obéir
+dragon_ev.0001 = {
+	type = character_event
+	title = dragon_ev.0001.t
+	desc = dragon_ev.0001.desc
+	theme = martial
+	left_portrait = { character = root animation = anger }
+	right_portrait = { character = scope:dragon }
+	trigger = { dre_has_dragon = yes }
+	cooldown = { years = 5 }
+	immediate = { dre_save_dragon = yes }
+
+	option = { # Imposer sa volonté
+		name = dragon_ev.0001.a
+		random_list = {
+			50 = {
+				modifier = { add = prowess }
+				desc = dragon_ev.0001.a.success
+				add_prestige = 150
+				add_character_modifier = { modifier = dre_dragon_bond_modifier years = 5 }
+			}
+			50 = {
+				desc = dragon_ev.0001.a.fail
+				increase_wounds_effect = { REASON = fight }
+			}
+		}
+	}
+	option = { # Patience
+		name = dragon_ev.0001.b
+		add_stress = 15
+		add_piety = 50
+	}
+}
+
+# 0002 - Le dragon dévore les troupeaux des paysans
+dragon_ev.0002 = {
+	type = character_event
+	title = dragon_ev.0002.t
+	desc = dragon_ev.0002.desc
+	theme = realm
+	left_portrait = { character = root animation = worry }
+	right_portrait = { character = scope:dragon }
+	trigger = { dre_has_dragon = yes gold >= 25 }
+	cooldown = { years = 4 }
+	immediate = { dre_save_dragon = yes }
+
+	option = { # Dédommager
+		name = dragon_ev.0002.a
+		remove_short_term_gold = 50
+		add_prestige = 50
+	}
+	option = { # Ce sont les impôts du dragon
+		name = dragon_ev.0002.b
+		add_dread = 15
+		capital_county = { add_county_modifier = { modifier = dre_burned_fields_modifier years = 3 } }
+	}
+}
+
+# 0003 - Le dragon grandit
+dragon_ev.0003 = {
+	type = character_event
+	title = dragon_ev.0003.t
+	desc = dragon_ev.0003.desc
+	theme = martial
+	left_portrait = { character = root animation = happiness }
+	right_portrait = { character = scope:dragon }
+	trigger = { dre_has_dragon = yes }
+	cooldown = { years = 10 }
+	immediate = { dre_save_dragon = yes }
+
+	option = {
+		name = dragon_ev.0003.a
+		add_prestige = 250
+		add_dread = 10
+	}
+}
+
+# 0004 - Rêves de feu
+dragon_ev.0004 = {
+	type = character_event
+	title = dragon_ev.0004.t
+	desc = dragon_ev.0004.desc
+	theme = mystic
+	left_portrait = { character = root animation = personality_rational }
+	trigger = { dre_has_dragon = yes }
+	cooldown = { years = 8 }
+	immediate = { dre_save_dragon = yes }
+
+	option = { # Méditer sur le lien
+		name = dragon_ev.0004.a
+		add_character_modifier = { modifier = dre_dragon_bond_modifier years = 3 }
+	}
+	option = { # Interroger les mestres
+		name = dragon_ev.0004.b
+		add_learning_lifestyle_xp = 300
+	}
+}
+
+# 0005 - Le dragon s'en prend à un courtisan
+dragon_ev.0005 = {
+	type = character_event
+	title = dragon_ev.0005.t
+	desc = dragon_ev.0005.desc
+	theme = dread
+	left_portrait = { character = root animation = shock }
+	right_portrait = { character = scope:victim animation = fear }
+	trigger = {
+		dre_has_dragon = yes
+		any_courtier = { is_adult = yes dre_is_dragon = no }
+	}
+	cooldown = { years = 10 }
+	immediate = {
+		dre_save_dragon = yes
+		random_courtier = {
+			limit = { is_adult = yes dre_is_dragon = no }
+			save_scope_as = victim
+		}
+	}
+
+	option = { # Intervenir
+		name = dragon_ev.0005.a
+		scope:victim = { add_opinion = { target = root modifier = grateful_opinion opinion = 30 } }
+		random = { chance = 30 increase_wounds_effect = { REASON = fight } }
+	}
+	option = { # Laisser faire
+		name = dragon_ev.0005.b
+		add_dread = 25
+		scope:victim = { death = { death_reason = death_dragon } }
+	}
+}
+
+# ---------- Batailles ----------
+
+# 0101 - Le dragon carbonise l'armée en déroute
+dragon_ev.0101 = {
+	type = character_event
+	title = dragon_ev.0101.t
+	desc = dragon_ev.0101.desc
+	theme = war
+	left_portrait = { character = root animation = war_over_win }
+	right_portrait = { character = scope:dragon }
+	immediate = { dre_save_dragon = yes }
+
+	option = { # Feu !
+		name = dragon_ev.0101.a
+		add_dread = 20
+		add_prestige = 100
+		add_character_modifier = { modifier = dre_dragon_fury_modifier years = 2 }
+	}
+	option = { # Épargner les fuyards
+		name = dragon_ev.0101.b
+		add_piety = 100
+		add_prestige = 50
+	}
+}
+
+# 0102 - La seule vue du dragon brise l'ennemi
+dragon_ev.0102 = {
+	type = character_event
+	title = dragon_ev.0102.t
+	desc = dragon_ev.0102.desc
+	theme = war
+	left_portrait = { character = root animation = war_over_win }
+	right_portrait = { character = scope:dragon }
+	immediate = { dre_save_dragon = yes }
+
+	option = {
+		name = dragon_ev.0102.a
+		add_prestige = 200
+		add_martial_lifestyle_xp = 200
+	}
+}
+
+# 0103 - Le dragon est blessé lors de la défaite
+dragon_ev.0103 = {
+	type = character_event
+	title = dragon_ev.0103.t
+	desc = dragon_ev.0103.desc
+	theme = war
+	left_portrait = { character = root animation = war_over_loss }
+	right_portrait = { character = scope:dragon }
+	immediate = { dre_save_dragon = yes }
+
+	option = { # Le soigner personnellement
+		name = dragon_ev.0103.a
+		add_stress = 20
+		add_character_modifier = { modifier = dre_dragon_bond_modifier years = 3 }
+	}
+	option = { # Repartir au combat malgré tout
+		name = dragon_ev.0103.b
+		add_character_modifier = { modifier = dre_dragon_wounded_modifier years = 2 }
+		add_prestige = 75
+	}
+}

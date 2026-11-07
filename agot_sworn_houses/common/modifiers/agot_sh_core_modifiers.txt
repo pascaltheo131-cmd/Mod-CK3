@@ -1,0 +1,21 @@
+﻿# Tempéraments politiques (visibles dans la fiche du personnage)
+agot_sh_temperament_loyalist_modifier = {
+	liege_opinion = 10
+}
+agot_sh_temperament_ambitious_modifier = {
+	monthly_prestige_gain_mult = 0.05
+}
+agot_sh_temperament_opportunist_modifier = {
+	intrigue = 1
+}
+agot_sh_temperament_cautious_modifier = {
+	stewardship = 1
+}
+
+# Respect de la Couronne (sur le souverain)
+agot_sh_crown_respected_modifier = {
+	vassal_opinion = 10
+}
+agot_sh_crown_despised_modifier = {
+	vassal_opinion = -15
+}

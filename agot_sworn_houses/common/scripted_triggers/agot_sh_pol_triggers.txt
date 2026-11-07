@@ -1,0 +1,88 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Politique et maisons - déclencheurs
+###############################################################################
+
+# Grand seigneur : tient au moins un duché
+agot_sh_pol_is_great_lord = {
+	is_ruler = yes
+	highest_held_title_tier >= tier_duchy
+}
+
+# Liens de mariage entre le personnage (ou ses enfants / frères et soeurs) et la maison de $CHAR$
+# Usage : agot_sh_pol_marriage_tie_trigger = { CHAR = scope:x }
+agot_sh_pol_marriage_tie_trigger = {
+	exists = dynasty
+	exists = $CHAR$.dynasty
+	NOT = { dynasty = $CHAR$.dynasty }
+	OR = {
+		any_spouse = {
+			OR = {
+				dynasty ?= $CHAR$.dynasty
+				is_close_family_of = $CHAR$
+			}
+		}
+		any_child = {
+			any_spouse = {
+				OR = {
+					dynasty ?= $CHAR$.dynasty
+					is_close_family_of = $CHAR$
+				}
+			}
+		}
+		any_sibling = {
+			any_spouse = {
+				OR = {
+					dynasty ?= $CHAR$.dynasty
+					is_close_family_of = $CHAR$
+				}
+			}
+		}
+	}
+}
+
+# Pupille (ward) ou otage de $GUARDIAN$ : la relation est testée dans les deux sens par prudence
+agot_sh_pol_is_ward_of_trigger = {
+	OR = {
+		has_relation_ward = $GUARDIAN$
+		has_relation_guardian = $GUARDIAN$
+		is_hostage_of = $GUARDIAN$
+	}
+}
+
+# Invité sous le toit de $HOST$ : invité de sa cour, ou participant à une activité (fête, chasse…) qu'il accueille
+agot_sh_pol_guest_of_trigger = {
+	NOT = { this = $HOST$ }
+	OR = {
+		AND = {
+			is_foreign_court_guest = yes
+			host ?= $HOST$
+		}
+		involved_activity ?= { activity_host = $HOST$ }
+	}
+}
+
+# Rancune tenace contre son suzerain
+agot_sh_pol_holds_grievance_against_liege_trigger = {
+	has_variable = agot_sh_pol_grievance
+	exists = liege
+	var:agot_sh_pol_grievance = liege
+}
+
+# Maison prestigieuse : chef de dynastie au moins de rang royaume (Seigneurs Suzerains, Couronne…)
+agot_sh_pol_is_great_house_trigger = {
+	exists = dynasty
+	exists = dynasty.dynast
+	dynasty.dynast = { highest_held_title_tier >= tier_kingdom }
+}
+
+# Maison mineure : chef de dynastie sans terre ou simple seigneur d'un comté
+agot_sh_pol_is_minor_house_trigger = {
+	exists = dynasty
+	exists = dynasty.dynast
+	dynasty.dynast = {
+		OR = {
+			is_ruler = no
+			highest_held_title_tier <= tier_county
+		}
+	}
+}

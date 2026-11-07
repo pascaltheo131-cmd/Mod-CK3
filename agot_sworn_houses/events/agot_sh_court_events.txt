@@ -1,0 +1,529 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Interactions et cour - évènements
+###############################################################################
+namespace = agot_sh_court
+
+#------------------------------------------------------------------------------
+# 0100 - 25. Arbitrer une querelle entre deux vassaux
+#------------------------------------------------------------------------------
+agot_sh_court.0100 = {
+	type = character_event
+	title = agot_sh_court.0100.t
+	desc = agot_sh_court.0100.desc
+	theme = realm
+	left_portrait = {
+		character = scope:agot_sh_claimant_a
+		animation = anger
+	}
+	right_portrait = {
+		character = scope:agot_sh_claimant_b
+		animation = disapproval
+	}
+	cooldown = { years = 3 }
+
+	trigger = {
+		is_ruler = yes
+		is_adult = yes
+		is_imprisoned = no
+		agot_sh_court_has_quarreling_vassals_trigger = yes
+	}
+
+	immediate = {
+		random_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				save_temporary_scope_as = agot_sh_court_quarrel_temp
+				root = {
+					any_vassal = {
+						agot_sh_is_active_vassal = yes
+						NOT = { this = scope:agot_sh_court_quarrel_temp }
+						opinion = { target = scope:agot_sh_court_quarrel_temp value <= -40 }
+					}
+				}
+			}
+			save_scope_as = agot_sh_claimant_a
+		}
+		random_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				NOT = { this = scope:agot_sh_claimant_a }
+				opinion = { target = scope:agot_sh_claimant_a value <= -40 }
+			}
+			save_scope_as = agot_sh_claimant_b
+		}
+	}
+
+	# Trancher en faveur du premier
+	option = {
+		name = agot_sh_court.0100.a
+		scope:agot_sh_claimant_a = {
+			add_opinion = { target = root modifier = agot_sh_court_just_ruling_opinion }
+		}
+		scope:agot_sh_claimant_b = {
+			add_opinion = { target = root modifier = agot_sh_court_unjust_ruling_opinion }
+		}
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 30
+				scope:agot_sh_claimant_a = {
+					highest_held_title_tier > scope:agot_sh_claimant_b.highest_held_title_tier
+				}
+			}
+		}
+	}
+
+	# Trancher en faveur du second
+	option = {
+		name = agot_sh_court.0100.b
+		scope:agot_sh_claimant_b = {
+			add_opinion = { target = root modifier = agot_sh_court_just_ruling_opinion }
+		}
+		scope:agot_sh_claimant_a = {
+			add_opinion = { target = root modifier = agot_sh_court_unjust_ruling_opinion }
+		}
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 30
+				scope:agot_sh_claimant_b = {
+					highest_held_title_tier > scope:agot_sh_claimant_a.highest_held_title_tier
+				}
+			}
+		}
+	}
+
+	# Refuser de juger
+	option = {
+		name = agot_sh_court.0100.c
+		add_prestige = minor_prestige_loss
+		scope:agot_sh_claimant_a = {
+			add_opinion = { target = root modifier = agot_sh_court_refused_judgment_opinion }
+		}
+		scope:agot_sh_claimant_b = {
+			add_opinion = { target = root modifier = agot_sh_court_refused_judgment_opinion }
+		}
+		if = {
+			limit = { agot_sh_is_sovereign = yes }
+			agot_sh_change_crown_respect_effect = { VALUE = -3 }
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 15
+				agot_sh_is_cautious = yes
+			}
+		}
+	}
+}
+
+#------------------------------------------------------------------------------
+# 0200 - 37. Rapport du « petit oiseau » placé chez un vassal
+# (scope:recipient vient de l'interaction agot_sh_court_place_spy_interaction)
+#------------------------------------------------------------------------------
+agot_sh_court.0200 = {
+	type = character_event
+	title = agot_sh_court.0200.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:agot_sh_spy_outcome = flag:plot }
+				desc = agot_sh_court.0200.desc.plot
+			}
+			triggered_desc = {
+				trigger = { scope:agot_sh_spy_outcome = flag:secret }
+				desc = agot_sh_court.0200.desc.secret
+			}
+			desc = agot_sh_court.0200.desc.nothing
+		}
+	}
+	theme = intrigue
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:recipient
+		animation = worry
+	}
+
+	trigger = {
+		exists = scope:recipient
+		scope:recipient = { is_alive = yes }
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				scope:recipient = { is_scheming_against = { target = root } }
+			}
+			save_scope_value_as = { name = agot_sh_spy_outcome value = flag:plot }
+		}
+		else_if = {
+			limit = {
+				scope:recipient = {
+					any_secret = { NOT = { is_known_by = root } }
+				}
+			}
+			scope:recipient = {
+				random_secret = {
+					limit = { NOT = { is_known_by = root } }
+					save_scope_as = agot_sh_spy_secret
+				}
+			}
+			scope:agot_sh_spy_secret = { reveal_to = root }
+			save_scope_value_as = { name = agot_sh_spy_outcome value = flag:secret }
+		}
+		else = {
+			save_scope_value_as = { name = agot_sh_spy_outcome value = flag:nothing }
+		}
+		# L'oiseau a pu être repéré
+		random = {
+			chance = 20
+			scope:recipient = {
+				add_opinion = { target = root modifier = agot_sh_court_spy_found_opinion }
+				remove_variable = agot_sh_court_spy_of
+			}
+			custom_tooltip = agot_sh_court.0200.caught_tt
+		}
+	}
+
+	# Complot : le dénoncer publiquement
+	option = {
+		name = agot_sh_court.0200.a
+		trigger = { scope:agot_sh_spy_outcome = flag:plot }
+		add_prestige = minor_prestige_gain
+		scope:recipient = {
+			add_character_modifier = {
+				modifier = agot_sh_court_exposed_plotter_modifier
+				years = 5
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 20
+				agot_sh_is_ambitious = yes
+			}
+		}
+	}
+
+	# Complot : se taire et garder une prise sur lui
+	option = {
+		name = agot_sh_court.0200.b
+		trigger = { scope:agot_sh_spy_outcome = flag:plot }
+		if = {
+			limit = {
+				can_add_hook = {
+					target = scope:recipient
+					type = weak_blackmail_hook
+				}
+			}
+			add_hook = {
+				type = weak_blackmail_hook
+				target = scope:recipient
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 30
+				OR = {
+					agot_sh_is_opportunist = yes
+					agot_sh_is_cautious = yes
+				}
+			}
+		}
+	}
+
+	# Secret ou rien : prendre note
+	option = {
+		name = agot_sh_court.0200.c
+		trigger = {
+			NOT = { scope:agot_sh_spy_outcome = flag:plot }
+		}
+		ai_chance = { base = 100 }
+	}
+}
+
+#------------------------------------------------------------------------------
+# 0300 - 26. Charge de Gardien retirée (réaction aux postes de cour d'AGOT)
+#------------------------------------------------------------------------------
+agot_sh_court.0300 = {
+	type = character_event
+	title = agot_sh_court.0300.t
+	desc = agot_sh_court.0300.desc
+	theme = crown
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	right_portrait = {
+		character = scope:agot_sh_king
+		animation = dismissal
+	}
+
+	trigger = {
+		exists = liege
+	}
+
+	immediate = {
+		liege = { save_scope_as = agot_sh_king }
+		add_opinion = {
+			target = scope:agot_sh_king
+			modifier = agot_sh_court_warden_stripped_opinion
+		}
+		add_prestige = medium_prestige_loss
+	}
+
+	# Ravaler sa colère
+	option = {
+		name = agot_sh_court.0300.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 40
+				OR = {
+					agot_sh_is_loyalist = yes
+					agot_sh_is_cautious = yes
+				}
+			}
+		}
+	}
+
+	# Le Nord se souvient : protester publiquement
+	option = {
+		name = agot_sh_court.0300.b
+		add_character_modifier = {
+			modifier = agot_sh_court_defiant_modifier
+			years = 5
+		}
+		scope:agot_sh_king = {
+			if = {
+				limit = { agot_sh_is_sovereign = yes }
+				agot_sh_change_crown_respect_effect = { VALUE = -3 }
+			}
+		}
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 40
+				agot_sh_is_ambitious = yes
+			}
+		}
+	}
+}
+
+#------------------------------------------------------------------------------
+# 0400 - 38. Offrir un siège au petit conseil à une grande maison mécontente
+#------------------------------------------------------------------------------
+agot_sh_court.0400 = {
+	type = character_event
+	title = agot_sh_court.0400.t
+	desc = agot_sh_court.0400.desc
+	theme = court
+	left_portrait = {
+		character = root
+		animation = personality_honorable
+	}
+	right_portrait = {
+		character = scope:agot_sh_great_lord
+		animation = scheme
+	}
+	cooldown = { years = 5 }
+
+	trigger = {
+		agot_sh_is_sovereign = yes
+		is_adult = yes
+		any_vassal = {
+			agot_sh_is_lord_paramount = yes
+			agot_sh_is_ambitious = yes
+			is_adult = yes
+			is_imprisoned = no
+			opinion = { target = root value < 0 }
+			NOT = { is_councillor_of = root }
+		}
+	}
+
+	immediate = {
+		random_vassal = {
+			limit = {
+				agot_sh_is_lord_paramount = yes
+				agot_sh_is_ambitious = yes
+				is_adult = yes
+				is_imprisoned = no
+				opinion = { target = root value < 0 }
+				NOT = { is_councillor_of = root }
+			}
+			save_scope_as = agot_sh_great_lord
+		}
+	}
+
+	# Lui offrir un siège (Grand Argentier ou conseiller martial selon ses talents)
+	option = {
+		name = agot_sh_court.0400.a
+		if = {
+			limit = {
+				scope:agot_sh_great_lord = { stewardship >= scope:agot_sh_great_lord.martial }
+			}
+			assign_councillor_type = {
+				type = councillor_steward
+				target = scope:agot_sh_great_lord
+			}
+		}
+		else = {
+			assign_councillor_type = {
+				type = councillor_marshal
+				target = scope:agot_sh_great_lord
+			}
+		}
+		scope:agot_sh_great_lord = {
+			add_opinion = { target = root modifier = agot_sh_court_council_seat_opinion }
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 25
+				OR = {
+					agot_sh_is_cautious = yes
+					agot_sh_is_opportunist = yes
+				}
+			}
+		}
+	}
+
+	# Pas de place au conseil pour les ambitieux
+	option = {
+		name = agot_sh_court.0400.b
+		add_prestige = minor_prestige_gain
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 30
+				agot_sh_is_ambitious = yes
+			}
+		}
+	}
+}
+
+#------------------------------------------------------------------------------
+# 0500 - 39. Tournoi politique (hôte, pendant le tournoi)
+#------------------------------------------------------------------------------
+agot_sh_court.0500 = {
+	type = character_event
+	title = agot_sh_court.0500.t
+	desc = agot_sh_court.0500.desc
+	theme = tournament_contest
+	left_portrait = {
+		character = root
+		animation = personality_bold
+	}
+	right_portrait = {
+		character = scope:agot_sh_tourney_guest
+		animation = happiness
+	}
+	cooldown = { years = 3 }
+
+	trigger = {
+		exists = scope:activity
+		scope:activity = {
+			any_attending_character = {
+				is_ruler = yes
+				NOT = { this = root }
+			}
+		}
+	}
+
+	immediate = {
+		scope:activity = {
+			random_attending_character = {
+				limit = {
+					is_ruler = yes
+					NOT = { this = root }
+					opinion = { target = root value >= 20 }
+				}
+				save_scope_as = agot_sh_tourney_ally
+			}
+			random_attending_character = {
+				limit = {
+					NOT = { this = root }
+					is_scheming_against = { target = root }
+				}
+				save_scope_as = agot_sh_tourney_plotter
+			}
+			random_attending_character = {
+				limit = {
+					is_ruler = yes
+					NOT = { this = root }
+					opinion = { target = root value <= -20 }
+				}
+				save_scope_as = agot_sh_tourney_rival
+			}
+			random_attending_character = {
+				limit = {
+					is_ruler = yes
+					NOT = { this = root }
+				}
+				save_scope_as = agot_sh_tourney_guest
+			}
+		}
+	}
+
+	# Renforcer une alliance (honorer un allié devant toute la cour)
+	option = {
+		name = agot_sh_court.0500.a
+		trigger = { exists = scope:agot_sh_tourney_ally }
+		add_opinion = { target = scope:agot_sh_tourney_ally modifier = agot_sh_court_tourney_bond_opinion }
+		scope:agot_sh_tourney_ally = {
+			add_opinion = { target = root modifier = agot_sh_court_tourney_bond_opinion }
+		}
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 20
+				agot_sh_is_loyalist = yes
+			}
+		}
+	}
+
+	# Démasquer un comploteur parmi les invités
+	option = {
+		name = agot_sh_court.0500.b
+		trigger = { exists = scope:agot_sh_tourney_plotter }
+		add_dread = minor_dread_gain
+		scope:agot_sh_tourney_plotter = {
+			add_prestige = medium_prestige_loss
+			add_character_modifier = {
+				modifier = agot_sh_court_exposed_plotter_modifier
+				years = 5
+			}
+			add_opinion = { target = root modifier = agot_sh_court_tourney_unmasked_opinion }
+		}
+		ai_chance = { base = 60 }
+	}
+
+	# Humilier un rival dans la lice
+	option = {
+		name = agot_sh_court.0500.c
+		trigger = { exists = scope:agot_sh_tourney_rival }
+		add_prestige = minor_prestige_gain
+		scope:agot_sh_tourney_rival = {
+			add_prestige = medium_prestige_loss
+			add_opinion = { target = root modifier = agot_sh_court_tourney_humiliated_opinion }
+		}
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 30
+				agot_sh_is_ambitious = yes
+			}
+		}
+	}
+
+	# Laisser les joutes être des joutes
+	option = {
+		name = agot_sh_court.0500.d
+		add_prestige = miniscule_prestige_gain
+		ai_chance = { base = 10 }
+	}
+}

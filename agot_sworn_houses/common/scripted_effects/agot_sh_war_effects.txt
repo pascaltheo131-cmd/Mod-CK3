@@ -1,0 +1,99 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Guerre et économie - effets
+###############################################################################
+
+# Idée 4 - Le suzerain (root/this) perd une bataille : les girouettes doutent
+agot_sh_war_battle_lost_effect = {
+	every_vassal = {
+		limit = {
+			agot_sh_is_active_vassal = yes
+			agot_sh_is_opportunist = yes
+		}
+		add_opinion = {
+			target = prev
+			modifier = agot_sh_war_lost_confidence_opinion
+		}
+	}
+}
+
+# Idée 4 - Le suzerain gagne une bataille : les girouettes se rallient
+agot_sh_war_battle_won_effect = {
+	every_vassal = {
+		limit = {
+			agot_sh_is_active_vassal = yes
+			agot_sh_is_opportunist = yes
+		}
+		add_opinion = {
+			target = prev
+			modifier = agot_sh_war_rally_opinion
+		}
+	}
+}
+
+# Idée 4 - Le suzerain perd une guerre : défections possibles vers une faction
+agot_sh_war_war_lost_effect = {
+	save_scope_as = sh_beaten_liege
+	random_targeting_faction = {
+		limit = {
+			NOT = { exists = faction_war }
+			NOT = { faction_is_type = populist_faction }
+		}
+		save_scope_as = sh_target_faction
+	}
+	every_vassal = {
+		limit = {
+			agot_sh_is_active_vassal = yes
+			agot_sh_war_is_fickle_trigger = yes
+		}
+		add_opinion = {
+			target = scope:sh_beaten_liege
+			modifier = agot_sh_war_war_lost_opinion
+		}
+		if = {
+			limit = {
+				exists = scope:sh_target_faction
+				can_join_faction = scope:sh_target_faction
+			}
+			random = {
+				chance = 30
+				join_faction = scope:sh_target_faction
+				save_temporary_scope_as = sh_turncoat
+				scope:sh_beaten_liege = {
+					send_interface_toast = {
+						title = agot_sh_war_turncoat_toast
+						left_icon = scope:sh_turncoat
+					}
+				}
+			}
+		}
+	}
+}
+
+# Idée 4 - Le suzerain gagne une guerre : les opportunistes accourent
+agot_sh_war_war_won_effect = {
+	every_vassal = {
+		limit = {
+			agot_sh_is_active_vassal = yes
+			OR = {
+				agot_sh_is_opportunist = yes
+				agot_sh_is_ambitious = yes
+			}
+		}
+		add_opinion = {
+			target = prev
+			modifier = agot_sh_war_victory_rally_opinion
+		}
+	}
+}
+
+# Idée 30 - Partage généreux du butin (root = suzerain)
+agot_sh_war_share_loot_effect = {
+	every_vassal = {
+		limit = { agot_sh_is_active_vassal = yes }
+		add_opinion = {
+			target = root
+			modifier = agot_sh_war_loot_generous_opinion
+		}
+		add_gold = tiny_gold_value
+	}
+}

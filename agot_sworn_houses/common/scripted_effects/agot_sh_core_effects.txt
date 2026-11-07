@@ -1,0 +1,158 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : effets communs (API partagée par tout le mod)
+###############################################################################
+
+# Donne un tempérament politique au personnage (s'il n'en a pas).
+# Le lore des grandes maisons pèse lourd, mais la personnalité compte aussi.
+agot_sh_assign_temperament_effect = {
+	if = {
+		limit = { agot_sh_has_temperament = no }
+		random_list = {
+			10 = { # Loyaliste
+				modifier = { add = 40 dynasty ?= dynasty:dynn_Stark }
+				modifier = { add = 40 dynasty ?= dynasty:dynn_Tully }
+				modifier = { add = 30 dynasty ?= dynasty:dynn_Tarly }
+				modifier = { add = 30 dynasty ?= dynasty:dynn_Manderly }
+				modifier = { add = 30 dynasty ?= dynasty:dynn_Mallister }
+				modifier = { add = 20 dynasty ?= dynasty:dynn_Umber }
+				modifier = { add = 10 has_trait = honest }
+				modifier = { add = 10 has_trait = just }
+				modifier = { add = 5 has_trait = content }
+				set_variable = { name = agot_sh_temperament value = flag:loyalist }
+			}
+			10 = { # Ambitieux
+				modifier = { add = 40 dynasty ?= dynasty:dynn_Lannister }
+				modifier = { add = 40 dynasty ?= dynasty:dynn_Hightower }
+				modifier = { add = 30 dynasty ?= dynasty:dynn_Greyjoy }
+				modifier = { add = 30 dynasty ?= dynasty:dynn_Tyrell }
+				modifier = { add = 30 dynasty ?= dynasty:dynn_Targaryen }
+				modifier = { add = 30 dynasty ?= dynasty:dynn_Velaryon }
+				modifier = { add = 20 dynasty ?= dynasty:dynn_Baratheon }
+				modifier = { add = 15 has_trait = ambitious }
+				modifier = { add = 10 has_trait = arrogant }
+				set_variable = { name = agot_sh_temperament value = flag:ambitious }
+			}
+			10 = { # Opportuniste
+				modifier = { add = 50 dynasty ?= dynasty:dynn_Frey }
+				modifier = { add = 40 dynasty ?= dynasty:dynn_Bolton }
+				modifier = { add = 15 has_trait = deceitful }
+				modifier = { add = 10 has_trait = greedy }
+				modifier = { add = 10 has_trait = fickle }
+				set_variable = { name = agot_sh_temperament value = flag:opportunist }
+			}
+			10 = { # Prudent
+				modifier = { add = 40 dynasty ?= dynasty:dynn_Arryn }
+				modifier = { add = 40 dynasty ?= dynasty:dynn_Martell }
+				modifier = { add = 20 dynasty ?= dynasty:dynn_Royce }
+				modifier = { add = 20 dynasty ?= dynasty:dynn_Redwyne }
+				modifier = { add = 10 has_trait = patient }
+				modifier = { add = 10 has_trait = craven }
+				modifier = { add = 5 has_trait = paranoid }
+				set_variable = { name = agot_sh_temperament value = flag:cautious }
+			}
+		}
+		agot_sh_refresh_temperament_modifier_effect = yes
+	}
+}
+
+# Affiche le tempérament dans l'interface via un modificateur de personnage
+agot_sh_refresh_temperament_modifier_effect = {
+	remove_character_modifier = agot_sh_temperament_loyalist_modifier
+	remove_character_modifier = agot_sh_temperament_ambitious_modifier
+	remove_character_modifier = agot_sh_temperament_opportunist_modifier
+	remove_character_modifier = agot_sh_temperament_cautious_modifier
+	if = {
+		limit = { agot_sh_is_loyalist = yes }
+		add_character_modifier = agot_sh_temperament_loyalist_modifier
+	}
+	else_if = {
+		limit = { agot_sh_is_ambitious = yes }
+		add_character_modifier = agot_sh_temperament_ambitious_modifier
+	}
+	else_if = {
+		limit = { agot_sh_is_opportunist = yes }
+		add_character_modifier = agot_sh_temperament_opportunist_modifier
+	}
+	else_if = {
+		limit = { agot_sh_is_cautious = yes }
+		add_character_modifier = agot_sh_temperament_cautious_modifier
+	}
+}
+
+# Un enfant hérite souvent du tempérament de son père (la maison façonne l'homme)
+agot_sh_inherit_temperament_effect = {
+	if = {
+		limit = {
+			agot_sh_has_temperament = no
+			exists = father
+			father = { agot_sh_has_temperament = yes }
+		}
+		random = {
+			chance = 60
+			set_variable = { name = agot_sh_temperament value = father.var:agot_sh_temperament }
+			agot_sh_refresh_temperament_modifier_effect = yes
+		}
+	}
+	agot_sh_assign_temperament_effect = yes
+}
+
+# Modifie le Respect de la Couronne (sur le souverain). Usage : agot_sh_change_crown_respect_effect = { VALUE = 5 }
+agot_sh_change_crown_respect_effect = {
+	if = {
+		limit = { exists = var:agot_sh_respect_events }
+		change_variable = { name = agot_sh_respect_events add = $VALUE$ }
+	}
+	else = {
+		set_variable = { name = agot_sh_respect_events value = $VALUE$ }
+	}
+}
+
+# Crée une querelle entre deux dynasties. Usage : agot_sh_add_feud_effect = { DYN1 = scope:a.dynasty DYN2 = scope:b.dynasty }
+agot_sh_add_feud_effect = {
+	if = {
+		limit = {
+			exists = $DYN1$
+			exists = $DYN2$
+			NOT = { $DYN1$ = $DYN2$ }
+		}
+		$DYN1$ = {
+			if = {
+				limit = { NOT = { is_target_in_variable_list = { name = agot_sh_feuds target = $DYN2$ } } }
+				add_to_variable_list = { name = agot_sh_feuds target = $DYN2$ }
+			}
+		}
+		$DYN2$ = {
+			if = {
+				limit = { NOT = { is_target_in_variable_list = { name = agot_sh_feuds target = $DYN1$ } } }
+				add_to_variable_list = { name = agot_sh_feuds target = $DYN1$ }
+			}
+		}
+	}
+}
+
+# Met fin à une querelle (réconciliation)
+agot_sh_end_feud_effect = {
+	$DYN1$ ?= { remove_list_variable = { name = agot_sh_feuds target = $DYN2$ } }
+	$DYN2$ ?= { remove_list_variable = { name = agot_sh_feuds target = $DYN1$ } }
+}
+
+# Réputation de la maison (sur la dynastie). Usage : dynasty = { agot_sh_change_reputation_effect = { VALUE = -10 } }
+agot_sh_change_reputation_effect = {
+	if = {
+		limit = { exists = var:agot_sh_reputation }
+		change_variable = { name = agot_sh_reputation add = $VALUE$ }
+		clamp_variable = { name = agot_sh_reputation min = -100 max = 100 }
+	}
+	else = {
+		set_variable = { name = agot_sh_reputation value = $VALUE$ }
+	}
+}
+
+# Querelles historiques de Westeros, posées au début de la partie
+agot_sh_setup_lore_feuds_effect = {
+	agot_sh_add_feud_effect = { DYN1 = dynasty:dynn_Stark DYN2 = dynasty:dynn_Bolton }
+	agot_sh_add_feud_effect = { DYN1 = dynasty:dynn_Tully DYN2 = dynasty:dynn_Frey }
+	agot_sh_add_feud_effect = { DYN1 = dynasty:dynn_Blackwood DYN2 = dynasty:dynn_Bracken }
+	agot_sh_add_feud_effect = { DYN1 = dynasty:dynn_Lannister DYN2 = dynasty:dynn_Reyne }
+	agot_sh_add_feud_effect = { DYN1 = dynasty:dynn_Yronwood DYN2 = dynasty:dynn_Tarly }
+}

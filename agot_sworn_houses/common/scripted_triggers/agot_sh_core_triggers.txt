@@ -1,0 +1,54 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : déclencheurs communs (API partagée par tout le mod)
+###############################################################################
+
+# --- Tempérament politique (variable agot_sh_temperament = flag:...) ---
+agot_sh_has_temperament = { has_variable = agot_sh_temperament }
+agot_sh_is_loyalist = { var:agot_sh_temperament ?= flag:loyalist }
+agot_sh_is_ambitious = { var:agot_sh_temperament ?= flag:ambitious }
+agot_sh_is_opportunist = { var:agot_sh_temperament ?= flag:opportunist }
+agot_sh_is_cautious = { var:agot_sh_temperament ?= flag:cautious }
+
+# --- Hiérarchie de Westeros ---
+# Seigneur Suzerain : tient un titre de rang « empire » (ex. e_the_north) sous un suzerain
+agot_sh_is_lord_paramount = {
+	is_ruler = yes
+	exists = liege
+	primary_title.tier = tier_empire
+}
+
+# Souverain : roi indépendant (Trône de Fer ou roi indépendant)
+agot_sh_is_sovereign = {
+	is_ruler = yes
+	is_independent_ruler = yes
+}
+
+# Vassal landed adulte « politiquement actif »
+agot_sh_is_active_vassal = {
+	is_ruler = yes
+	is_adult = yes
+	exists = liege
+	is_imprisoned = no
+	highest_held_title_tier >= tier_county
+}
+
+# --- Querelles entre maisons (listes sur la dynastie) ---
+# Usage : agot_sh_dynasties_feud_trigger = { DYN1 = scope:a.dynasty DYN2 = scope:b.dynasty }
+agot_sh_dynasties_feud_trigger = {
+	$DYN1$ ?= {
+		is_target_in_variable_list = {
+			name = agot_sh_feuds
+			target = $DYN2$
+		}
+	}
+}
+
+# --- Respect de la Couronne ---
+agot_sh_crown_respected_trigger = {
+	exists = var:agot_sh_crown_respect
+	var:agot_sh_crown_respect >= 70
+}
+agot_sh_crown_despised_trigger = {
+	exists = var:agot_sh_crown_respect
+	var:agot_sh_crown_respect <= 30
+}

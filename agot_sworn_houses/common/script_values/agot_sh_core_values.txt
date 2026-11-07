@@ -1,0 +1,27 @@
+﻿# Respect de la Couronne, de 0 à 100, recalculé chaque année sur le souverain
+agot_sh_crown_respect_value = {
+	value = 40
+	add = {
+		value = prestige_level
+		multiply = 6
+	}
+	add = {
+		value = dread
+		multiply = 0.2
+		max = 20
+	}
+	if = {
+		limit = { exists = var:agot_sh_respect_events }
+		add = var:agot_sh_respect_events
+	}
+	if = {
+		limit = { is_adult = no }
+		add = -15
+	}
+	if = {
+		limit = { has_trait = incapable }
+		add = -20
+	}
+	min = 0
+	max = 100
+}

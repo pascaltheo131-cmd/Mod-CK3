@@ -1,0 +1,101 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Guerre et économie - déclencheurs
+###############################################################################
+
+# Places frontalières clés de Westeros (Seigneurs des Marches)
+agot_sh_war_holds_march_trigger = {
+	OR = {
+		has_title = title:c_moat_cailin		# Le Nord face au Neck
+		has_title = title:c_the_twins		# Le passage du Trident
+		has_title = title:c_storms_end		# L'Accalmie
+		has_title = title:c_nightsong		# Marches de Dorne
+		has_title = title:c_blackhaven		# Marches de Dorne
+		has_title = title:c_kingsgrave		# Passe du Prince (Dorne)
+		has_title = title:c_yronwood		# Passe Osseuse (Dorne)
+		has_title = title:c_skyreach		# Passe du Prince (Dorne)
+		has_title = title:c_the_bloody_gate	# Porte Sanglante (Val)
+		has_title = title:c_the_golden_tooth	# Dent d'Or (Ouest)
+		has_title = title:c_seagard			# Salvemer face aux Fer-nés
+	}
+}
+
+# Passages stratégiques où l'on prélève des péages
+agot_sh_war_holds_toll_trigger = {
+	OR = {
+		has_title = title:c_the_twins
+		has_title = title:c_moat_cailin
+		has_title = title:c_the_bloody_gate
+		has_title = title:c_the_golden_tooth
+		has_title = title:c_kingsgrave
+	}
+}
+
+# Forteresses où un souverain devrait installer un châtelain
+agot_sh_war_holds_key_fortress_trigger = {
+	OR = {
+		has_title = title:c_harrenhal
+		has_title = title:c_moat_cailin
+		has_title = title:c_the_twins
+		has_title = title:c_storms_end
+		has_title = title:c_the_bloody_gate
+		has_title = title:c_the_golden_tooth
+	}
+}
+
+# Seigneur du Nord (comté-capitale de jure dans e_the_north)
+agot_sh_war_is_northern_trigger = {
+	exists = capital_county
+	capital_county.empire ?= title:e_the_north
+}
+
+# Fidèle du Dieu Noyé
+agot_sh_war_is_ironborn_trigger = {
+	OR = {
+		has_faith = faith:drowned_god
+		faith.religion = faith:drowned_god.religion
+	}
+}
+
+# Girouette : opportuniste, ou ambitieux mécontent
+agot_sh_war_is_fickle_trigger = {
+	OR = {
+		agot_sh_is_opportunist = yes
+		AND = {
+			agot_sh_is_ambitious = yes
+			opinion = { target = liege value < 20 }
+		}
+	}
+}
+
+# Cadet sans terres d'une maison (character = le cadet, $HEAD$ = chef de maison)
+agot_sh_war_landless_cadet_trigger = {
+	is_adult = yes
+	is_female = no
+	is_landed = no
+	is_imprisoned = no
+	age <= 35
+	is_child_of = $HEAD$
+	NOT = { is_primary_heir_of = $HEAD$ }
+	is_courtier_of = $HEAD$
+	has_any_court_position = no
+	is_councillor = no
+	NOR = {
+		has_trait = nightswatch
+		has_trait = maester
+		has_trait = septon
+		has_trait = kingsguard
+	}
+	NOT = { has_character_flag = agot_sh_war_cadet_decided }
+}
+
+# Scope titre : comté-forteresse clé
+agot_sh_war_key_fortress_title_trigger = {
+	OR = {
+		this = title:c_harrenhal
+		this = title:c_moat_cailin
+		this = title:c_the_twins
+		this = title:c_storms_end
+		this = title:c_the_bloody_gate
+		this = title:c_the_golden_tooth
+	}
+}

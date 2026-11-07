@@ -1,0 +1,46 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Interactions et cour - déclencheurs
+###############################################################################
+
+# Le personnage occupe une des charges de Gardien d'AGOT (postes de cour du Trône de Fer)
+agot_sh_court_holds_warden_trigger = {
+	OR = {
+		has_court_position = warden_of_the_north_court_position
+		has_court_position = warden_of_the_east_court_position
+		has_court_position = warden_of_the_west_court_position
+		has_court_position = warden_of_the_south_court_position
+	}
+}
+
+# Vassal direct de l'acteur, convocable à la cour
+agot_sh_court_direct_vassal_trigger = {
+	agot_sh_is_active_vassal = yes
+	liege = $LIEGE$
+	NOT = { is_at_war_with = $LIEGE$ }
+}
+
+# L'héritier principal du vassal est un enfant pouvant être pris en otage
+agot_sh_court_heir_can_be_ward_trigger = {
+	exists = primary_heir
+	primary_heir = {
+		is_adult = no
+		age >= 6
+		is_imprisoned = no
+		is_child_of = prev
+	}
+}
+
+# Un vassal hait un autre vassal direct du même suzerain
+agot_sh_court_has_quarreling_vassals_trigger = {
+	any_vassal = {
+		agot_sh_is_active_vassal = yes
+		save_temporary_scope_as = agot_sh_court_quarrel_temp
+		liege = {
+			any_vassal = {
+				agot_sh_is_active_vassal = yes
+				NOT = { this = scope:agot_sh_court_quarrel_temp }
+				opinion = { target = scope:agot_sh_court_quarrel_temp value <= -40 }
+			}
+		}
+	}
+}

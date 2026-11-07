@@ -1,0 +1,481 @@
+﻿# AGOT - Sworn Houses : Politique et maisons - on_actions
+# Les on_actions du jeu sont fusionnés : on n'ajoute que nos sous-actions.
+
+on_death = { on_actions = { agot_sh_pol_on_death } }
+on_imprison = { on_actions = { agot_sh_pol_on_imprison } }
+on_title_lost = { on_actions = { agot_sh_pol_on_title_lost } }
+on_war_started = { on_actions = { agot_sh_pol_on_war_started } }
+on_war_won_defender = { on_actions = { agot_sh_pol_on_war_won_defender } }
+on_join_war_as_secondary = { on_actions = { agot_sh_pol_on_join_war } }
+on_marriage = { on_actions = { agot_sh_pol_on_marriage } }
+on_betrothal_broken = { on_actions = { agot_sh_pol_on_betrothal_broken } }
+on_title_gain_inheritance = { on_actions = { agot_sh_pol_on_inheritance } }
+yearly_playable_pulse = { on_actions = { agot_sh_pol_yearly_pulse } }
+
+###############################################################################
+# Mort d'un personnage tué par quelqu'un (scope:killer)
+###############################################################################
+agot_sh_pol_on_death = {
+	trigger = {
+		exists = scope:killer
+		NOT = { scope:killer = root }
+	}
+	effect = {
+		save_scope_as = agot_sh_pol_victim
+		scope:killer = { save_scope_as = agot_sh_pol_killer }
+
+		# --- 8. Droit des invités : tuer un invité sous son toit ---
+		if = {
+			limit = {
+				is_imprisoned = no
+				agot_sh_pol_guest_of_trigger = { HOST = scope:killer }
+			}
+			agot_sh_pol_guest_right_broken_effect = { VILLAIN = scope:killer VICTIM = root }
+		}
+		# --- 9. Pupille tué par son gardien ---
+		else_if = {
+			limit = { agot_sh_pol_is_ward_of_trigger = { GUARDIAN = scope:killer } }
+			agot_sh_pol_ward_scandal_effect = { GUARDIAN = scope:killer }
+		}
+
+		# --- 13. Exécution d'un grand seigneur par son suzerain ---
+		if = {
+			limit = {
+				agot_sh_pol_is_great_lord = yes
+				OR = {
+					is_imprisoned = yes
+					has_character_flag = agot_sh_pol_condemned
+				}
+				OR = {
+					liege ?= scope:killer
+					is_imprisoned_by = scope:killer
+				}
+			}
+			scope:killer = {
+				if = {
+					limit = { agot_sh_is_sovereign = yes }
+					agot_sh_change_crown_respect_effect = { VALUE = -10 }
+				}
+				dynasty ?= { agot_sh_change_reputation_effect = { VALUE = -5 } }
+			}
+			# Querelle avec la maison de la victime
+			if = {
+				limit = {
+					exists = dynasty
+					exists = scope:killer.dynasty
+					NOT = { dynasty = scope:killer.dynasty }
+				}
+				agot_sh_add_feud_effect = { DYN1 = root.dynasty DYN2 = scope:killer.dynasty }
+			}
+			# 6. Les enfants de la victime gardent un grief durable
+			every_child = {
+				limit = {
+					is_alive = yes
+					is_adult = yes
+					NOT = { this = scope:killer }
+				}
+				add_opinion = { target = scope:killer modifier = agot_sh_pol_kinsman_executed_opinion }
+				agot_sh_pol_add_grievance_effect = { TARGET = scope:killer }
+			}
+			# L'héritier décide de la suite
+			primary_heir ?= {
+				if = {
+					limit = { NOT = { this = scope:killer } }
+					trigger_event = { id = agot_sh_pol.0012 days = 3 }
+				}
+			}
+			# Réaction de tous les vassaux du bourreau
+			scope:killer = {
+				every_vassal = {
+					limit = {
+						agot_sh_is_active_vassal = yes
+						NOT = { this = root }
+					}
+					trigger_event = { id = agot_sh_pol.0010 days = { 2 7 } }
+				}
+			}
+		}
+	}
+}
+
+###############################################################################
+# Emprisonnement (scope:imprisoner)
+###############################################################################
+agot_sh_pol_on_imprison = {
+	trigger = { exists = scope:imprisoner }
+	effect = {
+		# 8. Emprisonner un invité
+		if = {
+			limit = { agot_sh_pol_guest_of_trigger = { HOST = scope:imprisoner } }
+			agot_sh_pol_guest_right_broken_effect = { VILLAIN = scope:imprisoner VICTIM = root }
+		}
+		# 9. Maltraiter un pupille confié
+		else_if = {
+			limit = { agot_sh_pol_is_ward_of_trigger = { GUARDIAN = scope:imprisoner } }
+			agot_sh_pol_ward_scandal_effect = { GUARDIAN = scope:imprisoner }
+		}
+	}
+}
+
+###############################################################################
+# 6. Titre révoqué par le suzerain
+###############################################################################
+agot_sh_pol_on_title_lost = {
+	trigger = {
+		is_alive = yes
+		exists = scope:new_holder
+		liege ?= scope:new_holder
+		scope:title = { tier >= tier_county }
+		NOT = { has_variable = agot_sh_pol_revoked_recently }
+	}
+	effect = {
+		set_variable = { name = agot_sh_pol_revoked_recently value = yes days = 30 }
+		agot_sh_pol_add_grievance_effect = { TARGET = scope:new_holder }
+	}
+}
+
+###############################################################################
+# 18 / 21 / 41. Déclaration de guerre
+###############################################################################
+agot_sh_pol_on_war_started = {
+	effect = {
+		# 21. Parole rompue : prendre les armes contre celui à qui l'on a plié le genou ou juré fidélité
+		if = {
+			limit = {
+				scope:attacker = {
+					OR = {
+						var:agot_sh_pol_sworn_word ?= scope:defender
+						var:agot_sh_pol_oath_to_heir ?= scope:defender
+					}
+				}
+			}
+			scope:attacker = { agot_sh_pol_break_word_effect = { BETRAYED = scope:defender } }
+		}
+		# 18. Les Verts et les Noirs : une couronne est disputée par un prétendant
+		if = {
+			limit = {
+				exists = scope:claimant
+				NOT = { scope:claimant = scope:defender }
+				scope:war = {
+					OR = {
+						using_cb = claim_cb
+						using_cb = claimant_faction_war
+					}
+				}
+				scope:defender = {
+					OR = {
+						agot_sh_is_sovereign = yes
+						agot_sh_is_lord_paramount = yes
+					}
+				}
+			}
+			scope:claimant = { save_scope_as = agot_sh_pol_claimant }
+			scope:defender = { save_scope_as = agot_sh_pol_crown }
+			scope:war = { save_scope_as = agot_sh_pol_war }
+			scope:defender = {
+				every_vassal = {
+					limit = {
+						agot_sh_is_active_vassal = yes
+						highest_held_title_tier >= tier_duchy
+						NOT = { this = scope:agot_sh_pol_claimant }
+						NOT = { scope:agot_sh_pol_war = { is_participant = prev } }
+					}
+					trigger_event = { id = agot_sh_pol.0070 days = { 3 15 } }
+				}
+			}
+		}
+	}
+}
+
+# 21. Rejoindre une guerre contre celui à qui l'on a donné sa parole
+agot_sh_pol_on_join_war = {
+	effect = {
+		if = {
+			limit = {
+				has_variable = agot_sh_pol_sworn_word
+				scope:war = {
+					is_attacker = root
+					is_defender = root.var:agot_sh_pol_sworn_word
+				}
+			}
+			agot_sh_pol_break_word_effect = { BETRAYED = root.var:agot_sh_pol_sworn_word }
+		}
+		else_if = {
+			limit = {
+				has_variable = agot_sh_pol_oath_to_heir
+				scope:war = {
+					is_attacker = root
+					is_defender = root.var:agot_sh_pol_oath_to_heir
+				}
+			}
+			agot_sh_pol_break_word_effect = { BETRAYED = root.var:agot_sh_pol_oath_to_heir }
+		}
+	}
+}
+
+###############################################################################
+# 6 / 20 / 22. Une rébellion écrasée
+###############################################################################
+agot_sh_pol_on_war_won_defender = {
+	effect = {
+		if = {
+			limit = {
+				scope:war = { using_civil_war_cb_trigger = yes }
+				scope:attacker = {
+					is_alive = yes
+					OR = {
+						liege ?= scope:defender
+						is_imprisoned_by = scope:defender
+					}
+				}
+			}
+			# 6. Les rebelles ambitieux ou opportunistes ruminent leur défaite
+			scope:war = {
+				every_war_attacker = {
+					limit = {
+						liege ?= scope:defender
+						NOT = { this = scope:attacker }
+						OR = {
+							agot_sh_is_ambitious = yes
+							agot_sh_is_opportunist = yes
+						}
+					}
+					agot_sh_pol_add_grievance_effect = { TARGET = scope:defender }
+				}
+			}
+			# Le chef rebelle : genou plié, la Garde de Nuit ou la hache
+			scope:attacker = { save_scope_as = agot_sh_pol_rebel }
+			scope:defender = { trigger_event = { id = agot_sh_pol.0090 days = 2 } }
+		}
+	}
+}
+
+###############################################################################
+# 7 / 11. Mariages
+###############################################################################
+agot_sh_pol_on_marriage = {
+	trigger = {
+		exists = dynasty
+		exists = scope:spouse.dynasty
+		NOT = { dynasty = scope:spouse.dynasty }
+	}
+	effect = {
+		save_scope_as = agot_sh_pol_groom_side
+		scope:spouse = { save_scope_as = agot_sh_pol_bride_side }
+		# 7. Réconciliation par le mariage
+		if = {
+			limit = { agot_sh_dynasties_feud_trigger = { DYN1 = root.dynasty DYN2 = scope:spouse.dynasty } }
+			agot_sh_end_feud_effect = { DYN1 = root.dynasty DYN2 = scope:spouse.dynasty }
+			if = {
+				limit = {
+					exists = dynasty.dynast
+					exists = scope:spouse.dynasty.dynast
+				}
+				dynasty.dynast = { save_scope_as = agot_sh_pol_dynast_a }
+				scope:spouse.dynasty.dynast = { save_scope_as = agot_sh_pol_dynast_b }
+				scope:agot_sh_pol_dynast_a = { trigger_event = agot_sh_pol.0022 }
+				scope:agot_sh_pol_dynast_b = { trigger_event = agot_sh_pol.0023 }
+			}
+		}
+		# 11. Une grande maison s'unit à une maison mineure
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						agot_sh_pol_is_great_house_trigger = yes
+						scope:spouse = { agot_sh_pol_is_minor_house_trigger = yes }
+					}
+					AND = {
+						agot_sh_pol_is_minor_house_trigger = yes
+						scope:spouse = { agot_sh_pol_is_great_house_trigger = yes }
+					}
+				}
+			}
+			if = {
+				limit = { agot_sh_pol_is_great_house_trigger = yes }
+				dynasty.dynast = { save_scope_as = agot_sh_pol_great_dynast }
+				scope:spouse.dynasty.dynast = { save_scope_as = agot_sh_pol_minor_dynast }
+			}
+			else = {
+				scope:spouse.dynasty.dynast = { save_scope_as = agot_sh_pol_great_dynast }
+				dynasty.dynast = { save_scope_as = agot_sh_pol_minor_dynast }
+			}
+			scope:agot_sh_pol_great_dynast = { add_prestige = minor_prestige_loss }
+			scope:agot_sh_pol_minor_dynast = {
+				add_prestige = medium_prestige_gain
+				dynasty = { agot_sh_change_reputation_effect = { VALUE = 5 } }
+				trigger_event = agot_sh_pol.0061
+			}
+		}
+	}
+}
+
+# 11. Promesse de mariage rompue (lore Frey / Robb Stark)
+agot_sh_pol_on_betrothal_broken = {
+	trigger = {
+		scope:reason = flag:script
+		exists = dynasty.dynast
+		exists = scope:second.dynasty.dynast
+		NOT = { dynasty = scope:second.dynasty }
+	}
+	effect = {
+		dynasty.dynast = { save_scope_as = agot_sh_pol_dynast_a }
+		scope:second.dynasty.dynast = { save_scope_as = agot_sh_pol_dynast_b }
+		save_scope_as = agot_sh_pol_betrothed_a
+		scope:second = { save_scope_as = agot_sh_pol_betrothed_b }
+		scope:agot_sh_pol_dynast_a = {
+			add_opinion = { target = scope:agot_sh_pol_dynast_b modifier = agot_sh_pol_broken_betrothal_opinion }
+		}
+		scope:agot_sh_pol_dynast_b = {
+			add_opinion = { target = scope:agot_sh_pol_dynast_a modifier = agot_sh_pol_broken_betrothal_opinion }
+		}
+		scope:agot_sh_pol_dynast_a = { trigger_event = agot_sh_pol.0060 }
+	}
+}
+
+###############################################################################
+# 42. Un enfant hérite d'une couronne : la régence est disputée
+###############################################################################
+agot_sh_pol_on_inheritance = {
+	trigger = {
+		is_adult = no
+		scope:title = { tier >= tier_kingdom }
+		NOT = { has_variable = agot_sh_pol_regency_contested }
+	}
+	effect = {
+		set_variable = { name = agot_sh_pol_regency_contested value = yes years = 2 }
+		save_scope_as = agot_sh_pol_child
+		ordered_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				highest_held_title_tier >= tier_duchy
+			}
+			order_by = max_military_strength
+			save_scope_as = agot_sh_pol_contender_a
+		}
+		if = {
+			limit = { exists = scope:agot_sh_pol_contender_a }
+			ordered_vassal = {
+				limit = {
+					agot_sh_is_active_vassal = yes
+					highest_held_title_tier >= tier_duchy
+					NOT = { this = scope:agot_sh_pol_contender_a }
+				}
+				order_by = max_military_strength
+				save_scope_as = agot_sh_pol_contender_b
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:agot_sh_pol_contender_a
+				exists = scope:agot_sh_pol_contender_b
+			}
+			scope:agot_sh_pol_contender_a = { trigger_event = { id = agot_sh_pol.0120 days = 5 } }
+			scope:agot_sh_pol_contender_b = { trigger_event = { id = agot_sh_pol.0120 days = 7 } }
+		}
+	}
+}
+
+###############################################################################
+# Pulsation annuelle
+###############################################################################
+agot_sh_pol_yearly_pulse = {
+	effect = {
+		# --- 40. Réputation de la maison visible ---
+		remove_character_modifier = agot_sh_pol_house_honored_modifier
+		remove_character_modifier = agot_sh_pol_house_infamous_modifier
+		if = {
+			limit = {
+				is_ruler = yes
+				exists = dynasty
+				dynasty = { has_variable = agot_sh_reputation }
+			}
+			if = {
+				limit = { dynasty = { var:agot_sh_reputation >= 50 } }
+				add_character_modifier = agot_sh_pol_house_honored_modifier
+			}
+			else_if = {
+				limit = { dynasty = { var:agot_sh_reputation <= -50 } }
+				add_character_modifier = agot_sh_pol_house_infamous_modifier
+			}
+		}
+
+		# --- 19. La maison de la Main du Roi gagne en influence ---
+		if = {
+			limit = {
+				has_title = title:h_the_iron_throne
+				exists = cp:councillor_castellan
+			}
+			cp:councillor_castellan = {
+				remove_character_modifier = agot_sh_pol_hand_house_modifier
+				add_character_modifier = {
+					modifier = agot_sh_pol_hand_house_modifier
+					years = 1
+				}
+				dynasty ?= { agot_sh_change_reputation_effect = { VALUE = 2 } }
+			}
+		}
+
+		if = {
+			limit = { agot_sh_is_active_vassal = yes }
+			# --- 9. L'héritier pupille à la cour du suzerain : garantie de loyauté ---
+			if = {
+				limit = {
+					exists = primary_heir
+					primary_heir = { agot_sh_pol_is_ward_of_trigger = { GUARDIAN = root.liege } }
+				}
+				add_opinion = { target = liege modifier = agot_sh_pol_heir_in_his_care_opinion }
+			}
+			# --- 10. Blocs de maisons alliées par mariage ---
+			if = {
+				limit = {
+					liege = {
+						any_vassal = {
+							NOT = { this = root }
+							agot_sh_is_active_vassal = yes
+							agot_sh_pol_marriage_tie_trigger = { CHAR = root }
+						}
+					}
+				}
+				save_scope_as = agot_sh_pol_bloc_a
+				liege = {
+					save_scope_as = agot_sh_pol_bloc_liege
+					random_vassal = {
+						limit = {
+							NOT = { this = root }
+							agot_sh_is_active_vassal = yes
+							agot_sh_pol_marriage_tie_trigger = { CHAR = root }
+						}
+						save_scope_as = agot_sh_pol_bloc_b
+					}
+				}
+				add_opinion = { target = scope:agot_sh_pol_bloc_b modifier = agot_sh_pol_bloc_kinship_opinion }
+				scope:agot_sh_pol_bloc_b = { add_opinion = { target = root modifier = agot_sh_pol_bloc_kinship_opinion } }
+				# Le bloc fait pression sur le suzerain
+				if = {
+					limit = {
+						highest_held_title_tier >= tier_duchy
+						opinion = { target = liege value <= -20 }
+						scope:agot_sh_pol_bloc_b = { opinion = { target = root.liege value <= -20 } }
+						liege = { NOT = { has_variable = agot_sh_pol_bloc_pressure_cd } }
+					}
+					random = {
+						chance = 25
+						liege = {
+							set_variable = { name = agot_sh_pol_bloc_pressure_cd value = yes years = 5 }
+							trigger_event = { id = agot_sh_pol.0050 days = { 5 30 } }
+						}
+					}
+				}
+			}
+		}
+	}
+	random_events = {
+		400 = 0
+		100 = agot_sh_pol.0001	# 6. Vieilles blessures : le grief pousse vers les factions
+		60 = agot_sh_pol.0020	# 7. Occasion de vengeance
+		40 = agot_sh_pol.0021	# 7. Réparations entre maisons en querelle
+		60 = agot_sh_pol.0080	# 19. Jalousie envers la maison de la Main
+		60 = agot_sh_pol.0110	# 41. Serment à l'héritier
+	}
+}

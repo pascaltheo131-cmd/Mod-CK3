@@ -1,0 +1,34 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Interactions et cour - on_actions
+###############################################################################
+
+yearly_playable_pulse = {
+	on_actions = { agot_sh_court_yearly_pulse }
+}
+
+# Pendant la phase passive d'un tournoi (hôte uniquement)
+tournament_passive_state_host_pulse = {
+	on_actions = { agot_sh_court_tournament_host_pulse }
+}
+
+agot_sh_court_yearly_pulse = {
+	effect = {
+		agot_sh_court_ward_cleanup_effect = yes
+		agot_sh_court_warden_tracking_effect = yes
+	}
+	random_events = {
+		chance_to_happen = 30
+		100 = 0
+		40 = agot_sh_court.0100 # Querelle entre deux vassaux
+		15 = agot_sh_court.0400 # Siège au petit conseil pour une grande maison
+	}
+}
+
+agot_sh_court_tournament_host_pulse = {
+	trigger = { exists = scope:activity }
+	random_events = {
+		chance_to_happen = 20
+		100 = 0
+		50 = agot_sh_court.0500 # Tournoi politique
+	}
+}

@@ -1,0 +1,77 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Interactions et cour - effets
+###############################################################################
+
+# Nettoie la variable d'otage (sur le vassal) quand l'enfant est adulte, mort,
+# libéré (plus pupille du détenteur), ou que le détenteur est mort.
+# Variables : agot_sh_ward_held_by (= suzerain détenteur), agot_sh_court_ward_child (= l'enfant)
+agot_sh_court_ward_cleanup_effect = {
+	if = {
+		limit = { has_variable = agot_sh_ward_held_by }
+		if = {
+			limit = {
+				exists = var:agot_sh_ward_held_by
+				exists = var:agot_sh_court_ward_child
+			}
+			var:agot_sh_ward_held_by = { save_temporary_scope_as = agot_sh_ward_holder }
+			var:agot_sh_court_ward_child = { save_temporary_scope_as = agot_sh_ward_child }
+			if = {
+				limit = {
+					OR = {
+						scope:agot_sh_ward_holder = { is_alive = no }
+						scope:agot_sh_ward_child = {
+							OR = {
+								is_alive = no
+								is_adult = yes
+								NOT = { has_relation_guardian = scope:agot_sh_ward_holder }
+							}
+						}
+					}
+				}
+				if = {
+					limit = { scope:agot_sh_ward_holder = { is_alive = yes } }
+					scope:agot_sh_ward_holder = {
+						remove_character_modifier = agot_sh_court_holds_ward_modifier
+					}
+				}
+				remove_variable = agot_sh_ward_held_by
+				remove_variable = agot_sh_court_ward_child
+			}
+		}
+		else = {
+			remove_variable = agot_sh_ward_held_by
+			remove_variable = agot_sh_court_ward_child
+		}
+	}
+}
+
+# Réagit aux charges de Gardien d'AGOT (postes de cour du Trône de Fer) :
+# honneur à la nomination, affront majeur si la charge est retirée par le même roi.
+agot_sh_court_warden_tracking_effect = {
+	if = {
+		limit = { agot_sh_court_holds_warden_trigger = yes }
+		if = {
+			limit = {
+				NOT = { has_variable = agot_sh_court_warden_of }
+				exists = liege
+			}
+			set_variable = { name = agot_sh_court_warden_of value = liege }
+			add_opinion = {
+				target = liege
+				modifier = agot_sh_court_warden_named_opinion
+			}
+		}
+	}
+	else_if = {
+		limit = { has_variable = agot_sh_court_warden_of }
+		if = {
+			limit = {
+				is_ruler = yes
+				exists = liege
+				var:agot_sh_court_warden_of ?= liege
+			}
+			trigger_event = agot_sh_court.0300
+		}
+		remove_variable = agot_sh_court_warden_of
+	}
+}

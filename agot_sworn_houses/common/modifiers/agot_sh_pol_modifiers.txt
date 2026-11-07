@@ -1,0 +1,38 @@
+﻿# AGOT - Sworn Houses : Politique et maisons - modificateurs de personnage
+
+# 8. Malédiction du droit des invités
+agot_sh_pol_guest_curse_modifier = {
+	general_opinion = -20
+	monthly_prestige = -1
+}
+
+# 9. Pupille tué ou maltraité
+agot_sh_pol_ward_betrayer_modifier = {
+	general_opinion = -15
+}
+
+# 19. Maison de la Main du Roi
+agot_sh_pol_hand_house_modifier = {
+	monthly_prestige = 1
+	diplomacy = 1
+}
+
+# 20. Genou plié : loyauté douteuse
+agot_sh_pol_bent_knee_modifier = {
+	liege_opinion = -15
+	monthly_prestige = -0.5
+}
+
+# 21. Parjure
+agot_sh_pol_oathbreaker_modifier = {
+	general_opinion = -15
+}
+
+# 40. Réputation de la maison
+agot_sh_pol_house_honored_modifier = {
+	general_opinion = 5
+	monthly_prestige = 0.5
+}
+agot_sh_pol_house_infamous_modifier = {
+	general_opinion = -10
+}

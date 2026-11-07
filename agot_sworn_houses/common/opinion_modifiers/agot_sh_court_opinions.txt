@@ -1,0 +1,86 @@
+﻿# AGOT - Sworn Houses : Interactions et cour - opinions
+agot_sh_court_renewed_oath_opinion = {
+	opinion = 10
+	decaying = yes
+	years = 5
+}
+agot_sh_court_defied_summons_opinion = {
+	opinion = -25
+	decaying = yes
+	years = 5
+}
+agot_sh_court_ward_taken_opinion = {
+	opinion = -15
+	decaying = yes
+	years = 10
+}
+agot_sh_court_refused_ward_opinion = {
+	opinion = -25
+	decaying = yes
+	years = 8
+}
+agot_sh_court_ward_returned_opinion = {
+	opinion = 20
+	decaying = yes
+	years = 5
+}
+agot_sh_court_debts_paid_opinion = {
+	opinion = 40
+	decaying = yes
+	years = 10
+}
+agot_sh_court_just_ruling_opinion = {
+	opinion = 20
+	decaying = yes
+	years = 5
+}
+agot_sh_court_unjust_ruling_opinion = {
+	opinion = -25
+	decaying = yes
+	years = 8
+}
+agot_sh_court_refused_judgment_opinion = {
+	opinion = -10
+	decaying = yes
+	years = 3
+}
+agot_sh_court_warden_named_opinion = {
+	opinion = 20
+	decaying = yes
+	years = 5
+}
+agot_sh_court_warden_stripped_opinion = {
+	opinion = -40
+	decaying = yes
+	years = 15
+}
+agot_sh_court_city_charter_opinion = {
+	opinion = -10
+	decaying = yes
+	years = 10
+}
+agot_sh_court_spy_found_opinion = {
+	opinion = -30
+	decaying = yes
+	years = 10
+}
+agot_sh_court_council_seat_opinion = {
+	opinion = 30
+	decaying = yes
+	years = 10
+}
+agot_sh_court_tourney_bond_opinion = {
+	opinion = 20
+	decaying = yes
+	years = 5
+}
+agot_sh_court_tourney_humiliated_opinion = {
+	opinion = -30
+	decaying = yes
+	years = 8
+}
+agot_sh_court_tourney_unmasked_opinion = {
+	opinion = -20
+	decaying = yes
+	years = 5
+}

@@ -1,0 +1,94 @@
+﻿l_french:
+ # --- Interactions ---
+ agot_sh_court_summon_vassal_interaction:0 "Convoquer à la cour"
+ agot_sh_court_summon_vassal_interaction_desc:0 "Exiger que [recipient.GetTitledFirstName] vienne s'agenouiller à notre cour et renouvelle publiquement son serment. Un refus serait une défiance aux yeux de tout le royaume."
+ agot_sh_court_demand_ward_interaction:0 "Exiger un otage de loyauté"
+ agot_sh_court_demand_ward_interaction_desc:0 "Exiger que l'héritier de [recipient.GetTitledFirstName] soit élevé à notre cour, comme Theon Greyjoy le fut à Winterfell : un pupille choyé, mais un otage tout de même."
+ agot_sh_court_return_ward_interaction:0 "Rendre l'otage"
+ agot_sh_court_return_ward_interaction_desc:0 "Rendre à [recipient.GetTitledFirstName] l'enfant gardé à notre cour, en gage de confiance retrouvée."
+ agot_sh_court_pay_debts_interaction:0 "Racheter ses dettes"
+ agot_sh_court_pay_debts_interaction_desc:0 "Éponger les dettes de [recipient.GetTitledFirstName]. Un Lannister paie toujours ses dettes ; un suzerain avisé paie parfois celles des autres, et s'en souvient."
+ agot_sh_court_place_spy_interaction:0 "Placer un petit oiseau"
+ agot_sh_court_place_spy_interaction_desc:0 "Acheter un serviteur, une servante ou un mestre dans la maison de [recipient.GetTitledFirstName]. Les petits oiseaux chantent pour qui les nourrit."
+ agot_sh_court_place_spy_tt:0 "Un informateur rapportera d'ici quelques mois ce qu'il aura vu et entendu."
+ agot_sh_court_has_minor_heir_tt:0 "Son héritier principal est un enfant d'au moins 6 ans"
+ agot_sh_court_already_ward_tt:0 "Un de ses enfants est déjà retenu comme otage"
+ agot_sh_court_cannot_afford_debts_tt:0 "Nous devons avoir assez d'or pour couvrir toute sa dette"
+ agot_sh_court_spy_already_tt:0 "Nous avons déjà un informateur dans cette maison"
+ agot_sh_court_loyalist_reason:0 "Loyaliste"
+ agot_sh_court_cautious_reason:0 "Prudent"
+ agot_sh_court_ambitious_reason:0 "Ambitieux"
+ agot_sh_court_opportunist_reason:0 "Opportuniste"
+
+ # --- Décision ---
+ agot_sh_court_city_charter_decision:0 "Accorder une charte aux villes"
+ agot_sh_court_city_charter_decision_desc:0 "Accorder aux bourgeois de nos villes des privilèges de marché et d'octroi, comme en rêvent les marchands de Port-Réal ou de Villevieille. Les coffres s'en rempliront, mais les seigneurs qui vivaient de ces péages grinceront des dents."
+ agot_sh_court_city_charter_decision_tooltip:0 "Les villes de notre domaine reçoivent une charte de privilèges."
+ agot_sh_court_city_charter_decision_confirm:0 "Sceller la charte"
+ agot_sh_court_has_city_tt:0 "Nous tenons au moins une ville sans charte dans notre domaine"
+
+ # --- Opinions ---
+ agot_sh_court_renewed_oath_opinion:0 "Serment renouvelé"
+ agot_sh_court_defied_summons_opinion:0 "A défié ma convocation"
+ agot_sh_court_ward_taken_opinion:0 "Retient mon héritier"
+ agot_sh_court_refused_ward_opinion:0 "A refusé de livrer un otage"
+ agot_sh_court_ward_returned_opinion:0 "M'a rendu mon enfant"
+ agot_sh_court_debts_paid_opinion:0 "A payé mes dettes"
+ agot_sh_court_just_ruling_opinion:0 "Jugement favorable"
+ agot_sh_court_unjust_ruling_opinion:0 "Jugement inique"
+ agot_sh_court_refused_judgment_opinion:0 "A refusé de rendre justice"
+ agot_sh_court_warden_named_opinion:0 "M'a nommé Gardien"
+ agot_sh_court_warden_stripped_opinion:0 "M'a retiré ma charge de Gardien"
+ agot_sh_court_city_charter_opinion:0 "Privilèges accordés aux villes"
+ agot_sh_court_spy_found_opinion:0 "A placé un espion chez moi"
+ agot_sh_court_council_seat_opinion:0 "M'a offert un siège au conseil"
+ agot_sh_court_tourney_bond_opinion:0 "Honoré lors d'un tournoi"
+ agot_sh_court_tourney_humiliated_opinion:0 "Humilié lors d'un tournoi"
+ agot_sh_court_tourney_unmasked_opinion:0 "M'a démasqué au tournoi"
+
+ # --- Modificateurs ---
+ agot_sh_court_defiant_modifier:0 "Défiance publique"
+ agot_sh_court_defiant_modifier_desc:0 "Ce seigneur a ouvertement défié son suzerain. Ses pairs le savent, et la cour ne l'oublie pas."
+ agot_sh_court_exposed_plotter_modifier:0 "Comploteur démasqué"
+ agot_sh_court_exposed_plotter_modifier_desc:0 "Ses manigances ont été révélées au grand jour. Peu de gens lui font encore confiance."
+ agot_sh_court_holds_ward_modifier:0 "Détient un otage de loyauté"
+ agot_sh_court_holds_ward_modifier_desc:0 "Un héritier de vassal est élevé à cette cour : gage vivant de la fidélité de sa maison."
+ agot_sh_court_city_charter_modifier:0 "Charte de ville"
+ agot_sh_court_city_charter_modifier_desc:0 "Les bourgeois de cette ville jouissent de privilèges de marché qui enrichissent la ville et son seigneur."
+
+ # --- 0100 : querelle ---
+ agot_sh_court.0100.t:0 "Une querelle devant le trône"
+ agot_sh_court.0100.desc:0 "[agot_sh_claimant_a.GetTitledFirstName] et [agot_sh_claimant_b.GetTitledFirstName] se tiennent devant moi, chacun accusant l'autre : bornes déplacées, bétail volé, insultes de banquet. Leurs hommes d'armes se toisent dans la cour. Comme les Bracken et les Blackwood depuis des siècles, ils ne se calmeront que si je tranche, et celui que je désavouerai ne me le pardonnera pas."
+ agot_sh_court.0100.a:0 "[agot_sh_claimant_a.GetFirstName] est dans son droit."
+ agot_sh_court.0100.b:0 "[agot_sh_claimant_b.GetFirstName] est dans son droit."
+ agot_sh_court.0100.c:0 "Qu'ils règlent leurs différends entre eux."
+
+ # --- 0200 : petit oiseau ---
+ agot_sh_court.0200.t:0 "Le chant d'un petit oiseau"
+ agot_sh_court.0200.desc.plot:0 "Mon informateur dans la maison de [recipient.GetTitledFirstName] est formel : des lettres partent la nuit, des hommes se réunissent en secret, et mon nom revient dans leurs murmures. [recipient.GetFirstName] complote contre moi."
+ agot_sh_court.0200.desc.secret:0 "Mon informateur n'a trouvé nul complot chez [recipient.GetTitledFirstName], mais il a appris autre chose : un secret que la maison aurait préféré garder enfoui."
+ agot_sh_court.0200.desc.nothing:0 "Des mois d'écoute aux portes chez [recipient.GetTitledFirstName], et rien : des comptes de grain, des querelles de cuisine, des prières. Ce seigneur semble fidèle, du moins pour l'instant."
+ agot_sh_court.0200.a:0 "Le dénoncer devant toute la cour !"
+ agot_sh_court.0200.b:0 "Me taire. Ce que je sais me donne prise sur lui."
+ agot_sh_court.0200.c:0 "Bon à savoir."
+ agot_sh_court.0200.caught_tt:0 "Mon informateur a été démasqué : [recipient.GetFirstName] sait que je l'espionnais."
+
+ # --- 0300 : Gardien destitué ---
+ agot_sh_court.0300.t:0 "Une charge retirée"
+ agot_sh_court.0300.desc:0 "Le corbeau est arrivé de Port-Réal : [agot_sh_king.GetTitledFirstName] m'a retiré ma charge de Gardien. Depuis des générations, ma maison tenait cette marche pour la Couronne. C'est un affront que mes bannerets ne manqueront pas de remarquer."
+ agot_sh_court.0300.a:0 "Le roi décide. Je ravale ma colère."
+ agot_sh_court.0300.b:0 "Que tout Westeros sache l'injustice qui m'est faite !"
+
+ # --- 0400 : siège au conseil ---
+ agot_sh_court.0400.t:0 "Un siège pour une grande maison"
+ agot_sh_court.0400.desc:0 "[agot_sh_great_lord.GetTitledFirstName] ne cache plus son mécontentement, et sa maison commande à des milliers d'épées. Mes conseillers suggèrent de l'attacher à la Couronne par un siège au petit conseil, comme tant de rois avant moi ont acheté la loyauté des grandes maisons par une chaîne d'office."
+ agot_sh_court.0400.a:0 "Offrons-lui un siège au conseil."
+ agot_sh_court.0400.b:0 "Le conseil n'est pas à vendre."
+
+ # --- 0500 : tournoi politique ---
+ agot_sh_court.0500.t:0 "Joutes et intrigues"
+ agot_sh_court.0500.desc:0 "Les bannières claquent au-dessus des lices, les seigneurs du royaume sont réunis sous mes tentes. Comme au grand tournoi d'Harrenhal, ce qui se décide entre deux joutes compte bien plus que le vainqueur du jour."
+ agot_sh_court.0500.a:0 "Honorer [agot_sh_tourney_ally.GetFirstName] devant tous les seigneurs."
+ agot_sh_court.0500.b:0 "Faire saisir [agot_sh_tourney_plotter.GetFirstName], ce comploteur, devant la foule."
+ agot_sh_court.0500.c:0 "Faire mordre la poussière à [agot_sh_tourney_rival.GetFirstName]."
+ agot_sh_court.0500.d:0 "Profitons simplement des joutes."

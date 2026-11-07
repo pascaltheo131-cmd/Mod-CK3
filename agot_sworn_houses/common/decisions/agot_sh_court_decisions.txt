@@ -1,0 +1,87 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Interactions et cour - décisions
+###############################################################################
+
+# 28. Charte de ville : privilèges aux villes du domaine, au détriment des seigneurs
+agot_sh_court_city_charter_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/ep3_decision_city.dds"
+	}
+
+	cooldown = { years = 25 }
+
+	ai_check_interval = 120
+
+	is_shown = {
+		is_ruler = yes
+		is_landed = yes
+		highest_held_title_tier >= tier_duchy
+	}
+
+	is_valid = {
+		custom_description = {
+			text = agot_sh_court_has_city_tt
+			any_held_title = {
+				tier = tier_barony
+				title_province = {
+					has_holding_type = city_holding
+					NOT = { has_province_modifier = agot_sh_court_city_charter_modifier }
+				}
+			}
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		is_at_war = no
+		is_imprisoned = no
+	}
+
+	cost = {
+		prestige = 150
+	}
+
+	effect = {
+		every_held_title = {
+			limit = {
+				tier = tier_barony
+				title_province = {
+					has_holding_type = city_holding
+					NOT = { has_province_modifier = agot_sh_court_city_charter_modifier }
+				}
+			}
+			title_province = {
+				add_province_modifier = {
+					modifier = agot_sh_court_city_charter_modifier
+					years = 25
+				}
+			}
+		}
+		every_vassal = {
+			limit = {
+				is_ruler = yes
+				has_government = feudal_government
+			}
+			add_opinion = {
+				target = root
+				modifier = agot_sh_court_city_charter_opinion
+			}
+		}
+	}
+
+	ai_potential = {
+		highest_held_title_tier >= tier_duchy
+		stewardship >= 10
+	}
+
+	ai_will_do = {
+		base = 10
+		modifier = {
+			add = 20
+			agot_sh_is_cautious = yes
+		}
+		modifier = {
+			add = -10
+			agot_sh_is_ambitious = yes
+		}
+	}
+}

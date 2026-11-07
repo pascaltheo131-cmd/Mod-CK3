@@ -1,0 +1,23 @@
+﻿# AGOT - Sworn Houses : Interactions et cour - modificateurs
+# Défiance publique envers son suzerain (refus de convocation ou d'otage)
+agot_sh_court_defiant_modifier = {
+	icon = social_negative
+	liege_opinion = -10
+	monthly_prestige = 0.5
+}
+# Comploteur démasqué
+agot_sh_court_exposed_plotter_modifier = {
+	icon = social_negative
+	general_opinion = -10
+}
+# Hôte d'un otage de loyauté
+agot_sh_court_holds_ward_modifier = {
+	icon = social_positive
+	monthly_prestige = 0.2
+}
+# Charte de ville (province)
+agot_sh_court_city_charter_modifier = {
+	icon = county_modifier_development_positive
+	tax_mult = 0.2
+	development_growth_factor = 0.15
+}

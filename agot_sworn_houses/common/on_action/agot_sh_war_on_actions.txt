@@ -1,0 +1,134 @@
+﻿# AGOT - Sworn Houses : Guerre et économie - on_actions
+# Les on_actions du jeu sont fusionnés : on n'ajoute que nos sous-actions.
+
+### Idée 4 - Défection opportuniste (batailles) ###
+on_combat_end_winner = {
+	on_actions = { agot_sh_war_on_combat_won }
+}
+on_combat_end_loser = {
+	on_actions = { agot_sh_war_on_combat_lost }
+}
+
+# root = côté du combat
+agot_sh_war_on_combat_won = {
+	trigger = {
+		exists = side_primary_participant
+		side_primary_participant = {
+			is_ruler = yes
+			highest_held_title_tier >= tier_kingdom
+		}
+	}
+	effect = {
+		side_primary_participant = { agot_sh_war_battle_won_effect = yes }
+	}
+}
+agot_sh_war_on_combat_lost = {
+	trigger = {
+		exists = side_primary_participant
+		side_primary_participant = {
+			is_ruler = yes
+			highest_held_title_tier >= tier_kingdom
+		}
+	}
+	effect = {
+		side_primary_participant = { agot_sh_war_battle_lost_effect = yes }
+	}
+}
+
+### Idées 4 et 30 - Fin de guerre ###
+on_war_won_attacker = {
+	on_actions = { agot_sh_war_on_war_won_attacker }
+}
+on_war_won_defender = {
+	on_actions = { agot_sh_war_on_war_won_defender }
+}
+
+agot_sh_war_on_war_won_attacker = {
+	effect = {
+		scope:attacker = {
+			agot_sh_war_war_won_effect = yes
+			trigger_event = { id = agot_sh_war.0080 days = 3 }
+		}
+		scope:defender = { agot_sh_war_war_lost_effect = yes }
+	}
+}
+agot_sh_war_on_war_won_defender = {
+	effect = {
+		scope:defender = {
+			agot_sh_war_war_won_effect = yes
+			trigger_event = { id = agot_sh_war.0080 days = 3 }
+		}
+		scope:attacker = { agot_sh_war_war_lost_effect = yes }
+	}
+}
+
+### Idées 5, 29, 32 - Début de guerre ###
+on_war_started = {
+	on_actions = { agot_sh_war_on_war_started }
+}
+agot_sh_war_on_war_started = {
+	effect = {
+		scope:attacker = { trigger_event = agot_sh_war.0005 }
+		scope:defender = { trigger_event = agot_sh_war.0005 }
+	}
+}
+
+### Pulsation annuelle ###
+yearly_playable_pulse = {
+	on_actions = { agot_sh_war_yearly_pulse }
+}
+
+agot_sh_war_yearly_pulse = {
+	effect = {
+		# Idée 12 - Seigneurs des Marches
+		if = {
+			limit = { agot_sh_war_holds_march_trigger = yes }
+			if = {
+				limit = { NOT = { has_character_modifier = agot_sh_war_marcher_modifier } }
+				add_character_modifier = agot_sh_war_marcher_modifier
+			}
+		}
+		else_if = {
+			limit = { has_character_modifier = agot_sh_war_marcher_modifier }
+			remove_character_modifier = agot_sh_war_marcher_modifier
+		}
+		# Idée 33 - Nettoyage d'un châtelain disparu ou parti
+		if = {
+			limit = {
+				has_variable = agot_sh_war_castellan
+				var:agot_sh_war_castellan = {
+					OR = {
+						is_alive = no
+						NOT = { is_courtier_of = root }
+					}
+				}
+			}
+			remove_variable = agot_sh_war_castellan
+			remove_variable = agot_sh_war_castellan_county
+			remove_character_modifier = agot_sh_war_castellan_modifier
+		}
+		else_if = {
+			limit = {
+				has_variable = agot_sh_war_castellan_county
+				NOT = { has_title = var:agot_sh_war_castellan_county }
+			}
+			remove_variable = agot_sh_war_castellan
+			remove_variable = agot_sh_war_castellan_county
+			remove_character_modifier = agot_sh_war_castellan_modifier
+		}
+	}
+	random_events = {
+		chance_to_happen = 35
+		20 = agot_sh_war.0030	# Garde de la frontière
+		20 = agot_sh_war.0040	# Péages
+		15 = agot_sh_war.0050	# Cadets
+		25 = agot_sh_war.0060	# L'hiver vient
+		15 = agot_sh_war.0070	# Antique Voie
+		20 = agot_sh_war.0089	# Rançon
+		10 = agot_sh_war.0110	# Châtelain
+		20 = agot_sh_war.0111	# Châtelain félon
+		15 = agot_sh_war.0120	# Vassal ruiné
+		10 = agot_sh_war.0125	# Couronne endettée
+		10 = agot_sh_war.0129	# Mariage contre or
+	}
+}

@@ -1,0 +1,7 @@
+﻿# AGOT - Sworn Houses : Interactions et cour - valeurs
+# Montant de la dette d'un personnage (0 s'il n'est pas endetté)
+agot_sh_court_debt_value = {
+	value = gold
+	multiply = -1
+	min = 0
+}

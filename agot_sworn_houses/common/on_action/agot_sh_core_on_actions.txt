@@ -1,0 +1,103 @@
+﻿# AGOT - Sworn Houses : on_actions de la base commune.
+# Les on_actions du jeu sont fusionnés : on n'ajoute que nos sous-actions.
+
+on_game_start_after_lobby = {
+	on_actions = { agot_sh_on_game_start }
+}
+
+agot_sh_on_game_start = {
+	effect = {
+		every_living_character = {
+			limit = { is_ruler = yes }
+			agot_sh_assign_temperament_effect = yes
+		}
+		agot_sh_setup_lore_feuds_effect = yes
+	}
+}
+
+on_birth_child = {
+	on_actions = { agot_sh_on_birth }
+}
+
+agot_sh_on_birth = {
+	effect = { agot_sh_inherit_temperament_effect = yes }
+}
+
+yearly_playable_pulse = {
+	on_actions = { agot_sh_yearly_core_pulse }
+}
+
+agot_sh_yearly_core_pulse = {
+	effect = {
+		agot_sh_assign_temperament_effect = yes
+
+		# --- Respect de la Couronne (souverains) ---
+		if = {
+			limit = { agot_sh_is_sovereign = yes }
+			set_variable = { name = agot_sh_crown_respect value = agot_sh_crown_respect_value }
+			# Les évènements marquants s'estompent avec le temps
+			if = {
+				limit = { exists = var:agot_sh_respect_events }
+				change_variable = { name = agot_sh_respect_events multiply = 0.8 }
+			}
+			remove_character_modifier = agot_sh_crown_respected_modifier
+			remove_character_modifier = agot_sh_crown_despised_modifier
+			if = {
+				limit = { agot_sh_crown_respected_trigger = yes }
+				add_character_modifier = agot_sh_crown_respected_modifier
+			}
+			else_if = {
+				limit = { agot_sh_crown_despised_trigger = yes }
+				add_character_modifier = agot_sh_crown_despised_modifier
+			}
+		}
+
+		# --- Ralliés à leur Seigneur Suzerain ---
+		if = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				liege = { agot_sh_is_lord_paramount = yes }
+			}
+			add_opinion = { target = liege modifier = agot_sh_sworn_to_paramount_opinion }
+			if = {
+				limit = { liege = { opinion = { target = liege.liege value <= -25 } } }
+				add_opinion = { target = liege.liege modifier = agot_sh_follows_paramount_anger_opinion }
+			}
+			else_if = {
+				limit = { liege = { opinion = { target = liege.liege value >= 50 } } }
+				add_opinion = { target = liege.liege modifier = agot_sh_follows_paramount_favor_opinion }
+			}
+		}
+
+		# --- Tensions culturelles avec le suzerain ---
+		if = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				NOT = { culture = { has_same_culture_heritage = root.liege.culture } }
+			}
+			add_opinion = { target = liege modifier = agot_sh_foreign_customs_opinion }
+		}
+
+		# --- Querelles ancestrales : les chefs de maisons rivales se haïssent ---
+		if = {
+			limit = {
+				exists = dynasty
+				dynasty = { has_variable_list = agot_sh_feuds }
+			}
+			save_temporary_scope_as = feud_holder
+			dynasty = {
+				every_in_list = {
+					variable = agot_sh_feuds
+					every_dynasty_member = {
+						limit = {
+							is_ruler = yes
+							is_adult = yes
+						}
+						add_opinion = { target = scope:feud_holder modifier = agot_sh_ancestral_feud_opinion }
+						scope:feud_holder = { add_opinion = { target = prev modifier = agot_sh_ancestral_feud_opinion } }
+					}
+				}
+			}
+		}
+	}
+}

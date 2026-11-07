@@ -1,0 +1,165 @@
+﻿l_english:
+ # --- 6. Vieilles blessures ---
+ agot_sh_pol.0001.t:0 "Vieilles blessures"
+ agot_sh_pol.0001.desc:0 "Les années ont passé, mais je n'ai rien oublié de ce que [agot_sh_pol_liege.GetTitledFirstName] a fait à ma maison. Des seigneurs se réunissent à la nuit tombée, loin des oreilles de [agot_sh_pol_liege.GetHerHis] cour. Ils murmurent qu'un suzerain qui piétine ses vassaux ne mérite pas leur fidélité.\n\nOn m'a fait savoir que ma place était parmi eux."
+ agot_sh_pol.0001.a:0 "Qu'ils comptent sur mon épée."
+ agot_sh_pol.0001.b:0 "Pas encore. Un loup patient mange mieux."
+ agot_sh_pol.0001.c:0 "Il est temps de laisser les morts reposer."
+
+ # --- 13. Exécution d'un grand seigneur ---
+ agot_sh_pol.0010.t:0 "La hache est tombée"
+ agot_sh_pol.0010.desc:0 "La nouvelle a fait le tour des grandes salles : [agot_sh_pol_victim.GetTitledFirstName], seigneur d'une maison ancienne, a été mis à mort sur l'ordre de [agot_sh_pol_killer.GetTitledFirstName].\n\nCertains parlent de justice, d'autres d'un meurtre déguisé. Tous se demandent qui sera le prochain. Comme à Port-Réal, le jour où Ned Stark perdit la tête, le royaume retient son souffle."
+ agot_sh_pol.0010.a:0 "Mieux vaut courber l'échine que perdre la tête."
+ agot_sh_pol.0010.b:0 "Le sang appelle le sang."
+ agot_sh_pol.0010.c:0 "Les traîtres n'ont que ce qu'ils méritent."
+
+ agot_sh_pol.0012.t:0 "Le sang de mon père"
+ agot_sh_pol.0012.desc:0 "[agot_sh_pol_victim.GetFirstNameNoTooltip] est mort sous la hache, sur l'ordre de [agot_sh_pol_killer.GetTitledFirstName]. Son siège est désormais le mien, et avec lui le poids de son nom.\n\nMes bannerets me regardent. Attendent-ils un nouveau Jeune Loup, ou un seigneur assez sage pour survivre ?"
+ agot_sh_pol.0012.a:0 "Je jure devant les anciens dieux et les nouveaux qu'il paiera."
+ agot_sh_pol.0012.b:0 "Ma maison doit survivre. Je ravalerai ma colère."
+
+ # --- 7. Vengeance et réconciliation ---
+ agot_sh_pol.0020.t:0 "Un ennemi dans mes cachots"
+ agot_sh_pol.0020.desc:0 "[agot_sh_pol_enemy.GetTitledFirstName], de la maison [agot_sh_pol_enemy.GetDynasty.GetName], croupit dans mes geôles. Depuis des générations, nos maisons se haïssent ; le sang versé jadis n'a jamais été lavé.\n\nLe sort m'offre aujourd'hui ce que mes ancêtres n'ont jamais eu : la vie d'un des leurs entre mes mains."
+ agot_sh_pol.0020.a:0 "Le Nord se souvient. Qu'on prépare le billot."
+ agot_sh_pol.0020.b:0 "Une rançon, et que cette querelle s'achève."
+ agot_sh_pol.0020.c:0 "Qu'on l'exhibe enchaîné devant ma cour."
+
+ agot_sh_pol.0021.t:0 "Le prix du sang"
+ agot_sh_pol.0021.desc:0 "La querelle qui oppose ma maison à celle de [agot_sh_pol_rival.GetTitledFirstName] dure depuis plus longtemps que quiconque ne s'en souvient. Mon mestre suggère qu'un prix du sang, payé publiquement, pourrait clore cette vieille plaie, comme jadis entre Blackwood et Bracken lors des rares trêves.\n\nMais d'autres murmurent que payer, c'est avouer."
+ agot_sh_pol.0021.a:0 "Qu'on leur porte l'or, et qu'on enterre la hache."
+ agot_sh_pol.0021.b:0 "Le sang ne se rachète pas."
+
+ agot_sh_pol.0022.t:0 "Un mariage pour enterrer la hache"
+ agot_sh_pol.0022.desc:0 "[agot_sh_pol_groom_side.GetTitledFirstName] et [agot_sh_pol_bride_side.GetTitledFirstName] sont désormais unis devant les dieux. Leurs maisons, ennemies depuis des générations, partagent aujourd'hui le même sang.\n\nLes plus anciens de ma maison grommellent, mais la querelle est officiellement close."
+ agot_sh_pol.0022.a:0 "Que cette union scelle la paix."
+ agot_sh_pol.0022.b:0 "Un mariage n'efface pas tout."
+
+ # --- 8. Droit des invités ---
+ agot_sh_pol.0030.t:0 "Le droit des invités"
+ agot_sh_pol.0030.desc:0 "[agot_sh_pol_guest.GetTitledFirstName] avait partagé mon pain et mon sel. Sous mon toit, [agot_sh_pol_guest.GetSheHe] aurait dû être sacré(e).\n\nDéjà, dans tout le royaume, on prononce mon nom comme on prononçait celui de Walder Frey après les Noces Pourpres. Les septons parlent de malédiction, les vieilles femmes du Roi Rat que les dieux punirent pour un crime semblable."
+ agot_sh_pol.0030.a:0 "Que les dieux acceptent mon offrande."
+ agot_sh_pol.0030.b:0 "Qu'ils me maudissent, pourvu qu'ils me craignent."
+
+ agot_sh_pol.0031.t:0 "Trahis sous un toit ami"
+ agot_sh_pol.0031.desc:0 "[agot_sh_pol_guest.GetTitledFirstName] était l'invité(e) de [agot_sh_pol_host.GetTitledFirstName]. Le pain et le sel avaient été offerts, et pourtant le sang de ma maison a coulé.\n\nIl n'existe pas de crime plus odieux aux yeux des dieux et des hommes."
+ agot_sh_pol.0031.a:0 "Le Nord se souvient. Ma maison aussi."
+ agot_sh_pol.0031.b:0 "Pleurons nos morts avant de penser à la vengeance."
+
+ # --- 9. Pupilles ---
+ agot_sh_pol.0040.t:0 "Un pupille trahi"
+ agot_sh_pol.0040.desc_killed:0 "J'avais confié [agot_sh_pol_ward.GetFirstNameNoTooltip] à [agot_sh_pol_guardian.GetTitledFirstName] en gage de ma loyauté, comme Balon Greyjoy confia jadis Theon aux Stark.\n\n[agot_sh_pol_ward.GetFirstNameNoTooltip] est mort(e) entre ses mains. Le gage a été brisé, et avec lui tout ce qui me liait à [agot_sh_pol_guardian.GetHerHim]."
+ agot_sh_pol.0040.desc_imprisoned:0 "J'avais confié [agot_sh_pol_ward.GetFirstNameNoTooltip] à [agot_sh_pol_guardian.GetTitledFirstName] en gage de ma loyauté, comme Balon Greyjoy confia jadis Theon aux Stark.\n\nOn m'apprend que [agot_sh_pol_ward.GetSheHe] a été jeté(e) au cachot. Un pupille n'est pas un prisonnier, et tout le royaume le sait."
+ agot_sh_pol.0040.a:0 "Ma maison exigera son dû."
+ agot_sh_pol.0040.b:0 "Me taire... pour l'instant."
+
+ # --- 10. Blocs de maisons ---
+ agot_sh_pol.0050.t:0 "Les maisons liguées"
+ agot_sh_pol.0050.desc:0 "[agot_sh_pol_bloc_a.GetTitledFirstName] et [agot_sh_pol_bloc_b.GetTitledFirstName], unis par le sang et les mariages, se présentent ensemble devant moi. Leurs doléances sont les mêmes, leurs mots aussi, et derrière eux se tiennent leurs bannerets.\n\nSeul, chacun d'eux ne serait qu'un vassal mécontent. Ensemble, ils sont une menace."
+ agot_sh_pol.0050.a:0 "Accordons-leur ce qu'ils demandent."
+ agot_sh_pol.0050.b:0 "Je suis votre suzerain, pas votre débiteur."
+ agot_sh_pol.0050.c:0 "Rappelez-vous ce qui arrive aux Castamere de ce monde."
+
+ # --- 11. Mariages et promesses ---
+ agot_sh_pol.0060.t:0 "Une promesse rompue"
+ agot_sh_pol.0060.desc:0 "Les fiançailles entre [agot_sh_pol_betrothed_a.GetTitledFirstName] et [agot_sh_pol_betrothed_b.GetTitledFirstName] ont été rompues. Une promesse de mariage engage l'honneur de deux maisons, pas seulement de deux personnes.\n\nRobb Stark l'avait appris à ses dépens : un seigneur offensé n'oublie jamais."
+ agot_sh_pol.0060.a:0 "Cet affront ne sera pas oublié."
+ agot_sh_pol.0060.b:0 "Ils nous doivent réparation."
+ agot_sh_pol.0060.c:0 "Les promesses se font et se défont."
+
+ agot_sh_pol.0061.t:0 "Un honneur pour notre maison"
+ agot_sh_pol.0061.desc:0 "Ma maison, modeste parmi les maisons de Westeros, vient de s'unir par le mariage à celle de [agot_sh_pol_great_dynast.GetTitledFirstName].\n\nLes grands seigneurs haussent les sourcils devant une telle mésalliance, mais mes gens célèbrent : notre sang coulera désormais dans les veines d'une grande maison."
+ agot_sh_pol.0061.a:0 "Nous leur serons fidèles jusqu'à la mort."
+ agot_sh_pol.0061.b:0 "Ce n'est qu'une première marche."
+
+ # --- 18. Les Verts et les Noirs ---
+ agot_sh_pol.0070.t:0 "Les Verts et les Noirs"
+ agot_sh_pol.0070.desc:0 "[agot_sh_pol_claimant.GetTitledFirstName] réclame ce que tient [agot_sh_pol_crown.GetTitledFirstName]. Les corbeaux volent de château en château, porteurs de promesses et de menaces.\n\nComme au temps de la Danse des Dragons, chaque seigneur doit choisir sa couleur. Les liens du sang, les serments prêtés et les vieilles rancunes pèseront dans la balance."
+ agot_sh_pol.0070.a:0 "Je défendrai [agot_sh_pol_crown.GetFirstNameNoTooltip]."
+ agot_sh_pol.0070.b:0 "Ma maison se tient avec [agot_sh_pol_claimant.GetFirstNameNoTooltip]."
+ agot_sh_pol.0070.c:0 "Attendons de voir d'où souffle le vent."
+
+ # --- 19. La Main du Roi ---
+ agot_sh_pol.0080.t:0 "L'ombre de la Main"
+ agot_sh_pol.0080.desc:0 "Depuis que [agot_sh_pol_hand.GetTitledFirstName] sert comme Main du Roi, sa maison prospère : charges, mariages et faveurs pleuvent sur ses parents. À Port-Réal, on dit que la Main gouverne et que le roi signe.\n\nChaque faveur accordée aux siens est une faveur refusée aux miens."
+ agot_sh_pol.0080.a:0 "Quelques mots bien placés à l'oreille du roi..."
+ agot_sh_pol.0080.b:0 "Mieux vaut avoir la Main pour amie."
+ agot_sh_pol.0080.c:0 "Son heure passera."
+
+ # --- 20 / 22. Le rebelle vaincu ---
+ agot_sh_pol.0090.t:0 "Le genou ou la hache"
+ agot_sh_pol.0090.desc:0 "La rébellion est écrasée. [agot_sh_pol_rebel.GetTitledFirstName] se tient devant moi, vaincu(e), et attend mon jugement.\n\nCertains vaincus plient le genou et gardent leurs terres, comme les Tyrell après le Trident. D'autres prennent le noir pour expier, ou finissent sur le billot. Quoi que je décide, tout le royaume regardera."
+ agot_sh_pol.0090.a:0 "Plie le genou, et garde tes terres."
+ agot_sh_pol.0090.b:0 "Prends le noir, et que le Mur te garde."
+ agot_sh_pol.0090.c:0 "La hache."
+
+ # --- 21. La parole donnée ---
+ agot_sh_pol.0100.t:0 "Parjure !"
+ agot_sh_pol.0100.desc:0 "[agot_sh_pol_oathbreaker.GetTitledFirstName] avait juré, devant témoins et devant les dieux. Et voilà qu'[agot_sh_pol_oathbreaker.GetSheHe] prend les armes contre moi.\n\nUn homme sans parole n'est rien en Westeros. Tout le royaume saura ce que vaut sa parole."
+ agot_sh_pol.0100.a:0 "Que tout Westeros connaisse sa traîtrise."
+ agot_sh_pol.0100.b:0 "Je m'en souviendrai."
+
+ # --- 41. Serment à l'héritier ---
+ agot_sh_pol.0110.t:0 "Un serment pour l'héritier"
+ agot_sh_pol.0110.desc:0 "Je ne vivrai pas éternellement. Quand je ne serai plus, [agot_sh_pol_heir.GetTitledFirstName] devra tenir ce que j'ai tenu.\n\nSi les grands seigneurs prêtaient serment devant toute la cour, comme ils le firent jadis pour la princesse Rhaenyra, nul ne pourrait plus tard prétendre ignorer ma volonté."
+ agot_sh_pol.0110.a:0 "Convoquez les seigneurs. Ils jureront."
+ agot_sh_pol.0110.b:0 "Le moment n'est pas venu."
+
+ agot_sh_pol.0111.t:0 "Le serment"
+ agot_sh_pol.0111.desc:0 "[agot_sh_pol_king.GetTitledFirstName] a convoqué les grands seigneurs du royaume. Un par un, ils s'agenouillent devant [agot_sh_pol_heir.GetTitledFirstName] et jurent de [agot_sh_pol_heir.GetHerHim] servir comme [agot_sh_pol_heir.GetSheHe] servira le trône.\n\nC'est maintenant mon tour."
+ agot_sh_pol.0111.a:0 "Je le jure, devant les dieux et les hommes."
+ agot_sh_pol.0111.b:0 "Ma maison ne se lie pas les mains."
+
+ # --- 42. Régence contestée ---
+ agot_sh_pol.0120.t:0 "Qui gouvernera pour l'enfant ?"
+ agot_sh_pol.0120.desc:0 "[agot_sh_pol_child.GetTitledFirstName] n'est qu'un enfant, et un enfant ne gouverne pas. Les grandes maisons le savent : celui qui aura l'oreille du jeune souverain tiendra le royaume.\n\n[agot_sh_pol_rival.GetTitledFirstName] a déjà fait savoir qu'il entendait veiller sur le trône. Comme après la mort de Viserys Ier, les ambitions s'aiguisent autour d'un siège vide de pouvoir."
+ agot_sh_pol.0120.a:0 "C'est à ma maison de protéger le trône."
+ agot_sh_pol.0120.b:0 "Soutenons [agot_sh_pol_rival.GetFirstNameNoTooltip] ; il vaut mieux un régent fort."
+ agot_sh_pol.0120.c:0 "Ces querelles ne me regardent pas."
+
+ # --- Modificateurs d'opinion ---
+ agot_sh_pol_grievance_opinion:0 "Grief durable"
+ agot_sh_pol_execution_fear_opinion:0 "Crainte de la hache"
+ agot_sh_pol_execution_anger_opinion:0 "Exécution d'un grand seigneur"
+ agot_sh_pol_execution_rally_opinion:0 "Approuve la justice rendue"
+ agot_sh_pol_kinsman_executed_opinion:0 "A exécuté mon parent"
+ agot_sh_pol_vengeance_humiliated_opinion:0 "M'a humilié devant sa cour"
+ agot_sh_pol_reparations_opinion:0 "A payé le prix du sang"
+ agot_sh_pol_feud_ended_by_marriage_opinion:0 "Querelle close par un mariage"
+ agot_sh_pol_guest_right_broken_opinion:0 "A violé le droit des invités"
+ agot_sh_pol_heir_in_his_care_opinion:0 "Mon héritier est sous sa garde"
+ agot_sh_pol_ward_harmed_opinion:0 "A trahi la garde de mon enfant"
+ agot_sh_pol_bloc_kinship_opinion:0 "Maisons alliées par le sang"
+ agot_sh_pol_bloc_heeded_opinion:0 "A écouté nos maisons"
+ agot_sh_pol_bloc_refused_opinion:0 "A méprisé nos maisons"
+ agot_sh_pol_broken_betrothal_opinion:0 "Promesse de mariage rompue"
+ agot_sh_pol_honored_match_opinion:0 "Mariage honorable"
+ agot_sh_pol_side_chosen_for_opinion:0 "S'est rangé à mes côtés"
+ agot_sh_pol_side_chosen_against_opinion:0 "A choisi le camp adverse"
+ agot_sh_pol_hand_jealousy_opinion:0 "Jalousie envers la maison de la Main"
+ agot_sh_pol_hand_slandered_opinion:0 "Rumeurs sur la Main"
+ agot_sh_pol_hand_courted_opinion:0 "Courtise la Main"
+ agot_sh_pol_knee_mercy_opinion:0 "M'a laissé plier le genou"
+ agot_sh_pol_rebel_spared_approve_opinion:0 "Clémence envers un rebelle"
+ agot_sh_pol_rebel_spared_weak_opinion:0 "Faiblesse envers un rebelle"
+ agot_sh_pol_oathbreaker_opinion:0 "Parjure"
+ agot_sh_pol_oath_sworn_opinion:0 "A prêté serment à l'héritier"
+ agot_sh_pol_oath_refused_opinion:0 "A refusé de prêter serment"
+ agot_sh_pol_regency_rival_opinion:0 "Rival pour la régence"
+ agot_sh_pol_regency_support_opinion:0 "Soutien pour la régence"
+
+ # --- Modificateurs de personnage ---
+ agot_sh_pol_guest_curse_modifier:0 "Maudit par le droit des invités"
+ agot_sh_pol_guest_curse_modifier_desc:0 "Ce personnage a versé le sang d'un invité sous son propre toit. Ni les dieux ni les hommes ne le pardonnent."
+ agot_sh_pol_ward_betrayer_modifier:0 "Gardien indigne"
+ agot_sh_pol_ward_betrayer_modifier_desc:0 "Ce personnage a tué ou emprisonné un pupille confié à sa garde."
+ agot_sh_pol_hand_house_modifier:0 "Maison de la Main du Roi"
+ agot_sh_pol_hand_house_modifier_desc:0 "En tant que Main du Roi, ce personnage fait pleuvoir les faveurs sur sa maison."
+ agot_sh_pol_bent_knee_modifier:0 "A plié le genou"
+ agot_sh_pol_bent_knee_modifier_desc:0 "Ce seigneur s'est soumis après une rébellion manquée. Il garde ses terres, mais sa loyauté reste douteuse."
+ agot_sh_pol_oathbreaker_modifier:0 "Parjure"
+ agot_sh_pol_oathbreaker_modifier_desc:0 "Ce personnage a rompu une parole solennellement donnée. Tout Westeros le sait."
+ agot_sh_pol_house_honored_modifier:0 "Maison honorée"
+ agot_sh_pol_house_honored_modifier_desc:0 "La maison de ce personnage jouit d'une réputation d'honneur dans tout Westeros."
+ agot_sh_pol_house_infamous_modifier:0 "Maison infâme"
+ agot_sh_pol_house_infamous_modifier_desc:0 "Le nom de la maison de ce personnage est prononcé avec mépris dans tout Westeros."

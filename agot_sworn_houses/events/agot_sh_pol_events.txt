@@ -1,0 +1,1371 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Politique et maisons
+###############################################################################
+namespace = agot_sh_pol
+
+###############################################################################
+# 6. Vieilles blessures : un grief pousse un vassal ambitieux vers une faction
+###############################################################################
+agot_sh_pol.0001 = {
+	type = character_event
+	title = agot_sh_pol.0001.t
+	desc = agot_sh_pol.0001.desc
+	theme = realm
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_liege
+		animation = dismissal
+	}
+	cooldown = { years = 5 }
+
+	trigger = {
+		agot_sh_is_active_vassal = yes
+		OR = {
+			agot_sh_is_ambitious = yes
+			agot_sh_is_opportunist = yes
+		}
+		agot_sh_pol_holds_grievance_against_liege_trigger = yes
+		is_a_faction_member = no
+		liege = {
+			any_targeting_faction = {
+				root = { can_join_faction = prev }
+			}
+		}
+	}
+
+	immediate = {
+		liege = {
+			save_scope_as = agot_sh_pol_liege
+			random_targeting_faction = {
+				limit = {
+					root = { can_join_faction = prev }
+				}
+				save_scope_as = agot_sh_pol_faction
+			}
+		}
+	}
+
+	option = { # Rejoindre ceux qui conspirent
+		name = agot_sh_pol.0001.a
+		join_faction = scope:agot_sh_pol_faction
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 agot_sh_is_ambitious = yes }
+			modifier = { add = 20 has_trait = vengeful }
+			modifier = { add = -30 has_trait = craven }
+		}
+	}
+	option = { # Ruminer en silence
+		name = agot_sh_pol.0001.b
+		add_prestige = minor_prestige_loss
+		ai_chance = {
+			base = 30
+			modifier = { add = 20 agot_sh_is_opportunist = yes }
+			modifier = { add = 20 has_trait = patient }
+		}
+	}
+	option = { # Pardonner
+		name = agot_sh_pol.0001.c
+		remove_variable = agot_sh_pol_grievance
+		remove_opinion = {
+			target = scope:agot_sh_pol_liege
+			modifier = agot_sh_pol_grievance_opinion
+		}
+		stress_impact = {
+			vengeful = major_stress_impact_gain
+			wrathful = medium_stress_impact_gain
+			forgiving = minor_stress_impact_loss
+		}
+		ai_chance = {
+			base = 5
+			modifier = { add = 30 has_trait = forgiving }
+			modifier = { factor = 0 has_trait = vengeful }
+		}
+	}
+}
+
+###############################################################################
+# 13. Un grand seigneur exécuté : réaction des vassaux
+###############################################################################
+agot_sh_pol.0010 = {
+	type = character_event
+	title = agot_sh_pol.0010.t
+	desc = agot_sh_pol.0010.desc
+	theme = dread
+	left_portrait = {
+		character = root
+		animation = shock
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_killer
+		animation = anger
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_killer
+		exists = scope:agot_sh_pol_victim
+		scope:agot_sh_pol_killer = { is_alive = yes }
+		liege ?= scope:agot_sh_pol_killer
+	}
+
+	option = { # La peur : mieux vaut courber l'échine
+		name = agot_sh_pol.0010.a
+		add_opinion = {
+			target = scope:agot_sh_pol_killer
+			modifier = agot_sh_pol_execution_fear_opinion
+		}
+		ai_chance = {
+			base = 20
+			modifier = { add = 40 agot_sh_is_cautious = yes }
+			modifier = { add = 30 has_trait = craven }
+			modifier = { add = 10 has_trait = paranoid }
+		}
+	}
+	option = { # La colère : le sang appelle le sang
+		name = agot_sh_pol.0010.b
+		add_opinion = {
+			target = scope:agot_sh_pol_killer
+			modifier = agot_sh_pol_execution_anger_opinion
+		}
+		if = {
+			limit = {
+				OR = {
+					agot_sh_is_ambitious = yes
+					agot_sh_is_opportunist = yes
+					agot_sh_pol_marriage_tie_trigger = { CHAR = scope:agot_sh_pol_victim }
+				}
+			}
+			agot_sh_pol_add_grievance_effect = { TARGET = scope:agot_sh_pol_killer }
+		}
+		ai_chance = {
+			base = 20
+			modifier = { add = 30 agot_sh_is_ambitious = yes }
+			modifier = { add = 20 agot_sh_is_opportunist = yes }
+			modifier = { add = 50 agot_sh_pol_marriage_tie_trigger = { CHAR = scope:agot_sh_pol_victim } }
+			modifier = { add = 50 dynasty ?= scope:agot_sh_pol_victim.dynasty }
+			modifier = { add = 20 has_trait = wrathful }
+			modifier = { add = 20 has_trait = vengeful }
+			modifier = { add = 20 agot_sh_crown_despised_trigger = yes }
+		}
+	}
+	option = { # Le ralliement : la justice du suzerain est juste
+		name = agot_sh_pol.0010.c
+		add_opinion = {
+			target = scope:agot_sh_pol_killer
+			modifier = agot_sh_pol_execution_rally_opinion
+		}
+		ai_chance = {
+			base = 20
+			modifier = { add = 50 agot_sh_is_loyalist = yes }
+			modifier = { add = 20 has_trait = just }
+			modifier = { add = 20 has_trait = zealous }
+			modifier = { add = 20 dynasty ?= scope:agot_sh_pol_killer.dynasty }
+			modifier = { factor = 0 dynasty ?= scope:agot_sh_pol_victim.dynasty }
+		}
+	}
+}
+
+###############################################################################
+# 13 / 6. L'héritier du seigneur exécuté
+###############################################################################
+agot_sh_pol.0012 = {
+	type = character_event
+	title = agot_sh_pol.0012.t
+	desc = agot_sh_pol.0012.desc
+	theme = death
+	left_portrait = {
+		character = root
+		animation = grief
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_killer
+		animation = schadenfreude
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_killer
+		scope:agot_sh_pol_killer = { is_alive = yes }
+		is_alive = yes
+	}
+
+	option = { # Jurer vengeance
+		name = agot_sh_pol.0012.a
+		agot_sh_pol_add_grievance_effect = { TARGET = scope:agot_sh_pol_killer }
+		add_prestige = minor_prestige_gain
+		scope:agot_sh_pol_killer = {
+			add_opinion = {
+				target = root
+				modifier = agot_sh_pol_execution_anger_opinion
+			}
+		}
+		ai_chance = {
+			base = 40
+			modifier = { add = 30 agot_sh_is_ambitious = yes }
+			modifier = { add = 20 agot_sh_is_opportunist = yes }
+			modifier = { add = 30 has_trait = vengeful }
+			modifier = { add = 20 has_trait = wrathful }
+		}
+	}
+	option = { # Courber la tête pour sauver la maison
+		name = agot_sh_pol.0012.b
+		add_prestige = minor_prestige_loss
+		stress_impact = {
+			vengeful = major_stress_impact_gain
+			wrathful = medium_stress_impact_gain
+			arrogant = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 30
+			modifier = { add = 40 agot_sh_is_cautious = yes }
+			modifier = { add = 20 agot_sh_is_loyalist = yes }
+			modifier = { add = 30 has_trait = craven }
+		}
+	}
+}
+
+###############################################################################
+# 7. Occasion de vengeance : un membre de la maison ennemie dans nos cachots
+###############################################################################
+agot_sh_pol.0020 = {
+	type = character_event
+	title = agot_sh_pol.0020.t
+	desc = agot_sh_pol.0020.desc
+	theme = prison
+	left_portrait = {
+		character = root
+		animation = schadenfreude
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_enemy
+		animation = fear
+	}
+	cooldown = { years = 5 }
+
+	trigger = {
+		is_ruler = yes
+		is_adult = yes
+		exists = dynasty
+		dynasty = { has_variable_list = agot_sh_feuds }
+		any_prisoner = {
+			exists = dynasty
+			dynasty = {
+				is_target_in_variable_list = {
+					name = agot_sh_feuds
+					target = root.dynasty
+				}
+			}
+		}
+	}
+
+	immediate = {
+		random_prisoner = {
+			limit = {
+				exists = dynasty
+				dynasty = {
+					is_target_in_variable_list = {
+						name = agot_sh_feuds
+						target = root.dynasty
+					}
+				}
+			}
+			save_scope_as = agot_sh_pol_enemy
+		}
+	}
+
+	option = { # Le Nord se souvient : la hache
+		name = agot_sh_pol.0020.a
+		add_prestige = minor_prestige_gain
+		dynasty = { agot_sh_change_reputation_effect = { VALUE = -10 } }
+		scope:agot_sh_pol_enemy = {
+			add_character_flag = agot_sh_pol_condemned
+			death = {
+				death_reason = death_execution
+				killer = root
+			}
+		}
+		stress_impact = {
+			compassionate = major_stress_impact_gain
+			forgiving = medium_stress_impact_gain
+		}
+		ai_chance = {
+			base = 15
+			modifier = { add = 30 has_trait = vengeful }
+			modifier = { add = 20 has_trait = wrathful }
+			modifier = { add = 20 has_trait = sadistic }
+			modifier = { factor = 0.2 has_trait = compassionate }
+		}
+	}
+	option = { # Rançon et réconciliation
+		name = agot_sh_pol.0020.b
+		scope:agot_sh_pol_enemy = { release_from_prison = yes }
+		agot_sh_end_feud_effect = { DYN1 = root.dynasty DYN2 = scope:agot_sh_pol_enemy.dynasty }
+		dynasty = { agot_sh_change_reputation_effect = { VALUE = 5 } }
+		add_gold = minor_gold_value
+		scope:agot_sh_pol_enemy = {
+			add_opinion = {
+				target = root
+				modifier = agot_sh_pol_reparations_opinion
+			}
+		}
+		ai_chance = {
+			base = 30
+			modifier = { add = 30 agot_sh_is_cautious = yes }
+			modifier = { add = 20 has_trait = forgiving }
+			modifier = { add = 20 has_trait = greedy }
+			modifier = { factor = 0.3 has_trait = vengeful }
+		}
+	}
+	option = { # L'humilier devant la cour
+		name = agot_sh_pol.0020.c
+		add_prestige = medium_prestige_gain
+		scope:agot_sh_pol_enemy = {
+			add_opinion = {
+				target = root
+				modifier = agot_sh_pol_vengeance_humiliated_opinion
+			}
+		}
+		ai_chance = {
+			base = 30
+			modifier = { add = 20 agot_sh_is_ambitious = yes }
+			modifier = { add = 20 has_trait = arrogant }
+		}
+	}
+}
+
+###############################################################################
+# 7. Réparations : mettre fin à une querelle ancestrale
+###############################################################################
+agot_sh_pol.0021 = {
+	type = character_event
+	title = agot_sh_pol.0021.t
+	desc = agot_sh_pol.0021.desc
+	theme = diplomacy
+	left_portrait = {
+		character = root
+		animation = thinking
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_rival
+		animation = disapproval
+	}
+	cooldown = { years = 10 }
+
+	trigger = {
+		is_ruler = yes
+		is_adult = yes
+		exists = dynasty
+		dynasty.dynast ?= root
+		dynasty = {
+			any_in_list = {
+				variable = agot_sh_feuds
+				exists = dynast
+				dynast = {
+					is_alive = yes
+					is_ruler = yes
+				}
+			}
+		}
+	}
+
+	immediate = {
+		dynasty = {
+			random_in_list = {
+				variable = agot_sh_feuds
+				limit = {
+					exists = dynast
+					dynast = {
+						is_alive = yes
+						is_ruler = yes
+					}
+				}
+				save_scope_as = agot_sh_pol_rival_dynasty
+				dynast = { save_scope_as = agot_sh_pol_rival }
+			}
+		}
+	}
+
+	option = { # Offrir réparation
+		name = agot_sh_pol.0021.a
+		trigger = { gold >= medium_gold_value }
+		pay_short_term_gold = {
+			target = scope:agot_sh_pol_rival
+			gold = medium_gold_value
+		}
+		agot_sh_end_feud_effect = { DYN1 = root.dynasty DYN2 = scope:agot_sh_pol_rival_dynasty }
+		dynasty = { agot_sh_change_reputation_effect = { VALUE = 5 } }
+		add_prestige = minor_prestige_loss
+		scope:agot_sh_pol_rival = {
+			add_opinion = {
+				target = root
+				modifier = agot_sh_pol_reparations_opinion
+			}
+		}
+		ai_chance = {
+			base = 15
+			modifier = { add = 30 agot_sh_is_cautious = yes }
+			modifier = { add = 20 agot_sh_is_loyalist = yes }
+			modifier = { add = 20 has_trait = forgiving }
+			modifier = { factor = 0.2 has_trait = vengeful }
+		}
+	}
+	option = { # Le sang ne s'oublie pas
+		name = agot_sh_pol.0021.b
+		add_prestige = minor_prestige_gain
+		ai_chance = {
+			base = 50
+			modifier = { add = 20 agot_sh_is_ambitious = yes }
+			modifier = { add = 20 has_trait = vengeful }
+			modifier = { add = 10 has_trait = arrogant }
+		}
+	}
+}
+
+###############################################################################
+# 7. Un mariage réconcilie deux maisons en querelle (chef de la maison A puis B)
+###############################################################################
+agot_sh_pol.0022 = {
+	type = character_event
+	title = agot_sh_pol.0022.t
+	desc = agot_sh_pol.0022.desc
+	theme = marriage
+	left_portrait = {
+		character = scope:agot_sh_pol_groom_side
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_bride_side
+		animation = happiness
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_dynast_b
+		scope:agot_sh_pol_dynast_b = { is_alive = yes }
+	}
+
+	option = { # Que la paix soit scellée
+		name = agot_sh_pol.0022.a
+		add_opinion = {
+			target = scope:agot_sh_pol_dynast_b
+			modifier = agot_sh_pol_feud_ended_by_marriage_opinion
+		}
+		add_prestige = minor_prestige_gain
+		ai_chance = { base = 70 }
+	}
+	option = { # Un mariage n'efface pas tout
+		name = agot_sh_pol.0022.b
+		stress_impact = { vengeful = minor_stress_impact_gain }
+		ai_chance = {
+			base = 30
+			modifier = { add = 30 has_trait = vengeful }
+		}
+	}
+}
+
+agot_sh_pol.0023 = {
+	type = character_event
+	title = agot_sh_pol.0022.t
+	desc = agot_sh_pol.0022.desc
+	theme = marriage
+	left_portrait = {
+		character = scope:agot_sh_pol_bride_side
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_groom_side
+		animation = happiness
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_dynast_a
+		scope:agot_sh_pol_dynast_a = { is_alive = yes }
+	}
+
+	option = {
+		name = agot_sh_pol.0022.a
+		add_opinion = {
+			target = scope:agot_sh_pol_dynast_a
+			modifier = agot_sh_pol_feud_ended_by_marriage_opinion
+		}
+		add_prestige = minor_prestige_gain
+		ai_chance = { base = 70 }
+	}
+	option = {
+		name = agot_sh_pol.0022.b
+		stress_impact = { vengeful = minor_stress_impact_gain }
+		ai_chance = {
+			base = 30
+			modifier = { add = 30 has_trait = vengeful }
+		}
+	}
+}
+
+###############################################################################
+# 8. Droit des invités violé : le coupable
+###############################################################################
+agot_sh_pol.0030 = {
+	type = character_event
+	title = agot_sh_pol.0030.t
+	desc = agot_sh_pol.0030.desc
+	theme = dread
+	left_portrait = {
+		character = root
+		animation = paranoia
+	}
+
+	option = { # Expier devant les dieux
+		name = agot_sh_pol.0030.a
+		trigger = { gold >= minor_gold_value }
+		remove_short_term_gold = minor_gold_value
+		add_piety = medium_piety_gain
+		dynasty ?= { agot_sh_change_reputation_effect = { VALUE = 10 } }
+		ai_chance = {
+			base = 30
+			modifier = { add = 30 has_trait = zealous }
+			modifier = { add = 20 has_trait = paranoid }
+			modifier = { add = 20 agot_sh_is_cautious = yes }
+		}
+	}
+	option = { # Que mes ennemis tremblent
+		name = agot_sh_pol.0030.b
+		add_dread = 20
+		ai_chance = {
+			base = 30
+			modifier = { add = 30 has_trait = sadistic }
+			modifier = { add = 30 has_trait = callous }
+			modifier = { add = 20 agot_sh_is_opportunist = yes }
+		}
+	}
+}
+
+###############################################################################
+# 8. Droit des invités violé : la maison de la victime
+###############################################################################
+agot_sh_pol.0031 = {
+	type = character_event
+	title = agot_sh_pol.0031.t
+	desc = agot_sh_pol.0031.desc
+	theme = death
+	left_portrait = {
+		character = root
+		animation = rage
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_host
+		animation = schadenfreude
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_host
+		scope:agot_sh_pol_host = { is_alive = yes }
+	}
+
+	option = { # Le Nord se souvient
+		name = agot_sh_pol.0031.a
+		add_opinion = {
+			target = scope:agot_sh_pol_host
+			modifier = agot_sh_pol_guest_right_broken_opinion
+		}
+		add_prestige = minor_prestige_gain
+		if = {
+			limit = { liege ?= scope:agot_sh_pol_host }
+			agot_sh_pol_add_grievance_effect = { TARGET = scope:agot_sh_pol_host }
+		}
+		ai_chance = { base = 80 }
+	}
+	option = { # Pleurer nos morts
+		name = agot_sh_pol.0031.b
+		add_opinion = {
+			target = scope:agot_sh_pol_host
+			modifier = agot_sh_pol_guest_right_broken_opinion
+		}
+		stress_impact = {
+			vengeful = medium_stress_impact_gain
+			wrathful = minor_stress_impact_gain
+		}
+		ai_chance = {
+			base = 20
+			modifier = { add = 30 agot_sh_is_cautious = yes }
+			modifier = { add = 20 has_trait = craven }
+		}
+	}
+}
+
+###############################################################################
+# 9. Le pupille confié au suzerain a été tué ou jeté au cachot
+###############################################################################
+agot_sh_pol.0040 = {
+	type = character_event
+	title = agot_sh_pol.0040.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:agot_sh_pol_ward = { is_alive = no } }
+				desc = agot_sh_pol.0040.desc_killed
+			}
+			desc = agot_sh_pol.0040.desc_imprisoned
+		}
+	}
+	theme = family
+	left_portrait = {
+		character = root
+		animation = rage
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_guardian
+		animation = dismissal
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_guardian
+		scope:agot_sh_pol_guardian = { is_alive = yes }
+	}
+
+	option = { # Ma maison exigera son dû
+		name = agot_sh_pol.0040.a
+		add_opinion = {
+			target = scope:agot_sh_pol_guardian
+			modifier = agot_sh_pol_ward_harmed_opinion
+		}
+		agot_sh_pol_add_grievance_effect = { TARGET = scope:agot_sh_pol_guardian }
+		if = {
+			limit = {
+				exists = dynasty
+				exists = scope:agot_sh_pol_guardian.dynasty
+				NOT = { dynasty = scope:agot_sh_pol_guardian.dynasty }
+			}
+			agot_sh_add_feud_effect = { DYN1 = root.dynasty DYN2 = scope:agot_sh_pol_guardian.dynasty }
+		}
+		ai_chance = {
+			base = 60
+			modifier = { add = 30 has_trait = wrathful }
+			modifier = { add = 20 agot_sh_is_ambitious = yes }
+		}
+	}
+	option = { # Se taire et attendre
+		name = agot_sh_pol.0040.b
+		add_opinion = {
+			target = scope:agot_sh_pol_guardian
+			modifier = agot_sh_pol_ward_harmed_opinion
+		}
+		stress_impact = {
+			wrathful = major_stress_impact_gain
+			vengeful = medium_stress_impact_gain
+		}
+		ai_chance = {
+			base = 20
+			modifier = { add = 40 agot_sh_is_cautious = yes }
+			modifier = { add = 20 has_trait = craven }
+		}
+	}
+}
+
+###############################################################################
+# 10. Un bloc de maisons alliées fait pression sur le suzerain
+###############################################################################
+agot_sh_pol.0050 = {
+	type = character_event
+	title = agot_sh_pol.0050.t
+	desc = agot_sh_pol.0050.desc
+	theme = vassal
+	left_portrait = {
+		character = scope:agot_sh_pol_bloc_a
+		animation = disapproval
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_bloc_b
+		animation = anger
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_bloc_a
+		exists = scope:agot_sh_pol_bloc_b
+		scope:agot_sh_pol_bloc_a = { liege ?= root }
+		scope:agot_sh_pol_bloc_b = { liege ?= root }
+	}
+
+	option = { # Céder à leurs doléances
+		name = agot_sh_pol.0050.a
+		trigger = { gold >= minor_gold_value }
+		pay_short_term_gold = {
+			target = scope:agot_sh_pol_bloc_a
+			gold = minor_gold_value
+		}
+		add_prestige = minor_prestige_loss
+		scope:agot_sh_pol_bloc_a = { add_opinion = { target = root modifier = agot_sh_pol_bloc_heeded_opinion } }
+		scope:agot_sh_pol_bloc_b = { add_opinion = { target = root modifier = agot_sh_pol_bloc_heeded_opinion } }
+		ai_chance = {
+			base = 40
+			modifier = { add = 30 agot_sh_is_cautious = yes }
+			modifier = { add = 20 has_trait = content }
+		}
+	}
+	option = { # Refuser : je suis leur suzerain
+		name = agot_sh_pol.0050.b
+		add_prestige = minor_prestige_gain
+		scope:agot_sh_pol_bloc_a = {
+			add_opinion = { target = root modifier = agot_sh_pol_bloc_refused_opinion }
+			if = {
+				limit = {
+					OR = {
+						agot_sh_is_ambitious = yes
+						agot_sh_is_opportunist = yes
+					}
+				}
+				agot_sh_pol_add_grievance_effect = { TARGET = root }
+			}
+		}
+		scope:agot_sh_pol_bloc_b = { add_opinion = { target = root modifier = agot_sh_pol_bloc_refused_opinion } }
+		ai_chance = {
+			base = 30
+			modifier = { add = 30 has_trait = arrogant }
+			modifier = { add = 20 agot_sh_is_ambitious = yes }
+		}
+	}
+	option = { # Les intimider
+		name = agot_sh_pol.0050.c
+		add_dread = 10
+		scope:agot_sh_pol_bloc_a = { add_opinion = { target = root modifier = agot_sh_pol_bloc_refused_opinion } }
+		scope:agot_sh_pol_bloc_b = { add_opinion = { target = root modifier = agot_sh_pol_bloc_refused_opinion } }
+		ai_chance = {
+			base = 20
+			modifier = { add = 30 has_trait = wrathful }
+			modifier = { add = 30 has_trait = sadistic }
+		}
+	}
+}
+
+###############################################################################
+# 11. Promesse de mariage rompue
+###############################################################################
+agot_sh_pol.0060 = {
+	type = character_event
+	title = agot_sh_pol.0060.t
+	desc = agot_sh_pol.0060.desc
+	theme = marriage
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_dynast_b
+		animation = disapproval
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_dynast_b
+		scope:agot_sh_pol_dynast_b = { is_alive = yes }
+		NOT = { this = scope:agot_sh_pol_dynast_b }
+	}
+
+	option = { # Cet affront ne sera pas oublié
+		name = agot_sh_pol.0060.a
+		agot_sh_add_feud_effect = { DYN1 = root.dynasty DYN2 = scope:agot_sh_pol_dynast_b.dynasty }
+		add_prestige = minor_prestige_gain
+		scope:agot_sh_pol_dynast_b = {
+			add_opinion = { target = root modifier = agot_sh_pol_broken_betrothal_opinion }
+		}
+		ai_chance = {
+			base = 20
+			modifier = { add = 40 agot_sh_is_opportunist = yes }
+			modifier = { add = 20 agot_sh_is_ambitious = yes }
+			modifier = { add = 30 has_trait = vengeful }
+			modifier = { add = 20 has_trait = arrogant }
+		}
+	}
+	option = { # Exiger une compensation
+		name = agot_sh_pol.0060.b
+		add_hook = {
+			type = favor_hook
+			target = scope:agot_sh_pol_dynast_b
+		}
+		ai_chance = {
+			base = 40
+			modifier = { add = 20 has_trait = greedy }
+			modifier = { add = 20 agot_sh_is_cautious = yes }
+		}
+	}
+	option = { # Laisser passer
+		name = agot_sh_pol.0060.c
+		add_prestige = minor_prestige_loss
+		remove_opinion = {
+			target = scope:agot_sh_pol_dynast_b
+			modifier = agot_sh_pol_broken_betrothal_opinion
+		}
+		ai_chance = {
+			base = 20
+			modifier = { add = 30 has_trait = forgiving }
+			modifier = { add = 20 agot_sh_is_loyalist = yes }
+		}
+	}
+}
+
+###############################################################################
+# 11. Une maison mineure s'allie par mariage à une grande maison
+###############################################################################
+agot_sh_pol.0061 = {
+	type = character_event
+	title = agot_sh_pol.0061.t
+	desc = agot_sh_pol.0061.desc
+	theme = marriage
+	left_portrait = {
+		character = root
+		animation = happiness
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_great_dynast
+		animation = personality_content
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_great_dynast
+		scope:agot_sh_pol_great_dynast = { is_alive = yes }
+	}
+
+	option = { # Jurer fidélité à notre nouvelle parentèle
+		name = agot_sh_pol.0061.a
+		add_opinion = {
+			target = scope:agot_sh_pol_great_dynast
+			modifier = agot_sh_pol_honored_match_opinion
+		}
+		agot_sh_pol_set_sworn_word_effect = { TO = scope:agot_sh_pol_great_dynast }
+		scope:agot_sh_pol_great_dynast = {
+			add_opinion = {
+				target = root
+				modifier = agot_sh_pol_honored_match_opinion
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 agot_sh_is_loyalist = yes }
+		}
+	}
+	option = { # Une marche de plus vers les sommets
+		name = agot_sh_pol.0061.b
+		add_prestige = minor_prestige_gain
+		ai_chance = {
+			base = 30
+			modifier = { add = 30 agot_sh_is_ambitious = yes }
+			modifier = { add = 30 agot_sh_is_opportunist = yes }
+		}
+	}
+}
+
+###############################################################################
+# 18. Les Verts et les Noirs : choisir un camp
+###############################################################################
+agot_sh_pol.0070 = {
+	type = character_event
+	title = agot_sh_pol.0070.t
+	desc = agot_sh_pol.0070.desc
+	theme = war
+	left_portrait = {
+		character = scope:agot_sh_pol_crown
+		animation = war_over_win
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_claimant
+		animation = personality_bold
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_crown
+		exists = scope:agot_sh_pol_claimant
+		exists = scope:agot_sh_pol_war
+		scope:agot_sh_pol_crown = {
+			is_alive = yes
+			is_at_war = yes
+		}
+		scope:agot_sh_pol_claimant = { is_alive = yes }
+		liege ?= scope:agot_sh_pol_crown
+		NOT = { scope:agot_sh_pol_war = { is_participant = root } }
+	}
+
+	option = { # Pour la Couronne
+		name = agot_sh_pol.0070.a
+		scope:agot_sh_pol_war = { add_defender = root }
+		scope:agot_sh_pol_crown = {
+			add_opinion = { target = root modifier = agot_sh_pol_side_chosen_for_opinion }
+		}
+		scope:agot_sh_pol_claimant = {
+			add_opinion = { target = root modifier = agot_sh_pol_side_chosen_against_opinion }
+		}
+		if = {
+			limit = { var:agot_sh_pol_oath_to_heir ?= scope:agot_sh_pol_crown }
+			add_prestige = medium_prestige_gain
+			dynasty ?= { agot_sh_change_reputation_effect = { VALUE = 5 } }
+		}
+		ai_chance = {
+			base = 30
+			modifier = { add = 40 agot_sh_is_loyalist = yes }
+			modifier = { add = 60 var:agot_sh_pol_oath_to_heir ?= scope:agot_sh_pol_crown }
+			modifier = { add = 40 agot_sh_pol_marriage_tie_trigger = { CHAR = scope:agot_sh_pol_crown } }
+			modifier = { add = 40 agot_sh_dynasties_feud_trigger = { DYN1 = root.dynasty DYN2 = scope:agot_sh_pol_claimant.dynasty } }
+			modifier = { add = 20 agot_sh_crown_respected_trigger = yes }
+			modifier = { add = 20 has_trait = honest }
+			opinion_modifier = {
+				who = root
+				opinion_target = scope:agot_sh_pol_crown
+				multiplier = 0.5
+			}
+		}
+	}
+	option = { # Pour le prétendant
+		name = agot_sh_pol.0070.b
+		scope:agot_sh_pol_claimant = {
+			add_opinion = { target = root modifier = agot_sh_pol_side_chosen_for_opinion }
+		}
+		scope:agot_sh_pol_crown = {
+			add_opinion = { target = root modifier = agot_sh_pol_side_chosen_against_opinion }
+		}
+		if = {
+			limit = { var:agot_sh_pol_oath_to_heir ?= scope:agot_sh_pol_crown }
+			agot_sh_pol_break_word_effect = { BETRAYED = scope:agot_sh_pol_crown }
+		}
+		ai_chance = {
+			base = 20
+			modifier = { add = 30 agot_sh_is_ambitious = yes }
+			modifier = { add = 20 agot_sh_is_opportunist = yes }
+			modifier = { add = 50 agot_sh_pol_marriage_tie_trigger = { CHAR = scope:agot_sh_pol_claimant } }
+			modifier = { add = 60 dynasty ?= scope:agot_sh_pol_claimant.dynasty }
+			modifier = { add = 40 agot_sh_dynasties_feud_trigger = { DYN1 = root.dynasty DYN2 = scope:agot_sh_pol_crown.dynasty } }
+			modifier = { add = 30 agot_sh_pol_holds_grievance_against_liege_trigger = yes }
+			modifier = { add = 20 agot_sh_crown_despised_trigger = yes }
+			modifier = { factor = 0.3 var:agot_sh_pol_oath_to_heir ?= scope:agot_sh_pol_crown }
+			opinion_modifier = {
+				who = root
+				opinion_target = scope:agot_sh_pol_claimant
+				multiplier = 0.5
+			}
+		}
+	}
+	option = { # Attendre de voir d'où souffle le vent
+		name = agot_sh_pol.0070.c
+		add_prestige = minor_prestige_loss
+		ai_chance = {
+			base = 30
+			modifier = { add = 40 agot_sh_is_cautious = yes }
+			modifier = { add = 20 agot_sh_is_opportunist = yes }
+			modifier = { add = 20 has_trait = craven }
+		}
+	}
+}
+
+###############################################################################
+# 19. La maison de la Main du Roi attire les jalousies
+###############################################################################
+agot_sh_pol.0080 = {
+	type = character_event
+	title = agot_sh_pol.0080.t
+	desc = agot_sh_pol.0080.desc
+	theme = court
+	left_portrait = {
+		character = root
+		animation = scheme
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_hand
+		animation = personality_rational
+	}
+	cooldown = { years = 8 }
+
+	trigger = {
+		agot_sh_is_active_vassal = yes
+		highest_held_title_tier >= tier_duchy
+		OR = {
+			agot_sh_is_ambitious = yes
+			agot_sh_is_opportunist = yes
+		}
+		exists = dynasty
+		top_liege = {
+			has_title = title:h_the_iron_throne
+			exists = cp:councillor_castellan
+			cp:councillor_castellan = {
+				NOT = { this = root }
+				exists = dynasty
+				NOT = { dynasty = root.dynasty }
+			}
+		}
+	}
+
+	immediate = {
+		top_liege = {
+			save_scope_as = agot_sh_pol_king
+			cp:councillor_castellan = { save_scope_as = agot_sh_pol_hand }
+		}
+	}
+
+	option = { # Murmurer à l'oreille du roi
+		name = agot_sh_pol.0080.a
+		add_opinion = { target = scope:agot_sh_pol_hand modifier = agot_sh_pol_hand_jealousy_opinion }
+		scope:agot_sh_pol_hand = { add_opinion = { target = root modifier = agot_sh_pol_hand_jealousy_opinion } }
+		scope:agot_sh_pol_king = { add_opinion = { target = scope:agot_sh_pol_hand modifier = agot_sh_pol_hand_slandered_opinion } }
+		ai_chance = {
+			base = 40
+			modifier = { add = 30 agot_sh_is_ambitious = yes }
+			modifier = { add = 20 has_trait = deceitful }
+			modifier = { add = 20 has_trait = arrogant }
+		}
+	}
+	option = { # Courtiser la Main
+		name = agot_sh_pol.0080.b
+		trigger = { gold >= minor_gold_value }
+		pay_short_term_gold = {
+			target = scope:agot_sh_pol_hand
+			gold = minor_gold_value
+		}
+		scope:agot_sh_pol_hand = { add_opinion = { target = root modifier = agot_sh_pol_hand_courted_opinion } }
+		ai_chance = {
+			base = 30
+			modifier = { add = 40 agot_sh_is_opportunist = yes }
+		}
+	}
+	option = { # Ravaler son envie
+		name = agot_sh_pol.0080.c
+		add_opinion = { target = scope:agot_sh_pol_hand modifier = agot_sh_pol_hand_jealousy_opinion }
+		stress_impact = {
+			ambitious = medium_stress_impact_gain
+		}
+		ai_chance = { base = 20 }
+	}
+}
+
+###############################################################################
+# 20 / 22 / 13. Le sort du chef rebelle vaincu
+###############################################################################
+agot_sh_pol.0090 = {
+	type = character_event
+	title = agot_sh_pol.0090.t
+	desc = agot_sh_pol.0090.desc
+	theme = realm
+	left_portrait = {
+		character = root
+		animation = war_over_win
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_rebel
+		animation = beg
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_rebel
+		scope:agot_sh_pol_rebel = {
+			is_alive = yes
+			OR = {
+				liege ?= root
+				is_imprisoned_by = root
+			}
+		}
+	}
+
+	option = { # Qu'il plie le genou
+		name = agot_sh_pol.0090.a
+		scope:agot_sh_pol_rebel = {
+			if = {
+				limit = { is_imprisoned_by = root }
+				release_from_prison = yes
+			}
+			add_character_modifier = {
+				modifier = agot_sh_pol_bent_knee_modifier
+				years = 10
+			}
+			agot_sh_pol_set_sworn_word_effect = { TO = root }
+			remove_variable = agot_sh_pol_grievance
+			add_opinion = { target = root modifier = agot_sh_pol_knee_mercy_opinion }
+		}
+		add_prestige = minor_prestige_gain
+		ai_chance = {
+			base = 40
+			modifier = { add = 30 has_trait = forgiving }
+			modifier = { add = 20 has_trait = compassionate }
+			modifier = { add = 20 has_trait = just }
+			modifier = { factor = 0.3 has_trait = vengeful }
+		}
+	}
+	option = { # Qu'il prenne le noir
+		name = agot_sh_pol.0090.b
+		trigger = {
+			agot_nw_can_banish = { BANISHER = root BANISHEE = scope:agot_sh_pol_rebel }
+		}
+		scope:agot_sh_pol_rebel = {
+			if = {
+				limit = { is_ruler = yes }
+				depose = yes
+			}
+		}
+		agot_send_to_nightswatch_effect = {
+			ACTOR = root
+			NIGHTSWATCH_CANDIDATE = scope:agot_sh_pol_rebel
+		}
+		add_prestige = minor_prestige_gain
+		# Réaction des autres seigneurs : les hommes d'honneur saluent la clémence, les impitoyables y voient de la faiblesse
+		every_vassal = {
+			limit = { agot_sh_is_active_vassal = yes }
+			if = {
+				limit = {
+					OR = {
+						has_trait = just
+						has_trait = honest
+						has_trait = compassionate
+						has_trait = forgiving
+						agot_sh_is_loyalist = yes
+					}
+				}
+				add_opinion = { target = root modifier = agot_sh_pol_rebel_spared_approve_opinion }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						has_trait = wrathful
+						has_trait = vengeful
+						has_trait = sadistic
+					}
+				}
+				add_opinion = { target = root modifier = agot_sh_pol_rebel_spared_weak_opinion }
+			}
+		}
+		ai_chance = {
+			base = 40
+			modifier = { add = 20 has_trait = just }
+			modifier = { add = 20 agot_sh_is_cautious = yes }
+			modifier = { add = 10 has_trait = zealous }
+		}
+	}
+	option = { # La hache
+		name = agot_sh_pol.0090.c
+		add_dread = 15
+		scope:agot_sh_pol_rebel = {
+			add_character_flag = agot_sh_pol_condemned
+			death = {
+				death_reason = death_execution
+				killer = root
+			}
+		}
+		ai_chance = {
+			base = 15
+			modifier = { add = 30 has_trait = wrathful }
+			modifier = { add = 30 has_trait = vengeful }
+			modifier = { add = 20 has_trait = sadistic }
+			modifier = { factor = 0.3 has_trait = compassionate }
+		}
+	}
+}
+
+###############################################################################
+# 21. Notification : un parjure
+###############################################################################
+agot_sh_pol.0100 = {
+	type = character_event
+	title = agot_sh_pol.0100.t
+	desc = agot_sh_pol.0100.desc
+	theme = realm
+	left_portrait = {
+		character = root
+		animation = anger
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_oathbreaker
+		animation = scheme
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_oathbreaker
+		scope:agot_sh_pol_oathbreaker = { is_alive = yes }
+	}
+
+	option = { # Proclamer sa trahison dans tout le royaume
+		name = agot_sh_pol.0100.a
+		add_prestige = minor_prestige_gain
+		scope:agot_sh_pol_oathbreaker = { add_prestige = minor_prestige_loss }
+		ai_chance = { base = 60 }
+	}
+	option = { # Je m'en souviendrai
+		name = agot_sh_pol.0100.b
+		agot_sh_pol_add_grievance_effect = { TARGET = scope:agot_sh_pol_oathbreaker }
+		ai_chance = {
+			base = 40
+			modifier = { add = 30 has_trait = vengeful }
+		}
+	}
+}
+
+###############################################################################
+# 41. Faire jurer les grands vassaux fidélité à l'héritier
+###############################################################################
+agot_sh_pol.0110 = {
+	type = character_event
+	title = agot_sh_pol.0110.t
+	desc = agot_sh_pol.0110.desc
+	theme = crown
+	left_portrait = {
+		character = root
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_heir
+		animation = happiness
+	}
+	cooldown = { years = 5 }
+
+	trigger = {
+		agot_sh_is_sovereign = yes
+		highest_held_title_tier >= tier_kingdom
+		exists = primary_heir
+		NOT = { var:agot_sh_pol_oath_heir ?= primary_heir }
+		any_vassal = {
+			agot_sh_is_active_vassal = yes
+			highest_held_title_tier >= tier_duchy
+		}
+	}
+
+	immediate = {
+		primary_heir = { save_scope_as = agot_sh_pol_heir }
+	}
+
+	option = { # Convoquer les seigneurs pour qu'ils prêtent serment
+		name = agot_sh_pol.0110.a
+		set_variable = {
+			name = agot_sh_pol_oath_heir
+			value = scope:agot_sh_pol_heir
+		}
+		save_scope_as = agot_sh_pol_king
+		add_prestige = minor_prestige_gain
+		every_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				highest_held_title_tier >= tier_duchy
+				NOT = { this = scope:agot_sh_pol_heir }
+			}
+			trigger_event = { id = agot_sh_pol.0111 days = { 5 20 } }
+		}
+		ai_chance = { base = 80 }
+	}
+	option = { # Le moment n'est pas venu
+		name = agot_sh_pol.0110.b
+		ai_chance = {
+			base = 20
+			modifier = { add = 20 has_trait = paranoid }
+		}
+	}
+}
+
+agot_sh_pol.0111 = {
+	type = character_event
+	title = agot_sh_pol.0111.t
+	desc = agot_sh_pol.0111.desc
+	theme = crown
+	left_portrait = {
+		character = scope:agot_sh_pol_king
+		animation = personality_rational
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_heir
+		animation = happiness
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_heir
+		exists = scope:agot_sh_pol_king
+		scope:agot_sh_pol_heir = { is_alive = yes }
+		liege ?= scope:agot_sh_pol_king
+	}
+
+	option = { # Jurer devant les dieux
+		name = agot_sh_pol.0111.a
+		set_variable = {
+			name = agot_sh_pol_oath_to_heir
+			value = scope:agot_sh_pol_heir
+			years = 50
+		}
+		scope:agot_sh_pol_heir = { add_opinion = { target = root modifier = agot_sh_pol_oath_sworn_opinion } }
+		scope:agot_sh_pol_king = { add_opinion = { target = root modifier = agot_sh_pol_oath_sworn_opinion } }
+		ai_chance = {
+			base = 70
+			modifier = { add = 30 agot_sh_is_loyalist = yes }
+			modifier = { add = 20 agot_sh_is_cautious = yes }
+		}
+	}
+	option = { # Refuser de lier sa maison
+		name = agot_sh_pol.0111.b
+		add_prestige = minor_prestige_gain
+		scope:agot_sh_pol_heir = { add_opinion = { target = root modifier = agot_sh_pol_oath_refused_opinion } }
+		scope:agot_sh_pol_king = { add_opinion = { target = root modifier = agot_sh_pol_oath_refused_opinion } }
+		ai_chance = {
+			base = 5
+			modifier = { add = 20 agot_sh_is_ambitious = yes }
+			modifier = { add = 30 agot_sh_pol_holds_grievance_against_liege_trigger = yes }
+			modifier = { add = 20 has_trait = arrogant }
+		}
+	}
+}
+
+###############################################################################
+# 42. Régence contestée
+###############################################################################
+agot_sh_pol.0120 = {
+	type = character_event
+	title = agot_sh_pol.0120.t
+	desc = agot_sh_pol.0120.desc
+	theme = crown
+	left_portrait = {
+		character = scope:agot_sh_pol_child
+		animation = worry
+	}
+	right_portrait = {
+		character = scope:agot_sh_pol_rival
+		animation = scheme
+	}
+
+	trigger = {
+		exists = scope:agot_sh_pol_child
+		exists = scope:agot_sh_pol_contender_a
+		exists = scope:agot_sh_pol_contender_b
+		scope:agot_sh_pol_child = { is_alive = yes }
+		scope:agot_sh_pol_contender_a = { is_alive = yes }
+		scope:agot_sh_pol_contender_b = { is_alive = yes }
+	}
+
+	immediate = {
+		if = {
+			limit = { this = scope:agot_sh_pol_contender_a }
+			scope:agot_sh_pol_contender_b = { save_scope_as = agot_sh_pol_rival }
+		}
+		else = {
+			scope:agot_sh_pol_contender_a = { save_scope_as = agot_sh_pol_rival }
+		}
+	}
+
+	option = { # Réclamer la garde du roi enfant
+		name = agot_sh_pol.0120.a
+		add_prestige = minor_prestige_gain
+		add_opinion = { target = scope:agot_sh_pol_rival modifier = agot_sh_pol_regency_rival_opinion }
+		scope:agot_sh_pol_rival = { add_opinion = { target = root modifier = agot_sh_pol_regency_rival_opinion } }
+		ai_chance = {
+			base = 30
+			modifier = { add = 40 agot_sh_is_ambitious = yes }
+			modifier = { add = 20 agot_sh_is_opportunist = yes }
+			modifier = { add = 20 agot_sh_dynasties_feud_trigger = { DYN1 = root.dynasty DYN2 = scope:agot_sh_pol_rival.dynasty } }
+		}
+	}
+	option = { # Soutenir l'autre maison
+		name = agot_sh_pol.0120.b
+		scope:agot_sh_pol_rival = { add_opinion = { target = root modifier = agot_sh_pol_regency_support_opinion } }
+		add_opinion = { target = scope:agot_sh_pol_rival modifier = agot_sh_pol_regency_support_opinion }
+		ai_chance = {
+			base = 20
+			modifier = { add = 40 agot_sh_pol_marriage_tie_trigger = { CHAR = scope:agot_sh_pol_rival } }
+			modifier = { add = 20 agot_sh_is_loyalist = yes }
+			modifier = { factor = 0 agot_sh_dynasties_feud_trigger = { DYN1 = root.dynasty DYN2 = scope:agot_sh_pol_rival.dynasty } }
+		}
+	}
+	option = { # Se tenir à l'écart
+		name = agot_sh_pol.0120.c
+		add_prestige = minor_prestige_loss
+		ai_chance = {
+			base = 20
+			modifier = { add = 40 agot_sh_is_cautious = yes }
+		}
+	}
+}

@@ -1,0 +1,124 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Politique et maisons - effets
+###############################################################################
+
+# Un affront précis crée un grief durable (sur l'offensé). Usage : agot_sh_pol_add_grievance_effect = { TARGET = scope:x }
+agot_sh_pol_add_grievance_effect = {
+	if = {
+		limit = {
+			exists = $TARGET$
+			NOT = { this = $TARGET$ }
+		}
+		set_variable = {
+			name = agot_sh_pol_grievance
+			value = $TARGET$
+			years = 20
+		}
+		add_opinion = {
+			target = $TARGET$
+			modifier = agot_sh_pol_grievance_opinion
+		}
+	}
+}
+
+# Parole donnée : le personnage s'engage envers $TO$ (genou plié, serment…)
+agot_sh_pol_set_sworn_word_effect = {
+	set_variable = {
+		name = agot_sh_pol_sworn_word
+		value = $TO$
+		years = 30
+	}
+}
+
+# Parole rompue (sur le parjure). Usage : agot_sh_pol_break_word_effect = { BETRAYED = scope:x }
+agot_sh_pol_break_word_effect = {
+	save_scope_as = agot_sh_pol_oathbreaker
+	dynasty ?= { agot_sh_change_reputation_effect = { VALUE = -20 } }
+	if = {
+		limit = { NOT = { has_character_modifier = agot_sh_pol_oathbreaker_modifier } }
+		add_character_modifier = {
+			modifier = agot_sh_pol_oathbreaker_modifier
+			years = 15
+		}
+	}
+	remove_variable = agot_sh_pol_sworn_word
+	remove_variable = agot_sh_pol_oath_to_heir
+	remove_character_modifier = agot_sh_pol_bent_knee_modifier
+	$BETRAYED$ = {
+		save_scope_as = agot_sh_pol_betrayed
+		add_opinion = {
+			target = scope:agot_sh_pol_oathbreaker
+			modifier = agot_sh_pol_oathbreaker_opinion
+		}
+		trigger_event = agot_sh_pol.0100
+	}
+}
+
+# Violation du droit des invités. Usage : agot_sh_pol_guest_right_broken_effect = { VILLAIN = scope:x VICTIM = scope:y }
+agot_sh_pol_guest_right_broken_effect = {
+	$VICTIM$ = { save_scope_as = agot_sh_pol_guest }
+	$VILLAIN$ = {
+		save_scope_as = agot_sh_pol_host
+		if = {
+			limit = { NOT = { has_character_modifier = agot_sh_pol_guest_curse_modifier } }
+			add_character_modifier = {
+				modifier = agot_sh_pol_guest_curse_modifier
+				years = 25
+			}
+		}
+		dynasty ?= { agot_sh_change_reputation_effect = { VALUE = -40 } }
+		if = {
+			limit = { agot_sh_is_sovereign = yes }
+			agot_sh_change_crown_respect_effect = { VALUE = -20 }
+		}
+		trigger_event = agot_sh_pol.0030
+	}
+	# La maison de la victime n'oubliera pas
+	if = {
+		limit = {
+			exists = scope:agot_sh_pol_guest.dynasty
+			exists = scope:agot_sh_pol_host.dynasty
+			NOT = { scope:agot_sh_pol_guest.dynasty = scope:agot_sh_pol_host.dynasty }
+		}
+		agot_sh_add_feud_effect = { DYN1 = scope:agot_sh_pol_guest.dynasty DYN2 = scope:agot_sh_pol_host.dynasty }
+		scope:agot_sh_pol_guest.dynasty.dynast ?= {
+			if = {
+				limit = {
+					is_alive = yes
+					NOT = { this = scope:agot_sh_pol_guest }
+				}
+				trigger_event = { id = agot_sh_pol.0031 days = 3 }
+			}
+		}
+	}
+}
+
+# Pupille tué ou maltraité par son gardien (sur le pupille). Usage : agot_sh_pol_ward_scandal_effect = { GUARDIAN = scope:x }
+agot_sh_pol_ward_scandal_effect = {
+	save_scope_as = agot_sh_pol_ward
+	$GUARDIAN$ = {
+		save_scope_as = agot_sh_pol_guardian
+		if = {
+			limit = { NOT = { has_character_modifier = agot_sh_pol_ward_betrayer_modifier } }
+			add_character_modifier = {
+				modifier = agot_sh_pol_ward_betrayer_modifier
+				years = 15
+			}
+		}
+		dynasty ?= { agot_sh_change_reputation_effect = { VALUE = -25 } }
+		if = {
+			limit = { agot_sh_is_sovereign = yes }
+			agot_sh_change_crown_respect_effect = { VALUE = -10 }
+		}
+	}
+	father ?= {
+		if = {
+			limit = {
+				is_alive = yes
+				is_ruler = yes
+				NOT = { this = scope:agot_sh_pol_guardian }
+			}
+			trigger_event = { id = agot_sh_pol.0040 days = 2 }
+		}
+	}
+}

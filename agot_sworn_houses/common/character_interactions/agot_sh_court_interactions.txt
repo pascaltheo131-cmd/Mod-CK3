@@ -1,0 +1,463 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Interactions et cour
+###############################################################################
+
+#------------------------------------------------------------------------------
+# 23. Convoquer un vassal à la cour pour renouveler son serment
+#------------------------------------------------------------------------------
+agot_sh_court_summon_vassal_interaction = {
+	category = interaction_category_vassal
+	icon = demand_obedience
+	desc = agot_sh_court_summon_vassal_interaction_desc
+
+	cooldown = { years = 1 }
+	cooldown_against_recipient = { years = 5 }
+
+	is_shown = {
+		scope:actor = { is_ruler = yes }
+		scope:recipient = {
+			agot_sh_court_direct_vassal_trigger = { LIEGE = scope:actor }
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_imprisoned = no }
+		scope:actor = { is_imprisoned = no }
+	}
+
+	ai_accept = {
+		base = 10
+		opinion_modifier = {
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 1
+			desc = AI_OPINION_REASON
+		}
+		modifier = {
+			add = intimidated_reason_value
+			scope:recipient = {
+				has_dread_level_towards = { target = scope:actor level = 1 }
+			}
+			desc = INTIMIDATED_REASON
+		}
+		modifier = {
+			add = cowed_reason_value
+			scope:recipient = {
+				has_dread_level_towards = { target = scope:actor level = 2 }
+			}
+			desc = COWED_REASON
+		}
+		modifier = {
+			add = 30
+			scope:recipient = { agot_sh_is_loyalist = yes }
+			desc = agot_sh_court_loyalist_reason
+		}
+		modifier = {
+			add = 15
+			scope:recipient = { agot_sh_is_cautious = yes }
+			desc = agot_sh_court_cautious_reason
+		}
+		modifier = {
+			add = -25
+			scope:recipient = { agot_sh_is_ambitious = yes }
+			desc = agot_sh_court_ambitious_reason
+		}
+		modifier = {
+			add = -5
+			scope:recipient = { agot_sh_is_opportunist = yes }
+			desc = agot_sh_court_opportunist_reason
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = agot_sh_court_renewed_oath_opinion
+			}
+		}
+		scope:actor = {
+			add_prestige = minor_prestige_gain
+			if = {
+				limit = {
+					can_add_hook = {
+						target = scope:recipient
+						type = favor_hook
+					}
+				}
+				add_hook = {
+					type = favor_hook
+					target = scope:recipient
+				}
+			}
+		}
+	}
+
+	on_decline = {
+		scope:actor = {
+			add_prestige = minor_prestige_loss
+			add_opinion = {
+				target = scope:recipient
+				modifier = agot_sh_court_defied_summons_opinion
+			}
+			if = {
+				limit = { agot_sh_is_sovereign = yes }
+				agot_sh_change_crown_respect_effect = { VALUE = -2 }
+			}
+		}
+		scope:recipient = {
+			add_character_modifier = {
+				modifier = agot_sh_court_defiant_modifier
+				years = 5
+			}
+		}
+	}
+
+	ai_potential = {
+		is_ruler = yes
+		is_adult = yes
+	}
+	ai_targets = { ai_recipients = vassals }
+	ai_frequency = 24
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 25
+			scope:recipient = {
+				opinion = { target = scope:actor value < 0 }
+			}
+		}
+		modifier = {
+			add = -20
+			scope:recipient = { agot_sh_is_ambitious = yes }
+		}
+	}
+}
+
+#------------------------------------------------------------------------------
+# 24. Exiger un otage de loyauté (l'héritier mineur du vassal devient pupille)
+#------------------------------------------------------------------------------
+agot_sh_court_demand_ward_interaction = {
+	category = interaction_category_vassal
+	icon = child
+	desc = agot_sh_court_demand_ward_interaction_desc
+
+	cooldown_against_recipient = { years = 10 }
+
+	is_shown = {
+		scope:actor = { is_ruler = yes }
+		scope:recipient = {
+			agot_sh_court_direct_vassal_trigger = { LIEGE = scope:actor }
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			custom_description = {
+				text = agot_sh_court_has_minor_heir_tt
+				agot_sh_court_heir_can_be_ward_trigger = yes
+			}
+			custom_description = {
+				text = agot_sh_court_already_ward_tt
+				NOT = { has_variable = agot_sh_ward_held_by }
+			}
+			is_imprisoned = no
+		}
+	}
+
+	ai_accept = {
+		base = -20
+		opinion_modifier = {
+			who = scope:recipient
+			opinion_target = scope:actor
+			multiplier = 0.75
+			desc = AI_OPINION_REASON
+		}
+		modifier = {
+			add = intimidated_reason_value
+			scope:recipient = {
+				has_dread_level_towards = { target = scope:actor level = 1 }
+			}
+			desc = INTIMIDATED_REASON
+		}
+		modifier = {
+			add = cowed_reason_value
+			scope:recipient = {
+				has_dread_level_towards = { target = scope:actor level = 2 }
+			}
+			desc = COWED_REASON
+		}
+		modifier = {
+			add = 25
+			scope:recipient = { agot_sh_is_loyalist = yes }
+			desc = agot_sh_court_loyalist_reason
+		}
+		modifier = {
+			add = 20
+			scope:recipient = { agot_sh_is_cautious = yes }
+			desc = agot_sh_court_cautious_reason
+		}
+		modifier = {
+			add = -30
+			scope:recipient = { agot_sh_is_ambitious = yes }
+			desc = agot_sh_court_ambitious_reason
+		}
+		modifier = {
+			add = -10
+			scope:recipient = { agot_sh_is_opportunist = yes }
+			desc = agot_sh_court_opportunist_reason
+		}
+	}
+
+	on_accept = {
+		scope:recipient.primary_heir = { save_scope_as = agot_sh_ward }
+		scope:agot_sh_ward = {
+			set_relation_guardian = scope:actor
+		}
+		scope:actor = {
+			add_courtier = scope:agot_sh_ward
+			add_prestige = minor_prestige_gain
+			add_character_modifier = {
+				modifier = agot_sh_court_holds_ward_modifier
+				years = 10
+			}
+		}
+		scope:recipient = {
+			set_variable = { name = agot_sh_ward_held_by value = scope:actor }
+			set_variable = { name = agot_sh_court_ward_child value = scope:agot_sh_ward }
+			add_opinion = {
+				target = scope:actor
+				modifier = agot_sh_court_ward_taken_opinion
+			}
+		}
+	}
+
+	on_decline = {
+		scope:actor = {
+			add_prestige = minor_prestige_loss
+			add_opinion = {
+				target = scope:recipient
+				modifier = agot_sh_court_refused_ward_opinion
+			}
+		}
+		scope:recipient = {
+			add_character_modifier = {
+				modifier = agot_sh_court_defiant_modifier
+				years = 5
+			}
+		}
+	}
+
+	ai_potential = {
+		is_ruler = yes
+		is_adult = yes
+		highest_held_title_tier >= tier_kingdom
+	}
+	ai_targets = { ai_recipients = vassals }
+	ai_frequency = 60
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 20
+			scope:recipient = {
+				opinion = { target = scope:actor value < -20 }
+				highest_held_title_tier >= tier_duchy
+			}
+		}
+	}
+}
+
+#------------------------------------------------------------------------------
+# 24 bis. Rendre son otage à un vassal
+#------------------------------------------------------------------------------
+agot_sh_court_return_ward_interaction = {
+	category = interaction_category_vassal
+	icon = child
+	desc = agot_sh_court_return_ward_interaction_desc
+	auto_accept = yes
+
+	is_shown = {
+		scope:recipient = {
+			var:agot_sh_ward_held_by ?= scope:actor
+			exists = var:agot_sh_court_ward_child
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = { is_imprisoned = no }
+	}
+
+	on_accept = {
+		scope:recipient.var:agot_sh_court_ward_child = { save_scope_as = agot_sh_ward }
+		scope:actor = {
+			if = {
+				limit = { has_relation_ward = scope:agot_sh_ward }
+				remove_relation_ward = scope:agot_sh_ward
+			}
+			remove_character_modifier = agot_sh_court_holds_ward_modifier
+		}
+		scope:recipient = {
+			if = {
+				limit = { scope:agot_sh_ward = { is_alive = yes } }
+				add_courtier = scope:agot_sh_ward
+			}
+			remove_variable = agot_sh_ward_held_by
+			remove_variable = agot_sh_court_ward_child
+			add_opinion = {
+				target = scope:actor
+				modifier = agot_sh_court_ward_returned_opinion
+			}
+		}
+	}
+
+	ai_potential = { always = no }
+	ai_will_do = { base = 0 }
+}
+
+#------------------------------------------------------------------------------
+# 27. Racheter la loyauté : payer les dettes d'un vassal
+#------------------------------------------------------------------------------
+agot_sh_court_pay_debts_interaction = {
+	category = interaction_category_vassal
+	icon = icon_imperial_treasury
+	desc = agot_sh_court_pay_debts_interaction_desc
+	auto_accept = yes
+
+	cooldown_against_recipient = { years = 10 }
+
+	is_shown = {
+		scope:recipient = {
+			agot_sh_court_direct_vassal_trigger = { LIEGE = scope:actor }
+			gold < 0
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:actor = {
+			custom_description = {
+				text = agot_sh_court_cannot_afford_debts_tt
+				gold >= scope:recipient.agot_sh_court_debt_value
+			}
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			save_scope_value_as = { name = agot_sh_debt value = agot_sh_court_debt_value }
+		}
+		scope:actor = {
+			pay_short_term_gold = {
+				target = scope:recipient
+				gold = scope:agot_sh_debt
+			}
+			if = {
+				limit = {
+					can_add_hook = {
+						target = scope:recipient
+						type = favor_hook
+					}
+				}
+				add_hook = {
+					type = favor_hook
+					target = scope:recipient
+				}
+			}
+		}
+		scope:recipient = {
+			add_opinion = {
+				target = scope:actor
+				modifier = agot_sh_court_debts_paid_opinion
+			}
+		}
+	}
+
+	ai_potential = {
+		is_ruler = yes
+		gold >= 300
+	}
+	ai_targets = { ai_recipients = vassals }
+	ai_frequency = 36
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 30
+			scope:recipient = {
+				highest_held_title_tier >= tier_duchy
+				opinion = { target = scope:actor value < 0 }
+			}
+			scope:actor = {
+				gold >= {
+					value = scope:recipient.agot_sh_court_debt_value
+					multiply = 3
+				}
+			}
+		}
+	}
+}
+
+#------------------------------------------------------------------------------
+# 37. Placer un « petit oiseau » chez un vassal
+#------------------------------------------------------------------------------
+agot_sh_court_place_spy_interaction = {
+	category = interaction_category_vassal
+	icon = secret
+	desc = agot_sh_court_place_spy_interaction_desc
+	auto_accept = yes
+
+	cooldown = { years = 2 }
+
+	cost = {
+		gold = medium_gold_value
+	}
+
+	is_shown = {
+		scope:actor = { is_ruler = yes }
+		scope:recipient = {
+			is_ruler = yes
+			is_vassal_or_below_of = scope:actor
+		}
+	}
+
+	is_valid_showing_failures_only = {
+		scope:recipient = {
+			custom_description = {
+				text = agot_sh_court_spy_already_tt
+				NOT = { var:agot_sh_court_spy_of ?= scope:actor }
+			}
+		}
+	}
+
+	on_accept = {
+		scope:recipient = {
+			set_variable = {
+				name = agot_sh_court_spy_of
+				value = scope:actor
+				years = 5
+			}
+		}
+		scope:actor = {
+			custom_tooltip = agot_sh_court_place_spy_tt
+			trigger_event = {
+				id = agot_sh_court.0200
+				days = { 30 90 }
+			}
+		}
+	}
+
+	ai_potential = {
+		is_ruler = yes
+		highest_held_title_tier >= tier_kingdom
+		intrigue >= 12
+	}
+	ai_targets = { ai_recipients = vassals }
+	ai_frequency = 60
+	ai_will_do = {
+		base = 0
+		modifier = {
+			add = 15
+			scope:recipient = {
+				opinion = { target = scope:actor value < -20 }
+			}
+		}
+	}
+}

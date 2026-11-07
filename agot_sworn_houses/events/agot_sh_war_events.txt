@@ -1,0 +1,1487 @@
+﻿###############################################################################
+# AGOT - Sworn Houses : Guerre et économie
+# Namespace agot_sh_war
+###############################################################################
+namespace = agot_sh_war
+
+###############################################################################
+# 0005 - Répartiteur de début de guerre (caché)
+# Lancé pour l'attaquant et le défenseur principaux par on_war_started.
+###############################################################################
+agot_sh_war.0005 = {
+	type = character_event
+	hidden = yes
+
+	trigger = {
+		is_ruler = yes
+		is_alive = yes
+		any_vassal = { agot_sh_is_active_vassal = yes }
+	}
+
+	immediate = {
+		if = {
+			limit = { this = scope:attacker }
+			scope:defender = { save_scope_as = sh_enemy }
+		}
+		else = {
+			scope:attacker = { save_scope_as = sh_enemy }
+		}
+		if = {
+			limit = {
+				# Pas de guerre interne : seulement contre un ennemi extérieur
+				NOT = { scope:sh_enemy = { is_vassal_or_below_of = root } }
+				NOT = { is_vassal_or_below_of = scope:sh_enemy }
+			}
+			# Idée 29 - Le ban et l'arrière-ban (joueurs : c'est un résumé)
+			if = {
+				limit = { is_ai = no }
+				trigger_event = { id = agot_sh_war.0020 days = 2 }
+			}
+			# Idée 5 - Un vassal puissant exige son prix
+			random_vassal = {
+				limit = {
+					agot_sh_is_active_vassal = yes
+					highest_held_title_tier >= tier_duchy
+					OR = {
+						agot_sh_is_ambitious = yes
+						agot_sh_is_opportunist = yes
+						dynasty ?= dynasty:dynn_Frey
+					}
+					opinion = { target = root value < 50 }
+					NOT = { has_character_flag = agot_sh_war_price_demanded }
+				}
+				weight = {
+					base = 1
+					modifier = { add = 5 dynasty ?= dynasty:dynn_Frey }
+					modifier = { add = 3 has_title = title:c_the_twins }
+				}
+				save_scope_as = sh_vassal
+			}
+			if = {
+				limit = { exists = scope:sh_vassal }
+				random = {
+					chance = 50
+					trigger_event = { id = agot_sh_war.0010 days = 4 }
+				}
+			}
+			# Idée 32 - Un vassal prudent cherche une paix séparée
+			random_vassal = {
+				limit = {
+					agot_sh_is_active_vassal = yes
+					highest_held_title_tier >= tier_duchy
+					agot_sh_is_cautious = yes
+					opinion = { target = root value < 40 }
+				}
+				save_scope_as = sh_neutral
+			}
+			if = {
+				limit = { exists = scope:sh_neutral }
+				random = {
+					chance = 35
+					trigger_event = { id = agot_sh_war.0100 days = 15 }
+				}
+			}
+		}
+	}
+}
+
+###############################################################################
+# 0010 - Le prix du ralliement (idée 5) - lore : Walder Frey et les Jumeaux
+###############################################################################
+agot_sh_war.0010 = {
+	type = character_event
+	title = agot_sh_war.0010.t
+	desc = agot_sh_war.0010.desc
+	theme = war
+	left_portrait = { character = root animation = thinking }
+	right_portrait = { character = scope:sh_vassal animation = scheme }
+
+	trigger = {
+		exists = scope:sh_vassal
+		scope:sh_vassal = {
+			is_alive = yes
+			is_vassal_of = root
+		}
+		is_at_war = yes
+	}
+
+	immediate = {
+		scope:sh_vassal = {
+			add_character_flag = { flag = agot_sh_war_price_demanded years = 5 }
+		}
+		# Un mariage possible entre nos deux maisons ?
+		random_child = {
+			limit = {
+				is_adult = yes
+				is_ruler = no
+				is_married = no
+				is_betrothed = no
+			}
+			save_scope_as = sh_bride
+		}
+		if = {
+			limit = { exists = scope:sh_bride }
+			scope:sh_vassal = {
+				random_child = {
+					limit = {
+						is_adult = yes
+						is_married = no
+						is_betrothed = no
+						can_marry_character_trigger = { CHARACTER = scope:sh_bride }
+					}
+					save_scope_as = sh_groom
+				}
+			}
+		}
+	}
+
+	# Payer en or
+	option = {
+		name = agot_sh_war.0010.a
+		trigger = { gold >= 50 }
+		pay_short_term_gold = {
+			target = scope:sh_vassal
+			gold = medium_gold_value
+		}
+		scope:sh_vassal = {
+			add_opinion = { target = root modifier = agot_sh_war_price_paid_opinion }
+		}
+		ai_chance = {
+			base = 40
+			ai_value_modifier = { ai_greed = -0.5 }
+			modifier = { add = 20 gold >= 300 }
+		}
+	}
+
+	# Accorder un mariage
+	option = {
+		name = agot_sh_war.0010.b
+		trigger = { exists = scope:sh_groom }
+		scope:sh_bride = { marry = scope:sh_groom }
+		add_prestige = minor_prestige_loss
+		scope:sh_vassal = {
+			add_opinion = { target = root modifier = agot_sh_war_price_paid_opinion }
+			add_prestige = medium_prestige_gain
+		}
+		ai_chance = {
+			base = 30
+			modifier = { add = 20 agot_sh_is_cautious = yes }
+		}
+	}
+
+	# Promettre une faveur (titre ou charge à venir : le vassal obtient une prise)
+	option = {
+		name = agot_sh_war.0010.c
+		scope:sh_vassal = {
+			add_hook = { type = favor_hook target = root }
+			add_opinion = { target = root modifier = agot_sh_war_rally_opinion }
+		}
+		ai_chance = {
+			base = 20
+			ai_value_modifier = { ai_honor = 0.3 }
+		}
+	}
+
+	# Refuser : grief durable
+	option = {
+		name = agot_sh_war.0010.e
+		add_prestige = minor_prestige_gain
+		scope:sh_vassal = {
+			add_opinion = { target = root modifier = agot_sh_war_price_refused_opinion }
+		}
+		random_targeting_faction = {
+			limit = {
+				NOT = { exists = faction_war }
+				NOT = { faction_is_type = populist_faction }
+			}
+			save_scope_as = sh_target_faction
+		}
+		if = {
+			limit = {
+				exists = scope:sh_target_faction
+				scope:sh_vassal = { can_join_faction = scope:sh_target_faction }
+			}
+			random = {
+				chance = 25
+				scope:sh_vassal = { join_faction = scope:sh_target_faction }
+			}
+		}
+		ai_chance = {
+			base = 15
+			ai_value_modifier = { ai_boldness = 0.5 ai_vengefulness = 0.3 }
+			modifier = { add = 20 has_trait = arrogant }
+		}
+	}
+}
+
+###############################################################################
+# 0020 - Le ban et l'arrière-ban (idée 29)
+# Résumé : n'agit pas sur les levées réelles (More Interactive Vassals /
+# AGOT: Immersion), seulement sur opinion, prestige et modificateurs.
+###############################################################################
+agot_sh_war.0020 = {
+	type = character_event
+	title = agot_sh_war.0020.t
+	desc = agot_sh_war.0020.desc
+	theme = war
+	left_portrait = { character = root animation = marshal }
+
+	trigger = {
+		is_at_war = yes
+		any_vassal = { agot_sh_is_active_vassal = yes }
+	}
+
+	immediate = {
+		set_variable = { name = agot_sh_war_zeal_count value = 0 }
+		set_variable = { name = agot_sh_war_lag_count value = 0 }
+		every_vassal = {
+			limit = { agot_sh_is_active_vassal = yes }
+			if = {
+				limit = {
+					OR = {
+						agot_sh_is_loyalist = yes
+						opinion = { target = root value >= 50 }
+					}
+					opinion = { target = root value >= 0 }
+				}
+				add_to_list = sh_zealous
+				root = { change_variable = { name = agot_sh_war_zeal_count add = 1 } }
+			}
+			else_if = {
+				limit = {
+					OR = {
+						opinion = { target = root value < 0 }
+						AND = {
+							agot_sh_is_cautious = yes
+							opinion = { target = root value < 30 }
+						}
+						AND = {
+							agot_sh_war_is_fickle_trigger = yes
+							opinion = { target = root value < 10 }
+						}
+					}
+				}
+				add_to_list = sh_laggards
+				root = { change_variable = { name = agot_sh_war_lag_count add = 1 } }
+			}
+		}
+	}
+
+	# Honorer publiquement les plus zélés
+	option = {
+		name = agot_sh_war.0020.a
+		trigger = { var:agot_sh_war_zeal_count > 0 }
+		every_in_list = {
+			list = sh_zealous
+			add_opinion = { target = root modifier = agot_sh_war_zeal_praised_opinion }
+			add_character_modifier = { modifier = agot_sh_war_zealous_banner_modifier years = 2 }
+		}
+		ai_chance = { base = 50 }
+	}
+
+	# Tancer les retardataires
+	option = {
+		name = agot_sh_war.0020.b
+		trigger = { var:agot_sh_war_lag_count > 0 }
+		every_in_list = {
+			list = sh_laggards
+			add_opinion = { target = root modifier = agot_sh_war_rebuked_opinion }
+		}
+		add_dread = minor_dread_gain
+		add_prestige = minor_prestige_gain
+		ai_chance = {
+			base = 30
+			ai_value_modifier = { ai_boldness = 0.5 }
+		}
+	}
+
+	# Ne rien dire : la guerre parlera
+	option = {
+		name = agot_sh_war.0020.c
+		ai_chance = { base = 20 }
+	}
+
+	after = {
+		remove_variable = agot_sh_war_zeal_count
+		remove_variable = agot_sh_war_lag_count
+	}
+}
+
+###############################################################################
+# 0030 - Garde de la frontière (idée 12)
+###############################################################################
+agot_sh_war.0030 = {
+	type = character_event
+	title = agot_sh_war.0030.t
+	desc = agot_sh_war.0030.desc
+	theme = martial
+	left_portrait = { character = root animation = worry }
+	cooldown = { years = 4 }
+
+	trigger = {
+		is_ruler = yes
+		is_adult = yes
+		is_imprisoned = no
+		agot_sh_war_holds_march_trigger = yes
+	}
+
+	# Mener une sortie
+	option = {
+		name = agot_sh_war.0030.a
+		add_prestige = medium_prestige_gain
+		add_character_modifier = { modifier = agot_sh_war_border_sally_modifier years = 2 }
+		stress_impact = {
+			craven = medium_stress_impact_gain
+			brave = minor_stress_impact_loss
+		}
+		ai_chance = {
+			base = 30
+			ai_value_modifier = { ai_boldness = 1 }
+		}
+	}
+
+	# Renforcer la garnison
+	option = {
+		name = agot_sh_war.0030.b
+		remove_short_term_gold = minor_gold_value
+		add_character_modifier = { modifier = agot_sh_war_border_reinforced_modifier years = 3 }
+		ai_chance = {
+			base = 40
+			modifier = { add = 20 agot_sh_is_cautious = yes }
+		}
+	}
+
+	# Appeler son suzerain à l'aide
+	option = {
+		name = agot_sh_war.0030.c
+		trigger = { exists = liege }
+		random_list = {
+			60 = {
+				desc = agot_sh_war.0030.c.success
+				modifier = {
+					add = 20
+					liege = { opinion = { target = root value >= 30 } }
+				}
+				add_opinion = { target = liege modifier = agot_sh_war_march_support_opinion }
+				add_character_modifier = { modifier = agot_sh_war_border_reinforced_modifier years = 2 }
+			}
+			40 = {
+				desc = agot_sh_war.0030.c.failure
+				add_opinion = { target = liege modifier = agot_sh_war_march_ignored_opinion }
+			}
+		}
+		ai_chance = {
+			base = 20
+			modifier = { add = 20 agot_sh_is_loyalist = yes }
+		}
+	}
+}
+
+###############################################################################
+# 0040 - Péages et droits de passage (idée 35)
+###############################################################################
+agot_sh_war.0040 = {
+	type = character_event
+	title = agot_sh_war.0040.t
+	desc = agot_sh_war.0040.desc
+	theme = stewardship
+	left_portrait = { character = root animation = personality_greedy }
+	cooldown = { years = 5 }
+
+	trigger = {
+		is_ruler = yes
+		is_adult = yes
+		agot_sh_war_holds_toll_trigger = yes
+		NOT = { has_character_modifier = agot_sh_war_heavy_tolls_modifier }
+		NOT = { has_character_modifier = agot_sh_war_fair_tolls_modifier }
+	}
+
+	# Péages lourds : les voisins grincent des dents
+	option = {
+		name = agot_sh_war.0040.a
+		add_character_modifier = { modifier = agot_sh_war_heavy_tolls_modifier years = 5 }
+		if = {
+			limit = { exists = liege }
+			liege = {
+				every_vassal = {
+					limit = {
+						this != root
+						agot_sh_is_active_vassal = yes
+						exists = capital_county
+						capital_county.empire ?= root.capital_county.empire
+					}
+					add_opinion = { target = root modifier = agot_sh_war_toll_grievance_opinion }
+				}
+			}
+		}
+		else = {
+			every_vassal = {
+				limit = { agot_sh_is_active_vassal = yes }
+				add_opinion = { target = root modifier = agot_sh_war_toll_grievance_opinion }
+			}
+		}
+		ai_chance = {
+			base = 30
+			ai_value_modifier = { ai_greed = 1 }
+			modifier = { add = 30 agot_sh_is_opportunist = yes }
+			modifier = { add = 30 dynasty ?= dynasty:dynn_Frey }
+		}
+	}
+
+	# Péages raisonnables
+	option = {
+		name = agot_sh_war.0040.b
+		add_character_modifier = { modifier = agot_sh_war_fair_tolls_modifier years = 5 }
+		ai_chance = {
+			base = 40
+			modifier = { add = 20 agot_sh_is_cautious = yes }
+		}
+	}
+
+	# Libre passage pour les alliés
+	option = {
+		name = agot_sh_war.0040.c
+		add_prestige = minor_prestige_gain
+		if = {
+			limit = { exists = liege }
+			liege = {
+				add_opinion = { target = root modifier = agot_sh_war_toll_generosity_opinion }
+			}
+		}
+		ai_chance = {
+			base = 15
+			ai_value_modifier = { ai_honor = 0.5 ai_greed = -0.5 }
+			modifier = { add = 20 agot_sh_is_loyalist = yes }
+		}
+	}
+}
+
+###############################################################################
+# 0050 - Le sort des cadets (idée 14) - décision du chef de maison
+###############################################################################
+agot_sh_war.0050 = {
+	type = character_event
+	title = agot_sh_war.0050.t
+	desc = agot_sh_war.0050.desc
+	theme = family
+	left_portrait = { character = root animation = thinking }
+	right_portrait = { character = scope:sh_cadet animation = personality_bold }
+	cooldown = { years = 5 }
+
+	trigger = {
+		is_ruler = yes
+		is_landed = yes
+		is_house_head = yes
+		any_child = { agot_sh_war_landless_cadet_trigger = { HEAD = root } }
+	}
+
+	immediate = {
+		random_child = {
+			limit = { agot_sh_war_landless_cadet_trigger = { HEAD = root } }
+			save_scope_as = sh_cadet
+			add_character_flag = agot_sh_war_cadet_decided
+		}
+		if = {
+			limit = { exists = liege }
+			liege = { save_scope_as = sh_patron }
+		}
+		else = {
+			random_vassal = {
+				limit = {
+					agot_sh_is_active_vassal = yes
+					highest_held_title_tier >= tier_duchy
+				}
+				save_scope_as = sh_patron
+			}
+		}
+	}
+
+	# Prendre le noir
+	option = {
+		name = agot_sh_war.0050.a
+		trigger = { exists = title:k_the_wall.holder }
+		agot_send_to_nightswatch_effect = {
+			ACTOR = root
+			NIGHTSWATCH_CANDIDATE = scope:sh_cadet
+		}
+		add_prestige = minor_prestige_gain
+		scope:sh_cadet = {
+			add_opinion = { target = root modifier = agot_sh_war_cadet_sent_away_opinion }
+		}
+		ai_chance = {
+			base = 15
+			modifier = { add = 20 agot_sh_war_is_northern_trigger = yes }
+			modifier = { add = 20 scope:sh_cadet = { has_trait = craven } }
+		}
+	}
+
+	# La Citadelle
+	option = {
+		name = agot_sh_war.0050.b
+		trigger = { exists = global_var:citadel_title.holder }
+		scope:sh_cadet = {
+			set_employer = global_var:citadel_title.holder
+			add_opinion = { target = root modifier = agot_sh_war_cadet_sent_away_opinion }
+		}
+		ai_chance = {
+			base = 15
+			modifier = { add = 25 scope:sh_cadet = { learning >= 10 } }
+		}
+	}
+
+	# Le service d'un grand seigneur
+	option = {
+		name = agot_sh_war.0050.c
+		trigger = { exists = scope:sh_patron }
+		scope:sh_patron = {
+			add_courtier = scope:sh_cadet
+			add_opinion = { target = root modifier = agot_sh_war_cadet_favored_opinion }
+		}
+		ai_chance = {
+			base = 35
+			modifier = { add = 20 scope:sh_cadet = { martial >= 10 } }
+		}
+	}
+
+	# Le garder et le doter
+	option = {
+		name = agot_sh_war.0050.e
+		remove_short_term_gold = minor_gold_value
+		scope:sh_cadet = {
+			add_opinion = { target = root modifier = agot_sh_war_cadet_favored_opinion }
+		}
+		ai_chance = {
+			base = 25
+			ai_value_modifier = { ai_compassion = 0.5 ai_greed = -0.3 }
+		}
+	}
+}
+
+###############################################################################
+# 0060 - L'hiver vient (idée 15)
+# Saisons : character_capital_has_winter_trigger (AGOT ; redéfini par
+# « AGOT : Seasons of Ice and Fire » quand ce mod est actif).
+###############################################################################
+agot_sh_war.0060 = {
+	type = character_event
+	title = agot_sh_war.0060.t
+	desc = agot_sh_war.0060.desc
+	theme = war
+	left_portrait = { character = root animation = worry }
+	right_portrait = { character = scope:sh_northman animation = disapproval }
+	cooldown = { years = 2 }
+
+	trigger = {
+		is_ruler = yes
+		is_at_war = yes
+		any_vassal = {
+			agot_sh_is_active_vassal = yes
+			agot_sh_war_is_northern_trigger = yes
+			character_capital_has_winter_trigger = yes
+		}
+	}
+
+	immediate = {
+		every_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				agot_sh_war_is_northern_trigger = yes
+			}
+			add_to_list = sh_northmen
+		}
+		random_in_list = {
+			list = sh_northmen
+			limit = { character_capital_has_winter_trigger = yes }
+			save_scope_as = sh_northman
+		}
+	}
+
+	# Leur fournir des vivres
+	option = {
+		name = agot_sh_war.0060.a
+		remove_short_term_gold = medium_gold_value
+		every_in_list = {
+			list = sh_northmen
+			add_opinion = { target = root modifier = agot_sh_war_winter_provisioned_opinion }
+		}
+		ai_chance = {
+			base = 40
+			modifier = { add = 20 gold >= 200 }
+		}
+	}
+
+	# Les renvoyer chez eux avant les neiges
+	option = {
+		name = agot_sh_war.0060.b
+		add_prestige = medium_prestige_loss
+		every_in_list = {
+			list = sh_northmen
+			add_opinion = { target = root modifier = agot_sh_war_winter_provisioned_opinion }
+		}
+		ai_chance = {
+			base = 30
+			modifier = { add = 20 agot_sh_is_cautious = yes }
+		}
+	}
+
+	# Exiger qu'ils restent
+	option = {
+		name = agot_sh_war.0060.c
+		add_character_modifier = { modifier = agot_sh_war_winter_hardship_modifier years = 1 }
+		every_in_list = {
+			list = sh_northmen
+			add_opinion = { target = root modifier = agot_sh_war_winter_refused_opinion }
+		}
+		ai_chance = {
+			base = 20
+			ai_value_modifier = { ai_boldness = 0.5 ai_compassion = -0.5 }
+		}
+	}
+}
+
+###############################################################################
+# 0070 - L'Antique Voie (idée 16)
+###############################################################################
+agot_sh_war.0070 = {
+	type = character_event
+	title = agot_sh_war.0070.t
+	desc = agot_sh_war.0070.desc
+	theme = faith
+	left_portrait = { character = root animation = thinking }
+	right_portrait = { character = scope:sh_ironborn animation = personality_bold }
+	cooldown = { years = 5 }
+
+	trigger = {
+		is_ruler = yes
+		agot_sh_war_is_ironborn_trigger = no
+		any_vassal = {
+			agot_sh_is_active_vassal = yes
+			agot_sh_war_is_ironborn_trigger = yes
+			NOT = { has_character_flag = agot_sh_war_old_way_asked }
+		}
+	}
+
+	immediate = {
+		random_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				agot_sh_war_is_ironborn_trigger = yes
+				NOT = { has_character_flag = agot_sh_war_old_way_asked }
+			}
+			weight = {
+				base = 1
+				modifier = { add = 5 dynasty ?= dynasty:dynn_Greyjoy }
+			}
+			save_scope_as = sh_ironborn
+			add_character_flag = { flag = agot_sh_war_old_way_asked years = 10 }
+		}
+	}
+
+	# Accorder le droit de razzia
+	option = {
+		name = agot_sh_war.0070.a
+		every_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				agot_sh_war_is_ironborn_trigger = yes
+			}
+			add_opinion = { target = root modifier = agot_sh_war_old_way_granted_opinion }
+			add_character_modifier = { modifier = agot_sh_war_old_way_modifier years = 5 }
+		}
+		every_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				agot_sh_war_is_ironborn_trigger = no
+				exists = capital_county
+				capital_county = { is_coastal_county = yes }
+			}
+			add_opinion = { target = root modifier = agot_sh_war_reavers_tolerated_opinion }
+		}
+		ai_chance = {
+			base = 20
+			ai_value_modifier = { ai_honor = -0.5 }
+		}
+	}
+
+	# Refuser : les fer-nés grondent
+	option = {
+		name = agot_sh_war.0070.b
+		every_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				agot_sh_war_is_ironborn_trigger = yes
+			}
+			add_opinion = { target = root modifier = agot_sh_war_old_way_denied_opinion }
+		}
+		random_targeting_faction = {
+			limit = {
+				NOT = { exists = faction_war }
+				NOT = { faction_is_type = populist_faction }
+			}
+			save_scope_as = sh_target_faction
+		}
+		if = {
+			limit = {
+				exists = scope:sh_target_faction
+				scope:sh_ironborn = { can_join_faction = scope:sh_target_faction }
+			}
+			random = {
+				chance = 25
+				scope:sh_ironborn = { join_faction = scope:sh_target_faction }
+			}
+		}
+		ai_chance = {
+			base = 50
+			ai_value_modifier = { ai_honor = 0.5 }
+		}
+	}
+
+	# Payer le prix de l'or pour qu'ils restent chez eux
+	option = {
+		name = agot_sh_war.0070.c
+		remove_short_term_gold = medium_gold_value
+		add_prestige = minor_prestige_loss
+		ai_chance = {
+			base = 30
+			modifier = { add = 20 gold >= 300 }
+		}
+	}
+}
+
+###############################################################################
+# 0080 - Butin et gloire (idée 30)
+###############################################################################
+agot_sh_war.0080 = {
+	type = character_event
+	title = agot_sh_war.0080.t
+	desc = agot_sh_war.0080.desc
+	theme = war
+	left_portrait = { character = root animation = war_over_win }
+
+	trigger = {
+		is_ruler = yes
+		any_vassal = { agot_sh_is_active_vassal = yes }
+	}
+
+	# Partage généreux
+	option = {
+		name = agot_sh_war.0080.a
+		remove_short_term_gold = medium_gold_value
+		agot_sh_war_share_loot_effect = yes
+		ai_chance = {
+			base = 30
+			ai_value_modifier = { ai_greed = -0.5 ai_compassion = 0.3 }
+		}
+	}
+
+	# Tout garder
+	option = {
+		name = agot_sh_war.0080.b
+		add_gold = minor_gold_value
+		add_character_modifier = { modifier = agot_sh_war_hoarded_spoils_modifier years = 3 }
+		every_vassal = {
+			limit = { agot_sh_is_active_vassal = yes }
+			add_opinion = { target = root modifier = agot_sh_war_loot_greedy_opinion }
+		}
+		ai_chance = {
+			base = 25
+			ai_value_modifier = { ai_greed = 1 }
+		}
+	}
+
+	# Seulement les fidèles
+	option = {
+		name = agot_sh_war.0080.c
+		remove_short_term_gold = minor_gold_value
+		every_vassal = {
+			limit = { agot_sh_is_active_vassal = yes }
+			if = {
+				limit = {
+					OR = {
+						agot_sh_is_loyalist = yes
+						opinion = { target = root value >= 50 }
+					}
+				}
+				add_opinion = { target = root modifier = agot_sh_war_loot_generous_opinion }
+			}
+			else = {
+				add_opinion = { target = root modifier = agot_sh_war_loot_favoritism_opinion }
+			}
+		}
+		ai_chance = {
+			base = 35
+			ai_value_modifier = { ai_vengefulness = 0.5 }
+		}
+	}
+}
+
+###############################################################################
+# 0089 / 0090 - Rançon des nobles (idée 31) - lore : Jaime Lannister à Vivesaigues
+###############################################################################
+agot_sh_war.0089 = {
+	type = character_event
+	hidden = yes
+
+	trigger = {
+		is_ruler = yes
+		is_at_war = yes
+		any_vassal = {
+			agot_sh_is_active_vassal = yes
+			any_prisoner = {
+				is_ruler = yes
+				highest_held_title_tier >= tier_duchy
+				OR = {
+					is_at_war_with = root
+					top_liege = { is_at_war_with = root }
+				}
+			}
+		}
+	}
+
+	immediate = {
+		random_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				any_prisoner = {
+					is_ruler = yes
+					highest_held_title_tier >= tier_duchy
+					OR = {
+						is_at_war_with = root
+						top_liege = { is_at_war_with = root }
+					}
+				}
+			}
+			save_scope_as = sh_captor
+			random_prisoner = {
+				limit = {
+					is_ruler = yes
+					highest_held_title_tier >= tier_duchy
+					OR = {
+						is_at_war_with = root
+						top_liege = { is_at_war_with = root }
+					}
+				}
+				save_scope_as = sh_prisoner
+			}
+		}
+		if = {
+			limit = { exists = scope:sh_prisoner }
+			trigger_event = agot_sh_war.0090
+		}
+	}
+}
+
+agot_sh_war.0090 = {
+	type = character_event
+	title = agot_sh_war.0090.t
+	desc = agot_sh_war.0090.desc
+	theme = prison
+	left_portrait = { character = scope:sh_captor animation = personality_greedy }
+	right_portrait = { character = scope:sh_prisoner animation = shame }
+	cooldown = { years = 3 }
+
+	trigger = {
+		exists = scope:sh_prisoner
+		scope:sh_prisoner = { is_imprisoned_by = scope:sh_captor }
+	}
+
+	# Exiger qu'il me soit livré
+	option = {
+		name = agot_sh_war.0090.a
+		if = {
+			limit = {
+				scope:sh_captor = {
+					OR = {
+						agot_sh_is_loyalist = yes
+						opinion = { target = root value >= 30 }
+					}
+				}
+			}
+			custom_tooltip = agot_sh_war.0090.a.yield
+			scope:sh_prisoner = { release_from_prison = yes }
+			imprison = {
+				target = scope:sh_prisoner
+				type = dungeon
+			}
+			scope:sh_captor = {
+				add_opinion = { target = root modifier = agot_sh_war_rebuked_opinion }
+			}
+		}
+		else = {
+			custom_tooltip = agot_sh_war.0090.a.refuse
+			add_prestige = minor_prestige_loss
+			scope:sh_captor = {
+				add_opinion = { target = root modifier = agot_sh_war_ransom_seized_opinion }
+			}
+		}
+		ai_chance = {
+			base = 35
+			ai_value_modifier = { ai_boldness = 0.5 }
+		}
+	}
+
+	# Partager la rançon
+	option = {
+		name = agot_sh_war.0090.b
+		scope:sh_captor = {
+			pay_short_term_gold = {
+				target = root
+				gold = minor_gold_value
+			}
+		}
+		ai_chance = {
+			base = 40
+			ai_value_modifier = { ai_greed = 0.5 }
+		}
+	}
+
+	# Lui laisser sa prise
+	option = {
+		name = agot_sh_war.0090.c
+		add_prestige = minor_prestige_loss
+		scope:sh_captor = {
+			add_opinion = { target = root modifier = agot_sh_war_ransom_kept_opinion }
+		}
+		ai_chance = {
+			base = 25
+			ai_value_modifier = { ai_compassion = 0.3 ai_greed = -0.5 }
+		}
+	}
+}
+
+###############################################################################
+# 0100 - Paix séparée (idée 32) - lore : le Val pendant la guerre des Cinq Rois
+###############################################################################
+agot_sh_war.0100 = {
+	type = character_event
+	title = agot_sh_war.0100.t
+	desc = agot_sh_war.0100.desc
+	theme = diplomacy
+	left_portrait = { character = root animation = anger }
+	right_portrait = { character = scope:sh_neutral animation = personality_rational }
+
+	trigger = {
+		is_at_war = yes
+		exists = scope:sh_neutral
+		scope:sh_neutral = {
+			is_alive = yes
+			is_vassal_of = root
+		}
+	}
+
+	# Accepter sa neutralité
+	option = {
+		name = agot_sh_war.0100.a
+		add_prestige = minor_prestige_loss
+		scope:sh_neutral = {
+			add_character_modifier = { modifier = agot_sh_war_neutrality_modifier years = 3 }
+			add_opinion = { target = root modifier = agot_sh_war_neutrality_granted_opinion }
+		}
+		ai_chance = {
+			base = 30
+			modifier = { add = 20 agot_sh_is_cautious = yes }
+		}
+	}
+
+	# Le menacer
+	option = {
+		name = agot_sh_war.0100.b
+		add_dread = minor_dread_gain
+		random_list = {
+			50 = {
+				desc = agot_sh_war.0100.b.yield
+				modifier = {
+					add = 25
+					scope:sh_neutral = { has_trait = craven }
+				}
+				scope:sh_neutral = {
+					add_opinion = { target = root modifier = agot_sh_war_neutrality_threat_opinion }
+				}
+			}
+			50 = {
+				desc = agot_sh_war.0100.b.defy
+				scope:sh_neutral = {
+					add_opinion = { target = root modifier = agot_sh_war_neutrality_threat_opinion }
+					add_character_modifier = { modifier = agot_sh_war_neutrality_modifier years = 3 }
+				}
+			}
+		}
+		ai_chance = {
+			base = 35
+			ai_value_modifier = { ai_boldness = 0.5 }
+		}
+	}
+
+	# L'acheter
+	option = {
+		name = agot_sh_war.0100.c
+		pay_short_term_gold = {
+			target = scope:sh_neutral
+			gold = medium_gold_value
+		}
+		ai_chance = {
+			base = 25
+			modifier = { add = 20 gold >= 300 }
+		}
+	}
+}
+
+###############################################################################
+# 0110 / 0111 - Garnisons et châtelains (idée 33)
+###############################################################################
+agot_sh_war.0110 = {
+	type = character_event
+	title = agot_sh_war.0110.t
+	desc = agot_sh_war.0110.desc
+	theme = realm
+	left_portrait = { character = root animation = thinking }
+	right_portrait = { character = scope:sh_castellan animation = personality_honorable }
+	cooldown = { years = 5 }
+
+	trigger = {
+		is_ruler = yes
+		NOT = { has_variable = agot_sh_war_castellan }
+		agot_sh_war_holds_key_fortress_trigger = yes
+		any_held_title = {
+			tier = tier_county
+			agot_sh_war_key_fortress_title_trigger = yes
+			this != root.capital_county
+		}
+		any_courtier = {
+			is_adult = yes
+			is_imprisoned = no
+			martial >= 8
+		}
+	}
+
+	immediate = {
+		random_held_title = {
+			limit = {
+				tier = tier_county
+				agot_sh_war_key_fortress_title_trigger = yes
+				this != root.capital_county
+			}
+			save_scope_as = sh_county
+		}
+		random_courtier = {
+			limit = {
+				is_adult = yes
+				is_imprisoned = no
+				martial >= 8
+			}
+			weight = {
+				base = 1
+				modifier = {
+					add = 3
+					opinion = { target = root value >= 30 }
+				}
+				modifier = { add = 2 has_trait = loyal }
+			}
+			save_scope_as = sh_castellan
+		}
+	}
+
+	# Nommer ce châtelain
+	option = {
+		name = agot_sh_war.0110.a
+		set_variable = { name = agot_sh_war_castellan value = scope:sh_castellan }
+		set_variable = { name = agot_sh_war_castellan_county value = scope:sh_county }
+		add_character_modifier = agot_sh_war_castellan_modifier
+		scope:sh_castellan = {
+			add_opinion = { target = root modifier = agot_sh_war_castellan_trusted_opinion }
+		}
+		ai_chance = { base = 70 }
+	}
+
+	# Garder la place sous ma seule autorité
+	option = {
+		name = agot_sh_war.0110.b
+		ai_chance = {
+			base = 30
+			modifier = { add = 20 has_trait = paranoid }
+		}
+	}
+}
+
+# Le châtelain déloyal livre la place
+agot_sh_war.0111 = {
+	type = character_event
+	title = agot_sh_war.0111.t
+	desc = agot_sh_war.0111.desc
+	theme = war
+	left_portrait = { character = root animation = rage }
+	right_portrait = { character = scope:sh_castellan animation = scheme }
+
+	trigger = {
+		is_at_war = yes
+		has_variable = agot_sh_war_castellan
+		has_variable = agot_sh_war_castellan_county
+		var:agot_sh_war_castellan = {
+			is_alive = yes
+			is_courtier_of = root
+			OR = {
+				opinion = { target = root value < 0 }
+				AND = {
+					opinion = { target = root value < 20 }
+					OR = {
+						has_trait = deceitful
+						has_trait = ambitious
+						has_trait = greedy
+					}
+				}
+			}
+		}
+	}
+
+	immediate = {
+		var:agot_sh_war_castellan = { save_scope_as = sh_castellan }
+		var:agot_sh_war_castellan_county = {
+			save_scope_as = sh_county
+			change_county_control = -50
+		}
+		remove_character_modifier = agot_sh_war_castellan_modifier
+		remove_variable = agot_sh_war_castellan
+		remove_variable = agot_sh_war_castellan_county
+		add_prestige = medium_prestige_loss
+	}
+
+	# Le jeter au cachot
+	option = {
+		name = agot_sh_war.0111.a
+		imprison = {
+			target = scope:sh_castellan
+			type = dungeon
+		}
+		ai_chance = { base = 60 }
+	}
+
+	# Qu'il fuie, et que son nom soit maudit
+	option = {
+		name = agot_sh_war.0111.b
+		scope:sh_castellan = { move_to_pool = yes }
+		ai_chance = { base = 40 }
+	}
+}
+
+###############################################################################
+# 0120 - Un vassal ruiné emprunte (idée 34)
+###############################################################################
+agot_sh_war.0120 = {
+	type = character_event
+	title = agot_sh_war.0120.t
+	desc = agot_sh_war.0120.desc
+	theme = stewardship
+	left_portrait = { character = root animation = steward }
+	right_portrait = { character = scope:sh_debtor animation = beg }
+	cooldown = { years = 5 }
+
+	trigger = {
+		is_ruler = yes
+		gold >= 100
+		any_vassal = {
+			agot_sh_is_active_vassal = yes
+			gold < 0
+		}
+	}
+
+	immediate = {
+		random_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				gold < 0
+			}
+			save_scope_as = sh_debtor
+		}
+	}
+
+	# Prêter, contre une dette (prise)
+	option = {
+		name = agot_sh_war.0120.a
+		pay_short_term_gold = {
+			target = scope:sh_debtor
+			gold = medium_gold_value
+		}
+		add_hook = { type = indebted_hook target = scope:sh_debtor }
+		ai_chance = {
+			base = 45
+			ai_value_modifier = { ai_greed = 0.3 }
+		}
+	}
+
+	# Donner sans rien exiger
+	option = {
+		name = agot_sh_war.0120.b
+		pay_short_term_gold = {
+			target = scope:sh_debtor
+			gold = medium_gold_value
+		}
+		scope:sh_debtor = {
+			add_opinion = { target = root modifier = agot_sh_war_loan_granted_opinion }
+		}
+		ai_chance = {
+			base = 20
+			ai_value_modifier = { ai_compassion = 0.5 ai_greed = -0.5 }
+		}
+	}
+
+	# Refuser
+	option = {
+		name = agot_sh_war.0120.c
+		scope:sh_debtor = {
+			add_opinion = { target = root modifier = agot_sh_war_loan_refused_opinion }
+		}
+		ai_chance = {
+			base = 35
+			ai_value_modifier = { ai_greed = 0.5 }
+		}
+	}
+}
+
+###############################################################################
+# 0125 / 0126 - La Couronne endettée (idée 34)
+# Distinct de agot_dc.0251 (Dragon Chronicles, lié aux dragons).
+###############################################################################
+agot_sh_war.0125 = {
+	type = character_event
+	title = agot_sh_war.0125.t
+	desc = agot_sh_war.0125.desc
+	theme = stewardship
+	left_portrait = { character = root animation = worry }
+	right_portrait = { character = scope:sh_lender animation = personality_greedy }
+	cooldown = { years = 10 }
+
+	trigger = {
+		agot_sh_is_sovereign = yes
+		gold < 0
+		NOT = { has_variable = agot_sh_war_iron_bank_debt }
+	}
+
+	immediate = {
+		random_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				dynasty ?= dynasty:dynn_Lannister
+				gold >= 300
+			}
+			save_scope_as = sh_lender
+		}
+	}
+
+	# Emprunter aux Lannister
+	option = {
+		name = agot_sh_war.0125.a
+		trigger = { exists = scope:sh_lender }
+		scope:sh_lender = {
+			pay_short_term_gold = {
+				target = root
+				gold = medium_gold_value
+			}
+			add_hook = { type = indebted_hook target = root }
+		}
+		ai_chance = { base = 40 }
+	}
+
+	# Emprunter à la Banque de Fer de Braavos
+	option = {
+		name = agot_sh_war.0125.b
+		add_gold = major_gold_value
+		set_variable = { name = agot_sh_war_iron_bank_debt value = yes }
+		add_character_modifier = { modifier = agot_sh_war_iron_bank_debt_modifier years = 3 }
+		trigger_event = { id = agot_sh_war.0126 years = 3 }
+		ai_chance = {
+			base = 30
+			modifier = { add = -20 agot_sh_is_cautious = yes }
+		}
+	}
+
+	# Se serrer la ceinture
+	option = {
+		name = agot_sh_war.0125.c
+		add_prestige = medium_prestige_loss
+		stress_impact = { base = minor_stress_impact_gain }
+		ai_chance = {
+			base = 30
+			modifier = { add = 20 agot_sh_is_cautious = yes }
+		}
+	}
+}
+
+agot_sh_war.0126 = {
+	type = character_event
+	title = agot_sh_war.0126.t
+	desc = agot_sh_war.0126.desc
+	theme = stewardship
+	left_portrait = { character = root animation = worry }
+
+	trigger = {
+		has_variable = agot_sh_war_iron_bank_debt
+	}
+
+	# Rembourser, avec les intérêts
+	option = {
+		name = agot_sh_war.0126.a
+		remove_short_term_gold = major_gold_value
+		remove_short_term_gold = minor_gold_value
+		remove_variable = agot_sh_war_iron_bank_debt
+		add_prestige = minor_prestige_gain
+		ai_chance = {
+			base = 70
+			modifier = { add = -60 gold < 0 }
+		}
+	}
+
+	# Faire défaut
+	option = {
+		name = agot_sh_war.0126.b
+		remove_variable = agot_sh_war_iron_bank_debt
+		add_prestige = major_prestige_loss
+		add_character_modifier = { modifier = agot_sh_war_iron_bank_wrath_modifier years = 10 }
+		ai_chance = { base = 30 }
+	}
+}
+
+###############################################################################
+# 0129 / 0130 - Mariages contre or (idée 36)
+###############################################################################
+agot_sh_war.0129 = {
+	type = character_event
+	hidden = yes
+
+	trigger = {
+		is_ruler = yes
+		any_child = {
+			is_adult = yes
+			is_ruler = no
+			is_married = no
+			is_betrothed = no
+		}
+		any_vassal = {
+			agot_sh_is_active_vassal = yes
+			gold >= 500
+			NOT = { has_character_flag = agot_sh_war_bought_marriage }
+		}
+	}
+
+	immediate = {
+		random_child = {
+			limit = {
+				is_adult = yes
+				is_ruler = no
+				is_married = no
+				is_betrothed = no
+			}
+			save_scope_as = sh_bride
+		}
+		random_vassal = {
+			limit = {
+				agot_sh_is_active_vassal = yes
+				gold >= 500
+				NOT = { has_character_flag = agot_sh_war_bought_marriage }
+				any_child = {
+					is_adult = yes
+					is_married = no
+					is_betrothed = no
+					can_marry_character_trigger = { CHARACTER = scope:sh_bride }
+				}
+			}
+			save_scope_as = sh_suitor
+			random_child = {
+				limit = {
+					is_adult = yes
+					is_married = no
+					is_betrothed = no
+					can_marry_character_trigger = { CHARACTER = scope:sh_bride }
+				}
+				save_scope_as = sh_groom
+			}
+		}
+		if = {
+			limit = { exists = scope:sh_groom }
+			scope:sh_suitor = {
+				add_character_flag = { flag = agot_sh_war_bought_marriage years = 10 }
+			}
+			trigger_event = agot_sh_war.0130
+		}
+	}
+}
+
+agot_sh_war.0130 = {
+	type = character_event
+	title = agot_sh_war.0130.t
+	desc = agot_sh_war.0130.desc
+	theme = marriage
+	left_portrait = { character = scope:sh_suitor animation = personality_greedy }
+	right_portrait = { character = scope:sh_groom animation = happiness }
+	lower_right_portrait = scope:sh_bride
+
+	trigger = {
+		exists = scope:sh_groom
+		scope:sh_bride = { can_marry_character_trigger = { CHARACTER = scope:sh_groom } }
+	}
+
+	# Accepter l'or et l'alliance
+	option = {
+		name = agot_sh_war.0130.a
+		scope:sh_suitor = {
+			pay_short_term_gold = {
+				target = root
+				gold = medium_gold_value
+			}
+			add_prestige = medium_prestige_gain
+			add_opinion = { target = root modifier = agot_sh_war_marriage_bought_opinion }
+		}
+		scope:sh_bride = { marry = scope:sh_groom }
+		add_prestige = minor_prestige_loss
+		ai_chance = {
+			base = 50
+			ai_value_modifier = { ai_greed = 0.5 }
+			modifier = { add = 20 gold < 0 }
+		}
+	}
+
+	# Exiger davantage
+	option = {
+		name = agot_sh_war.0130.b
+		random_list = {
+			50 = {
+				desc = agot_sh_war.0130.b.accept
+				modifier = {
+					add = 20
+					scope:sh_suitor = { gold >= 1000 }
+				}
+				scope:sh_suitor = {
+					pay_short_term_gold = {
+						target = root
+						gold = major_gold_value
+					}
+					add_opinion = { target = root modifier = agot_sh_war_marriage_bought_opinion }
+				}
+				scope:sh_bride = { marry = scope:sh_groom }
+				add_prestige = minor_prestige_loss
+			}
+			50 = {
+				desc = agot_sh_war.0130.b.refuse
+				scope:sh_suitor = {
+					add_opinion = { target = root modifier = agot_sh_war_marriage_spurned_opinion }
+				}
+			}
+		}
+		ai_chance = {
+			base = 25
+			ai_value_modifier = { ai_greed = 1 }
+		}
+	}
+
+	# Refuser : le sang ne s'achète pas
+	option = {
+		name = agot_sh_war.0130.c
+		add_prestige = minor_prestige_gain
+		scope:sh_suitor = {
+			add_opinion = { target = root modifier = agot_sh_war_marriage_spurned_opinion }
+		}
+		ai_chance = {
+			base = 25
+			modifier = { add = 25 has_trait = arrogant }
+		}
+	}
+}

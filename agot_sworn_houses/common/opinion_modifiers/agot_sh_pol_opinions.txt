@@ -1,0 +1,147 @@
+﻿# AGOT - Sworn Houses : Politique et maisons - modificateurs d'opinion
+
+# 6. Grief durable (exécution d'un parent, titre révoqué, guerre perdue)
+agot_sh_pol_grievance_opinion = {
+	opinion = -40
+	decaying = yes
+	monthly_change = 0.15
+}
+
+# 13. Exécution d'un grand seigneur
+agot_sh_pol_execution_fear_opinion = {
+	opinion = 10
+	years = 5
+}
+agot_sh_pol_execution_anger_opinion = {
+	opinion = -25
+	years = 10
+}
+agot_sh_pol_execution_rally_opinion = {
+	opinion = 10
+	years = 5
+}
+agot_sh_pol_kinsman_executed_opinion = {
+	opinion = -50
+	decaying = yes
+	monthly_change = 0.2
+}
+
+# 7. Vengeance et réconciliation
+agot_sh_pol_vengeance_humiliated_opinion = {
+	opinion = -30
+	years = 10
+}
+agot_sh_pol_reparations_opinion = {
+	opinion = 30
+	years = 10
+}
+agot_sh_pol_feud_ended_by_marriage_opinion = {
+	opinion = 20
+	years = 10
+}
+
+# 8. Droit des invités
+agot_sh_pol_guest_right_broken_opinion = {
+	opinion = -60
+	decaying = yes
+	monthly_change = 0.1
+}
+
+# 9. Pupilles
+agot_sh_pol_heir_in_his_care_opinion = {
+	opinion = 15
+	years = 1
+}
+agot_sh_pol_ward_harmed_opinion = {
+	opinion = -80
+	decaying = yes
+	monthly_change = 0.1
+}
+
+# 10. Blocs de maisons
+agot_sh_pol_bloc_kinship_opinion = {
+	opinion = 15
+	years = 1
+}
+agot_sh_pol_bloc_heeded_opinion = {
+	opinion = 15
+	years = 5
+}
+agot_sh_pol_bloc_refused_opinion = {
+	opinion = -20
+	years = 5
+}
+
+# 11. Mariages et promesses
+agot_sh_pol_broken_betrothal_opinion = {
+	opinion = -40
+	decaying = yes
+	monthly_change = 0.1
+}
+agot_sh_pol_honored_match_opinion = {
+	opinion = 20
+	years = 10
+}
+
+# 18. Les Verts et les Noirs
+agot_sh_pol_side_chosen_for_opinion = {
+	opinion = 25
+	years = 10
+}
+agot_sh_pol_side_chosen_against_opinion = {
+	opinion = -30
+	years = 10
+}
+
+# 19. La Main du Roi
+agot_sh_pol_hand_jealousy_opinion = {
+	opinion = -20
+	years = 5
+}
+agot_sh_pol_hand_slandered_opinion = {
+	opinion = -10
+	years = 3
+}
+agot_sh_pol_hand_courted_opinion = {
+	opinion = 15
+	years = 5
+}
+
+# 20 / 22. Rebelle vaincu
+agot_sh_pol_knee_mercy_opinion = {
+	opinion = 20
+	years = 10
+}
+agot_sh_pol_rebel_spared_approve_opinion = {
+	opinion = 10
+	years = 5
+}
+agot_sh_pol_rebel_spared_weak_opinion = {
+	opinion = -10
+	years = 5
+}
+
+# 21 / 41. Parole donnée
+agot_sh_pol_oathbreaker_opinion = {
+	opinion = -60
+	decaying = yes
+	monthly_change = 0.1
+}
+agot_sh_pol_oath_sworn_opinion = {
+	opinion = 15
+	years = 15
+}
+agot_sh_pol_oath_refused_opinion = {
+	opinion = -30
+	years = 15
+}
+
+# 42. Régence contestée
+agot_sh_pol_regency_rival_opinion = {
+	opinion = -30
+	years = 10
+}
+agot_sh_pol_regency_support_opinion = {
+	opinion = 20
+	years = 10
+}

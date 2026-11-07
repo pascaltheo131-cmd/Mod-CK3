@@ -1,0 +1,78 @@
+﻿# AGOT - Sworn Houses : Guerre et économie - modificateurs
+
+# Seigneur des Marches : garde d'une place frontalière clé
+agot_sh_war_marcher_modifier = {
+	icon = martial_positive
+	garrison_size = 0.25
+	defender_advantage = 3
+}
+agot_sh_war_border_reinforced_modifier = {
+	icon = martial_positive
+	garrison_size = 0.3
+	defender_advantage = 2
+}
+agot_sh_war_border_sally_modifier = {
+	icon = prestige_positive
+	monthly_prestige = 1
+}
+
+# Péages
+agot_sh_war_heavy_tolls_modifier = {
+	icon = economy_positive
+	monthly_income = 1.5
+}
+agot_sh_war_fair_tolls_modifier = {
+	icon = economy_positive
+	monthly_income = 0.5
+}
+
+# Ban et arrière-ban
+agot_sh_war_zealous_banner_modifier = {
+	icon = prestige_positive
+	monthly_prestige = 0.5
+}
+
+# Paix séparée : le vassal garde ses hommes chez lui
+agot_sh_war_neutrality_modifier = {
+	icon = martial_negative
+	levy_size = -0.5
+}
+
+# Antique Voie
+agot_sh_war_old_way_modifier = {
+	icon = prestige_positive
+	monthly_prestige = 1
+	levy_size = 0.1
+}
+
+# Hiver
+agot_sh_war_winter_hardship_modifier = {
+	icon = martial_negative
+	supply_limit_mult = -0.2
+	men_at_arms_maintenance = 0.1
+}
+
+# Butin
+agot_sh_war_hoarded_spoils_modifier = {
+	icon = economy_positive
+	domain_tax_mult = 0.1
+	vassal_opinion = -5
+}
+
+# Châtelain loyal
+agot_sh_war_castellan_modifier = {
+	icon = martial_positive
+	garrison_size = 0.2
+	defender_advantage = 2
+}
+
+# Dettes
+agot_sh_war_iron_bank_debt_modifier = {
+	icon = stewardship_mixed
+	domain_tax_mult = -0.05
+}
+agot_sh_war_iron_bank_wrath_modifier = {
+	icon = social_negative
+	domain_tax_mult = -0.2
+	monthly_prestige = -1
+}

@@ -24,3 +24,19 @@ agot_dc_dragon_feared_county_modifier = {
 	county_opinion_add = -10
 	levy_size = 0.1
 }
+
+# Repris du sous-mod « AGOT Dragon Events » (dre_)
+agot_dc_dragon_bond_modifier = {
+	stress_loss_mult = 0.2
+	monthly_prestige = 0.5
+}
+
+agot_dc_dragon_fury_modifier = {
+	prowess = 3
+	dread_gain_mult = 0.2
+}
+
+agot_dc_dragon_wounded_modifier = {
+	monthly_prestige = -0.5
+	stress_gain_mult = 0.25
+}

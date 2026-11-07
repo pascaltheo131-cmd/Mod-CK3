@@ -62,6 +62,7 @@ agot_dc_battle.0100 = {
 					trigger_event = agot_dc_battle.1021
 				}
 				8 = { trigger_event = agot_dc_battle.1031 } # Le rugissement de la victoire
+				8 = { trigger_event = agot_dc_battle.1041 } # Terreur des cieux
 			}
 		}
 	}
@@ -81,6 +82,7 @@ agot_dc_battle.0200 = {
 				10 = { trigger_event = agot_dc_battle.2001 } # Le dragon devient incontrôlable
 				10 = { trigger_event = agot_dc_battle.2011 } # Désarçonné
 				10 = { trigger_event = agot_dc_battle.2021 } # Couvrir la retraite
+				10 = { trigger_event = agot_dc_battle.2031 } # Dragon blessé dans la défaite
 			}
 		}
 	}

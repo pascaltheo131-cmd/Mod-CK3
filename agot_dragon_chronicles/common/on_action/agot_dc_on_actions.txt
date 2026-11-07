@@ -17,6 +17,10 @@ agot_dc_yearly_dragon_pulse = {
 		10 = agot_dc.0061 # Vol dans la tempête
 		10 = agot_dc.0071 # Le dragon incendie un navire pirate
 		10 = agot_dc.0081 # Fête populaire en l'honneur du dragon
+		10 = agot_dc.0091 # Un dragon rétif
+		5 = agot_dc.0101 # Le dragon grandit
+		10 = agot_dc.0111 # Rêves de feu
+		6 = agot_dc.0121 # Le dragon s'en prend à un courtisan
 	}
 }
 

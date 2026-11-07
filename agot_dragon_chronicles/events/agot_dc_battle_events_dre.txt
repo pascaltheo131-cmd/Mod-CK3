@@ -1,0 +1,63 @@
+﻿namespace = agot_dc_battle
+
+###############################################################################
+# AGOT - Dragon Chronicles : batailles reprises du sous-mod « AGOT Dragon Events »
+# Envoyés par les gestionnaires agot_dc_battle.0100 / 0200 (mêmes scopes).
+###############################################################################
+
+#########################################
+# 1041 - Terreur des cieux (victoire)
+#########################################
+agot_dc_battle.1041 = {
+	type = character_event
+	title = agot_dc_battle.1041.t
+	desc = agot_dc_battle.1041.desc
+	theme = battle
+	left_portrait = { character = root animation = war_over_win }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+
+	option = {
+		name = agot_dc_battle.1041.a
+		add_prestige = medium_prestige_gain
+		add_martial_lifestyle_xp = medium_lifestyle_xp
+		add_character_modifier = { modifier = agot_dc_dragon_fury_modifier years = 2 }
+	}
+}
+
+#########################################
+# 2031 - Dragon blessé dans la défaite
+#########################################
+agot_dc_battle.2031 = {
+	type = character_event
+	title = agot_dc_battle.2031.t
+	desc = agot_dc_battle.2031.desc
+	theme = battle
+	left_portrait = { character = root animation = war_over_loss }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	immediate = {
+		scope:dc_dragon = { wound_dragon = yes }
+	}
+
+	option = { # Le soigner personnellement
+		name = agot_dc_battle.2031.a
+		add_stress = medium_stress_gain
+		add_character_modifier = { modifier = agot_dc_dragon_bond_modifier years = 3 }
+		ai_chance = { base = 60 }
+	}
+	option = { # Repartir au combat malgré tout
+		name = agot_dc_battle.2031.b
+		add_prestige = minor_prestige_gain
+		add_character_modifier = { modifier = agot_dc_dragon_wounded_modifier years = 2 }
+		ai_chance = { base = 40 }
+	}
+}

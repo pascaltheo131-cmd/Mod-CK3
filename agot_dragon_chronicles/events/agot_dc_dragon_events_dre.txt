@@ -1,0 +1,185 @@
+﻿namespace = agot_dc
+
+###############################################################################
+# AGOT - Dragon Chronicles : évènements repris du sous-mod « AGOT Dragon Events »
+# (ancienne branche agot-dragon-events, préfixe dre_), adaptés au système AGOT.
+###############################################################################
+
+#########################################
+# 0091 - Un dragon rétif
+#########################################
+agot_dc.0091 = {
+	type = character_event
+	title = agot_dc.0091.t
+	desc = agot_dc.0091.desc
+	theme = dragon
+	cooldown = { years = 8 }
+	left_portrait = { character = root animation = anger }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { agot_dc_rider_with_dragon_trigger = yes }
+	immediate = { var:current_dragon = { save_scope_as = dc_dragon } }
+
+	option = { # Imposer sa volonté
+		name = agot_dc.0091.a
+		duel = {
+			skill = prowess
+			value = 12
+			50 = {
+				desc = agot_dc.0091.a.success
+				compare_modifier = { value = scope:duel_value multiplier = 3.5 }
+				add_prestige = medium_prestige_gain
+				agot_add_dragon_training_xp = { VALUE = 20 }
+				add_character_modifier = { modifier = agot_dc_dragon_bond_modifier years = 5 }
+			}
+			50 = {
+				desc = agot_dc.0091.a.fail
+				compare_modifier = { value = scope:duel_value multiplier = -3.5 }
+				increase_wounds_effect = { REASON = dragon }
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 has_trait = brave }
+		}
+	}
+	option = { # Patience
+		name = agot_dc.0091.b
+		add_stress = minor_stress_gain
+		agot_add_dragon_training_xp = { VALUE = 5 }
+		scope:dc_dragon = { change_temperament = { VALUE = -5 } }
+		ai_chance = {
+			base = 50
+			modifier = { add = 30 has_trait = patient }
+		}
+	}
+}
+
+#########################################
+# 0101 - Le dragon grandit
+#########################################
+agot_dc.0101 = {
+	type = character_event
+	title = agot_dc.0101.t
+	desc = agot_dc.0101.desc
+	theme = dragon
+	cooldown = { years = 15 }
+	left_portrait = { character = root animation = happiness }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { agot_dc_rider_with_dragon_trigger = yes }
+	immediate = { var:current_dragon = { save_scope_as = dc_dragon } }
+
+	option = {
+		name = agot_dc.0101.a
+		add_prestige = medium_prestige_gain
+		add_dread = 10
+	}
+}
+
+#########################################
+# 0111 - Rêves de feu
+#########################################
+agot_dc.0111 = {
+	type = character_event
+	title = agot_dc.0111.t
+	desc = agot_dc.0111.desc
+	theme = dragon
+	cooldown = { years = 10 }
+	left_portrait = { character = root animation = personality_rational }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { agot_dc_rider_with_dragon_trigger = yes }
+	immediate = { var:current_dragon = { save_scope_as = dc_dragon } }
+
+	option = { # Méditer sur le lien
+		name = agot_dc.0111.a
+		add_character_modifier = { modifier = agot_dc_dragon_bond_modifier years = 3 }
+		agot_add_dragon_training_xp = { VALUE = 10 }
+	}
+	option = { # Interroger les mestres
+		name = agot_dc.0111.b
+		add_learning_lifestyle_xp = medium_lifestyle_xp
+	}
+}
+
+#########################################
+# 0121 - Le dragon s'en prend à un courtisan
+#########################################
+agot_dc.0121 = {
+	type = character_event
+	title = agot_dc.0121.t
+	desc = agot_dc.0121.desc
+	theme = dragon
+	cooldown = { years = 15 }
+	left_portrait = { character = root animation = shock }
+	right_portrait = { character = scope:dc_victim animation = fear }
+	lower_right_portrait = scope:dc_dragon
+	trigger = {
+		agot_dc_rider_with_dragon_trigger = yes
+		any_courtier = {
+			is_adult = yes
+			NOT = { has_trait = dragon }
+			NOT = { is_close_or_extended_family_of = root }
+		}
+	}
+	immediate = {
+		var:current_dragon = { save_scope_as = dc_dragon }
+		random_courtier = {
+			limit = {
+				is_adult = yes
+				NOT = { has_trait = dragon }
+				NOT = { is_close_or_extended_family_of = root }
+			}
+			save_scope_as = dc_victim
+		}
+	}
+
+	option = { # Intervenir
+		name = agot_dc.0121.a
+		scope:dc_victim = { add_opinion = { target = root modifier = grateful_opinion opinion = 30 } }
+		random = {
+			chance = 30
+			send_interface_toast = {
+				title = agot_dc.0121.a.hurt
+				left_icon = root
+				increase_wounds_effect = { REASON = dragon }
+			}
+		}
+		stress_impact = { callous = minor_stress_impact_gain }
+		ai_chance = {
+			base = 60
+			modifier = { add = 30 has_trait = compassionate }
+		}
+	}
+	option = { # Laisser faire
+		name = agot_dc.0121.b
+		add_dread = 25
+		scope:dc_victim = {
+			death = {
+				death_reason = death_dragon
+				killer = scope:dc_dragon
+			}
+		}
+		stress_impact = {
+			compassionate = major_stress_impact_gain
+			just = medium_stress_impact_gain
+		}
+		ai_chance = {
+			base = 20
+			modifier = { add = 40 has_trait = sadistic }
+		}
+	}
+}

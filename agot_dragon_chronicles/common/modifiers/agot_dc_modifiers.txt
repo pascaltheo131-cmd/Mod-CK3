@@ -40,3 +40,38 @@ agot_dc_dragon_wounded_modifier = {
 	monthly_prestige = -0.5
 	stress_gain_mult = 0.25
 }
+
+# Vague 2
+agot_dc_valyrian_saddle_modifier = {
+	prowess = 2
+	monthly_prestige = 0.3
+}
+
+agot_dc_scale_armor_modifier = {
+	prowess = 3
+	health = 0.25
+}
+
+agot_dc_minstrel_song_modifier = {
+	monthly_prestige = 1
+	general_opinion = 3
+}
+
+agot_dc_dragon_cradle_modifier = {
+	health = 0.5
+	prowess = 1
+}
+
+agot_dc_aerial_champion_modifier = {
+	monthly_prestige = 1
+	prowess = 1
+}
+
+agot_dc_iron_bank_debt_modifier = {
+	monthly_income_mult = -0.2
+}
+
+agot_dc_wild_dragon_county_modifier = {
+	county_opinion_add = -5
+	development_growth_factor = -0.1
+}

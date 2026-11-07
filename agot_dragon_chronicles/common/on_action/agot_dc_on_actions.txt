@@ -7,7 +7,7 @@ yearly_playable_pulse = {
 agot_dc_yearly_dragon_pulse = {
 	trigger = { agot_dc_rider_with_dragon_trigger = yes }
 	random_events = {
-		200 = 0
+		300 = 0
 		10 = agot_dc.0001 # La viande empoisonnée
 		10 = agot_dc.0011 # Le marché des écailles
 		10 = agot_dc.0021 # Un septon veut bénir (ou maudire) le dragon
@@ -21,6 +21,20 @@ agot_dc_yearly_dragon_pulse = {
 		5 = agot_dc.0101 # Le dragon grandit
 		10 = agot_dc.0111 # La langue des dragons
 		6 = agot_dc.0121 # Le dragon s'en prend à un courtisan
+		6 = agot_dc.0131 # Bataille navale (en guerre)
+		8 = agot_dc.0141 # Le dragon jaloux
+		8 = agot_dc.0151 # Rivalité entre dragons
+		5 = agot_dc.0161 # La selle de Valyria
+		8 = agot_dc.0171 # Le chant du ménestrel
+		5 = agot_dc.0181 # L'armure d'écailles
+		8 = agot_dc.0191 # Le dragon et le bébé
+		10 = agot_dc.0201 # Un dragon trop gourmand
+		5 = agot_dc.0211 # Les sorciers de Qarth
+		6 = agot_dc.0221 # Le dragon sauvage voisin
+		8 = agot_dc.0231 # Le tournoi aérien
+		4 = agot_dc.0241 # Les Dothrakis
+		5 = agot_dc.0251 # La Banque de Fer
+		4 = agot_dc.0261 # Au-delà du Mur
 	}
 }
 

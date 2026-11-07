@@ -63,6 +63,19 @@ agot_dc_battle.0100 = {
 				}
 				8 = { trigger_event = agot_dc_battle.1031 } # Le festin du champ de bataille
 				8 = { trigger_event = agot_dc_battle.1041 } # La bannière arrachée
+				8 = { trigger_event = agot_dc_battle.1051 } # Pluie de feu sur le camp
+				8 = { trigger_event = agot_dc_battle.1061 } # Les chevaux s'affolent
+				8 = { trigger_event = agot_dc_battle.1071 } # Le pont en flammes
+				8 = { # Enlèvement en plein vol
+					trigger = {
+						exists = scope:dc_enemy_commander
+						scope:dc_enemy_commander = {
+							NOT = { has_trait = dragonrider }
+							NOT = { has_trait = dragon }
+						}
+					}
+					trigger_event = agot_dc_battle.1081
+				}
 			}
 		}
 	}
@@ -83,6 +96,7 @@ agot_dc_battle.0200 = {
 				10 = { trigger_event = agot_dc_battle.2011 } # Désarçonné
 				10 = { trigger_event = agot_dc_battle.2021 } # Couvrir la retraite
 				10 = { trigger_event = agot_dc_battle.2031 } # Dragon blessé dans la défaite
+				10 = { trigger_event = agot_dc_battle.2041 } # Désertion par terreur
 			}
 		}
 	}

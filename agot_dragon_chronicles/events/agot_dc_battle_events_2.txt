@@ -1,0 +1,159 @@
+﻿namespace = agot_dc_battle
+
+###############################################################################
+# AGOT - Dragon Chronicles : batailles, vague 2
+# Envoyés par les gestionnaires agot_dc_battle.0100 / 0200 (mêmes scopes).
+###############################################################################
+
+#########################################
+# 1051 - Pluie de feu sur le camp (victoire)
+#########################################
+agot_dc_battle.1051 = {
+	type = character_event
+	title = agot_dc_battle.1051.t
+	desc = agot_dc_battle.1051.desc
+	theme = battle
+	left_portrait = {
+		character = root
+		animation = jockey_gallop
+		camera = camera_dragonrider_over_battlefield
+	}
+
+	option = { # Incendier le camp pendant la nuit
+		name = agot_dc_battle.1051.a
+		add_dread = 15
+		add_prestige = medium_prestige_gain
+		stress_impact = { compassionate = medium_stress_impact_gain }
+		ai_chance = { base = 60 }
+	}
+	option = { # Seulement les tentes des chefs
+		name = agot_dc_battle.1051.b
+		add_prestige = minor_prestige_gain
+		add_intrigue_lifestyle_xp = minor_lifestyle_xp
+		ai_chance = { base = 40 }
+	}
+}
+
+#########################################
+# 1061 - Les chevaux s'affolent (victoire)
+#########################################
+agot_dc_battle.1061 = {
+	type = character_event
+	title = agot_dc_battle.1061.t
+	desc = agot_dc_battle.1061.desc
+	theme = battle
+	left_portrait = { character = root animation = war_over_win }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+
+	option = { # Capturer les chevaux
+		name = agot_dc_battle.1061.a
+		add_gold = minor_gold_value
+		add_stewardship_lifestyle_xp = minor_lifestyle_xp
+		ai_chance = { base = 50 }
+	}
+	option = { # Poursuivre les chevaliers à terre
+		name = agot_dc_battle.1061.b
+		add_prestige = medium_prestige_gain
+		add_martial_lifestyle_xp = medium_lifestyle_xp
+		ai_chance = { base = 50 }
+	}
+}
+
+#########################################
+# 1071 - Le pont en flammes (victoire)
+#########################################
+agot_dc_battle.1071 = {
+	type = character_event
+	title = agot_dc_battle.1071.t
+	desc = agot_dc_battle.1071.desc
+	theme = battle
+	left_portrait = {
+		character = root
+		animation = jockey_gallop
+		camera = camera_dragonrider_over_battlefield
+	}
+
+	option = { # Brûler le pont : aucun ne s'échappera
+		name = agot_dc_battle.1071.a
+		add_dread = 15
+		add_prestige = medium_prestige_gain
+		ai_chance = { base = 60 }
+	}
+	option = { # Épargner le pont, il fait vivre la région
+		name = agot_dc_battle.1071.b
+		add_prestige = minor_prestige_gain
+		add_stewardship_lifestyle_xp = minor_lifestyle_xp
+		ai_chance = { base = 40 }
+	}
+}
+
+#########################################
+# 1081 - Enlèvement en plein vol (victoire)
+#########################################
+agot_dc_battle.1081 = {
+	type = character_event
+	title = agot_dc_battle.1081.t
+	desc = agot_dc_battle.1081.desc
+	theme = battle
+	left_portrait = { character = root animation = personality_bold }
+	right_portrait = { character = scope:dc_enemy_commander animation = fear }
+	lower_right_portrait = scope:dc_dragon
+	trigger = { scope:dc_enemy_commander ?= { is_alive = yes } }
+
+	option = { # Exiger une rançon
+		name = agot_dc_battle.1081.a
+		scope:dc_enemy_commander = {
+			pay_short_term_gold = { target = root gold = medium_gold_value }
+			add_opinion = { target = root modifier = angry_opinion opinion = -20 }
+		}
+		add_prestige = medium_prestige_gain
+		ai_chance = { base = 60 }
+	}
+	option = { # Le relâcher en plein ciel… au-dessus de ses lignes
+		name = agot_dc_battle.1081.b
+		add_dread = 20
+		scope:dc_enemy_commander = {
+			increase_wounds_effect = { REASON = dragon }
+			add_opinion = { target = root modifier = scared_opinion opinion = -40 }
+		}
+		ai_chance = {
+			base = 40
+			modifier = { add = 30 has_trait = sadistic }
+		}
+	}
+}
+
+#########################################
+# 2041 - Désertion par terreur (défaite)
+#########################################
+agot_dc_battle.2041 = {
+	type = character_event
+	title = agot_dc_battle.2041.t
+	desc = agot_dc_battle.2041.desc
+	theme = battle
+	left_portrait = { character = root animation = anger }
+	right_portrait = {
+		character = scope:dc_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+
+	option = { # Faire un exemple des déserteurs
+		name = agot_dc_battle.2041.a
+		add_dread = 15
+		stress_impact = { compassionate = medium_stress_impact_gain }
+		ai_chance = { base = 50 }
+	}
+	option = { # Pardonner : leur peur était légitime
+		name = agot_dc_battle.2041.b
+		add_prestige = minor_prestige_loss
+		add_character_modifier = { modifier = agot_dc_dragon_merciful_modifier years = 3 }
+		ai_chance = { base = 50 }
+	}
+}

@@ -5,7 +5,7 @@
 # (agot_dc_aerial_tournament). Tous envoyés à l'hôte (root), sauf 0021.
 #  0001        : ouverture / parade
 #  0010        : répartiteur caché des incidents
-#  0011 - 0016 : incidents
+#  0011 - 0019, 0022 : incidents
 #  0020        : finale et remise du prix
 #  0021        : notification au vainqueur (s'il n'est pas l'hôte)
 ###############################################################################
@@ -123,6 +123,16 @@ agot_dc_tourney.0010 = {
 			20 = { trigger_event = agot_dc_tourney.0014 } # Foule terrifiée
 			15 = { trigger_event = agot_dc_tourney.0015 } # Chute d'un cavalier
 			15 = { trigger_event = agot_dc_tourney.0016 } # Vent violent
+			15 = { trigger_event = agot_dc_tourney.0017 } # Les paris
+			15 = {
+				trigger = { agot_dc_tourney_has_two_racers_trigger = yes }
+				trigger_event = agot_dc_tourney.0018 # Accusation de sabotage
+			}
+			8 = { trigger_event = agot_dc_tourney.0019 } # Dragon sauvage
+			12 = {
+				trigger = { agot_dc_tourney_has_two_racers_trigger = yes }
+				trigger_event = agot_dc_tourney.0022 # Défi lancé à l'hôte
+			}
 		}
 	}
 }
@@ -630,5 +640,200 @@ agot_dc_tourney.0021 = {
 	option = {
 		name = agot_dc_tourney.0021.a
 		add_stress = minor_stress_loss
+	}
+}
+
+#########################################
+# 0017 - Les paris
+#########################################
+agot_dc_tourney.0017 = {
+	type = activity_event
+	title = agot_dc_tourney.0017.t
+	desc = agot_dc_tourney.0017.desc
+	theme = dragon
+	left_portrait = { character = root animation = scheme }
+	right_portrait = {
+		character = scope:dc_racer_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { exists = involved_activity }
+	immediate = { agot_dc_tourney_pick_racer_effect = yes }
+
+	option = { # Prélever une part des paris
+		name = agot_dc_tourney.0017.a
+		add_gold = minor_gold_value
+		add_piety = minor_piety_loss
+		ai_chance = { base = 50 modifier = { add = 40 has_trait = greedy } }
+	}
+	option = { # Parier soi-même sur le favori
+		name = agot_dc_tourney.0017.b
+		random_list = {
+			50 = {
+				desc = agot_dc_tourney.0017.b.win
+				add_gold = medium_gold_value
+			}
+			50 = {
+				desc = agot_dc_tourney.0017.b.lose
+				remove_short_term_gold = minor_gold_value
+				add_stress = minor_stress_gain
+			}
+		}
+		ai_chance = { base = 25 modifier = { add = 30 has_trait = arbitrary } }
+	}
+	option = { # Interdire les paris
+		name = agot_dc_tourney.0017.c
+		add_piety = minor_piety_gain
+		ai_chance = { base = 25 modifier = { add = 40 has_trait = zealous } }
+	}
+}
+
+#########################################
+# 0018 - Accusation de sabotage
+#########################################
+agot_dc_tourney.0018 = {
+	type = activity_event
+	title = agot_dc_tourney.0018.t
+	desc = agot_dc_tourney.0018.desc
+	theme = intrigue
+	left_portrait = { character = scope:dc_rival animation = anger }
+	right_portrait = { character = scope:dc_racer animation = worry }
+	trigger = { agot_dc_tourney_has_two_racers_trigger = yes }
+	immediate = {
+		agot_dc_tourney_pick_racer_effect = yes
+		agot_dc_tourney_pick_second_racer_effect = yes
+	}
+
+	option = { # Mener l'enquête
+		name = agot_dc_tourney.0018.a
+		duel = {
+			skill = intrigue
+			value = 12
+			60 = {
+				desc = agot_dc_tourney.0018.a.found
+				compare_modifier = { value = scope:duel_value multiplier = 3 }
+				add_prestige = minor_prestige_gain
+				scope:dc_rival = { add_opinion = { target = root modifier = grateful_opinion opinion = 20 } }
+				scope:dc_racer = { add_character_flag = { flag = agot_dc_tourney_hampered months = 3 } }
+			}
+			40 = {
+				desc = agot_dc_tourney.0018.a.nothing
+				add_stress = minor_stress_gain
+			}
+		}
+		ai_chance = { base = 50 }
+	}
+	option = { # Disqualifier l'accusé
+		name = agot_dc_tourney.0018.b
+		scope:dc_racer = {
+			add_character_flag = { flag = agot_dc_tourney_hampered months = 3 }
+			add_opinion = { target = root modifier = angry_opinion opinion = -25 }
+		}
+		add_dread = minor_dread_gain
+		ai_chance = { base = 25 modifier = { add = 30 has_trait = paranoid } }
+	}
+	option = { # Accusations sans preuve : rejetées
+		name = agot_dc_tourney.0018.c
+		scope:dc_rival = { add_opinion = { target = root modifier = angry_opinion opinion = -20 } }
+		ai_chance = { base = 25 }
+	}
+}
+
+#########################################
+# 0019 - Un dragon sauvage survole l'arène
+#########################################
+agot_dc_tourney.0019 = {
+	type = activity_event
+	title = agot_dc_tourney.0019.t
+	desc = agot_dc_tourney.0019.desc
+	theme = dragon
+	left_portrait = { character = root animation = shock }
+	right_portrait = {
+		character = scope:dc_racer_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	trigger = { exists = involved_activity }
+	immediate = { agot_dc_tourney_pick_racer_effect = yes }
+
+	option = { # Le chasser avec les dragons du tournoi
+		name = agot_dc_tourney.0019.a
+		trigger = { agot_dc_rider_with_dragon_trigger = yes }
+		random_list = {
+			60 = {
+				desc = agot_dc_tourney.0019.a.success
+				modifier = { add = prowess }
+				add_prestige = medium_prestige_gain
+				agot_add_dragon_training_xp = { VALUE = 5 }
+			}
+			40 = {
+				desc = agot_dc_tourney.0019.a.fail
+				var:current_dragon ?= { wound_dragon = yes }
+			}
+		}
+		ai_chance = { base = 50 modifier = { add = 30 has_trait = brave } }
+	}
+	option = { # Faire évacuer les tribunes
+		name = agot_dc_tourney.0019.b
+		add_prestige = minor_prestige_loss
+		add_stress = minor_stress_loss
+		ai_chance = { base = 50 modifier = { add = 30 has_trait = craven } }
+	}
+}
+
+#########################################
+# 0022 - Un concurrent défie l'hôte
+#########################################
+agot_dc_tourney.0022 = {
+	type = activity_event
+	title = agot_dc_tourney.0022.t
+	desc = agot_dc_tourney.0022.desc
+	theme = dragon
+	left_portrait = { character = root animation = personality_bold }
+	right_portrait = { character = scope:dc_rival animation = personality_bold }
+	trigger = {
+		agot_dc_tourney_has_two_racers_trigger = yes
+		agot_dc_rider_with_dragon_trigger = yes
+	}
+	immediate = {
+		agot_dc_tourney_pick_racer_effect = yes
+		involved_activity = {
+			random_attending_character = {
+				limit = {
+					agot_dc_rider_with_dragon_trigger = yes
+					NOT = { this = root }
+				}
+				save_scope_as = dc_rival
+			}
+		}
+	}
+
+	option = { # Relever le défi
+		name = agot_dc_tourney.0022.a
+		duel = {
+			skill = prowess
+			target = scope:dc_rival
+			50 = {
+				desc = agot_dc_tourney.0022.a.win
+				compare_modifier = { value = scope:duel_value multiplier = 3 }
+				add_prestige = medium_prestige_gain
+				scope:dc_rival = { add_prestige = minor_prestige_loss }
+			}
+			50 = {
+				desc = agot_dc_tourney.0022.a.lose
+				compare_modifier = { value = scope:duel_value multiplier = -3 }
+				add_prestige = minor_prestige_loss
+				scope:dc_rival = { add_prestige = minor_prestige_gain }
+			}
+		}
+		ai_chance = { base = 60 modifier = { add = 30 has_trait = brave } }
+	}
+	option = { # Décliner : l'hôte ne concourt pas
+		name = agot_dc_tourney.0022.b
+		add_prestige = minor_prestige_loss
+		scope:dc_rival = { add_opinion = { target = root modifier = angry_opinion opinion = -10 } }
+		ai_chance = { base = 40 modifier = { add = 30 has_trait = craven } }
 	}
 }

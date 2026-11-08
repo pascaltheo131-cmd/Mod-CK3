@@ -166,10 +166,15 @@ agot_dc_aerial_tournament = {
 			is_predefined = yes
 			order = 1
 
+			# Correctif boucle : la progression de phase ne dépend plus du test
+			# « this = scope:host » (qui pouvait ne jamais être vrai et laisser la
+			# phase tourner indéfiniment, « prochaine activité dans 7 j »).
+			# Elle est programmée une seule fois, quel que soit le scope root.
 			on_phase_active = {
-				if = {
-					limit = { this = scope:host }
-					scope:activity = {
+				scope:activity = {
+					if = {
+						limit = { NOT = { has_variable = agot_dc_parade_scheduled } }
+						set_variable = agot_dc_parade_scheduled
 						add_activity_log_entry = {
 							key = agot_dc_aerial_parade_log
 							tags = { contest }
@@ -177,8 +182,8 @@ agot_dc_aerial_tournament = {
 							character = scope:host
 						}
 						progress_activity_phase_after = { days = 3 }
+						scope:host = { trigger_event = agot_dc_tourney.0001 }
 					}
-					trigger_event = agot_dc_tourney.0001
 				}
 			}
 		}
@@ -188,12 +193,16 @@ agot_dc_aerial_tournament = {
 			order = 2
 
 			on_phase_active = {
-				if = {
-					limit = { this = scope:host }
-					trigger_event = { id = agot_dc_tourney.0010 days = 1 }
-					trigger_event = { id = agot_dc_tourney.0010 days = 4 }
-					trigger_event = { id = agot_dc_tourney.0020 days = 7 }
-					scope:activity = {
+				scope:activity = {
+					if = {
+						limit = { NOT = { has_variable = agot_dc_contest_scheduled } }
+						set_variable = agot_dc_contest_scheduled
+						scope:host = {
+							trigger_event = { id = agot_dc_tourney.0010 days = 1 }
+							trigger_event = { id = agot_dc_tourney.0010 days = 3 }
+							trigger_event = { id = agot_dc_tourney.0010 days = 5 }
+							trigger_event = { id = agot_dc_tourney.0020 days = 7 }
+						}
 						progress_activity_phase_after = { days = 9 }
 					}
 				}

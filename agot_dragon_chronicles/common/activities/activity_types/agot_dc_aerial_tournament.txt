@@ -192,6 +192,19 @@ agot_dc_aerial_tournament = {
 			is_predefined = yes
 			order = 2
 
+			# Une phase qui n'est pas la première reste en attente tant qu'on ne la fait pas
+			# progresser (même méthode que le Festin du jeu) : sans cela, on_phase_active
+			# ne se déclenche jamais et l'activité tourne en boucle.
+			on_enter_phase = {
+				scope:activity = {
+					if = {
+						limit = { NOT = { has_variable = agot_dc_contest_entered } }
+						set_variable = agot_dc_contest_entered
+						progress_activity_phase_after = { days = 1 }
+					}
+				}
+			}
+
 			on_phase_active = {
 				scope:activity = {
 					if = {

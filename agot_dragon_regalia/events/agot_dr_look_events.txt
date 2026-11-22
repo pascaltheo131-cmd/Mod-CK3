@@ -48,6 +48,13 @@ agot_dr_look.0001 = {
 	right_portrait = {
 		character = scope:dragon
 	}
+	immediate = {
+		# Repli (évènement lancé à la main) : prendre le dragon monté par le personnage
+		if = {
+			limit = { NOT = { exists = scope:dragon } }
+			var:current_dragon ?= { save_scope_as = dragon }
+		}
+	}
 	trigger = {
 		exists = scope:dragon
 		scope:dragon = { has_variable = agot_dr_look_rare_coat }
@@ -77,6 +84,13 @@ agot_dr_look.0002 = {
 	right_portrait = {
 		character = scope:dragon
 	}
+	immediate = {
+		# Repli (évènement lancé à la main) : prendre le dragon monté par le personnage
+		if = {
+			limit = { NOT = { exists = scope:dragon } }
+			var:current_dragon ?= { save_scope_as = dragon }
+		}
+	}
 	trigger = {
 		exists = scope:dragon
 		scope:dragon = { is_alive = yes }
@@ -98,6 +112,13 @@ agot_dr_look.0003 = {
 	}
 	right_portrait = {
 		character = scope:dragon
+	}
+	immediate = {
+		# Repli (évènement lancé à la main) : prendre le dragon monté par le personnage
+		if = {
+			limit = { NOT = { exists = scope:dragon } }
+			var:current_dragon ?= { save_scope_as = dragon }
+		}
 	}
 	trigger = {
 		exists = scope:dragon

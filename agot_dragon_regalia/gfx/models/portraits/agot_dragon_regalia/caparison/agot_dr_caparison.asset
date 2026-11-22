@@ -1,0 +1,57 @@
+﻿# AGOT - Dragon Regalia : caparaçon aux armes de la maison (modélisé dans Blender, rattaché aux vertèbres du dragon d'AGOT)
+# Masque du blason (UV0) : B = blason (dessiné via UV2), R = couleur 1 du blason, G = couleur 2 (bordure)
+pdxmesh = {
+	name = "agot_dr_caparison_mesh"
+	file = "agot_dr_caparison.mesh"
+	scale = 1.0
+
+	import = {
+		type = skeletal_animation_set
+		name = "dragon_animations"
+	}
+
+	meshsettings = {
+		name = "agot_dr_caparison"
+		index = 0
+		texture_diffuse = "agot_dr_caparison_diffuse.dds"
+		texture_normal = "agot_dr_caparison_normal.dds"
+		texture_specular = "agot_dr_caparison_properties.dds"
+		shader = "portrait_attachment_with_coa_and_variations"
+		shader_file = "gfx/FX/jomini/portrait.shader"
+	}
+}
+
+entity = {
+	name = "agot_dr_caparison_entity"
+	pdxmesh = "agot_dr_caparison_mesh"
+
+	game_data = {
+		portrait_entity_user_data = {
+			portrait_accessory = {
+				pattern_mask = "gfx/models/portraits/agot_dragon_regalia/caparison/agot_dr_caparison_masks.dds"
+				variation = "agot_dr_caparison_cloth"
+			}
+			coa_mask = "gfx/models/portraits/agot_dragon_regalia/caparison/agot_dr_caparison_coa.dds"
+		}
+	}
+
+	get_state_from_parent = yes
+
+	state = {	name = "dragon_static"						animation = "dragon_idle_1" 					looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_idle_loop"					animation = "dragon_idle_1" 					looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_idle_entry"					animation = "dragon_idle_flair_lookingleft" 	looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_idle"						animation = "dragon_idle_1" 					looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_flying"						animation = "dragon_flying_1" 					looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_flying_2"					animation = "dragon_flying_2" 					looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_flying_fire"					animation = "dragon_flying_1_fire" 				looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_flying_2_fire"				animation = "dragon_flying_2_fire" 				looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_roar"						animation = "dragon_roar_1" 					looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_hover"						animation = "dragon_hover_1" 					looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_roar_fire"					animation = "dragon_roar_1_fire" 				looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_hover_fire"					animation = "dragon_hover_1_fire" 				looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_baby_idle"					animation = "dragon_baby_idle_1" 				looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_baby_idle_2"					animation = "dragon_baby_idle_2" 				looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_baby_idle_burp"				animation = "dragon_baby_idle_burp" 			looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_baby_fire"					animation = "dragon_baby_idle_burp" 			looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+	state = {	name = "dragon_baby_fire_idle"				animation = "dragon_baby_idle_1" 				looping = no animation_speed = 1.0 animation_blend_time = 0.3 }
+}

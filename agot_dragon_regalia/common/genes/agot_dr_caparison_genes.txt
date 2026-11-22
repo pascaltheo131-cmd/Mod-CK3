@@ -1,0 +1,21 @@
+﻿# AGOT - Dragon Regalia : caparaçon aux armes de la maison
+special_genes = {
+	accessory_genes = {
+		agot_dr_caparison = {
+			agot_dr_caparison_none = {
+				index = 0
+				male = { 1 = empty }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_caparison_house = {
+				index = 1
+				male = { 1 = agot_dr_acc_caparison }
+				female = male
+				boy = male
+				girl = female
+			}
+		}
+	}
+}

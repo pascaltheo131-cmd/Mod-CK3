@@ -1,0 +1,12 @@
+﻿# AGOT - Dragon Regalia : étoffe du caparaçon (les couleurs viennent ensuite du blason de la maison)
+variation = {
+	name = "agot_dr_caparison_cloth"
+	pattern = {
+		weight = 1
+		r = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		a = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_horn_ring_silver.dds" }
+}

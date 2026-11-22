@@ -1,0 +1,45 @@
+﻿# AGOT - Dragon Regalia : caparaçon. Affiché si le dragon monté a var:agot_dr_caparison.
+agot_dr_caparison_group = {
+	usage = game
+	selection_behavior = max
+	priority = 12
+
+	agot_dr_caparison_default = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = agot_dr_caparison
+				template = agot_dr_caparison_none
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				NOT = { var:current_dragon ?= { has_variable = agot_dr_caparison } }
+			}
+		}
+	}
+	agot_dr_caparison_pm_house = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = agot_dr_caparison
+				template = agot_dr_caparison_house
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { has_variable = agot_dr_caparison }
+			}
+		}
+	}
+}

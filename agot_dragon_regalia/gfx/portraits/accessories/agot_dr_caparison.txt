@@ -1,0 +1,4 @@
+﻿# AGOT - Dragon Regalia : caparaçon
+agot_dr_acc_caparison = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_caparison_entity" }
+}

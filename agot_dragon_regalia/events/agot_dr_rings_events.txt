@@ -83,3 +83,62 @@ agot_dr_rings.0100 = {
 		remove_short_term_gold = 100
 	}
 }
+
+#########################################
+# 0002 - Le caparaçon aux armes de la maison
+#########################################
+agot_dr_rings.0002 = {
+	type = character_event
+	title = agot_dr_rings.0002.t
+	desc = agot_dr_rings.0002.desc
+	theme = dragon
+	left_portrait = { character = root animation = personality_bold }
+	right_portrait = {
+		character = scope:agot_dr_rings_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	immediate = {
+		var:current_dragon ?= { save_scope_as = agot_dr_rings_dragon }
+	}
+
+	option = { # Faire broder le caparaçon
+		name = agot_dr_rings.0002.a
+		trigger = {
+			gold >= 120
+			var:current_dragon ?= { NOT = { has_variable = agot_dr_caparison } }
+		}
+		remove_short_term_gold = 120
+		add_prestige = 75
+		var:current_dragon = { set_variable = agot_dr_caparison }
+		set_variable = { name = agot_dr_caparison_cooldown years = 2 }
+	}
+	option = { # Le retirer
+		name = agot_dr_rings.0002.b
+		trigger = { var:current_dragon ?= { has_variable = agot_dr_caparison } }
+		var:current_dragon = { remove_variable = agot_dr_caparison }
+	}
+	option = { # Renoncer
+		name = agot_dr_rings.0002.c
+	}
+}
+
+#########################################
+# 0101 - IA : les rois et seigneurs suzerains portent leurs armes sur leur dragon (caché)
+#########################################
+agot_dr_rings.0101 = {
+	type = character_event
+	hidden = yes
+	trigger = {
+		is_ai = yes
+		agot_dr_gear_can_equip_trigger = yes
+		highest_held_title_tier >= tier_kingdom
+		gold >= 250
+		var:current_dragon ?= { NOT = { has_variable = agot_dr_caparison } }
+	}
+	immediate = {
+		var:current_dragon = { set_variable = agot_dr_caparison }
+		remove_short_term_gold = 100
+	}
+}

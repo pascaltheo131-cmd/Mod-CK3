@@ -1,0 +1,32 @@
+﻿# AGOT - Dragon Regalia : orner les cornes de son dragon (anneaux modélisés en phase 2)
+
+agot_dr_rings_adorn_horns_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dragons.dds"
+	}
+	desc = agot_dr_rings_adorn_horns_decision_desc
+	selection_tooltip = agot_dr_rings_adorn_horns_decision_tooltip
+	sort_order = 49
+
+	ai_check_interval = 0 # L'IA passe par agot_dr_rings_on_actions.txt
+
+	is_shown = {
+		is_ai = no
+		agot_dr_gear_can_equip_trigger = yes
+	}
+
+	is_valid_showing_failures_only = {
+		custom_tooltip = {
+			text = agot_dr_rings_cooldown_tt
+			NOT = { has_variable = agot_dr_rings_cooldown }
+		}
+	}
+
+	effect = {
+		custom_tooltip = agot_dr_rings_adorn_horns_decision_effect_tt
+		trigger_event = agot_dr_rings.0001
+	}
+
+	ai_potential = { always = no }
+	ai_will_do = { base = 0 }
+}

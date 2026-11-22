@@ -1,0 +1,331 @@
+﻿# AGOT - Dragon Regalia : Equipement - evenements
+# 0001 style -> 0002 metal -> 0003 couleurs (-> 0004 maisons) -> 0005 artisan
+# 0100 : IA, nouveau lien cavalier/dragon (cache)
+
+namespace = agot_dr_gear
+
+scripted_trigger agot_dr_gear_event_valid_trigger = {
+	agot_dr_gear_can_equip_trigger = yes
+}
+
+# Choix du style
+agot_dr_gear.0001 = {
+	type = character_event
+	title = agot_dr_gear.0001.t
+	desc = agot_dr_gear.0001.desc
+	theme = dragon
+	override_background = { reference = agot_dragonpit }
+	right_portrait = {
+		character = root
+		camera = camera_dragonrider_flying_event_front
+		animation = dragon_main
+		outfit_tags = { dragonrider }
+	}
+
+	trigger = { agot_dr_gear_event_valid_trigger = yes }
+
+	immediate = {
+		agot_dr_gear_clear_pending_effect = yes
+		var:current_dragon = { save_scope_as = agot_dr_gear_dragon }
+	}
+
+	option = {
+		name = agot_dr_gear.0001.a
+		custom_tooltip = agot_dr_gear_style_war_tt
+		set_variable = { name = agot_dr_gear_pending_style value = flag:war }
+		trigger_event = agot_dr_gear.0002
+	}
+	option = {
+		name = agot_dr_gear.0001.b
+		custom_tooltip = agot_dr_gear_style_travel_tt
+		set_variable = { name = agot_dr_gear_pending_style value = flag:travel }
+		trigger_event = agot_dr_gear.0002
+	}
+	option = {
+		name = agot_dr_gear.0001.c
+		custom_tooltip = agot_dr_gear_style_parade_tt
+		set_variable = { name = agot_dr_gear_pending_style value = flag:parade }
+		trigger_event = agot_dr_gear.0002
+	}
+	option = {
+		name = agot_dr_gear.0001.d
+		custom_tooltip = agot_dr_gear_style_valyrian_tt
+		set_variable = { name = agot_dr_gear_pending_style value = flag:valyrian }
+		trigger_event = agot_dr_gear.0002
+	}
+	option = { # Deblocage : Champion des Cieux (style, metal et couleurs fixes)
+		name = agot_dr_gear.0001.e
+		trigger = { agot_dr_gear_sky_champion_unlocked_trigger = yes }
+		custom_tooltip = agot_dr_gear_style_champion_tt
+		set_variable = { name = agot_dr_gear_pending_style value = flag:champion }
+		set_variable = { name = agot_dr_gear_pending_metal value = flag:gold }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:style }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = { # Deblocage : Conquerant
+		name = agot_dr_gear.0001.f
+		trigger = { agot_dr_gear_conqueror_unlocked_trigger = yes }
+		custom_tooltip = agot_dr_gear_style_conqueror_tt
+		set_variable = { name = agot_dr_gear_pending_style value = flag:conqueror }
+		set_variable = { name = agot_dr_gear_pending_metal value = flag:black }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:style }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = { # Retirer la parure
+		name = agot_dr_gear.0001.g
+		trigger = { agot_dr_gear_dragon_has_gear_trigger = yes }
+		agot_dr_gear_remove_gear_effect = yes
+	}
+	option = {
+		name = agot_dr_gear.0001.z
+		agot_dr_gear_clear_pending_effect = yes
+	}
+}
+
+# Choix du metal des garnitures, boucles et chaines d'apparat
+agot_dr_gear.0002 = {
+	type = character_event
+	title = agot_dr_gear.0002.t
+	desc = agot_dr_gear.0002.desc
+	theme = dragon
+	override_background = { reference = agot_dragonpit }
+	right_portrait = {
+		character = root
+		camera = camera_dragonrider_flying_event_front
+		animation = dragon_main
+		outfit_tags = { dragonrider }
+	}
+
+	trigger = { agot_dr_gear_event_valid_trigger = yes }
+
+	option = {
+		name = agot_dr_gear.0002.a
+		set_variable = { name = agot_dr_gear_pending_metal value = flag:gold }
+		trigger_event = agot_dr_gear.0003
+	}
+	option = {
+		name = agot_dr_gear.0002.b
+		set_variable = { name = agot_dr_gear_pending_metal value = flag:silver }
+		trigger_event = agot_dr_gear.0003
+	}
+	option = {
+		name = agot_dr_gear.0002.c
+		set_variable = { name = agot_dr_gear_pending_metal value = flag:black }
+		trigger_event = agot_dr_gear.0003
+	}
+	option = {
+		name = agot_dr_gear.0001.z
+		agot_dr_gear_clear_pending_effect = yes
+	}
+}
+
+# Choix des couleurs
+agot_dr_gear.0003 = {
+	type = character_event
+	title = agot_dr_gear.0003.t
+	desc = agot_dr_gear.0003.desc
+	theme = dragon
+	override_background = { reference = agot_dragonpit }
+	right_portrait = {
+		character = root
+		camera = camera_dragonrider_flying_event_front
+		animation = dragon_main
+		outfit_tags = { dragonrider }
+	}
+
+	trigger = { agot_dr_gear_event_valid_trigger = yes }
+
+	option = { # Couleurs propres au style
+		name = agot_dr_gear.0003.a
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:style }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = { # Aux couleurs de ma maison
+		name = agot_dr_gear.0003.b
+		custom_tooltip = agot_dr_gear.0003.b.tt
+		agot_dr_gear_set_house_colors_effect = yes
+		trigger_event = agot_dr_gear.0005
+	}
+	option = { # Aux couleurs d'une autre grande maison
+		name = agot_dr_gear.0003.c
+		trigger_event = agot_dr_gear.0004
+	}
+	option = {
+		name = agot_dr_gear.0001.z
+		agot_dr_gear_clear_pending_effect = yes
+	}
+}
+
+# Couleurs des grandes maisons (version sans blason : le caparacon brode est prevu en phase 2)
+agot_dr_gear.0004 = {
+	type = character_event
+	title = agot_dr_gear.0004.t
+	desc = agot_dr_gear.0004.desc
+	theme = dragon
+	override_background = { reference = agot_dragonpit }
+	right_portrait = {
+		character = root
+		camera = camera_dragonrider_flying_event_front
+		animation = dragon_main
+		outfit_tags = { dragonrider }
+	}
+
+	trigger = { agot_dr_gear_event_valid_trigger = yes }
+
+	option = {
+		name = agot_dr_gear.0004.targaryen
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:targaryen }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0004.velaryon
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:velaryon }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0004.lannister
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:lannister }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0004.stark
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:stark }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0004.baratheon
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:baratheon }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0004.arryn
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:arryn }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0004.tully
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:tully }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0004.tyrell
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:tyrell }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0004.martell
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:martell }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0004.greyjoy
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:greyjoy }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0004.hightower
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:hightower }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0004.neutral
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:neutral }
+		trigger_event = agot_dr_gear.0005
+	}
+	option = {
+		name = agot_dr_gear.0001.z
+		agot_dr_gear_clear_pending_effect = yes
+	}
+}
+
+# Choix de l'artisan et paiement
+agot_dr_gear.0005 = {
+	type = character_event
+	title = agot_dr_gear.0005.t
+	desc = agot_dr_gear.0005.desc
+	theme = dragon
+	override_background = { reference = agot_dragonpit }
+	right_portrait = {
+		character = root
+		camera = camera_dragonrider_flying_event_front
+		animation = dragon_main
+		outfit_tags = { dragonrider }
+	}
+
+	trigger = { agot_dr_gear_event_valid_trigger = yes }
+
+	immediate = {
+		var:current_dragon = { save_scope_as = agot_dr_gear_dragon }
+	}
+
+	option = { # Artisan local
+		name = agot_dr_gear.0005.a
+		trigger = {
+			gold >= agot_dr_gear_local_gold_value
+			prestige >= agot_dr_gear_local_prestige_value
+		}
+		remove_short_term_gold = agot_dr_gear_local_gold_value
+		add_prestige = agot_dr_gear_local_prestige_neg_value
+		set_variable = { name = agot_dr_gear_cooldown years = 3 }
+		agot_dr_gear_apply_pending_effect = yes
+	}
+	option = { # Maitre de Myr
+		name = agot_dr_gear.0005.b
+		trigger = {
+			gold >= agot_dr_gear_master_gold_value
+			prestige >= agot_dr_gear_master_prestige_value
+		}
+		remove_short_term_gold = agot_dr_gear_master_gold_value
+		add_prestige = agot_dr_gear_master_prestige_neg_value
+		set_variable = { name = agot_dr_gear_pending_master value = flag:myr }
+		set_variable = { name = agot_dr_gear_cooldown years = 3 }
+		add_character_modifier = { modifier = agot_dr_gear_master_saddle_modifier years = 5 }
+		agot_dr_gear_apply_pending_effect = yes
+	}
+	option = { # Maitre de Lys
+		name = agot_dr_gear.0005.c
+		trigger = {
+			gold >= agot_dr_gear_master_gold_value
+			prestige >= agot_dr_gear_master_prestige_value
+		}
+		remove_short_term_gold = agot_dr_gear_master_gold_value
+		add_prestige = agot_dr_gear_master_prestige_neg_value
+		set_variable = { name = agot_dr_gear_pending_master value = flag:lys }
+		set_variable = { name = agot_dr_gear_cooldown years = 3 }
+		add_character_modifier = { modifier = agot_dr_gear_master_saddle_modifier years = 5 }
+		agot_dr_gear_apply_pending_effect = yes
+	}
+	option = { # Maitre de Qohor
+		name = agot_dr_gear.0005.d
+		trigger = {
+			gold >= agot_dr_gear_master_gold_value
+			prestige >= agot_dr_gear_master_prestige_value
+		}
+		remove_short_term_gold = agot_dr_gear_master_gold_value
+		add_prestige = agot_dr_gear_master_prestige_neg_value
+		set_variable = { name = agot_dr_gear_pending_master value = flag:qohor }
+		set_variable = { name = agot_dr_gear_cooldown years = 3 }
+		add_character_modifier = { modifier = agot_dr_gear_master_saddle_modifier years = 5 }
+		agot_dr_gear_apply_pending_effect = yes
+	}
+	option = {
+		name = agot_dr_gear.0001.z
+		agot_dr_gear_clear_pending_effect = yes
+	}
+}
+
+# IA : un cavalier vient de se lier a un dragon
+agot_dr_gear.0100 = {
+	type = character_event
+	hidden = yes
+
+	trigger = {
+		is_ai = yes
+		agot_dr_gear_can_equip_trigger = yes
+		agot_dr_gear_dragon_has_gear_trigger = no
+	}
+
+	immediate = {
+		agot_dr_gear_ai_equip_effect = yes
+	}
+}

@@ -1,0 +1,340 @@
+﻿# AGOT - Dragon Regalia : partie « Apparence » (effets)
+#
+# AGOT stocke l'apparence de chaque dragon dans un story cycle
+# « story_dragon_variable_storage » (liste globale gl_dragon_variable_storage,
+# repéré par var:dragon_id). Les script values gene_dragon_*_svalue lisent ces
+# variables pour le portrait. On ne modifie donc QUE ces variables stockées,
+# comme le fait wound_dragon_visual_increment_effect, puis on resynchronise
+# les drapeaux de couleur avec agot_change_dragon_color_flags (comme
+# l'éditeur de dragon d'AGOT).
+#
+# Échelle « value » d'AGOT : 0 = clair/blanc, 1 = noir.
+#   blanc 0.00-0.13 | couleurs 0.14-0.86 | gris 0.87-0.90 | noir 0.91-1.00
+
+# Trouve le stockage du dragon $DRAGON$ et le sauve en scope:agot_dr_look_story
+agot_dr_look_get_story_effect = {
+	$DRAGON$ = { save_scope_as = agot_dr_look_dragon }
+	random_in_global_list = {
+		variable = gl_dragon_variable_storage
+		limit = {
+			var:dragon_id ?= scope:agot_dr_look_dragon
+		}
+		save_scope_as = agot_dr_look_story
+	}
+}
+
+# Prévient le joueur cavalier ou propriétaire du dragon (scope = dragon)
+agot_dr_look_notify_owner_effect = {
+	save_scope_as = dragon
+	if = {
+		limit = { var:current_rider ?= { is_ai = no } }
+		var:current_rider = { trigger_event = $EVENT$ }
+	}
+	else_if = {
+		limit = { court_owner ?= { is_ai = no } }
+		court_owner = { trigger_event = $EVENT$ }
+	}
+}
+
+#######################################
+# 2. Robes rares
+#######################################
+
+# Écrit un jeu de couleurs dans le stockage (scope = story)
+agot_dr_look_write_coat_effect = {
+	set_variable = { name = gene_dragon_primary_color_hue value = $PH$ }
+	set_variable = { name = gene_dragon_primary_color_saturation value = $PS$ }
+	set_variable = { name = gene_dragon_primary_color_value value = $PV$ }
+	set_variable = { name = gene_dragon_secondary_hue value = $SH$ }
+	set_variable = { name = gene_dragon_secondary_saturation value = $SS$ }
+	set_variable = { name = gene_dragon_secondary_value value = $SV$ }
+	set_variable = { name = gene_dragon_tertiary_hue value = $TH$ }
+	set_variable = { name = gene_dragon_tertiary_saturation value = $TS$ }
+	set_variable = { name = gene_dragon_tertiary_value value = $TV$ }
+	# L'éclat métallique ne baisse jamais (œufs métalliques d'AGOT conservés)
+	if = {
+		limit = {
+			OR = {
+				NOT = { has_variable = gene_dragon_metallic_scales_strength }
+				var:gene_dragon_metallic_scales_strength < $MET$
+			}
+		}
+		set_variable = { name = gene_dragon_metallic_scales_strength value = $MET$ }
+	}
+}
+
+# Applique la robe rare définie par var:agot_dr_look_rare_coat (scope = dragon)
+agot_dr_look_apply_rare_coat_effect = {
+	save_scope_as = agot_dr_look_coat_dragon
+	agot_dr_look_get_story_effect = { DRAGON = scope:agot_dr_look_coat_dragon }
+	scope:agot_dr_look_story ?= {
+		switch = {
+			trigger = scope:agot_dr_look_coat_dragon.var:agot_dr_look_rare_coat
+			flag:silver = { # Argent pâle - Silverwing
+				agot_dr_look_write_coat_effect = {
+					PH = 0.07 PS = 0.30 PV = 0.06
+					SH = 0.07 SS = 0.25 SV = 0.88
+					TH = 0.55 TS = 0.50 TV = 0.22
+					MET = 0.85
+				}
+			}
+			flag:bronze = { # Bronze - Vermithor
+				agot_dr_look_write_coat_effect = {
+					PH = 0.07 PS = 0.80 PV = 0.55
+					SH = 0.12 SS = 0.85 SV = 0.40
+					TH = 0.05 TS = 0.90 TV = 0.72
+					MET = 0.75
+				}
+			}
+			flag:balerion = { # Noir et rouge - Balerion
+				agot_dr_look_write_coat_effect = {
+					PH = 1.00 PS = 1.00 PV = 0.96
+					SH = 0.00 SS = 1.00 SV = 0.50
+					TH = 0.99 TS = 1.00 TV = 0.70
+					MET = 0.15
+				}
+			}
+			flag:jade = { # Vert de jade - Vhagar / Tessarion
+				agot_dr_look_write_coat_effect = {
+					PH = 0.33 PS = 0.70 PV = 0.60
+					SH = 0.13 SS = 0.80 SV = 0.45
+					TH = 0.30 TS = 0.75 TV = 0.78
+					MET = 0.45
+				}
+			}
+			flag:blood = { # Rouge sang - Caraxès
+				agot_dr_look_write_coat_effect = {
+					PH = 0.00 PS = 1.00 PV = 0.60
+					SH = 0.11 SS = 1.00 SV = 0.35
+					TH = 0.98 TS = 0.95 TV = 0.80
+					MET = 0.20
+				}
+			}
+			flag:gold = { # Or et rose - Sunfyre
+				agot_dr_look_write_coat_effect = {
+					PH = 0.12 PS = 1.00 PV = 0.35
+					SH = 0.88 SS = 0.70 SV = 0.35
+					TH = 0.13 TS = 0.90 TV = 0.55
+					MET = 0.95
+				}
+			}
+		}
+	}
+	# Resynchronise primary_color / secondary_color / ... (utilisés par AGOT pour les œufs)
+	agot_change_dragon_color_flags = { DRAGON = scope:agot_dr_look_coat_dragon }
+	switch = {
+		trigger = var:agot_dr_look_rare_coat
+		flag:silver = { add_character_modifier = agot_dr_look_coat_silver_modifier }
+		flag:bronze = { add_character_modifier = agot_dr_look_coat_bronze_modifier }
+		flag:balerion = { add_character_modifier = agot_dr_look_coat_balerion_modifier }
+		flag:jade = { add_character_modifier = agot_dr_look_coat_jade_modifier }
+		flag:blood = { add_character_modifier = agot_dr_look_coat_blood_modifier }
+		flag:gold = { add_character_modifier = agot_dr_look_coat_gold_modifier }
+	}
+}
+
+# Tirage unique, au premier anniversaire du dragonnet (scope = dragon)
+agot_dr_look_roll_rare_coat_effect = {
+	set_variable = agot_dr_look_coat_rolled
+	if = {
+		limit = {
+			age <= 2
+			is_historical_dragon = no
+			NOT = { has_variable = agot_dr_look_rare_coat }
+		}
+		# Héritage : un parent à robe rare transmet la sienne avec 35 % de chances
+		if = {
+			limit = { any_parent = { has_variable = agot_dr_look_rare_coat } }
+			random_parent = {
+				limit = { has_variable = agot_dr_look_rare_coat }
+				save_scope_as = agot_dr_look_rare_parent
+			}
+			random = {
+				chance = agot_dr_look_rare_coat_inherit_chance
+				set_variable = {
+					name = agot_dr_look_rare_coat
+					value = scope:agot_dr_look_rare_parent.var:agot_dr_look_rare_coat
+				}
+				set_variable = agot_dr_look_coat_inherited
+			}
+		}
+		# Sinon, petite chance d'une robe rare spontanée
+		if = {
+			limit = { NOT = { has_variable = agot_dr_look_rare_coat } }
+			random = {
+				chance = agot_dr_look_rare_coat_base_chance
+				random_list = {
+					1 = { set_variable = { name = agot_dr_look_rare_coat value = flag:silver } }
+					1 = { set_variable = { name = agot_dr_look_rare_coat value = flag:bronze } }
+					1 = { set_variable = { name = agot_dr_look_rare_coat value = flag:balerion } }
+					1 = { set_variable = { name = agot_dr_look_rare_coat value = flag:jade } }
+					1 = { set_variable = { name = agot_dr_look_rare_coat value = flag:blood } }
+					1 = { set_variable = { name = agot_dr_look_rare_coat value = flag:gold } }
+				}
+			}
+		}
+		if = {
+			limit = { has_variable = agot_dr_look_rare_coat }
+			agot_dr_look_apply_rare_coat_effect = yes
+			if = {
+				limit = { agot_dr_look_has_player_owner_trigger = yes }
+				agot_dr_look_notify_owner_effect = { EVENT = agot_dr_look.0001 }
+			}
+		}
+	}
+}
+
+#######################################
+# 3. La mue
+#######################################
+
+# Assombrit légèrement un canal sans jamais changer de bande de couleur (scope = story)
+agot_dr_look_molt_channel_effect = {
+	if = {
+		limit = { has_variable = $VALUE$ }
+		if = {
+			limit = { # Couleurs : reste sous 0.86
+				var:$VALUE$ >= 0.14
+				var:$VALUE$ <= 0.84
+			}
+			change_variable = { name = $VALUE$ add = 0.02 }
+		}
+		else_if = {
+			limit = { var:$VALUE$ <= 0.11 } # Blanc : reste sous 0.13
+			change_variable = { name = $VALUE$ add = 0.02 }
+		}
+		else_if = {
+			limit = { # Gris : reste sous 0.90
+				var:$VALUE$ >= 0.87
+				var:$VALUE$ <= 0.88
+			}
+			change_variable = { name = $VALUE$ add = 0.02 }
+		}
+		else_if = {
+			limit = { # Noir : reste sous 1.00
+				var:$VALUE$ >= 0.91
+				var:$VALUE$ <= 0.98
+			}
+			change_variable = { name = $VALUE$ add = 0.02 }
+		}
+	}
+	if = {
+		limit = {
+			has_variable = $SAT$
+			var:$SAT$ >= 0.77
+		}
+		change_variable = { name = $SAT$ subtract = 0.02 }
+	}
+}
+
+# Mue d'un dragon possédé à un âge clé (scope = dragon)
+agot_dr_look_molt_effect = {
+	save_scope_as = agot_dr_look_molt_dragon
+	set_variable = { name = agot_dr_look_last_molt_age value = age }
+	agot_dr_look_get_story_effect = { DRAGON = scope:agot_dr_look_molt_dragon }
+	scope:agot_dr_look_story ?= {
+		agot_dr_look_molt_channel_effect = { VALUE = gene_dragon_primary_color_value SAT = gene_dragon_primary_color_saturation }
+		agot_dr_look_molt_channel_effect = { VALUE = gene_dragon_secondary_value SAT = gene_dragon_secondary_saturation }
+		agot_dr_look_molt_channel_effect = { VALUE = gene_dragon_tertiary_value SAT = gene_dragon_tertiary_saturation }
+		# Les très vieux dragons prennent un éclat métallique
+		if = {
+			limit = {
+				scope:agot_dr_look_molt_dragon = { age >= 100 }
+				has_variable = gene_dragon_metallic_scales_strength
+				var:gene_dragon_metallic_scales_strength <= 0.95
+			}
+			change_variable = { name = gene_dragon_metallic_scales_strength add = 0.05 }
+		}
+	}
+	agot_change_dragon_color_flags = { DRAGON = scope:agot_dr_look_molt_dragon }
+	if = {
+		limit = { agot_dr_look_has_player_owner_trigger = yes }
+		random = {
+			chance = 50
+			agot_dr_look_notify_owner_effect = { EVENT = agot_dr_look.0002 }
+		}
+	}
+}
+
+#######################################
+# 4. Cicatrices de guerre
+#######################################
+# AGOT ne réduit jamais gene_dragon_wounded à la guérison (seul le trait
+# dragon_wounded_X disparaît ; le gène passe du template « wounded » au
+# template « scarred »). Mais wound_dragon n'ajoute rien pour une blessure
+# de niveau 1 et les blessures sont comptées nulle part. On compte donc les
+# blessures observées et on impose un plancher de cicatrices croissant.
+
+# scope = dragon
+agot_dr_look_update_scars_effect = {
+	save_scope_as = agot_dr_look_scar_dragon
+	if = {
+		limit = { NOT = { has_variable = agot_dr_look_last_wound_level } }
+		set_variable = { name = agot_dr_look_last_wound_level value = 0 }
+	}
+	if = {
+		limit = { NOT = { has_variable = agot_dr_look_wound_count } }
+		set_variable = { name = agot_dr_look_wound_count value = 0 }
+	}
+	if = {
+		limit = { agot_dr_look_wound_level_value > var:agot_dr_look_last_wound_level }
+		change_variable = {
+			name = agot_dr_look_wound_count
+			add = {
+				value = agot_dr_look_wound_level_value
+				subtract = var:agot_dr_look_last_wound_level
+			}
+		}
+		# Plancher de cicatrices permanentes
+		agot_dr_look_get_story_effect = { DRAGON = scope:agot_dr_look_scar_dragon }
+		scope:agot_dr_look_story ?= {
+			if = {
+				limit = {
+					OR = {
+						NOT = { has_variable = gene_dragon_wounded }
+						var:gene_dragon_wounded < scope:agot_dr_look_scar_dragon.agot_dr_look_scar_floor_value
+					}
+				}
+				set_variable = {
+					name = gene_dragon_wounded
+					value = scope:agot_dr_look_scar_dragon.agot_dr_look_scar_floor_value
+				}
+			}
+		}
+	}
+	set_variable = { name = agot_dr_look_last_wound_level value = agot_dr_look_wound_level_value }
+	# Couturé de cicatrices
+	if = {
+		limit = {
+			var:agot_dr_look_wound_count >= agot_dr_look_scarred_threshold
+			NOT = { has_character_modifier = agot_dr_look_battle_scarred_modifier }
+		}
+		add_character_modifier = agot_dr_look_battle_scarred_modifier
+		if = {
+			limit = { var:current_rider ?= { is_ai = no } }
+			save_scope_as = dragon
+			var:current_rider = { trigger_event = agot_dr_look.0003 }
+		}
+	}
+	var:current_rider ?= { agot_dr_look_sync_rider_effect = yes }
+}
+
+# Donne / retire le bonus de terreur du cavalier (scope = cavalier)
+agot_dr_look_sync_rider_effect = {
+	if = {
+		limit = {
+			var:current_dragon ?= {
+				is_alive = yes
+				has_character_modifier = agot_dr_look_battle_scarred_modifier
+			}
+		}
+		if = {
+			limit = { NOT = { has_character_modifier = agot_dr_look_scarred_mount_modifier } }
+			add_character_modifier = agot_dr_look_scarred_mount_modifier
+		}
+	}
+	else_if = {
+		limit = { has_character_modifier = agot_dr_look_scarred_mount_modifier }
+		remove_character_modifier = agot_dr_look_scarred_mount_modifier
+	}
+}

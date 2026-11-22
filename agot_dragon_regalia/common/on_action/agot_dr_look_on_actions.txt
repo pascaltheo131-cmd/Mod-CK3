@@ -1,0 +1,54 @@
+﻿# AGOT - Dragon Regalia : partie « Apparence » (on_actions)
+
+# on_dragon_birthday est défini par AGOT (common/on_action/birthday.txt) et
+# appelé à chaque anniversaire d'un dragon. On y ajoute seulement un on_action.
+on_dragon_birthday = {
+	on_actions = {
+		agot_dr_look_on_dragon_birthday
+	}
+}
+
+agot_dr_look_on_dragon_birthday = {
+	trigger = {
+		agot_dr_look_valid_dragon_trigger = yes
+	}
+	effect = {
+		# 2. Robe rare : tirage unique (les dragons déjà adultes sont juste marqués)
+		if = {
+			limit = { NOT = { has_variable = agot_dr_look_coat_rolled } }
+			agot_dr_look_roll_rare_coat_effect = yes
+		}
+		# 3. La mue
+		if = {
+			limit = {
+				agot_dr_look_is_molt_age_trigger = yes
+				agot_dr_look_owned_dragon_trigger = yes
+				NOT = { var:agot_dr_look_last_molt_age ?= age }
+			}
+			agot_dr_look_molt_effect = yes
+		}
+		# 4. Cicatrices
+		agot_dr_look_update_scars_effect = yes
+	}
+}
+
+# Suivi plus fréquent des blessures pour les dragons montés par des souverains
+quarterly_playable_pulse = {
+	on_actions = {
+		agot_dr_look_quarterly_rider_pulse
+	}
+}
+
+agot_dr_look_quarterly_rider_pulse = {
+	effect = {
+		if = {
+			limit = {
+				var:current_dragon ?= { agot_dr_look_valid_dragon_trigger = yes }
+			}
+			var:current_dragon = { agot_dr_look_update_scars_effect = yes }
+		}
+		else = {
+			agot_dr_look_sync_rider_effect = yes
+		}
+	}
+}

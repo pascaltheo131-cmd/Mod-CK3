@@ -1,0 +1,11 @@
+﻿# AGOT - Dragon Regalia : anneaux de cornes (IA)
+yearly_playable_pulse = {
+	on_actions = { agot_dr_rings_yearly_pulse }
+}
+
+agot_dr_rings_yearly_pulse = {
+	random_events = {
+		90 = 0
+		10 = agot_dr_rings.0100
+	}
+}

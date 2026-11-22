@@ -1,0 +1,41 @@
+﻿l_french:
+ # Modificateurs
+ agot_dr_look_coat_silver_modifier:0 "Robe rare : argent pâle"
+ agot_dr_look_coat_silver_modifier_desc:0 "Ses écailles ont l'éclat argenté et pâle de Silverwing, la monture de la bonne reine Alysanne."
+ agot_dr_look_coat_bronze_modifier:0 "Robe rare : bronze"
+ agot_dr_look_coat_bronze_modifier_desc:0 "Ses écailles ont la teinte de bronze et d'or terni de Vermithor, la Furie de bronze."
+ agot_dr_look_coat_balerion_modifier:0 "Robe rare : noir et rouge"
+ agot_dr_look_coat_balerion_modifier_desc:0 "Noir comme la nuit, veiné de rouge sang : la robe même de Balerion, la Terreur noire."
+ agot_dr_look_coat_jade_modifier:0 "Robe rare : vert de jade"
+ agot_dr_look_coat_jade_modifier_desc:0 "Ses écailles d'un vert de jade aux reflets de bronze rappellent la vieille Vhagar."
+ agot_dr_look_coat_blood_modifier:0 "Robe rare : rouge sang"
+ agot_dr_look_coat_blood_modifier_desc:0 "Rouge comme le sang, aux reflets jaunes : on dit que Caraxès, le Wyrm de sang, avait la même robe."
+ agot_dr_look_coat_gold_modifier:0 "Robe rare : or et rose"
+ agot_dr_look_coat_gold_modifier_desc:0 "Des écailles d'or éclatant et des membranes rosées, comme Sunfyre le Doré, le plus beau dragon ayant jamais volé à Westeros."
+ agot_dr_look_battle_scarred_modifier:0 "Couturé de cicatrices"
+ agot_dr_look_battle_scarred_modifier_desc:0 "Ce dragon porte les traces de nombreuses batailles. Comme Vhagar ou Caraxès, chaque cicatrice rappelle à ses ennemis qu'il a survécu à pire qu'eux."
+ agot_dr_look_scarred_mount_modifier:0 "Monture couturée de cicatrices"
+ agot_dr_look_scarred_mount_modifier_desc:0 "Ce personnage chevauche un dragon couvert de cicatrices de guerre, dont la seule vue inspire la terreur."
+
+ # Évènement 0001 : robe rare
+ agot_dr_look.0001.t:0 "Une robe rare"
+ agot_dr_look.0001.desc.silver:0 "À mesure que [scope:dragon.GetFirstName] grandit, ses écailles perdent leur terne de dragonnet. Elles se révèlent d'un argent pâle, presque laiteux, que les palefreniers du dragon n'avaient plus vu depuis Silverwing."
+ agot_dr_look.0001.desc.bronze:0 "À mesure que [scope:dragon.GetFirstName] grandit, ses écailles se révèlent d'un bronze profond, veiné d'or terni. Les plus vieux gardiens de dragons murmurent le nom de Vermithor."
+ agot_dr_look.0001.desc.balerion:0 "À mesure que [scope:dragon.GetFirstName] grandit, ses écailles noircissent comme du charbon, et sous chacune d'elles brille un rouge de braise. Nul ne l'ose dire tout haut, mais tous pensent à Balerion."
+ agot_dr_look.0001.desc.jade:0 "À mesure que [scope:dragon.GetFirstName] grandit, ses écailles prennent un vert de jade profond, aux reflets de bronze, comme celles de la vieille Vhagar."
+ agot_dr_look.0001.desc.blood:0 "À mesure que [scope:dragon.GetFirstName] grandit, ses écailles prennent la couleur du sang frais, rehaussée de jaune. Les gardiens y voient le souvenir de Caraxès."
+ agot_dr_look.0001.desc.gold:0 "À mesure que [scope:dragon.GetFirstName] grandit, ses écailles se révèlent d'or éclatant et ses membranes d'un rose tendre. Depuis Sunfyre le Doré, on n'avait rien vu d'aussi beau."
+ agot_dr_look.0001.desc.inherited:0 "\n\nLe sang parle : l'un de ses parents portait déjà cette robe."
+ agot_dr_look.0001.a:0 "Le sang du dragon ne ment jamais."
+
+ # Évènement 0002 : la mue
+ agot_dr_look.0002.t:0 "La mue"
+ agot_dr_look.0002.desc:0 "Pendant des semaines, [scope:dragon.GetFirstName] a gratté ses flancs contre la roche et laissé derrière lui des écailles mortes, grandes comme des boucliers. Les nouvelles sont plus sombres et plus dures. Sa couleur n'a pas changé, mais elle a pris de la profondeur, comme un vin qui vieillit."
+ agot_dr_look.0002.desc.old:0 "\n\nÀ son âge, les écailles neuves ont aussi un éclat presque métallique au soleil, l'éclat des très vieux dragons."
+ agot_dr_look.0002.a:0 "Il vieillit, mais il ne faiblit pas."
+
+ # Évènement 0003 : cicatrices
+ agot_dr_look.0003.t:0 "Couturé de cicatrices"
+ agot_dr_look.0003.desc:0 "Les blessures de [scope:dragon.GetFirstName] se sont refermées, mais elles ont laissé des traces. Des sillons pâles courent sur ses écailles, des membranes ont été recousues par le feu. Comme Vhagar ou Caraxès, il porte désormais l'histoire de ses batailles sur sa peau, et ses ennemis la lisent avant même qu'il n'ouvre la gueule."
+ agot_dr_look.0003.a:0 "Chaque cicatrice est une bataille gagnée."
+ agot_dr_look.0003.a.tt:0 "Tant que vous montez ce dragon, vous inspirez davantage de terreur."

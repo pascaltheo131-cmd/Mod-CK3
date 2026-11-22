@@ -1,0 +1,76 @@
+﻿# AGOT - Dragon Regalia : Equipement - couts (portee : le cavalier, lit ses variables agot_dr_gear_pending_*)
+
+agot_dr_gear_local_gold_value = {
+	value = 30
+	if = {
+		limit = { var:agot_dr_gear_pending_style ?= flag:war }
+		add = 50
+	}
+	else_if = {
+		limit = { var:agot_dr_gear_pending_style ?= flag:parade }
+		add = 110
+	}
+	else_if = {
+		limit = { var:agot_dr_gear_pending_style ?= flag:valyrian }
+		add = 140
+	}
+	else_if = {
+		limit = {
+			OR = {
+				var:agot_dr_gear_pending_style ?= flag:champion
+				var:agot_dr_gear_pending_style ?= flag:conqueror
+			}
+		}
+		add = 120
+	}
+	else = {
+		add = 20
+	}
+	if = {
+		limit = { var:agot_dr_gear_pending_metal ?= flag:gold }
+		add = 60
+	}
+	else_if = {
+		limit = { var:agot_dr_gear_pending_metal ?= flag:silver }
+		add = 30
+	}
+	else = {
+		add = 15
+	}
+}
+
+agot_dr_gear_master_gold_value = {
+	value = agot_dr_gear_local_gold_value
+	multiply = 2.5
+	round = yes
+}
+
+agot_dr_gear_local_prestige_value = {
+	value = 0
+	if = {
+		limit = {
+			OR = {
+				var:agot_dr_gear_pending_style ?= flag:parade
+				var:agot_dr_gear_pending_style ?= flag:valyrian
+				var:agot_dr_gear_pending_style ?= flag:champion
+				var:agot_dr_gear_pending_style ?= flag:conqueror
+			}
+		}
+		add = 50
+	}
+}
+
+agot_dr_gear_master_prestige_value = {
+	value = agot_dr_gear_local_prestige_value
+	add = 100
+}
+
+agot_dr_gear_local_prestige_neg_value = {
+	value = agot_dr_gear_local_prestige_value
+	multiply = -1
+}
+
+agot_dr_gear_master_prestige_neg_value = {
+	value = agot_dr_gear_master_prestige_value
+	multiply = -1
+}

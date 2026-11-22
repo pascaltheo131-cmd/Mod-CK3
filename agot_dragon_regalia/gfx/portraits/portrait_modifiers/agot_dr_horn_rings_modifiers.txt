@@ -1,0 +1,83 @@
+﻿# AGOT - Dragon Regalia : anneaux de cornes. Lit var:agot_dr_horn_rings (flag:gold/silver/black) sur le dragon monté.
+agot_dr_horn_rings_group = {
+	usage = game
+	selection_behavior = max
+	priority = 12
+
+	agot_dr_horn_rings_default = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = agot_dr_horn_rings
+				template = agot_dr_horn_rings_none
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				NOT = { var:current_dragon ?= { has_variable = agot_dr_horn_rings } }
+			}
+		}
+	}
+	agot_dr_horn_rings_pm_gold = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = agot_dr_horn_rings
+				template = agot_dr_horn_rings_gold
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_horn_rings ?= flag:gold }
+			}
+		}
+	}
+	agot_dr_horn_rings_pm_silver = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = agot_dr_horn_rings
+				template = agot_dr_horn_rings_silver
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_horn_rings ?= flag:silver }
+			}
+		}
+	}
+	agot_dr_horn_rings_pm_black = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = agot_dr_horn_rings
+				template = agot_dr_horn_rings_black
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_horn_rings ?= flag:black }
+			}
+		}
+	}
+}

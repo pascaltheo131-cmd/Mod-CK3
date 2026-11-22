@@ -1,0 +1,85 @@
+﻿namespace = agot_dr_rings
+
+# Anneaux posés sur le dragon monté : var:agot_dr_horn_rings = flag:gold / silver / black
+scripted_effect agot_dr_rings_set_effect = {
+	var:current_dragon = {
+		set_variable = { name = agot_dr_horn_rings value = flag:$METAL$ }
+	}
+	set_variable = { name = agot_dr_rings_cooldown years = 2 }
+}
+
+#########################################
+# 0001 - Les anneaux de cornes
+#########################################
+agot_dr_rings.0001 = {
+	type = character_event
+	title = agot_dr_rings.0001.t
+	desc = agot_dr_rings.0001.desc
+	theme = dragon
+	left_portrait = { character = root animation = personality_rational }
+	right_portrait = {
+		character = scope:agot_dr_rings_dragon
+		animation = dragon_main
+		camera = camera_dragon_event_standing
+		outfit_tags = { linear_camera_zoom }
+	}
+	immediate = {
+		var:current_dragon ?= { save_scope_as = agot_dr_rings_dragon }
+	}
+
+	option = { # Or
+		name = agot_dr_rings.0001.a
+		trigger = { gold >= 150 }
+		remove_short_term_gold = 150
+		add_prestige = 50
+		agot_dr_rings_set_effect = { METAL = gold }
+	}
+	option = { # Argent
+		name = agot_dr_rings.0001.b
+		trigger = { gold >= 90 }
+		remove_short_term_gold = 90
+		add_prestige = 25
+		agot_dr_rings_set_effect = { METAL = silver }
+	}
+	option = { # Acier noirci
+		name = agot_dr_rings.0001.c
+		trigger = { gold >= 60 }
+		remove_short_term_gold = 60
+		add_dread = 5
+		agot_dr_rings_set_effect = { METAL = black }
+	}
+	option = { # Retirer les anneaux
+		name = agot_dr_rings.0001.d
+		trigger = { var:current_dragon ?= { has_variable = agot_dr_horn_rings } }
+		var:current_dragon = { remove_variable = agot_dr_horn_rings }
+	}
+	option = { # Renoncer
+		name = agot_dr_rings.0001.e
+	}
+}
+
+#########################################
+# 0100 - IA : les grands seigneurs ornent les cornes de leur dragon (caché)
+#########################################
+agot_dr_rings.0100 = {
+	type = character_event
+	hidden = yes
+	trigger = {
+		is_ai = yes
+		agot_dr_gear_can_equip_trigger = yes
+		highest_held_title_tier >= tier_kingdom
+		gold >= 300
+		var:current_dragon ?= { NOT = { has_variable = agot_dr_horn_rings } }
+	}
+	immediate = {
+		random_list = {
+			60 = { var:current_dragon = { set_variable = { name = agot_dr_horn_rings value = flag:gold } } }
+			30 = { var:current_dragon = { set_variable = { name = agot_dr_horn_rings value = flag:silver } } }
+			10 = {
+				modifier = { add = 30 has_trait = wrathful }
+				var:current_dragon = { set_variable = { name = agot_dr_horn_rings value = flag:black } }
+			}
+		}
+		remove_short_term_gold = 100
+	}
+}

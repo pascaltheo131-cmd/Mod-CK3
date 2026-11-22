@@ -1,0 +1,32 @@
+﻿# AGOT - Dragon Regalia : partie « Apparence » (modificateurs)
+
+# Robes rares (portées par le dragon)
+agot_dr_look_coat_silver_modifier = {
+	prowess = 1
+}
+agot_dr_look_coat_bronze_modifier = {
+	prowess = 1
+}
+agot_dr_look_coat_balerion_modifier = {
+	prowess = 1
+}
+agot_dr_look_coat_jade_modifier = {
+	prowess = 1
+}
+agot_dr_look_coat_blood_modifier = {
+	prowess = 1
+}
+agot_dr_look_coat_gold_modifier = {
+	prowess = 1
+}
+
+# Cicatrices de guerre
+agot_dr_look_battle_scarred_modifier = {
+	prowess = 2
+}
+
+# Porté par le cavalier d'un dragon couturé de cicatrices
+agot_dr_look_scarred_mount_modifier = {
+	dread_baseline_add = 5
+	monthly_prestige = 0.2
+}

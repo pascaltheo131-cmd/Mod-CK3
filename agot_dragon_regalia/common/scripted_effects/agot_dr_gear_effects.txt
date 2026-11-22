@@ -1,0 +1,197 @@
+﻿# AGOT - Dragon Regalia : Equipement - effets
+# Variables posees sur le DRAGON (lues par gfx/portraits/portrait_modifiers/agot_dr_gear_saddle_modifiers.txt) :
+#   agot_dr_gear_style  = flag:war / travel / parade / valyrian / champion / conqueror
+#   agot_dr_gear_metal  = flag:gold / silver / black
+#   agot_dr_gear_colors = flag:style / targaryen / velaryon / lannister / stark / baratheon / arryn / tully / tyrell / martell / greyjoy / hightower / neutral
+#   agot_dr_gear_master = flag:myr / lys / qohor (facultatif, selle de maitre)
+# Variables temporaires sur le CAVALIER pendant le choix : agot_dr_gear_pending_style / _metal / _colors / _master
+
+# this = cavalier : met agot_dr_gear_pending_colors aux couleurs de sa dynastie (palette neutre sinon)
+agot_dr_gear_set_house_colors_effect = {
+	if = {
+		limit = { dynasty ?= dynasty:dynn_Targaryen }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:targaryen }
+	}
+	else_if = {
+		limit = { dynasty ?= dynasty:dynn_Velaryon }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:velaryon }
+	}
+	else_if = {
+		limit = { dynasty ?= dynasty:dynn_Lannister }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:lannister }
+	}
+	else_if = {
+		limit = { dynasty ?= dynasty:dynn_Stark }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:stark }
+	}
+	else_if = {
+		limit = { dynasty ?= dynasty:dynn_Baratheon }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:baratheon }
+	}
+	else_if = {
+		limit = { dynasty ?= dynasty:dynn_Arryn }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:arryn }
+	}
+	else_if = {
+		limit = { dynasty ?= dynasty:dynn_Tully }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:tully }
+	}
+	else_if = {
+		limit = { dynasty ?= dynasty:dynn_Tyrell }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:tyrell }
+	}
+	else_if = {
+		limit = { dynasty ?= dynasty:dynn_Martell }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:martell }
+	}
+	else_if = {
+		limit = { dynasty ?= dynasty:dynn_Greyjoy }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:greyjoy }
+	}
+	else_if = {
+		limit = { dynasty ?= dynasty:dynn_Hightower }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:hightower }
+	}
+	else = {
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:neutral }
+	}
+}
+
+# this = cavalier : efface les choix temporaires
+agot_dr_gear_clear_pending_effect = {
+	remove_variable = agot_dr_gear_pending_style
+	remove_variable = agot_dr_gear_pending_metal
+	remove_variable = agot_dr_gear_pending_colors
+	remove_variable = agot_dr_gear_pending_master
+}
+
+# this = cavalier : copie les choix temporaires sur son dragon, puis les efface
+agot_dr_gear_apply_pending_effect = {
+	save_scope_as = agot_dr_gear_rider
+	if = {
+		limit = { NOT = { has_variable = agot_dr_gear_pending_metal } }
+		set_variable = { name = agot_dr_gear_pending_metal value = flag:gold }
+	}
+	if = {
+		limit = { NOT = { has_variable = agot_dr_gear_pending_colors } }
+		set_variable = { name = agot_dr_gear_pending_colors value = flag:style }
+	}
+	var:current_dragon ?= {
+		set_variable = { name = agot_dr_gear_style value = scope:agot_dr_gear_rider.var:agot_dr_gear_pending_style }
+		set_variable = { name = agot_dr_gear_metal value = scope:agot_dr_gear_rider.var:agot_dr_gear_pending_metal }
+		set_variable = { name = agot_dr_gear_colors value = scope:agot_dr_gear_rider.var:agot_dr_gear_pending_colors }
+		remove_variable = agot_dr_gear_master
+		if = {
+			limit = { scope:agot_dr_gear_rider = { has_variable = agot_dr_gear_pending_master } }
+			set_variable = { name = agot_dr_gear_master value = scope:agot_dr_gear_rider.var:agot_dr_gear_pending_master }
+		}
+	}
+	agot_dr_gear_clear_pending_effect = yes
+}
+
+# this = cavalier : retire la parure (le dragon reprend la selle d'origine d'AGOT)
+agot_dr_gear_remove_gear_effect = {
+	var:current_dragon ?= {
+		remove_variable = agot_dr_gear_style
+		remove_variable = agot_dr_gear_metal
+		remove_variable = agot_dr_gear_colors
+		remove_variable = agot_dr_gear_master
+	}
+}
+
+# this = cavalier : verifie les deblocages (drapeaux permanents)
+agot_dr_gear_check_unlocks_effect = {
+	if = {
+		limit = {
+			NOT = { has_character_flag = agot_dr_gear_sky_champion }
+			has_character_modifier = agot_dc_aerial_champion_modifier
+		}
+		add_character_flag = agot_dr_gear_sky_champion
+	}
+}
+
+# this = cavalier IA : equipe son dragon selon son rang, sa richesse et sa maison (gratuit pour l'IA)
+agot_dr_gear_ai_equip_effect = {
+	if = {
+		limit = { agot_dr_gear_can_equip_trigger = yes }
+		agot_dr_gear_check_unlocks_effect = yes
+		# Style
+		random_list = {
+			10 = {
+				trigger = { agot_dr_gear_sky_champion_unlocked_trigger = yes }
+				modifier = { add = 30 agot_dr_gear_sky_champion_unlocked_trigger = yes }
+				set_variable = { name = agot_dr_gear_pending_style value = flag:champion }
+			}
+			10 = {
+				trigger = { agot_dr_gear_conqueror_unlocked_trigger = yes }
+				modifier = { add = 30 agot_dr_gear_conqueror_unlocked_trigger = yes }
+				set_variable = { name = agot_dr_gear_pending_style value = flag:conqueror }
+			}
+			20 = {
+				modifier = { add = 30 highest_held_title_tier >= tier_kingdom }
+				modifier = { add = 20 gold >= 500 }
+				modifier = { factor = 0 is_landed = no }
+				set_variable = { name = agot_dr_gear_pending_style value = flag:parade }
+			}
+			10 = {
+				modifier = {
+					add = 40
+					OR = {
+						dynasty ?= dynasty:dynn_Targaryen
+						dynasty ?= dynasty:dynn_Velaryon
+					}
+				}
+				modifier = { add = 10 highest_held_title_tier >= tier_duchy }
+				set_variable = { name = agot_dr_gear_pending_style value = flag:valyrian }
+			}
+			30 = {
+				modifier = { add = 20 is_at_war = yes }
+				modifier = { add = 10 has_trait = brave }
+				set_variable = { name = agot_dr_gear_pending_style value = flag:war }
+			}
+			30 = {
+				modifier = { add = 20 is_landed = no }
+				modifier = { factor = 0.3 highest_held_title_tier >= tier_kingdom }
+				set_variable = { name = agot_dr_gear_pending_style value = flag:travel }
+			}
+		}
+		# Metal
+		random_list = {
+			10 = {
+				modifier = { add = 50 highest_held_title_tier >= tier_kingdom }
+				modifier = { add = 20 gold >= 300 }
+				set_variable = { name = agot_dr_gear_pending_metal value = flag:gold }
+			}
+			20 = {
+				modifier = { add = 20 highest_held_title_tier >= tier_duchy }
+				set_variable = { name = agot_dr_gear_pending_metal value = flag:silver }
+			}
+			20 = {
+				modifier = { add = 20 is_at_war = yes }
+				modifier = { add = 20 is_landed = no }
+				set_variable = { name = agot_dr_gear_pending_metal value = flag:black }
+			}
+		}
+		# Couleurs : celles de la maison si connues, sinon celles du style
+		if = {
+			limit = { agot_dr_gear_has_house_colors_trigger = yes }
+			agot_dr_gear_set_house_colors_effect = yes
+		}
+		else = {
+			set_variable = { name = agot_dr_gear_pending_colors value = flag:style }
+		}
+		# Les grands seigneurs riches s'offrent un maitre artisan
+		if = {
+			limit = {
+				highest_held_title_tier >= tier_kingdom
+				gold >= 300
+			}
+			random_list = {
+				1 = { set_variable = { name = agot_dr_gear_pending_master value = flag:myr } }
+				1 = { set_variable = { name = agot_dr_gear_pending_master value = flag:lys } }
+				1 = { set_variable = { name = agot_dr_gear_pending_master value = flag:qohor } }
+			}
+		}
+		agot_dr_gear_apply_pending_effect = yes
+	}
+}

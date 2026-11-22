@@ -1,0 +1,52 @@
+﻿# AGOT - Dragon Regalia : Equipement - declencheurs
+
+# Cavalier (this) avec un dragon vivant, a sa cour / dans sa fosse (is_current_dragonrider d'AGOT exclut le dragon loge ailleurs)
+agot_dr_gear_can_equip_trigger = {
+	is_current_dragonrider = yes
+	exists = var:current_dragon
+	var:current_dragon = {
+		is_alive = yes
+		has_trait = dragon
+	}
+}
+
+# Le dragon du cavalier porte deja une parure
+agot_dr_gear_dragon_has_gear_trigger = {
+	var:current_dragon ?= { has_variable = agot_dr_gear_style }
+}
+
+# Deblocage : Champion des Cieux (Tournoi aerien de Dragon Chronicles).
+# Le drapeau est pose des que le modificateur de DC est vu (il ne dure que 5 ans).
+# Sans Dragon Chronicles, le modificateur n'existe pas : la condition est simplement fausse.
+agot_dr_gear_sky_champion_unlocked_trigger = {
+	OR = {
+		has_character_flag = agot_dr_gear_sky_champion
+		has_character_modifier = agot_dc_aerial_champion_modifier
+	}
+}
+
+# Deblocage : Conquerant (guerre gagnee contre un roi ou plus, ou detenteur du Trone de Fer)
+agot_dr_gear_conqueror_unlocked_trigger = {
+	OR = {
+		has_character_flag = agot_dr_gear_conqueror
+		has_title = title:h_the_iron_throne
+	}
+}
+
+# Une parure "de maison" est connue pour la dynastie du cavalier
+agot_dr_gear_has_house_colors_trigger = {
+	exists = dynasty
+	OR = {
+		dynasty = dynasty:dynn_Targaryen
+		dynasty = dynasty:dynn_Velaryon
+		dynasty = dynasty:dynn_Lannister
+		dynasty = dynasty:dynn_Stark
+		dynasty = dynasty:dynn_Baratheon
+		dynasty = dynasty:dynn_Arryn
+		dynasty = dynasty:dynn_Tully
+		dynasty = dynasty:dynn_Tyrell
+		dynasty = dynasty:dynn_Martell
+		dynasty = dynasty:dynn_Greyjoy
+		dynasty = dynasty:dynn_Hightower
+	}
+}

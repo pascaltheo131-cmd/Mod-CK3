@@ -1,0 +1,1122 @@
+﻿# AGOT - Dragon Regalia : Equipement (selles). FICHIER GENERE (scratchpad gen_gear.ps1) - ne pas editer a la main.
+# Nouveau gene accessoire (special) : AGOT n'est pas modifie. Le gene gene_dragon_saddle d'AGOT est mis a no_saddle
+# par notre portrait modifier quand une parure est choisie.
+special_genes = {
+	accessory_genes = {
+		agot_dr_gear_saddle = {
+			agot_dr_gear_none = {
+				index = 0
+				male = { 1 = empty }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_style = {
+				index = 1
+				male = { 1 = agot_dr_gear_acc_war_gold_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_targaryen = {
+				index = 2
+				male = { 1 = agot_dr_gear_acc_war_gold_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_velaryon = {
+				index = 3
+				male = { 1 = agot_dr_gear_acc_war_gold_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_lannister = {
+				index = 4
+				male = { 1 = agot_dr_gear_acc_war_gold_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_stark = {
+				index = 5
+				male = { 1 = agot_dr_gear_acc_war_gold_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_baratheon = {
+				index = 6
+				male = { 1 = agot_dr_gear_acc_war_gold_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_arryn = {
+				index = 7
+				male = { 1 = agot_dr_gear_acc_war_gold_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_tully = {
+				index = 8
+				male = { 1 = agot_dr_gear_acc_war_gold_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_tyrell = {
+				index = 9
+				male = { 1 = agot_dr_gear_acc_war_gold_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_martell = {
+				index = 10
+				male = { 1 = agot_dr_gear_acc_war_gold_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_greyjoy = {
+				index = 11
+				male = { 1 = agot_dr_gear_acc_war_gold_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_hightower = {
+				index = 12
+				male = { 1 = agot_dr_gear_acc_war_gold_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_gold_neutral = {
+				index = 13
+				male = { 1 = agot_dr_gear_acc_war_gold_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_style = {
+				index = 14
+				male = { 1 = agot_dr_gear_acc_war_silver_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_targaryen = {
+				index = 15
+				male = { 1 = agot_dr_gear_acc_war_silver_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_velaryon = {
+				index = 16
+				male = { 1 = agot_dr_gear_acc_war_silver_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_lannister = {
+				index = 17
+				male = { 1 = agot_dr_gear_acc_war_silver_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_stark = {
+				index = 18
+				male = { 1 = agot_dr_gear_acc_war_silver_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_baratheon = {
+				index = 19
+				male = { 1 = agot_dr_gear_acc_war_silver_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_arryn = {
+				index = 20
+				male = { 1 = agot_dr_gear_acc_war_silver_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_tully = {
+				index = 21
+				male = { 1 = agot_dr_gear_acc_war_silver_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_tyrell = {
+				index = 22
+				male = { 1 = agot_dr_gear_acc_war_silver_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_martell = {
+				index = 23
+				male = { 1 = agot_dr_gear_acc_war_silver_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_greyjoy = {
+				index = 24
+				male = { 1 = agot_dr_gear_acc_war_silver_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_hightower = {
+				index = 25
+				male = { 1 = agot_dr_gear_acc_war_silver_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_silver_neutral = {
+				index = 26
+				male = { 1 = agot_dr_gear_acc_war_silver_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_style = {
+				index = 27
+				male = { 1 = agot_dr_gear_acc_war_black_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_targaryen = {
+				index = 28
+				male = { 1 = agot_dr_gear_acc_war_black_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_velaryon = {
+				index = 29
+				male = { 1 = agot_dr_gear_acc_war_black_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_lannister = {
+				index = 30
+				male = { 1 = agot_dr_gear_acc_war_black_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_stark = {
+				index = 31
+				male = { 1 = agot_dr_gear_acc_war_black_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_baratheon = {
+				index = 32
+				male = { 1 = agot_dr_gear_acc_war_black_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_arryn = {
+				index = 33
+				male = { 1 = agot_dr_gear_acc_war_black_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_tully = {
+				index = 34
+				male = { 1 = agot_dr_gear_acc_war_black_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_tyrell = {
+				index = 35
+				male = { 1 = agot_dr_gear_acc_war_black_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_martell = {
+				index = 36
+				male = { 1 = agot_dr_gear_acc_war_black_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_greyjoy = {
+				index = 37
+				male = { 1 = agot_dr_gear_acc_war_black_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_hightower = {
+				index = 38
+				male = { 1 = agot_dr_gear_acc_war_black_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_war_black_neutral = {
+				index = 39
+				male = { 1 = agot_dr_gear_acc_war_black_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_style = {
+				index = 40
+				male = { 1 = agot_dr_gear_acc_travel_gold_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_targaryen = {
+				index = 41
+				male = { 1 = agot_dr_gear_acc_travel_gold_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_velaryon = {
+				index = 42
+				male = { 1 = agot_dr_gear_acc_travel_gold_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_lannister = {
+				index = 43
+				male = { 1 = agot_dr_gear_acc_travel_gold_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_stark = {
+				index = 44
+				male = { 1 = agot_dr_gear_acc_travel_gold_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_baratheon = {
+				index = 45
+				male = { 1 = agot_dr_gear_acc_travel_gold_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_arryn = {
+				index = 46
+				male = { 1 = agot_dr_gear_acc_travel_gold_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_tully = {
+				index = 47
+				male = { 1 = agot_dr_gear_acc_travel_gold_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_tyrell = {
+				index = 48
+				male = { 1 = agot_dr_gear_acc_travel_gold_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_martell = {
+				index = 49
+				male = { 1 = agot_dr_gear_acc_travel_gold_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_greyjoy = {
+				index = 50
+				male = { 1 = agot_dr_gear_acc_travel_gold_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_hightower = {
+				index = 51
+				male = { 1 = agot_dr_gear_acc_travel_gold_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_gold_neutral = {
+				index = 52
+				male = { 1 = agot_dr_gear_acc_travel_gold_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_style = {
+				index = 53
+				male = { 1 = agot_dr_gear_acc_travel_silver_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_targaryen = {
+				index = 54
+				male = { 1 = agot_dr_gear_acc_travel_silver_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_velaryon = {
+				index = 55
+				male = { 1 = agot_dr_gear_acc_travel_silver_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_lannister = {
+				index = 56
+				male = { 1 = agot_dr_gear_acc_travel_silver_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_stark = {
+				index = 57
+				male = { 1 = agot_dr_gear_acc_travel_silver_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_baratheon = {
+				index = 58
+				male = { 1 = agot_dr_gear_acc_travel_silver_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_arryn = {
+				index = 59
+				male = { 1 = agot_dr_gear_acc_travel_silver_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_tully = {
+				index = 60
+				male = { 1 = agot_dr_gear_acc_travel_silver_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_tyrell = {
+				index = 61
+				male = { 1 = agot_dr_gear_acc_travel_silver_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_martell = {
+				index = 62
+				male = { 1 = agot_dr_gear_acc_travel_silver_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_greyjoy = {
+				index = 63
+				male = { 1 = agot_dr_gear_acc_travel_silver_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_hightower = {
+				index = 64
+				male = { 1 = agot_dr_gear_acc_travel_silver_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_silver_neutral = {
+				index = 65
+				male = { 1 = agot_dr_gear_acc_travel_silver_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_style = {
+				index = 66
+				male = { 1 = agot_dr_gear_acc_travel_black_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_targaryen = {
+				index = 67
+				male = { 1 = agot_dr_gear_acc_travel_black_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_velaryon = {
+				index = 68
+				male = { 1 = agot_dr_gear_acc_travel_black_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_lannister = {
+				index = 69
+				male = { 1 = agot_dr_gear_acc_travel_black_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_stark = {
+				index = 70
+				male = { 1 = agot_dr_gear_acc_travel_black_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_baratheon = {
+				index = 71
+				male = { 1 = agot_dr_gear_acc_travel_black_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_arryn = {
+				index = 72
+				male = { 1 = agot_dr_gear_acc_travel_black_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_tully = {
+				index = 73
+				male = { 1 = agot_dr_gear_acc_travel_black_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_tyrell = {
+				index = 74
+				male = { 1 = agot_dr_gear_acc_travel_black_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_martell = {
+				index = 75
+				male = { 1 = agot_dr_gear_acc_travel_black_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_greyjoy = {
+				index = 76
+				male = { 1 = agot_dr_gear_acc_travel_black_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_hightower = {
+				index = 77
+				male = { 1 = agot_dr_gear_acc_travel_black_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_travel_black_neutral = {
+				index = 78
+				male = { 1 = agot_dr_gear_acc_travel_black_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_style = {
+				index = 79
+				male = { 1 = agot_dr_gear_acc_parade_gold_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_targaryen = {
+				index = 80
+				male = { 1 = agot_dr_gear_acc_parade_gold_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_velaryon = {
+				index = 81
+				male = { 1 = agot_dr_gear_acc_parade_gold_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_lannister = {
+				index = 82
+				male = { 1 = agot_dr_gear_acc_parade_gold_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_stark = {
+				index = 83
+				male = { 1 = agot_dr_gear_acc_parade_gold_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_baratheon = {
+				index = 84
+				male = { 1 = agot_dr_gear_acc_parade_gold_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_arryn = {
+				index = 85
+				male = { 1 = agot_dr_gear_acc_parade_gold_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_tully = {
+				index = 86
+				male = { 1 = agot_dr_gear_acc_parade_gold_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_tyrell = {
+				index = 87
+				male = { 1 = agot_dr_gear_acc_parade_gold_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_martell = {
+				index = 88
+				male = { 1 = agot_dr_gear_acc_parade_gold_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_greyjoy = {
+				index = 89
+				male = { 1 = agot_dr_gear_acc_parade_gold_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_hightower = {
+				index = 90
+				male = { 1 = agot_dr_gear_acc_parade_gold_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_gold_neutral = {
+				index = 91
+				male = { 1 = agot_dr_gear_acc_parade_gold_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_style = {
+				index = 92
+				male = { 1 = agot_dr_gear_acc_parade_silver_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_targaryen = {
+				index = 93
+				male = { 1 = agot_dr_gear_acc_parade_silver_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_velaryon = {
+				index = 94
+				male = { 1 = agot_dr_gear_acc_parade_silver_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_lannister = {
+				index = 95
+				male = { 1 = agot_dr_gear_acc_parade_silver_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_stark = {
+				index = 96
+				male = { 1 = agot_dr_gear_acc_parade_silver_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_baratheon = {
+				index = 97
+				male = { 1 = agot_dr_gear_acc_parade_silver_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_arryn = {
+				index = 98
+				male = { 1 = agot_dr_gear_acc_parade_silver_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_tully = {
+				index = 99
+				male = { 1 = agot_dr_gear_acc_parade_silver_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_tyrell = {
+				index = 100
+				male = { 1 = agot_dr_gear_acc_parade_silver_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_martell = {
+				index = 101
+				male = { 1 = agot_dr_gear_acc_parade_silver_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_greyjoy = {
+				index = 102
+				male = { 1 = agot_dr_gear_acc_parade_silver_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_hightower = {
+				index = 103
+				male = { 1 = agot_dr_gear_acc_parade_silver_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_silver_neutral = {
+				index = 104
+				male = { 1 = agot_dr_gear_acc_parade_silver_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_style = {
+				index = 105
+				male = { 1 = agot_dr_gear_acc_parade_black_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_targaryen = {
+				index = 106
+				male = { 1 = agot_dr_gear_acc_parade_black_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_velaryon = {
+				index = 107
+				male = { 1 = agot_dr_gear_acc_parade_black_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_lannister = {
+				index = 108
+				male = { 1 = agot_dr_gear_acc_parade_black_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_stark = {
+				index = 109
+				male = { 1 = agot_dr_gear_acc_parade_black_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_baratheon = {
+				index = 110
+				male = { 1 = agot_dr_gear_acc_parade_black_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_arryn = {
+				index = 111
+				male = { 1 = agot_dr_gear_acc_parade_black_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_tully = {
+				index = 112
+				male = { 1 = agot_dr_gear_acc_parade_black_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_tyrell = {
+				index = 113
+				male = { 1 = agot_dr_gear_acc_parade_black_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_martell = {
+				index = 114
+				male = { 1 = agot_dr_gear_acc_parade_black_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_greyjoy = {
+				index = 115
+				male = { 1 = agot_dr_gear_acc_parade_black_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_hightower = {
+				index = 116
+				male = { 1 = agot_dr_gear_acc_parade_black_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_parade_black_neutral = {
+				index = 117
+				male = { 1 = agot_dr_gear_acc_parade_black_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_style = {
+				index = 118
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_targaryen = {
+				index = 119
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_velaryon = {
+				index = 120
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_lannister = {
+				index = 121
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_stark = {
+				index = 122
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_baratheon = {
+				index = 123
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_arryn = {
+				index = 124
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_tully = {
+				index = 125
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_tyrell = {
+				index = 126
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_martell = {
+				index = 127
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_greyjoy = {
+				index = 128
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_hightower = {
+				index = 129
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_gold_neutral = {
+				index = 130
+				male = { 1 = agot_dr_gear_acc_valyrian_gold_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_style = {
+				index = 131
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_targaryen = {
+				index = 132
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_velaryon = {
+				index = 133
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_lannister = {
+				index = 134
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_stark = {
+				index = 135
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_baratheon = {
+				index = 136
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_arryn = {
+				index = 137
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_tully = {
+				index = 138
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_tyrell = {
+				index = 139
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_martell = {
+				index = 140
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_greyjoy = {
+				index = 141
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_hightower = {
+				index = 142
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_silver_neutral = {
+				index = 143
+				male = { 1 = agot_dr_gear_acc_valyrian_silver_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_style = {
+				index = 144
+				male = { 1 = agot_dr_gear_acc_valyrian_black_style }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_targaryen = {
+				index = 145
+				male = { 1 = agot_dr_gear_acc_valyrian_black_targaryen }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_velaryon = {
+				index = 146
+				male = { 1 = agot_dr_gear_acc_valyrian_black_velaryon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_lannister = {
+				index = 147
+				male = { 1 = agot_dr_gear_acc_valyrian_black_lannister }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_stark = {
+				index = 148
+				male = { 1 = agot_dr_gear_acc_valyrian_black_stark }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_baratheon = {
+				index = 149
+				male = { 1 = agot_dr_gear_acc_valyrian_black_baratheon }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_arryn = {
+				index = 150
+				male = { 1 = agot_dr_gear_acc_valyrian_black_arryn }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_tully = {
+				index = 151
+				male = { 1 = agot_dr_gear_acc_valyrian_black_tully }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_tyrell = {
+				index = 152
+				male = { 1 = agot_dr_gear_acc_valyrian_black_tyrell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_martell = {
+				index = 153
+				male = { 1 = agot_dr_gear_acc_valyrian_black_martell }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_greyjoy = {
+				index = 154
+				male = { 1 = agot_dr_gear_acc_valyrian_black_greyjoy }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_hightower = {
+				index = 155
+				male = { 1 = agot_dr_gear_acc_valyrian_black_hightower }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_valyrian_black_neutral = {
+				index = 156
+				male = { 1 = agot_dr_gear_acc_valyrian_black_neutral }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_champion = {
+				index = 157
+				male = { 1 = agot_dr_gear_acc_champion }
+				female = male
+				boy = male
+				girl = female
+			}
+			agot_dr_gear_conqueror = {
+				index = 158
+				male = { 1 = agot_dr_gear_acc_conqueror }
+				female = male
+				boy = male
+				girl = female
+			}
+		}
+	}
+}

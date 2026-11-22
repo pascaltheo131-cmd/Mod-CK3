@@ -1,0 +1,44 @@
+﻿# AGOT - Dragon Regalia : partie « Apparence » (valeurs)
+
+# Chances (en %) d'une robe rare à l'éclosion
+agot_dr_look_rare_coat_base_chance = 5
+agot_dr_look_rare_coat_inherit_chance = 35
+
+# Nombre de blessures de guerre à partir duquel le dragon est « couturé de cicatrices »
+agot_dr_look_scarred_threshold = 5
+
+# Niveau de blessure actuel du dragon (0 à 5), scope = dragon
+agot_dr_look_wound_level_value = {
+	value = 0
+	if = {
+		limit = { has_trait = dragon_wounded_5 }
+		value = 5
+	}
+	else_if = {
+		limit = { has_trait = dragon_wounded_4 }
+		value = 4
+	}
+	else_if = {
+		limit = { has_trait = dragon_wounded_3 }
+		value = 3
+	}
+	else_if = {
+		limit = { has_trait = dragon_wounded_2 }
+		value = 2
+	}
+	else_if = {
+		limit = { has_trait = dragon_wounded_1 }
+		value = 1
+	}
+}
+
+# Plancher de cicatrices visibles (gene_dragon_wounded) selon le nombre de blessures, scope = dragon
+agot_dr_look_scar_floor_value = {
+	value = 0
+	if = {
+		limit = { has_variable = agot_dr_look_wound_count }
+		value = var:agot_dr_look_wound_count
+		multiply = 0.05
+	}
+	max = 0.8
+}

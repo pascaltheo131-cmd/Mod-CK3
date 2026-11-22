@@ -1,0 +1,40 @@
+﻿# AGOT - Dragon Regalia : partie « Apparence » (déclencheurs)
+
+# scope = dragon : dragon vivant dont l'apparence est gérée par le stockage d'AGOT
+agot_dr_look_valid_dragon_trigger = {
+	has_trait = dragon
+	is_alive = yes
+	agot_has_dragon_storage_system_global_list = yes
+}
+
+# scope = dragon : dragon « possédé » (monté ou présent dans une cour)
+agot_dr_look_owned_dragon_trigger = {
+	OR = {
+		exists = var:current_rider
+		exists = court_owner
+	}
+}
+
+# scope = dragon : un joueur doit être prévenu (cavalier ou propriétaire joueur)
+agot_dr_look_has_player_owner_trigger = {
+	OR = {
+		var:current_rider ?= { is_ai = no }
+		court_owner ?= { is_ai = no }
+	}
+}
+
+# scope = dragon : porte une robe rare
+agot_dr_look_has_rare_coat_trigger = {
+	has_variable = agot_dr_look_rare_coat
+}
+
+# scope = dragon : âge auquel survient une mue
+agot_dr_look_is_molt_age_trigger = {
+	OR = {
+		age = 25
+		age = 50
+		age = 100
+		age = 150
+		age = 200
+	}
+}

@@ -1,0 +1,3980 @@
+﻿# AGOT - Dragon Regalia : Equipement (selles). FICHIER GENERE (scratchpad gen_gear.ps1) - ne pas editer a la main.
+# Priorite 12 > dragonrider d'AGOT (11) : applique APRES et ecrase la selle d'AGOT.
+# Portee = le personnage porte (le cavalier, tag dragonrider) ; la parure est lue sur var:current_dragon.
+# Tout modificateur dont le tag correspond a un poids >= 1 : l'entree agot_dr_gear_default (poids 100 si aucune parure)
+# garantit qu'on ne choisit pas une parure au hasard. selection_behavior = max : le premier poids >= 100 l'emporte.
+agot_dr_gear_saddle_group = {
+	usage = game
+	selection_behavior = max
+	priority = 12
+
+	agot_dr_gear_default = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_none
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				NOT = { var:current_dragon ?= { has_variable = agot_dr_gear_style } }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_gold_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_gold_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_silver_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_silver_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_war_black_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_war_black_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:war var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_gold_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_gold_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_silver_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_silver_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_travel_black_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_travel_black_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:travel var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_gold_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_gold_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_silver_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_silver_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_parade_black_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_parade_black_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:parade var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_gold_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_gold_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:gold var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_silver_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_silver_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:silver var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_style = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_style
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:style }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_targaryen = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_targaryen
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:targaryen }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_velaryon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_velaryon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:velaryon }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_lannister = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_lannister
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:lannister }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_stark = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_stark
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:stark }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_baratheon = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_baratheon
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:baratheon }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_arryn = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_arryn
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:arryn }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_tully = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_tully
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:tully }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_tyrell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_tyrell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:tyrell }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_martell = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_martell
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:martell }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_greyjoy = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_greyjoy
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:greyjoy }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_hightower = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_hightower
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:hightower }
+			}
+		}
+	}
+	agot_dr_gear_pm_valyrian_black_neutral = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_valyrian_black_neutral
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:valyrian var:agot_dr_gear_metal ?= flag:black var:agot_dr_gear_colors ?= flag:neutral }
+			}
+		}
+	}
+	agot_dr_gear_pm_champion = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_champion
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:champion }
+			}
+		}
+	}
+	agot_dr_gear_pm_conqueror = {
+		dna_modifiers = {
+			accessory = {
+				mode = add
+				gene = gene_dragon_saddle
+				template = no_saddle
+				value = 0.5
+			}
+			accessory = {
+				mode = add
+				gene = agot_dr_gear_saddle
+				template = agot_dr_gear_conqueror
+				value = 0.5
+			}
+		}
+		outfit_tags = { dragonrider }
+		require_outfit_tags = yes
+		weight = {
+			base = 0
+			modifier = {
+				add = 100
+				var:current_dragon ?= { var:agot_dr_gear_style ?= flag:conqueror }
+			}
+		}
+	}
+}

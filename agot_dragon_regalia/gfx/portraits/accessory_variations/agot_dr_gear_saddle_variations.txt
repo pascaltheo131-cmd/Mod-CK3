@@ -1,0 +1,1742 @@
+﻿# AGOT - Dragon Regalia : Equipement (selles). FICHIER GENERE (scratchpad gen_gear.ps1) - ne pas editer a la main.
+# Memes masques que dragon_saddle_01 d'AGOT : r = assise, g = sangles/panneaux, b = garnitures, a = pieces metalliques.
+# Une seule ligne de palette (repetee 4x) => couleur deterministe.
+
+variation = {
+	name = "agot_dr_gear_war_gold_style"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_war_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_gold_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_style"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_war_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_silver_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_style"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_war_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_war_black_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_04"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_style"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_travel_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_gold_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_style"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_travel_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_silver_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_style"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_travel_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_travel_black_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "leather_plain_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "western_wool_plain_01"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_style"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_parade_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_gold_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_style"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_parade_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_silver_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_style"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_parade_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_parade_black_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_style"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_valyrian_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_gold_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_gold.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_style"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_valyrian_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_silver_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "all_silver_plain_rough_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_silver.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_style"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_style_valyrian_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_targaryen"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_targaryen_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_velaryon"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_velaryon_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_lannister"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_lannister_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_stark"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_stark_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_baratheon"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_baratheon_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_arryn"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_arryn_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_tully"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tully_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_tyrell"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_tyrell_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_martell"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_martell_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_greyjoy"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_greyjoy_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_hightower"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_hightower_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_valyrian_black_neutral"
+	pattern = {
+		weight = 1
+		r = { textures = "valyrian_silk_01"	layout = "valyrian_silk_01_layout" }
+		g = { textures = "agot_leather_damask_01"	layout = "agot_armor_layout_01" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_neutral_black.dds" }
+}
+variation = {
+	name = "agot_dr_gear_champion"
+	pattern = {
+		weight = 1
+		r = { textures = "western_silk_brocade_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "velvet_01"	layout = "plain_fabric_layout" }
+		b = { textures = "western_silk_trim_01"	layout = "small_trim_layout" }
+		a = { textures = "western_gold_plain_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_champion.dds" }
+}
+variation = {
+	name = "agot_dr_gear_conqueror"
+	pattern = {
+		weight = 1
+		r = { textures = "agot_leather_damask_01"	layout = "western_silk_brocade_01_layout" }
+		g = { textures = "leather_plain_04"	layout = "plain_fabric_layout" }
+		b = { textures = "leather_plain_04"	layout = "small_trim_layout" }
+		a = { textures = "cast_iron_01"	layout = "plain_fabric_layout" }
+	}
+	color_palette = { weight = 1	texture = "gfx/portraits/accessory_variations/textures/agot_dr_gear_conqueror.dds" }
+}

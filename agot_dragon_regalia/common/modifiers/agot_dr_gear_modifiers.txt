@@ -1,0 +1,7 @@
+﻿# AGOT - Dragon Regalia : Equipement - modificateurs
+
+# Selle commandee a un maitre de Myr, Lys ou Qohor
+agot_dr_gear_master_saddle_modifier = {
+	icon = prestige_positive
+	monthly_prestige = 0.5
+}

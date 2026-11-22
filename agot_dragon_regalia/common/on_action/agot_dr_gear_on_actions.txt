@@ -1,0 +1,122 @@
+﻿# AGOT - Dragon Regalia : Equipement - on_actions
+# On n'ajoute que des listes on_actions aux on_actions existants (fusionnees par le moteur), jamais d'effect.
+
+yearly_playable_pulse = {
+	on_actions = { agot_dr_gear_yearly_pulse }
+}
+
+on_game_start_after_lobby = {
+	on_actions = { agot_dr_gear_game_start }
+}
+
+# Code AGOT/moteur : appele quand une relation agot_dragon est posee (lien cavalier/dragon)
+on_set_relation_agot_dragon = {
+	on_actions = { agot_dr_gear_on_dragon_bond }
+}
+
+on_war_won_attacker = {
+	on_actions = { agot_dr_gear_war_won_attacker }
+}
+
+on_war_won_defender = {
+	on_actions = { agot_dr_gear_war_won_defender }
+}
+
+# root = dirigeant jouable
+agot_dr_gear_yearly_pulse = {
+	effect = {
+		if = {
+			limit = { has_trait = dragonrider }
+			agot_dr_gear_check_unlocks_effect = yes
+		}
+		every_courtier = {
+			limit = { has_trait = dragonrider }
+			agot_dr_gear_check_unlocks_effect = yes
+		}
+		# Pulse leger : seuls les cavaliers IA dont le dragon n'est pas encore pare (ou rarement, une mise a jour)
+		if = {
+			limit = {
+				is_ai = yes
+				agot_dr_gear_can_equip_trigger = yes
+			}
+			if = {
+				limit = { agot_dr_gear_dragon_has_gear_trigger = no }
+				agot_dr_gear_ai_equip_effect = yes
+			}
+			else = {
+				random = {
+					chance = 5
+					agot_dr_gear_ai_equip_effect = yes
+				}
+			}
+		}
+		every_courtier = {
+			limit = {
+				is_ai = yes
+				agot_dr_gear_can_equip_trigger = yes
+				agot_dr_gear_dragon_has_gear_trigger = no
+			}
+			agot_dr_gear_ai_equip_effect = yes
+		}
+	}
+}
+
+# Dragons deja montes au demarrage
+agot_dr_gear_game_start = {
+	effect = {
+		every_living_character = {
+			limit = {
+				has_trait = dragonrider
+				is_ai = yes
+				agot_dr_gear_can_equip_trigger = yes
+				agot_dr_gear_dragon_has_gear_trigger = no
+			}
+			agot_dr_gear_ai_equip_effect = yes
+		}
+	}
+}
+
+# Nouveau lien : root ou scope:target peut etre le cavalier ; on laisse AGOT poser var:current_dragon
+agot_dr_gear_on_dragon_bond = {
+	effect = {
+		if = {
+			limit = { has_trait = dragonrider is_ai = yes }
+			trigger_event = { id = agot_dr_gear.0100 days = 3 }
+		}
+		scope:target ?= {
+			if = {
+				limit = { has_trait = dragonrider is_ai = yes }
+				trigger_event = { id = agot_dr_gear.0100 days = 3 }
+			}
+		}
+	}
+}
+
+# Deblocage Conquerant : victoire d'un cavalier contre un roi (ou plus)
+agot_dr_gear_war_won_attacker = {
+	effect = {
+		if = {
+			limit = {
+				exists = scope:attacker
+				exists = scope:defender
+				scope:attacker = { has_trait = dragonrider }
+				scope:defender = { highest_held_title_tier >= tier_kingdom }
+			}
+			scope:attacker = { add_character_flag = agot_dr_gear_conqueror }
+		}
+	}
+}
+
+agot_dr_gear_war_won_defender = {
+	effect = {
+		if = {
+			limit = {
+				exists = scope:attacker
+				exists = scope:defender
+				scope:defender = { has_trait = dragonrider }
+				scope:attacker = { highest_held_title_tier >= tier_kingdom }
+			}
+			scope:defender = { add_character_flag = agot_dr_gear_conqueror }
+		}
+	}
+}

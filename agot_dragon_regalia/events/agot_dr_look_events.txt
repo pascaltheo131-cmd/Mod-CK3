@@ -1,0 +1,111 @@
+﻿namespace = agot_dr_look
+
+###############################################################################
+# AGOT - Dragon Regalia : partie « Apparence »
+#  0001 : un dragonnet révèle une robe rare (au propriétaire / cavalier joueur)
+#  0002 : la mue
+#  0003 : couturé de cicatrices
+# scope:dragon = le dragon concerné (sauvé avant trigger_event)
+###############################################################################
+
+agot_dr_look.0001 = {
+	type = character_event
+	title = agot_dr_look.0001.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:dragon.var:agot_dr_look_rare_coat = flag:silver }
+				desc = agot_dr_look.0001.desc.silver
+			}
+			triggered_desc = {
+				trigger = { scope:dragon.var:agot_dr_look_rare_coat = flag:bronze }
+				desc = agot_dr_look.0001.desc.bronze
+			}
+			triggered_desc = {
+				trigger = { scope:dragon.var:agot_dr_look_rare_coat = flag:balerion }
+				desc = agot_dr_look.0001.desc.balerion
+			}
+			triggered_desc = {
+				trigger = { scope:dragon.var:agot_dr_look_rare_coat = flag:jade }
+				desc = agot_dr_look.0001.desc.jade
+			}
+			triggered_desc = {
+				trigger = { scope:dragon.var:agot_dr_look_rare_coat = flag:blood }
+				desc = agot_dr_look.0001.desc.blood
+			}
+			desc = agot_dr_look.0001.desc.gold
+		}
+		triggered_desc = {
+			trigger = { scope:dragon = { has_variable = agot_dr_look_coat_inherited } }
+			desc = agot_dr_look.0001.desc.inherited
+		}
+	}
+	theme = dragon
+	left_portrait = {
+		character = root
+		animation = admiration
+	}
+	right_portrait = {
+		character = scope:dragon
+	}
+	trigger = {
+		exists = scope:dragon
+		scope:dragon = { has_variable = agot_dr_look_rare_coat }
+	}
+
+	option = {
+		name = agot_dr_look.0001.a
+		add_prestige = minor_prestige_gain
+	}
+}
+
+agot_dr_look.0002 = {
+	type = character_event
+	title = agot_dr_look.0002.t
+	desc = {
+		desc = agot_dr_look.0002.desc
+		triggered_desc = {
+			trigger = { scope:dragon = { age >= 100 } }
+			desc = agot_dr_look.0002.desc.old
+		}
+	}
+	theme = dragon
+	left_portrait = {
+		character = root
+		animation = thinking
+	}
+	right_portrait = {
+		character = scope:dragon
+	}
+	trigger = {
+		exists = scope:dragon
+		scope:dragon = { is_alive = yes }
+	}
+
+	option = {
+		name = agot_dr_look.0002.a
+	}
+}
+
+agot_dr_look.0003 = {
+	type = character_event
+	title = agot_dr_look.0003.t
+	desc = agot_dr_look.0003.desc
+	theme = dragon
+	left_portrait = {
+		character = root
+		animation = war_over_win
+	}
+	right_portrait = {
+		character = scope:dragon
+	}
+	trigger = {
+		exists = scope:dragon
+		scope:dragon = { is_alive = yes }
+	}
+
+	option = {
+		name = agot_dr_look.0003.a
+		custom_tooltip = agot_dr_look.0003.a.tt
+	}
+}

@@ -1,0 +1,634 @@
+﻿# AGOT - Dragon Regalia : Equipement (selles). FICHIER GENERE (scratchpad gen_gear.ps1) - ne pas editer a la main.
+
+agot_dr_gear_acc_war_gold_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_style_entity" }
+}
+
+agot_dr_gear_acc_war_gold_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_targaryen_entity" }
+}
+
+agot_dr_gear_acc_war_gold_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_velaryon_entity" }
+}
+
+agot_dr_gear_acc_war_gold_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_lannister_entity" }
+}
+
+agot_dr_gear_acc_war_gold_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_stark_entity" }
+}
+
+agot_dr_gear_acc_war_gold_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_baratheon_entity" }
+}
+
+agot_dr_gear_acc_war_gold_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_arryn_entity" }
+}
+
+agot_dr_gear_acc_war_gold_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_tully_entity" }
+}
+
+agot_dr_gear_acc_war_gold_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_tyrell_entity" }
+}
+
+agot_dr_gear_acc_war_gold_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_martell_entity" }
+}
+
+agot_dr_gear_acc_war_gold_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_war_gold_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_hightower_entity" }
+}
+
+agot_dr_gear_acc_war_gold_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_gold_neutral_entity" }
+}
+
+agot_dr_gear_acc_war_silver_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_style_entity" }
+}
+
+agot_dr_gear_acc_war_silver_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_targaryen_entity" }
+}
+
+agot_dr_gear_acc_war_silver_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_velaryon_entity" }
+}
+
+agot_dr_gear_acc_war_silver_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_lannister_entity" }
+}
+
+agot_dr_gear_acc_war_silver_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_stark_entity" }
+}
+
+agot_dr_gear_acc_war_silver_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_baratheon_entity" }
+}
+
+agot_dr_gear_acc_war_silver_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_arryn_entity" }
+}
+
+agot_dr_gear_acc_war_silver_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_tully_entity" }
+}
+
+agot_dr_gear_acc_war_silver_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_tyrell_entity" }
+}
+
+agot_dr_gear_acc_war_silver_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_martell_entity" }
+}
+
+agot_dr_gear_acc_war_silver_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_war_silver_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_hightower_entity" }
+}
+
+agot_dr_gear_acc_war_silver_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_silver_neutral_entity" }
+}
+
+agot_dr_gear_acc_war_black_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_style_entity" }
+}
+
+agot_dr_gear_acc_war_black_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_targaryen_entity" }
+}
+
+agot_dr_gear_acc_war_black_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_velaryon_entity" }
+}
+
+agot_dr_gear_acc_war_black_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_lannister_entity" }
+}
+
+agot_dr_gear_acc_war_black_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_stark_entity" }
+}
+
+agot_dr_gear_acc_war_black_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_baratheon_entity" }
+}
+
+agot_dr_gear_acc_war_black_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_arryn_entity" }
+}
+
+agot_dr_gear_acc_war_black_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_tully_entity" }
+}
+
+agot_dr_gear_acc_war_black_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_tyrell_entity" }
+}
+
+agot_dr_gear_acc_war_black_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_martell_entity" }
+}
+
+agot_dr_gear_acc_war_black_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_war_black_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_hightower_entity" }
+}
+
+agot_dr_gear_acc_war_black_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_war_black_neutral_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_style_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_targaryen_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_velaryon_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_lannister_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_stark_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_baratheon_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_arryn_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_tully_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_tyrell_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_martell_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_hightower_entity" }
+}
+
+agot_dr_gear_acc_travel_gold_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_gold_neutral_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_style_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_targaryen_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_velaryon_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_lannister_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_stark_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_baratheon_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_arryn_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_tully_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_tyrell_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_martell_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_hightower_entity" }
+}
+
+agot_dr_gear_acc_travel_silver_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_silver_neutral_entity" }
+}
+
+agot_dr_gear_acc_travel_black_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_style_entity" }
+}
+
+agot_dr_gear_acc_travel_black_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_targaryen_entity" }
+}
+
+agot_dr_gear_acc_travel_black_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_velaryon_entity" }
+}
+
+agot_dr_gear_acc_travel_black_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_lannister_entity" }
+}
+
+agot_dr_gear_acc_travel_black_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_stark_entity" }
+}
+
+agot_dr_gear_acc_travel_black_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_baratheon_entity" }
+}
+
+agot_dr_gear_acc_travel_black_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_arryn_entity" }
+}
+
+agot_dr_gear_acc_travel_black_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_tully_entity" }
+}
+
+agot_dr_gear_acc_travel_black_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_tyrell_entity" }
+}
+
+agot_dr_gear_acc_travel_black_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_martell_entity" }
+}
+
+agot_dr_gear_acc_travel_black_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_travel_black_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_hightower_entity" }
+}
+
+agot_dr_gear_acc_travel_black_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_travel_black_neutral_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_style_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_targaryen_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_velaryon_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_lannister_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_stark_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_baratheon_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_arryn_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_tully_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_tyrell_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_martell_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_hightower_entity" }
+}
+
+agot_dr_gear_acc_parade_gold_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_gold_neutral_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_style_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_targaryen_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_velaryon_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_lannister_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_stark_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_baratheon_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_arryn_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_tully_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_tyrell_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_martell_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_hightower_entity" }
+}
+
+agot_dr_gear_acc_parade_silver_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_silver_neutral_entity" }
+}
+
+agot_dr_gear_acc_parade_black_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_style_entity" }
+}
+
+agot_dr_gear_acc_parade_black_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_targaryen_entity" }
+}
+
+agot_dr_gear_acc_parade_black_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_velaryon_entity" }
+}
+
+agot_dr_gear_acc_parade_black_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_lannister_entity" }
+}
+
+agot_dr_gear_acc_parade_black_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_stark_entity" }
+}
+
+agot_dr_gear_acc_parade_black_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_baratheon_entity" }
+}
+
+agot_dr_gear_acc_parade_black_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_arryn_entity" }
+}
+
+agot_dr_gear_acc_parade_black_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_tully_entity" }
+}
+
+agot_dr_gear_acc_parade_black_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_tyrell_entity" }
+}
+
+agot_dr_gear_acc_parade_black_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_martell_entity" }
+}
+
+agot_dr_gear_acc_parade_black_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_parade_black_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_hightower_entity" }
+}
+
+agot_dr_gear_acc_parade_black_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_parade_black_neutral_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_style_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_targaryen_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_velaryon_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_lannister_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_stark_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_baratheon_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_arryn_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_tully_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_tyrell_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_martell_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_hightower_entity" }
+}
+
+agot_dr_gear_acc_valyrian_gold_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_gold_neutral_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_style_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_targaryen_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_velaryon_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_lannister_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_stark_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_baratheon_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_arryn_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_tully_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_tyrell_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_martell_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_hightower_entity" }
+}
+
+agot_dr_gear_acc_valyrian_silver_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_silver_neutral_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_style = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_style_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_targaryen = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_targaryen_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_velaryon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_velaryon_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_lannister = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_lannister_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_stark = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_stark_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_baratheon = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_baratheon_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_arryn = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_arryn_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_tully = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_tully_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_tyrell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_tyrell_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_martell = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_martell_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_greyjoy = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_greyjoy_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_hightower = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_hightower_entity" }
+}
+
+agot_dr_gear_acc_valyrian_black_neutral = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_valyrian_black_neutral_entity" }
+}
+
+agot_dr_gear_acc_champion = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_champion_entity" }
+}
+
+agot_dr_gear_acc_conqueror = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_gear_conqueror_entity" }
+}
+

@@ -1,0 +1,13 @@
+﻿l_english:
+ agot_dr_rings_adorn_horns_decision: "Orner les cornes de mon dragon"
+ agot_dr_rings_adorn_horns_decision_desc: "À la manière des seigneurs dragons de Valyria, faire forger des anneaux de métal précieux pour les grandes cornes de mon dragon."
+ agot_dr_rings_adorn_horns_decision_tooltip: "Faire forger des anneaux pour les cornes de votre dragon."
+ agot_dr_rings_adorn_horns_decision_effect_tt: "Vous choisirez le métal des anneaux."
+ agot_dr_rings_cooldown_tt: "Les forgerons travaillent encore à vos derniers anneaux."
+ agot_dr_rings.0001.t: "Les anneaux de cornes"
+ agot_dr_rings.0001.desc: "Le maître forgeron a pris la mesure des grandes cornes de [agot_dr_rings_dragon.GetFirstName]. Il attend votre choix : l'or des anciens seigneurs dragons, l'argent pâle, ou l'acier noirci qui ne reflète que le feu."
+ agot_dr_rings.0001.a: "De l'or, comme à Valyria."
+ agot_dr_rings.0001.b: "De l'argent pâle."
+ agot_dr_rings.0001.c: "De l'acier noirci."
+ agot_dr_rings.0001.d: "Retirez-lui ses anneaux."
+ agot_dr_rings.0001.e: "Je n'en veux pas pour l'instant."

@@ -1,0 +1,13 @@
+﻿# AGOT - Dragon Regalia : anneaux de cornes
+
+agot_dr_acc_horn_rings_gold = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_horn_rings_gold_entity" }
+}
+
+agot_dr_acc_horn_rings_silver = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_horn_rings_silver_entity" }
+}
+
+agot_dr_acc_horn_rings_black = {
+	entity = {	node = "dragon_origin"	entity = "agot_dr_horn_rings_black_entity" }
+}

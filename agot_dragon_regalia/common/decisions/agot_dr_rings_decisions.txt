@@ -12,10 +12,14 @@ agot_dr_rings_adorn_horns_decision = {
 
 	is_shown = {
 		is_ai = no
-		agot_dr_gear_can_equip_trigger = yes
+		has_trait = dragonrider
 	}
 
 	is_valid_showing_failures_only = {
+		custom_tooltip = {
+			text = agot_dr_need_current_dragon_tt
+			agot_dr_gear_can_equip_trigger = yes
+		}
 		custom_tooltip = {
 			text = agot_dr_rings_cooldown_tt
 			NOT = { has_variable = agot_dr_rings_cooldown }
@@ -44,10 +48,14 @@ agot_dr_caparison_decision = {
 
 	is_shown = {
 		is_ai = no
-		agot_dr_gear_can_equip_trigger = yes
+		has_trait = dragonrider
 	}
 
 	is_valid_showing_failures_only = {
+		custom_tooltip = {
+			text = agot_dr_need_current_dragon_tt
+			agot_dr_gear_can_equip_trigger = yes
+		}
 		custom_tooltip = {
 			text = agot_dr_caparison_cooldown_tt
 			NOT = { has_variable = agot_dr_caparison_cooldown }

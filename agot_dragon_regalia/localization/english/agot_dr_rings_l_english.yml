@@ -21,3 +21,7 @@
  agot_dr_rings.0002.a: "Que mes armes flottent sur ses flancs."
  agot_dr_rings.0002.b: "Retirez-lui son caparaçon."
  agot_dr_rings.0002.c: "Pas pour l'instant."
+ agot_dr_need_current_dragon_tt: "Vous devez chevaucher un dragon vivant, présent auprès de vous (et non resté dans une fosse lointaine)."
+ agot_dr_gear_equip_dragon_decision_confirm: "Faire venir les selliers"
+ agot_dr_rings_adorn_horns_decision_confirm: "Faire venir le forgeron"
+ agot_dr_caparison_decision_confirm: "Faire venir les brodeuses"

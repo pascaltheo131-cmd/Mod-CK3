@@ -70,3 +70,34 @@ agot_dr_caparison_decision = {
 	ai_potential = { always = no }
 	ai_will_do = { base = 0 }
 }
+
+# Voir son dragon paré (selle, anneaux, caparaçon) sur le portrait du cavalier monté
+agot_dr_preview_decision = {
+	picture = {
+		reference = "gfx/interface/illustrations/decisions/decision_dragons.dds"
+	}
+	desc = agot_dr_preview_decision_desc
+	selection_tooltip = agot_dr_preview_decision_tooltip
+	sort_order = 47
+
+	ai_check_interval = 0
+
+	is_shown = {
+		is_ai = no
+		has_trait = dragonrider
+	}
+
+	is_valid_showing_failures_only = {
+		custom_tooltip = {
+			text = agot_dr_need_current_dragon_tt
+			agot_dr_gear_can_equip_trigger = yes
+		}
+	}
+
+	effect = {
+		trigger_event = agot_dr_preview.0001
+	}
+
+	ai_potential = { always = no }
+	ai_will_do = { base = 0 }
+}

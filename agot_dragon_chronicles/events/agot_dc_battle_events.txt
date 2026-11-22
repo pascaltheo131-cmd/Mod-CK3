@@ -112,8 +112,9 @@ agot_dc_battle.1001 = {
 	theme = battle
 	left_portrait = {
 		character = root
-		animation = jockey_gallop
+		animation = dragon_main
 		camera = camera_dragonrider_over_battlefield
+		outfit_tags = { dragonrider }
 	}
 
 	option = { # Brûler les fuyards
@@ -157,8 +158,9 @@ agot_dc_battle.1011 = {
 	theme = battle
 	left_portrait = {
 		character = root
-		animation = jockey_gallop
+		animation = dragon_main
 		camera = camera_dragonrider_over_battlefield
+		outfit_tags = { dragonrider }
 	}
 
 	option = { # Saisir le trésor de guerre
@@ -365,8 +367,9 @@ agot_dc_battle.2021 = {
 	theme = battle
 	left_portrait = {
 		character = root
-		animation = jockey_gallop
+		animation = dragon_main
 		camera = camera_dragonrider_over_battlefield
+		outfit_tags = { dragonrider }
 	}
 
 	option = { # Plonger sur les poursuivants

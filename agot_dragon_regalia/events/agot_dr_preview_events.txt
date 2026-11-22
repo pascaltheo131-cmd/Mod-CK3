@@ -1,0 +1,24 @@
+﻿namespace = agot_dr_preview
+
+#########################################
+# 0001 - Admirer son dragon paré : portrait du cavalier monté (tag dragonrider d'AGOT)
+#########################################
+agot_dr_preview.0001 = {
+	type = character_event
+	title = agot_dr_preview.0001.t
+	desc = agot_dr_preview.0001.desc
+	theme = dragon
+	left_portrait = {
+		character = root
+		animation = dragon_main
+		camera = camera_dragon_hover_left_pointing_center
+		outfit_tags = { dragonrider dynamic_camera_zoom_0.8 }
+	}
+	immediate = {
+		var:current_dragon ?= { save_scope_as = agot_dr_preview_dragon }
+	}
+
+	option = {
+		name = agot_dr_preview.0001.a
+	}
+}

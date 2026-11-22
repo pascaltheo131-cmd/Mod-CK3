@@ -329,8 +329,9 @@ agot_dc.0061 = {
 	cooldown = { years = 8 }
 	left_portrait = {
 		character = root
-		animation = jockey_gallop
+		animation = dragon_main
 		camera = camera_dragonrider_flying_event_front
+		outfit_tags = { dragonrider }
 	}
 	trigger = { agot_dc_rider_with_dragon_trigger = yes }
 	immediate = { agot_dc_save_dragon_effect = yes }
@@ -376,8 +377,9 @@ agot_dc.0071 = {
 	cooldown = { years = 15 }
 	left_portrait = {
 		character = root
-		animation = jockey_gallop
+		animation = dragon_main
 		camera = camera_dragonrider_over_battlefield
+		outfit_tags = { dragonrider }
 	}
 	trigger = {
 		agot_dc_rider_with_dragon_trigger = yes

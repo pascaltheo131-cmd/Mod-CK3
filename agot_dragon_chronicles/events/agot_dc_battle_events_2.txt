@@ -15,8 +15,9 @@ agot_dc_battle.1051 = {
 	theme = battle
 	left_portrait = {
 		character = root
-		animation = jockey_gallop
+		animation = dragon_main
 		camera = camera_dragonrider_over_battlefield
+		outfit_tags = { dragonrider }
 	}
 
 	option = { # Incendier le camp pendant la nuit
@@ -74,8 +75,9 @@ agot_dc_battle.1071 = {
 	theme = battle
 	left_portrait = {
 		character = root
-		animation = jockey_gallop
+		animation = dragon_main
 		camera = camera_dragonrider_over_battlefield
+		outfit_tags = { dragonrider }
 	}
 
 	option = { # Brûler le pont : aucun ne s'échappera
